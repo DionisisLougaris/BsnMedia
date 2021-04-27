@@ -7,7 +7,7 @@ abstract public class User {
 	protected String username;
 	protected String password;
 	protected String email;
-	protected String Telephone;
+	protected String telephone;
 	protected String address;
 	protected String gender;
 	protected String birthday;
@@ -27,7 +27,7 @@ abstract public class User {
 		this.username = username;
 		this.password = password;
 		this.email = email;
-		Telephone = telephone;
+		this.telephone = telephone;
 		this.address = address;
 		this.gender = gender;
 		this.birthday = birthday;
