@@ -1,5 +1,3 @@
-/User.class
-/Company.class
-/Notification.class
-/Post.class
-/Boss.class
+/Conversation.class
+/Message.class
+/Group.class
