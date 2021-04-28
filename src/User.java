@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 
-abstract public class User {
+//thn ebgala apo abstract gia thn wra giati eixa thema sthn dimiourgia antikeimenou user
+//Prepei na ginei pali abstract!
+ public class User {
 	
 	protected String firstName;
 	protected String lastName;
@@ -35,6 +37,11 @@ abstract public class User {
 		this.image = image;
 		this.myCompany = myCompany;
 		
+	}
+	//Assisting simple Constructor for testing
+	public User(String fistName)
+	{
+		this.firstName=firstName;
 	}
 	
 	
