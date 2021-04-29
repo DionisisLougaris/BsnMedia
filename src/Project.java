@@ -12,4 +12,9 @@ public class Project {
 		this.myGroup = myGroup;
 	}
 	
+	public void setName(String n) { name=n;}
+	public void setDescription(String d) { description=d;}
+	public void setDeadline(String d) { deadline=d;}
+	public void setMyGroup(Group g) { myGroup=g;}
+	
 }
