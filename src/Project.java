@@ -12,13 +12,40 @@ public class Project {
 		this.myGroup = myGroup;
 	}
 	
-	public void setName(String n){ 
-		name=n;}
-	public void setDescription(String d) { 
-		description=d;}
-	public void setDeadline(String d) { 
-		deadline=d;}
-	public void setMyGroup(Group g){ 
-		myGroup=g; }
 	
+	
+	
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getDeadline() {
+		return deadline;
+	}
+
+	public void setDeadline(String deadline) {
+		this.deadline = deadline;
+	}
+
+	public Group getMyGroup() {
+		return myGroup;
+	}
+
+	public void setMyGroup(Group myGroup) {
+		this.myGroup = myGroup;
+	}
+		
 }
