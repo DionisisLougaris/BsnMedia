@@ -1,9 +1,8 @@
 import java.time.*;
 
-public class Message {
+public class Message extends Notification{
 	private String content;
 	private LocalDateTime timesent;
-	private int key;
 	private User sender;
 	
 	
@@ -28,15 +27,6 @@ public class Message {
 		return sender;
 	}
 
-
-	public int getKey() {
-		return key;
-	}
-
-
-	public void setKey(int key) {
-		this.key = key;
-	}
 	
 	
 }

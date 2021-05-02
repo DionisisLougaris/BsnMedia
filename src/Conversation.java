@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-//This class might not be used later!
 
 public class Conversation {
 	ArrayList<Message> allMessages= new ArrayList<Message>();

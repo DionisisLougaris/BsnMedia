@@ -11,7 +11,7 @@ public class Encryption {
 		for(char c : chars)
 		{
 			c+=key;
-			//anti gia syso tha ginetai eggrafh sto arxeio
+			//edw krutpografeite to pedio kai oxi mono gia na perastei sto arxeio(anti gia syso tha ginetai eggrafh sto arxeio)
 			System.out.print(c);	
 		}
 		return key;
