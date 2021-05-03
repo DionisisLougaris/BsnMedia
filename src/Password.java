@@ -13,6 +13,7 @@ public class Password {
 	public Password(String password) {
 		
 		if (password.length()>=8) { //check if the code is accepted
+			//Πριν οριστει τιμη στο πεδιο, θα μεσολαβει η κρυπτοφραφιση του κωδικου
 			this.password = password;
 			this.accountCreationTime = LocalDateTime.now(); //takes the current time the object is to be created
 		}
