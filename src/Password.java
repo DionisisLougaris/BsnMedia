@@ -17,7 +17,7 @@ public class Password {
 			this.accountCreationTime = LocalDateTime.now(); //takes the current time the object is to be created
 		}
 		else {
-			String message = "Ο κωδικός είναι αδύναμος! Δοκιμάστε ένα πιο ισχυρό";
+			String message = "Password is weak! Try a stronger one";
 			JOptionPane.showMessageDialog(new JFrame(), message, "Message",
 			        JOptionPane.INFORMATION_MESSAGE);
 		}
