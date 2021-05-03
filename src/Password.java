@@ -6,7 +6,6 @@ import javax.swing.JOptionPane;
 public class Password {
 	
 	private String password;
-	// (!) private String encryptedPassword;
 	private LocalDateTime accountCreationTime;
 	
 	//Constructor for Password
