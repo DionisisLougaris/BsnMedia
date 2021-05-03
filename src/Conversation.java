@@ -2,7 +2,7 @@ import java.util.*;
 
 abstract public class Conversation {
 	
-	TreeSet<Message> allMessages = new TreeSet<Message>();
+	protected TreeSet<Message> allMessages = new TreeSet<Message>();
 	
 	
 	//Add a message to the message List

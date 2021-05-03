@@ -1,11 +1,20 @@
 
 public class Storage {
 
-	public static void saveAll() {
+	
+	public static void saveInBinaryFile(Company theCompany) {
 		
 	}
 	
-	public static void retrieveAll() {
+	public static void retrieveFromBinaryFile() {
+		
+	}
+	
+	public static void saveConversation(Conversation aConversation) {
+		
+	}
+	
+	public static void retrieveConversation() {
 		
 	}
 }

@@ -17,9 +17,10 @@ abstract public class User {
 	protected ArrayList<User> pendingConnectionRequests = new ArrayList<User>();
 	protected TreeSet<Conversation> listOfConversations = new TreeSet<Conversation>();
 	
-	//Complete constructor for user
+	
+	//Initial constructor for user
 	public User(String firstName, String lastName, String telephone, String address, String gender, String birthday,
-			String companyPost, String image, Account myAccount) {
+			String companyPost, Account myAccount) {
 		
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -27,8 +28,8 @@ abstract public class User {
 		this.address = address;
 		this.gender = gender;
 		this.birthday = birthday;
+		this.image = "";
 		this.companyPost = companyPost;
-		this.image = image;
 		this.myAccount = myAccount;
 	}
 	

@@ -6,7 +6,7 @@ import javax.swing.JOptionPane;
 public class Password {
 	
 	private String password;
-	private LocalDateTime accountCreationTime;
+	private LocalDateTime timestamp;
 	
 	//Constructor for Password
 	public Password(String password) {
@@ -14,7 +14,7 @@ public class Password {
 		if (password.length()>=8) { //check if the code is accepted
 			//Πριν οριστει τιμη στο πεδιο, θα μεσολαβει η κρυπτοφραφιση του κωδικου
 			this.password = password;
-			this.accountCreationTime = LocalDateTime.now(); //takes the current time the object is to be created
+			this.timestamp = LocalDateTime.now(); //takes the current time the object is to be created
 		}
 		else {
 			String message = "Password is weak! Try a stronger one";
@@ -30,7 +30,7 @@ public class Password {
 	}
 
 	public LocalDateTime getAccountCreationTime() {
-		return accountCreationTime;
+		return timestamp;
 	}
 	
 }

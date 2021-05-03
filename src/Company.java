@@ -13,9 +13,16 @@ public class Company {
 	private ArrayList<User> companyMembers = new ArrayList<User>();
 	private ArrayList<Group> companyGroups = new ArrayList<Group>();
 	
-	public Company(String name, String info) {
+	
+	//Initial Constructor for Company class
+	public Company(String name, String info, String verificationCode, String telephone, String address, String email) {
 		this.name = name;
 		this.info = info;
+		this.verificationCode = verificationCode;
+		this.telephone = telephone;
+		this.address = address;
+		this.email = email;
 	}
 	
+
 }

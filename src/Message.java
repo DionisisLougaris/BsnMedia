@@ -1,15 +1,18 @@
 import java.time.*;
 
-public class Message extends Notification{
+public class Message {
+	
 	private String content;
 	private LocalDateTime timesent;
 	private User sender;
+	private User reciever;
 	
 	
-	public Message(String content, LocalDateTime timesent, User sender) {
+	public Message(String content, User sender, User reciever) {
 		this.content = content;
-		this.timesent = timesent;
+		this.timesent = LocalDateTime.now();
 		this.sender = sender;
+		this.reciever = reciever;
 	}
 
 

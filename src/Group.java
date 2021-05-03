@@ -1,6 +1,7 @@
 import java.util.*;
 
 public class Group {
+	
 	private String name;
 	private Project myProject;
 	private int rating;

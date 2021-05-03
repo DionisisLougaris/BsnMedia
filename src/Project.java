@@ -1,10 +1,13 @@
 
 public class Project {
+	
 	private String name;
 	private String description;
 	private String deadline;
 	private Group myGroup;
 	
+	
+	//Constructor for Project class
 	public Project(String name, String description, String deadline, Group myGroup) {
 		this.name = name;
 		this.description = description;
