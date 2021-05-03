@@ -1,15 +1,12 @@
 import java.util.ArrayList;
 
-public class Conversation {
+abstract public class Conversation {
+	
 	ArrayList<Message> allMessages= new ArrayList<Message>();
-	User sender;
-	User reciever;
 	
-	public Conversation(ArrayList<Message> allMessages, User sender, User reciever) {
-		this.allMessages = allMessages;
-		this.sender = sender;
-		this.reciever = reciever;
+	public void addMesage(Message newMessage) {
+		
+		allMessages.add(newMessage);
 	}
-	
 	
 }

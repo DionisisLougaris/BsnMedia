@@ -1,6 +1,6 @@
-import java.util.ArrayList;
+import java.util.*;
 
- abstract public class User {
+abstract public class User {
 	
 	protected String firstName;
 	protected String lastName;
@@ -15,6 +15,7 @@ import java.util.ArrayList;
 	protected ArrayList<Post> listOfPosts = new ArrayList<Post>();
 	protected ArrayList<Notification> listOfNotifications = new ArrayList<Notification>();
 	protected ArrayList<User> pendingConnectionRequests = new ArrayList<User>();
+	protected TreeSet<Conversation> listOfConversations = new TreeSet<Conversation>();
 	
 	//Complete constructor for user
 	public User(String firstName, String lastName, String telephone, String address, String gender, String birthday,
