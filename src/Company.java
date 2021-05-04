@@ -24,5 +24,135 @@ public class Company {
 		this.email = email;
 	}
 	
+	//This method checks if a User exists based on his firstname or lastname or username or email
+	public User isCompanyMember(String aString)
+	{
+		for(int i=0;i<this.companyMembers.size();i++)
+			if(this.companyMembers.get(i).firstName.equals(aString) 
+					|| this.companyMembers.get(i).lastName.equals(aString)
+					|| this.companyMembers.get(i).myAccount.getUsername().equals(aString)
+					|| this.companyMembers.get(i).myAccount.getEmail().equals(aString))
+							return this.companyMembers.get(i);
+		
+		return null;
+	}
+	
+	public ArrayList<String> suggestedSearchOption(String aString)
+	{
+		ArrayList<String> suggestedOptions = new ArrayList<String>();
+		
+		char[] givenString = aString.toCharArray();
+		
+		//Checking if the User tried searching the Company
+		int charsMatchingForCompany=0;
+		char[] companyName = this.name.toCharArray();
+		for(int i=0;i<companyName.length;i++) {
+			if(charactersEqualIgnoringCase(companyName[i],givenString[i]))
+				charsMatchingForCompany++;
+		}
+		/*If the given String is at most 2 characters off the company name,
+		  the company entity is added on the suggested search list */
+		if(charsMatchingForCompany>=companyName.length-2)
+			suggestedOptions.add(this.name);
+			
+		//Checking if the User tried searching for any of the active Groups
+		for(int i=0;i<this.companyGroups.size();i++)
+		{
+			int charsMatchingForGroup=0;
+			char[] groupName = this.companyGroups.get(i).getName().toCharArray();
+			for(int j=0;j<groupName.length;j++)
+				if(charactersEqualIgnoringCase(groupName[i],givenString[i]))
+					charsMatchingForGroup++;
+			
+			/*If the given String is at most 2 characters off a Group name,
+			  the group entity is added on the suggested search list */
+			if(charsMatchingForGroup>=groupName.length-2)
+				suggestedOptions.add(this.companyGroups.get(i).getName());	
+		}
+		
+		//Checking if the User tried searching for any of the active Users by Full name
+		for(int i=0;i<this.companyMembers.size();i++)
+		{
+			int charsMatchingForUserFullName=0;
+			//Connecting users First and Last name in one String and converting it to char array
+			char[] userFullName = (this.companyMembers.get(i).getFirstName()+ " " +  this.companyMembers.get(i).getLastName()).toCharArray();
+			for(int j=0;j<userFullName.length;j++)
+				if(charactersEqualIgnoringCase(userFullName[i],givenString[i]))
+					charsMatchingForUserFullName++;
+					
+			/*If the given String is at most 3 characters off a User's Full name,
+				 the User entity is added on the suggested search list */
+			if(charsMatchingForUserFullName>=userFullName.length-3)
+				suggestedOptions.add(this.companyMembers.get(i).getFirstName()+ " " +  this.companyMembers.get(i).getLastName());
+					
+		}
+				
+		return suggestedOptions;
+	}
+	
+	
+	public void searchObject(String aString)
+	{
+		boolean found=false;
+		
+		//Searching for the company
+		if(aString.equals(this.name))
+		{
+			found=true;
+			new companyProfile();
+		}
+		
+		//Searching for a group
+		for(int i=0;i<this.companyGroups.size();i++)
+			if(this.companyGroups.get(i).getName().equals(aString))
+			{
+				found=true;
+				new groupProfile();
+			}
+		//Searching for a User by Full name or email
+		for(int i=0;i<this.companyMembers.size();i++)
+		{
+			if((this.companyMembers.get(i).getFirstName()+ " " +  this.companyMembers.get(i).getLastName()).equals(aString)
+					||this.companyMembers.get(i).myAccount.getEmail().equals(aString))
+			{
+				found=true;
+				new userBackendProfile();
+			}
+		}
+		//No entity was found so suggested search options appear to User
+		if (found=false)
+			this.suggestedSearchOption(aString);
+	}
+	
+	
+	//This methods returns if a Group Name is taken or not
+	public boolean groupNameAvailability(String aString)
+	{
+		boolean available=true;
+		for(int i=0;i<this.companyGroups.size();i++)
+			if(this.companyGroups.get(i).getName().equalsIgnoreCase(aString))
+				available=false;
+		return available;
+	}
+	
+	//This method seperates and collects Chiefs from all Users
+	public ArrayList<Chief> returnChiefs()
+	{
+		ArrayList<Chief> allChiefs = new ArrayList<Chief>();
+		for(this.companyMembers.size();i++)
+			//instance of
+	}
+	
+	//This static method checks if two characters are equal ignoring case
+	static boolean charactersEqualIgnoringCase(char c1, char c2) {
+		
+		  if (c1 == c2) return true;
+		  char u1 = Character.toUpperCase(c1);
+		  char u2 = Character.toUpperCase(c2);
+		  if (u1 == u2) return true;
+
+		  return Character.toLowerCase(u1) == Character.toLowerCase(u2);
+	}
+	
 
 }

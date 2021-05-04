@@ -42,6 +42,39 @@ abstract public class User {
 		this.companyPost = companyPost;
 		this.myAccount = myAccount;
 	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public String getTelephone() {
+		return telephone;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public String getBirthday() {
+		return birthday;
+	}
+
+	public String getCompanyPost() {
+		return companyPost;
+	}
+
+	public Account getMyAccount() {
+		return myAccount;
+	}
+	
 	
 	
 	

@@ -48,5 +48,36 @@ public class Group {
 		
 		groupPosts.add(postForGroup);
 	}
+
+
+	public String getName() {
+		return name;
+	}
+
+
+	public Project getMyProject() {
+		return myProject;
+	}
+
+
+	public int getRating() {
+		return rating;
+	}
+
+
+	public Chief getSupervisor() {
+		return supervisor;
+	}
+
+
+	public TreeSet<Post> getGroupPosts() {
+		return groupPosts;
+	}
+
+
+	public groupConversation getMyConversation() {
+		return myConversation;
+	}
+	
 	
 }
