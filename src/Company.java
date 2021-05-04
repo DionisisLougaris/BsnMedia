@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 
 public class Company {
@@ -35,6 +36,16 @@ public class Company {
 							return this.companyMembers.get(i);
 		
 		return null;
+	}
+	
+	//This methods checks if the verification code given by the user is correct
+	public boolean checkVerificationCode(String aString)
+	{
+		boolean correct=false;
+		if(aString.equals(this.verificationCode));
+			correct=true;
+			
+			return correct;
 	}
 	
 	public ArrayList<String> suggestedSearchOption(String aString)
@@ -139,9 +150,26 @@ public class Company {
 	public ArrayList<Chief> returnChiefs()
 	{
 		ArrayList<Chief> allChiefs = new ArrayList<Chief>();
-		for(this.companyMembers.size();i++)
-			//instance of
+		for(int i=0; i<this.companyMembers.size();i++) {
+			if (this.companyMembers.get(i) instanceof Chief) {
+				allChiefs.add((Chief)(companyMembers.get(i)));
+			}
+		}
+		return allChiefs;
 	}
+	
+	//This method seperates and collects Employees from all Users
+	public ArrayList<Employee> returnEmployees()
+	{
+		ArrayList<Employee> allEmployees = new ArrayList<Employee>();
+		for(int i=0; i<this.companyMembers.size();i++) {
+			if (this.companyMembers.get(i) instanceof Employee) {
+				allEmployees.add((Employee)(companyMembers.get(i)));
+			}
+		}
+		return allEmployees;
+	}
+	
 	
 	//This static method checks if two characters are equal ignoring case
 	static boolean charactersEqualIgnoringCase(char c1, char c2) {

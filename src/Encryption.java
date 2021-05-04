@@ -1,6 +1,7 @@
 
 public class Encryption {
 	
+	//Ceaser cipher encryption based on time!
 	public static int encryptMessage(Message aMessage)
 	{
 		char[] chars = aMessage.getContent().toCharArray();
