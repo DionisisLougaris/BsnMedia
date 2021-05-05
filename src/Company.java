@@ -25,6 +25,12 @@ public class Company {
 		this.email = email;
 	}
 	
+	public ArrayList<User> getCompanyMembers()
+	{
+		return companyMembers;
+	}
+
+	
 	//This method checks if a User exists based on his firstname or lastname or username or email
 	public User isCompanyMember(String aString)
 	{

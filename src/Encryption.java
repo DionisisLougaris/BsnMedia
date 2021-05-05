@@ -46,7 +46,7 @@ public class Encryption {
 		return key;
 	}
 	
-	public static void decryptPassword(String encryptedString,int key)
+	public static String decryptPassword(String encryptedString,int key)
 	{
 		char[] chars = encryptedString.toCharArray();
 		for(char c : chars)
@@ -55,6 +55,8 @@ public class Encryption {
 			//prepei na doume pws tha sundesoume thn klash password me tis 2 methodous kruptografishs
 			System.out.print(c);
 		}
+		
+		return  String.valueOf(chars); 
 		
 	}
 }
