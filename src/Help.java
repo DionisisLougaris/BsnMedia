@@ -22,7 +22,7 @@ public class Help {
 		
 	}
 	
-	public static void sendEmail() {
+	public static void sendEmail(String emailSender, String emailReceiver, String passwordReceiver, String emailthem) {
 		
 	}
 	
