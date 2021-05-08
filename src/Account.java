@@ -1,6 +1,8 @@
+import java.io.Serializable;
+
 import javax.swing.JOptionPane;
 
-public class Account {
+public class Account implements Serializable{
 	
 	private String username;
 	private String email;
@@ -82,7 +84,7 @@ public class Account {
 			String decryptedPassword = Encryption.decryptPassword(myPassword.getPassword(), myPassword.getAccountCreationTime().getSecond() + 1);
 			if(decryptedPassword.equals(inputPassword) )
 			{
-				new userBackendProfile();// prepei na mpei kai o user
+				// prepei me instance of the doume pio apo ta 3 gui xrhstwn tha anoiksoume
 			}
 			else
 			{

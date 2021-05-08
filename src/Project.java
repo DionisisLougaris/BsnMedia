@@ -1,5 +1,6 @@
+import java.io.Serializable;
 
-public class Project {
+public class Project implements Serializable{
 	
 	private String name;
 	private String description;

@@ -1,9 +1,11 @@
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-public class Password {
+public class Password implements Serializable
+{
 	
 	private String password;
 	private LocalDateTime timestamp;

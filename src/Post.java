@@ -1,10 +1,11 @@
+import java.io.Serializable;
 import java.time.*;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-public class Post {
+public class Post implements Serializable{
 	
 	private User creator;
 	private String content;
