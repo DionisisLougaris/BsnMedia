@@ -26,52 +26,6 @@ public class Company implements Serializable{
 		this.email = email;
 	}
 	
-	public ArrayList<User> getCompanyMembers()
-	{
-		return companyMembers;
-	}
-	
-	public String getVerificationCode() 
-	{
-		return verificationCode;
-	}
-	
-	public void setVerificationCode(String s) 
-	{
-		 verificationCode = s;
-	}
-	
-	public void setName(String n)
-	{
-		name = n;
-	}
-	
-	public void setTelephone(String t) 
-	{
-		telephone = t;
-	}
-	
-	public void setEmail(String e) 
-	{
-		email = e;
-	}
-	
-	public void setAddress(String a) 
-	{
-		address = a;
-	}
-	
-	public void setInfo(String i) 
-	{
-		info = i;
-	}
-	
-	public void setImage(String i) 
-	{
-		image = i;
-	}
-	
-	
 
 	
 	//This method checks if a User exists based on his firstname or lastname or username or email
@@ -231,5 +185,66 @@ public class Company implements Serializable{
 		  return Character.toLowerCase(u1) == Character.toLowerCase(u2);
 	}
 	
+	
+	/*This is a method that goes through the list of Users of the company checking if everyone's email 
+	 * coincides with the potential email of type String that is taken as a parameter. 
+	 * Returns a reasonable value (boolean*/
+	public boolean emailAvailability (String desiredEmail) {
+		
+		for(User companyMember: companyMembers) {
+			if (companyMember.myAccount.getEmail().equalsIgnoreCase(desiredEmail))
+				return false;
+		}
+		return true;
+	}
+	
+	
+	
+	public ArrayList<User> getCompanyMembers()
+	{
+		return companyMembers;
+	}
+	
+	public String getVerificationCode() 
+	{
+		return verificationCode;
+	}
+	
+	public void setVerificationCode(String s) 
+	{
+		 verificationCode = s;
+	}
+	
+	public void setName(String n)
+	{
+		name = n;
+	}
+	
+	public void setTelephone(String t) 
+	{
+		telephone = t;
+	}
+	
+	public void setEmail(String e) 
+	{
+		email = e;
+	}
+	
+	public void setAddress(String a) 
+	{
+		address = a;
+	}
+	
+	public void setInfo(String i) 
+	{
+		info = i;
+	}
+	
+	public void setImage(String i) 
+	{
+		image = i;
+	}
+	
+		
 
 }

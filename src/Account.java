@@ -21,46 +21,6 @@ public class Account implements Serializable{
 	
 	
 	
-	
-	public String getUsername() {
-		return username;
-	}
-
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-
-	public String getEmail() {
-		return email;
-	}
-
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-
-	public Password getMyPassword() {
-		return myPassword;
-	}
-
-
-	public void setMyPassword(Password myPassword) {
-		this.myPassword = myPassword;
-	}
-
-
-	public Company getMyCompany() {
-		return myCompany;
-	}
-
-
-	public void setMyCompany(Company myCompany) {
-		this.myCompany = myCompany;
-	}
-	
 	/*This is a method that runs through the list of Users of the company checking whether everyone's email coincides with the potential email type String which is considered  
 	 as a parameter. Returns a reasonable value (boolean).*/
 	public boolean emailAvailability (String desiredEmail)
@@ -110,7 +70,7 @@ public class Account implements Serializable{
 						if(inputEmail.equalsIgnoreCase(myCompany.getCompanyMembers().get(i).getMyAccount().getEmail()))
 						{
 							User user = myCompany.getCompanyMembers().get(i);
-							Help.sendEmail("itintelligenceuom@gmail.com",email, myPassword.getPassword(),"Verification code");
+							Help.sendGmail("itintelligenceuom@gmail.com",email, myPassword.getPassword(),"Verification code");
 							return user;
 						}
 				}
@@ -134,5 +94,42 @@ public class Account implements Serializable{
 			JOptionPane.showMessageDialog(null, "Failed to delete User",deletedUser.getLastName() , 0);
 		}
 	}
+
+
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public Password getMyPassword() {
+		return myPassword;
+	}
+
+	public void setMyPassword(Password myPassword) {
+		this.myPassword = myPassword;
+	}
+
+
+	public Company getMyCompany() {
+		return myCompany;
+	}
+
+
+	public void setMyCompany(Company myCompany) {
+		this.myCompany = myCompany;
+	}
+	
 	
 }

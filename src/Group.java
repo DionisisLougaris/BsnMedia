@@ -50,35 +50,53 @@ public class Group implements Serializable{
 		groupPosts.add(postForGroup);
 	}
 
-
+	
 	public String getName() {
 		return name;
 	}
-
 
 	public Project getMyProject() {
 		return myProject;
 	}
 
-
 	public int getRating() {
 		return rating;
 	}
-
 
 	public Chief getSupervisor() {
 		return supervisor;
 	}
 
-
 	public TreeSet<Post> getGroupPosts() {
 		return groupPosts;
 	}
 
-
 	public groupConversation getMyConversation() {
 		return myConversation;
 	}
-	
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setMyProject(Project myProject) {
+		this.myProject = myProject;
+	}
+
+	public void setRating(int rating) {
+		this.rating = rating;
+	}
+
+	public void setSupervisor(Chief supervisor) {
+		this.supervisor = supervisor;
+	}
+
+	public ArrayList<Employee> getGroupMembers() {
+		return groupMembers;
+	}
+
+	public void setGroupMembers(ArrayList<Employee> groupMembers) {
+		this.groupMembers = groupMembers;
+	}
 	
 }

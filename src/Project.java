@@ -5,6 +5,7 @@ public class Project implements Serializable{
 	private String name;
 	private String description;
 	private String deadline;
+	private String status; //only values "ongoing" or "done"
 	private Group myGroup;
 	
 	
@@ -14,6 +15,7 @@ public class Project implements Serializable{
 		this.description = description;
 		this.deadline = deadline;
 		this.myGroup = myGroup;
+		this.status = "ongoing";
 	}
 	
 	//Getters and Setters
@@ -48,5 +50,13 @@ public class Project implements Serializable{
 	public void setMyGroup(Group myGroup) {
 		this.myGroup = myGroup;
 	}
-		
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+			
 }
