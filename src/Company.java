@@ -41,6 +41,11 @@ public class Company implements Serializable{
 		return null;
 	}
 	
+	public ArrayList<Group> getCompanyGroups()
+	{
+		return companyGroups; 
+	}
+	
 	//This methods checks if the verification code given by the user is correct
 	public boolean checkVerificationCode(String aString)
 	{

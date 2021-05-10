@@ -76,6 +76,11 @@ abstract public class User implements Serializable{
 		return myAccount;
 	}
 	
+	public ArrayList<User> getListOfConnections()
+	{
+		return listOfConnections; 
+	}
+	
 	
 	
 	
