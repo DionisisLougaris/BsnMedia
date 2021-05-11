@@ -6,14 +6,14 @@ public class Connection extends Notification{
 	
 	
 	//Constructor for Connection class
-	public Connection(String notificationContent, User firstUser, User secondUser) {
-		super(notificationContent);
+	public Connection(User firstUser, User secondUser) {
 		this.firstUser = firstUser;
 		this.secondUser = secondUser;
 	}
 	
+	
 	//This is a method that checks if two users are connected to each other.
-	private boolean areConnected() {
+	public boolean areConnected() {
 		
 		if(firstUser.getListOfConnections().contains(secondUser) || secondUser.getListOfConnections().contains(firstUser))
 		{

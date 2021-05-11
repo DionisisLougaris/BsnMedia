@@ -1,5 +1,7 @@
 import java.io.Serializable;
+import java.util.ArrayList;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 public class Account implements Serializable{
@@ -7,33 +9,47 @@ public class Account implements Serializable{
 	private String username;
 	private String email;
 	private Password myPassword;
-	private Company myCompany;
+	private Company myCompany; 
 	
 	
 	//Constructor for Account
 	public Account(String username, String email, Company myCompany, Password myPassword) {
-		
-		this.username = username;
-		this.email = email;
-		this.myCompany = myCompany;
-		this.myPassword = myPassword;
-	}
-	
-	
-	
-	/*This is a method that runs through the list of Users of the company checking whether everyone's email coincides with the potential email type String which is considered  
-	 as a parameter. Returns a reasonable value (boolean).*/
-	public boolean emailAvailability (String desiredEmail)
-	{
-		for(int i=0; i<myCompany.getCompanyMembers().size(); i++)
-		{
-			if(desiredEmail.equalsIgnoreCase(email))
-			{
-				return true;
+		/*A prerequisite for the creation of the object is the email and the Username that 
+		 * will be given not to be used already, for this reason the following checks also occur.*/
+		if(this.emailAvailability(email)){  //Check if email is used
+			if (myCompany.isCompanyMember(username)==null) { //Check if username is used
+				this.username = username;
+				this.email = email;
+				this.myCompany = myCompany;
+				this.myPassword = myPassword;
+			}
+			else {
+				String message = "The username you selected is already in use!";
+				JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+				        JOptionPane.INFORMATION_MESSAGE);
 			}
 		}
-		return false;
+		else {
+			String message = "The email you selected is already in use!";
+			JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+			        JOptionPane.INFORMATION_MESSAGE);
+		}
 	}
+	
+	
+	/*This is a method that goes through the list of Users of the company checking if everyone's email 
+	 * coincides with the potential email of type String that is taken as a parameter. 
+	 * Returns a reasonable value (boolean*/
+	public boolean emailAvailability (String desiredEmail) {
+		
+		ArrayList<User> companyMembers = myCompany.getCompanyMembers();
+		for(User companyMember: companyMembers) {
+			if (companyMember.myAccount.getEmail().equalsIgnoreCase(desiredEmail))
+				return false;
+		}
+		return true;
+	}
+	
 	
 	/*This is a method that allows or does not allow the User to access in Bsn Media. If all checks are finished without 
 	any error the user's backend Profile window on  network  opens.*/ 
@@ -53,8 +69,6 @@ public class Account implements Serializable{
 			
 
 	      }
-	
-	
 	}
 	
 	/*This is a method that changes or not a user's password in case he has forgotten the previous one.

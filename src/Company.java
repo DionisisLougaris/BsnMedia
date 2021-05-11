@@ -191,19 +191,6 @@ public class Company implements Serializable{
 	}
 	
 	
-	/*This is a method that goes through the list of Users of the company checking if everyone's email 
-	 * coincides with the potential email of type String that is taken as a parameter. 
-	 * Returns a reasonable value (boolean*/
-	public boolean emailAvailability (String desiredEmail) {
-		
-		for(User companyMember: companyMembers) {
-			if (companyMember.myAccount.getEmail().equalsIgnoreCase(desiredEmail))
-				return false;
-		}
-		return true;
-	}
-	
-	
 	
 	public ArrayList<User> getCompanyMembers()
 	{

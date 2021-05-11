@@ -11,9 +11,12 @@ public class Password implements Serializable
 	private LocalDateTime timestamp;
 	
 	//Constructor for Password
-	public Password(String password) {
-		
-		if (password.length()>=8) { //check if the code is accepted
+	public Password(String password, String username, String firstName, String lastName) {
+		//The fields username, firstName and lastName are usefull for the password strength
+		//check if the code is accepted
+		if (password.length()>=8 && !password.equalsIgnoreCase(username) 
+								 && !password.equalsIgnoreCase(firstName)
+								 && !password.equalsIgnoreCase(lastName)) { 
 			//Πριν οριστει τιμη στο πεδιο, θα μεσολαβει η κρυπτοφραφιση του κωδικου
 			this.password = password;
 			this.timestamp = LocalDateTime.now(); //takes the current time the object is to be created

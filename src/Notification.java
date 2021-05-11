@@ -37,4 +37,9 @@ public class Notification implements Serializable{
 		this.aboutThisConversation = aboutThisConversation;
 	}
 	
+	//Empty constructor for class Connection
+	public Notification() {
+		
+	}
+	
 }

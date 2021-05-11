@@ -9,7 +9,7 @@ public class Post implements Serializable{
 	
 	private User creator;
 	private String content;
-	private String postScope; //Εμβελεια
+	private String postScope; //Scope: (public or friends or group)
 	private LocalDateTime timestamp;
 	private int numberOfLikes;
 	private ArrayList<User> likers = new ArrayList<User>(); //All users who likes the post
@@ -41,6 +41,57 @@ public class Post implements Serializable{
 			return true; //New like added
 		}	
 	}
+
+
 	
-	
+	//*********************************************************************************************************************
+	//Getters and Setters
+	public User getCreator() {
+		return creator;
+	}
+
+	public void setCreator(User creator) {
+		this.creator = creator;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public String getPostScope() {
+		return postScope;
+	}
+
+	public void setPostScope(String postScope) {
+		this.postScope = postScope;
+	}
+
+	public LocalDateTime getTimestamp() {
+		return timestamp;
+	}
+
+	public void setTimestamp(LocalDateTime timestamp) {
+		this.timestamp = timestamp;
+	}
+
+	public int getNumberOfLikes() {
+		return numberOfLikes;
+	}
+
+	public void setNumberOfLikes(int numberOfLikes) {
+		this.numberOfLikes = numberOfLikes;
+	}
+
+	public ArrayList<User> getLikers() {
+		return likers;
+	}
+
+	public void setLikers(ArrayList<User> likers) {
+		this.likers = likers;
+	}
+		
 }
