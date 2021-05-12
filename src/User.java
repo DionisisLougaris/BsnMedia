@@ -171,5 +171,11 @@ abstract public class User implements Serializable{
 	public void setListOfConversations(TreeSet<Conversation> listOfConversations) {
 		this.listOfConversations = listOfConversations;
 	}
-		
+
+
+	public void addPendingConnectionRequest(User user) {
+		pendingConnectionRequests.add(user);
+	}
+	
+	
 }

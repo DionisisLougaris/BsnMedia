@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
 
 public class Connection extends Notification{
 
@@ -35,7 +38,55 @@ public class Connection extends Notification{
 			secondUser.getListOfConnections().remove(firstUser);
 		}
 	}
-
+	
+	//This is a method in which a connection request is sent to another user.
+	public void  sendConnectionRequest()
+	{
+		boolean pendingConnectionRequest = false;
+		if(!areConnected())
+		{
+			for(int i=0; i<secondUser.getPendingConnectionRequests().size(); i++)
+			{
+				if(firstUser == secondUser.getPendingConnectionRequests().get(i))
+				{
+					pendingConnectionRequest = true;
+					break;
+				}
+			}
+			if(!pendingConnectionRequest)
+			{
+				firstUser.addPendingConnectionRequest(secondUser);
+			}
+			else
+			{
+				JOptionPane.showMessageDialog(null, "Failed to pending connection request because the request all ready be pended. ");
+			}
+		}
+		else
+		{
+			JOptionPane.showMessageDialog(null, "Failed to pending connection request because you are all ready connected. ");
+		}
+	}
+	
+	//This is a method in which the connection request is accepted or is canceled.
+	public void manageConnectionRequest(boolean manageCR)
+	{
+		if(manageCR)
+		{
+			if(!areConnected())
+			{
+				firstUser.getListOfConnections().add(secondUser);
+				secondUser.getListOfConnections().add(firstUser);
+			}
+		}
+		else
+		{
+			firstUser.getPendingConnectionRequests().remove(secondUser);
+			firstUser.getListOfNotifications(); // diagrafh toy notification
+		}
+	}
+	
+	
 	
 
 }
