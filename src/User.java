@@ -13,7 +13,7 @@ abstract public class User implements Serializable{
 	protected String image;
 	protected Account myAccount;
 	protected ArrayList<User> listOfConnections = new ArrayList<User>();
-	protected TreeSet<Post> listOfPosts = new TreeSet<Post>(); //Εδω θα έχει μονο τα δικα του Post ή ολα οσα μπορει να δει
+	protected TreeSet<Post> listOfPosts = new TreeSet<Post>(); //Only his Posts
 	protected ArrayList<Notification> listOfNotifications = new ArrayList<Notification>();
 	protected ArrayList<User> pendingConnectionRequests = new ArrayList<User>();
 	protected TreeSet<Conversation> listOfConversations = new TreeSet<Conversation>();
@@ -39,7 +39,7 @@ abstract public class User implements Serializable{
 	 * of another user whose public profile has been visited*/
 	public TreeSet<Post> returnVisiblePosts(User visitedUser) {
 		
-		TreeSet<Post> visitedUserAllPosts = visitedUser.returnAllPosts(); //List of Posts of the user who visited his public profile
+		TreeSet<Post> visitedUserAllPosts = visitedUser.getListOfPosts(); //List of Posts of the user who visited his public profile
 		TreeSet<Post> visiblePostsToBeReturned = new TreeSet<Post>();
 		
 		for (Post visitedUserPost: visitedUserAllPosts) {
@@ -55,9 +55,36 @@ abstract public class User implements Serializable{
 	}
 	
 	
-	
+	/*This is a method that returns a TreeSet with all the posts that are visible to the logged in user. 
+	 * Such posts are his own, his friends', from users who have set universal visibility in a Post, 
+	 * as well as posts addressed to the Groups he is a member of.*/
 	public TreeSet<Post> returnAllPosts() {
-			return listOfPosts;
+			
+		TreeSet<Post> postForBackEndProfile = new TreeSet<Post>(); //List of Posts that will appear in the User's Back-End Profile
+		
+		for(Post hisPost: listOfPosts) 
+			postForBackEndProfile.add(hisPost); //Initially, his own are added
+		
+		for(User connectedUser: listOfConnections) {
+			TreeSet<Post> friendsPosts = connectedUser.getListOfPosts();
+			for(Post friendsPost: friendsPosts) 
+				if (friendsPost.getPostScope().equalsIgnoreCase("friends")) 
+					postForBackEndProfile.add(friendsPost); //The Posts of connected users with whom he has the opportunity to see
+		}
+		
+		for(User otherCompanyMember: this.myAccount.getMyCompany().getCompanyMembers()) {
+			TreeSet<Post> otherUsersPosts = otherCompanyMember.getListOfPosts();
+			for(Post otherUserPost: otherUsersPosts)
+				if (otherUserPost.getPostScope().equalsIgnoreCase("public"))
+					postForBackEndProfile.add(otherUserPost); //Posts from members of the company that have a universal scope
+		}
+		
+		return postForBackEndProfile;
+	}
+	
+	
+	public TreeSet<Notification> returnNotification() {
+		
 	}
 
 	
@@ -176,6 +203,9 @@ abstract public class User implements Serializable{
 	public void addPendingConnectionRequest(User user) {
 		pendingConnectionRequests.add(user);
 	}
-	
-	
+
+	public TreeSet<Post> getListOfPosts() {
+		return listOfPosts;
+	}
+		
 }

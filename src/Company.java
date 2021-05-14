@@ -46,15 +46,6 @@ public class Company implements Serializable{
 		return companyGroups; 
 	}
 	
-	//This methods checks if the verification code given by the user is correct
-	public boolean checkVerificationCode(String aString)
-	{
-		boolean correct=false;
-		if(aString.equals(this.verificationCode));
-			correct=true;
-			
-			return correct;
-	}
 	
 	public ArrayList<String> suggestedSearchOption(String aString)
 	{
