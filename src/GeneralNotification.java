@@ -8,9 +8,14 @@ public class GeneralNotification extends Notification{
 		this.typeOfNotification = typeOfNotification;
 	}
 
-
 	
 	
+	public String getTypeOfNotification() {
+		return typeOfNotification;
+	}
 
+	public void setTypeOfNotification(String typeOfNotification) {
+		this.typeOfNotification = typeOfNotification;
+	}
 		
 }

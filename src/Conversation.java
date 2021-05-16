@@ -1,7 +1,7 @@
 import java.io.File;
 import java.util.*;
 
-abstract public class Conversation {
+abstract public class Conversation extends Notification{
 	
 	protected TreeSet<Message> allMessages = new TreeSet<Message>();
 	File conversationName = new File("uniqueConversationFIleName.txt");

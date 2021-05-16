@@ -1,5 +1,6 @@
 
 import java.util.ArrayList;
+import java.util.TreeSet;
 
 public class Chief extends User{
 	
@@ -46,6 +47,68 @@ public class Chief extends User{
 			editableeGroup.setName(groupName);
 			return true;
 		}
+	}
+
+	
+	@Override
+	public TreeSet<Post> returnAllPosts() {
+		// TODO Auto-generated method stub
+	
+		TreeSet<Post> postForBackEndProfile = new TreeSet<Post>(); //List of Posts that will appear in the User's Back-End Profile
+		
+		for(Post hisPost: listOfPosts) 
+			postForBackEndProfile.add(hisPost); //Initially, his own are added
+		
+		for(User connectedUser: listOfConnections) {
+			TreeSet<Post> friendsPosts = connectedUser.getListOfPosts();
+			for(Post friendsPost: friendsPosts) 
+				if (friendsPost.getPostScope().equalsIgnoreCase("friends")) 
+					postForBackEndProfile.add(friendsPost); //The Posts of connected users with whom he has the opportunity to see
+		}
+		
+		for(User otherCompanyMember: this.myAccount.getMyCompany().getCompanyMembers()) {
+			TreeSet<Post> otherUsersPosts = otherCompanyMember.getListOfPosts();
+			for(Post otherUserPost: otherUsersPosts)
+				if (otherUserPost.getPostScope().equalsIgnoreCase("public"))
+					postForBackEndProfile.add(otherUserPost); //Posts from members of the company that have a universal scope
+		}
+		
+		for(Group supervisingGroup: groupsSupervising) {
+			TreeSet<Post> supervisingGroupPosts = supervisingGroup.getGroupPosts();
+			for (Post groupPost: supervisingGroupPosts) {
+				postForBackEndProfile.add(groupPost); /*Addition of publications, which have as their scope 
+														Group which are supervised by the specific Chief*/
+			}
+		}
+		
+		return postForBackEndProfile;
+	}
+
+	@Override //Users that are in the same Group with him and Friends of Friends
+	public TreeSet<User> suggestedConnections() {
+		// TODO Auto-generated method stub
+		
+		TreeSet<User> listWithSuggestedConnections = new TreeSet<User>();
+		
+		for(User connectedUser: listOfConnections) {
+			ArrayList<User> connectedUserConnections = connectedUser.getListOfConnections();
+			for(User suggestedUser: connectedUserConnections) {
+				Connection areAlreadyConnected = new Connection(this, suggestedUser);
+				if (!areAlreadyConnected.areConnected())
+					listWithSuggestedConnections.add(suggestedUser);
+			}
+		}
+		
+		//For users that are in the same Group with him
+		for(Group myGroup: groupsSupervising) {
+			for(Employee otherGroupMember: myGroup.getGroupMembers()) {
+				Connection areAlreadyConnected = new Connection(this, otherGroupMember);
+				if(!areAlreadyConnected.areConnected())
+					listWithSuggestedConnections.add(otherGroupMember);
+			}
+		}
+		
+		return listWithSuggestedConnections;
 	}
 
 }

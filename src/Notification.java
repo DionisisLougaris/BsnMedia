@@ -1,7 +1,7 @@
 import java.io.Serializable;
 import java.time.*;
 
-public class Notification implements Serializable{
+abstract public class Notification implements Serializable{
 	
 	private String notificationContent;
 	private LocalDateTime timestamp;

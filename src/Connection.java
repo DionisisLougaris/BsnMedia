@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 public class Connection extends Notification{
@@ -12,6 +13,11 @@ public class Connection extends Notification{
 	public Connection(User firstUser, User secondUser) {
 		this.firstUser = firstUser;
 		this.secondUser = secondUser;
+	}
+	
+	//Constructor for Connection as Notification
+	public Connection(String notificationContent, User aboutThisUser) {
+		super(notificationContent, aboutThisUser);
 	}
 	
 	
@@ -36,6 +42,11 @@ public class Connection extends Notification{
 		{
 			firstUser.getListOfConnections().remove(secondUser);
 			secondUser.getListOfConnections().remove(firstUser);
+		}
+		else {
+			String message = "You are not connected to each other!";
+			JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+			        JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
 	

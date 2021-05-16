@@ -38,6 +38,9 @@ public class Password implements Serializable
 			if (newPass.equalsIgnoreCase(confirmedPass)) {
 				//Εδω θα κληθει μεθοδος για κρυπρογραφιση του καινουργιου κωδικού
 				this.password = newPass; //the code is updated
+				String message = "The code has updated succesfully";
+				JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+				        JOptionPane.INFORMATION_MESSAGE);
 			}
 			else {
 				String message = "The code and the confirmed code are not the same!";

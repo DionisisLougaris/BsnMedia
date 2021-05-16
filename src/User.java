@@ -1,6 +1,9 @@
 import java.io.Serializable;
 import java.util.*;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 abstract public class User implements Serializable{
 	
 	protected String firstName;
@@ -58,34 +61,113 @@ abstract public class User implements Serializable{
 	/*This is a method that returns a TreeSet with all the posts that are visible to the logged in user. 
 	 * Such posts are his own, his friends', from users who have set universal visibility in a Post, 
 	 * as well as posts addressed to the Groups he is a member of.*/
-	public TreeSet<Post> returnAllPosts() {
-			
-		TreeSet<Post> postForBackEndProfile = new TreeSet<Post>(); //List of Posts that will appear in the User's Back-End Profile
-		
-		for(Post hisPost: listOfPosts) 
-			postForBackEndProfile.add(hisPost); //Initially, his own are added
-		
-		for(User connectedUser: listOfConnections) {
-			TreeSet<Post> friendsPosts = connectedUser.getListOfPosts();
-			for(Post friendsPost: friendsPosts) 
-				if (friendsPost.getPostScope().equalsIgnoreCase("friends")) 
-					postForBackEndProfile.add(friendsPost); //The Posts of connected users with whom he has the opportunity to see
-		}
-		
-		for(User otherCompanyMember: this.myAccount.getMyCompany().getCompanyMembers()) {
-			TreeSet<Post> otherUsersPosts = otherCompanyMember.getListOfPosts();
-			for(Post otherUserPost: otherUsersPosts)
-				if (otherUserPost.getPostScope().equalsIgnoreCase("public"))
-					postForBackEndProfile.add(otherUserPost); //Posts from members of the company that have a universal scope
-		}
-		
-		return postForBackEndProfile;
-	}
+	abstract public TreeSet<Post> returnAllPosts(); 
 	
 	
+	/*Return notifications regarding the acceptance of a connection request from another user, 
+	 * joining a group, a project that has been completed, as well as a Project that has been evaluated.*/
 	public TreeSet<Notification> returnNotification() {
 		
+		TreeSet<Notification> generalNotifications = new TreeSet<Notification>();
+		
+		//Adds notifications that belong to the special category "General notifications"
+		for(Notification myNotification: listOfNotifications) {
+			if (myNotification instanceof GeneralNotification) {
+				if(!(((GeneralNotification) myNotification).getTypeOfNotification().equalsIgnoreCase("connection request")))
+					generalNotifications.add(myNotification);
+			}
+		}
+		
+		return generalNotifications;
 	}
+	
+	
+	//This is a method that returns a TreeSet with all connection requests to the user.
+	public TreeSet<Notification> returnConnectionsRequest() {
+		
+		TreeSet<Notification> connectionsRequest = new TreeSet<Notification>();
+		
+		//Adds notifications that belong to the special category "Connections Request (Class Connection)"
+		for(Notification myNotification: listOfNotifications) {
+			if (myNotification instanceof Connection) 
+					connectionsRequest.add(myNotification);
+		}
+		
+		return connectionsRequest;
+	}
+	
+	
+	/*This is a method by which User has the ability to change the photo that appears his public Profile*/
+	public void changeUsersPhoto(String photoPath) {
+		
+	}
+	
+	
+	//This is a method that modifies the user's public information.
+	public boolean editPublicInfo(String firstName, String lastName, String email, String telephone,
+					String address, String speciality, String gender, String birthday) {
+		
+		//Fields that do not require some checks will change directly
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.telephone = telephone;
+		this.address = address;
+		this.companyPost = speciality;
+		this.gender = gender;
+		this.birthday = birthday;
+		
+		//Field that requires control
+		if(this.myAccount.emailAvailability(email)) {
+			this.myAccount.setEmail(email); //The email is updated
+			return true; //True: It appears from Gui that all the algae were okay
+		}
+		else
+			return false; /*False: The new email was not available. 
+					Informs with false so that the field in Gui is empty, and blushes so that the user knows what went wrong*/
+	}
+	
+	
+	//This is a method that modifies the user's private information.
+	public boolean editPrivateInfo(String username, String currPassword, String newPassword, String confirmedPassword) {
+		
+		boolean changeUsername = true;
+		
+		//To change Username
+		if (!username.equalsIgnoreCase(this.myAccount.getUsername())) { //Check if JTextField has been modified
+			
+			ArrayList<User> allCompanyMembers = this.myAccount.getMyCompany().getCompanyMembers();
+			
+			for(User companyMember: allCompanyMembers) {
+				if (username.equalsIgnoreCase(companyMember.myAccount.getUsername()))
+						changeUsername = false; //The username he chose is not available
+			}
+			if (changeUsername == true)
+				this.myAccount.setUsername(username);
+			/*else { (Θα δουμε που βολευει να μπει η ειδοποιηση)
+				String message = "The new username he chose is not available!";
+				JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+				        JOptionPane.INFORMATION_MESSAGE);
+			}*/
+		}
+		else {
+			changeUsername = false;
+		}
+		
+		//To change Password (If everything is blank, it means that the user does not want to change the password)
+		if (!currPassword.equalsIgnoreCase("") || !newPassword.equalsIgnoreCase("") || !confirmedPassword.equalsIgnoreCase("")) {
+			this.myAccount.getMyPassword().changePassword(currPassword, newPassword, confirmedPassword, this);
+		}
+		
+		/*True or false: This way we will know how to display the changes in the GUI and how to notify the user*/
+		if (changeUsername)
+			return true; //Username changed and changes accepted
+		else
+			return false; //Username was not changed or changes were accepted
+	}
+	
+	
+	//This is a method that calculates and returns a list of suggested connections for a user.
+	abstract public TreeSet<User> suggestedConnections();
 
 	
 	

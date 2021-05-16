@@ -67,6 +67,51 @@ public class Boss extends User{
 	public void changeCompanyPhoto(String photoUrl) {
 		
 	}
+
+	
+	@Override
+	public TreeSet<Post> returnAllPosts() {
+		// TODO Auto-generated method stub
+		
+		TreeSet<Post> postForBackEndProfile = new TreeSet<Post>(); //List of Posts that will appear in the User's Back-End Profile
+		
+		for(Post hisPost: listOfPosts) 
+			postForBackEndProfile.add(hisPost); //Initially, his own are added
+		
+		for(User connectedUser: listOfConnections) {
+			TreeSet<Post> friendsPosts = connectedUser.getListOfPosts();
+			for(Post friendsPost: friendsPosts) 
+				if (friendsPost.getPostScope().equalsIgnoreCase("friends")) 
+					postForBackEndProfile.add(friendsPost); //The Posts of connected users with whom he has the opportunity to see
+		}
+		
+		for(User otherCompanyMember: this.myAccount.getMyCompany().getCompanyMembers()) {
+			TreeSet<Post> otherUsersPosts = otherCompanyMember.getListOfPosts();
+			for(Post otherUserPost: otherUsersPosts)
+				if (otherUserPost.getPostScope().equalsIgnoreCase("public"))
+					postForBackEndProfile.add(otherUserPost); //Posts from members of the company that have a universal scope
+		}
+		
+		return postForBackEndProfile;
+	}
+
+	@Override //Friends of friends only
+	public TreeSet<User> suggestedConnections() {
+		// TODO Auto-generated method stub
+		
+		TreeSet<User> listWithSuggestedConnections = new TreeSet<User>();
+		
+		for(User connectedUser: listOfConnections) {
+			ArrayList<User> connectedUserConnections = connectedUser.getListOfConnections();
+			for(User suggestedUser: connectedUserConnections) {
+				Connection areAlreadyConnected = new Connection(this, suggestedUser);
+				if (!areAlreadyConnected.areConnected())
+					listWithSuggestedConnections.add(suggestedUser);
+			}
+		}
+		
+		return listWithSuggestedConnections;
+	}
 	
 	
 }
