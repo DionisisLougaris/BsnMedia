@@ -97,6 +97,24 @@ public class Connection extends Notification{
 		}
 	}
 	
+	//This method returns the mutual connections between two users.
+	public ArrayList<User>  mutualConnections ()
+	{
+		ArrayList<User> listOfMutualConnections = new ArrayList<User>();
+		ArrayList<User> firstUserConnection = firstUser.getListOfConnections();
+		ArrayList<User> secondUserConnection = secondUser.getListOfConnections();
+		
+        for(int i=0; i<firstUserConnection.size(); i++)
+		{
+			if(secondUserConnection.contains(firstUserConnection.get(i)) && firstUserConnection.get(i) != secondUser )
+			{
+					listOfMutualConnections.add(firstUserConnection.get(i));
+			}
+		}
+		
+	 return listOfMutualConnections;
+	}
+	
 	
 	
 

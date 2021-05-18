@@ -41,6 +41,30 @@ public class Post implements Serializable{
 			return true; //New like added
 		}	
 	}
+	
+	//This method remove user's like from post.
+	public boolean removeLike(User theUser)
+	{
+		if(likers.contains(theUser))
+		{
+			numberOfLikes--;
+			likers.remove(theUser);
+			return true;
+		}
+		else
+		{
+			JOptionPane.showMessageDialog(new JFrame(), "You hava not already like this post. So you can not remove like from this post", "Message", JOptionPane.INFORMATION_MESSAGE);
+			return false;
+		}
+	}
+	
+	//This method share a post to a conversation.
+	public void  shareToConversation(User userSharing, Conversation conversationSharing, User userSherdPost)
+	{
+		String messageshare = content + "\n" + "Creator: " + creator.getFirstName() + " " + creator.getLastName() + " " + "Time: " + timestamp;
+		Message message = new Message(messageshare, userSharing, userSherdPost);
+		conversationSharing.addMesage(message);
+	}
 
 
 	
