@@ -109,7 +109,7 @@ public class Company implements Serializable{
 		if(aString.equals(this.name))
 		{
 			found=true;
-			new companyProfile();
+			//new companyProfile();
 		}
 		
 		//Searching for a group
@@ -117,7 +117,7 @@ public class Company implements Serializable{
 			if(this.companyGroups.get(i).getName().equals(aString))
 			{
 				found=true;
-				new groupProfile();
+				//new groupProfile();
 			}
 		//Searching for a User by Full name or email
 		for(int i=0;i<this.companyMembers.size();i++)
@@ -126,7 +126,7 @@ public class Company implements Serializable{
 					||this.companyMembers.get(i).myAccount.getEmail().equals(aString))
 			{
 				found=true;
-				new userBackendProfile();
+				//new userBackendProfile();
 			}
 		}
 		//No entity was found so suggested search options appear to User

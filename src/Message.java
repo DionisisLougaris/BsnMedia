@@ -14,6 +14,12 @@ public class Message {
 		this.sender = sender;
 		this.reciever = reciever;
 	}
+	
+	//Constructor for testing encryption
+	public Message(String content) {
+		this.content = content;
+		this.timesent = LocalDateTime.now();
+	}
 
 
 	public String getContent() {

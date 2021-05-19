@@ -84,7 +84,7 @@ public class Account implements Serializable{
 						if(inputEmail.equalsIgnoreCase(myCompany.getCompanyMembers().get(i).getMyAccount().getEmail()))
 						{
 							User user = myCompany.getCompanyMembers().get(i);
-							Help.sendGmail("itintelligenceuom@gmail.com",email, myPassword.getPassword(),"Verification code");
+							//Help.sendGmail("itintelligenceuom@gmail.com",email, myPassword.getPassword(),"Verification code");
 							return user;
 						}
 				}

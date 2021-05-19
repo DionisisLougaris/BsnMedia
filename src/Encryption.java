@@ -1,35 +1,36 @@
 
 public class Encryption {
 	
-	//Ceaser cipher encryption based on time!
-	public static int encryptMessage(Message aMessage)
-	{
-		char[] chars = aMessage.getContent().toCharArray();
-		
-		//prepei na allaksei to key den einai swsto
-		int key= (aMessage.getTimesent().getSecond()+1);
-		
-		for(char c : chars)
-		{
-			c+=key;
-			//edw krutpografeite to pedio kai oxi mono gia na perastei sto arxeio(anti gia syso tha ginetai eggrafh sto arxeio)
-			System.out.print(c);	
+
+	//Message encryption algorithm
+	public static String encryptMessage(String originalMessage, int key) {
+		   
+		String encrypted = ""; //The encrypted message to be saved
+	       
+		for (int i = 0; i < originalMessage.length(); i++) {
+	    	   
+			int c = originalMessage.charAt(i) + key; //We modify each character of the alphanumeric
+	           
+			if (c > 126) {
+				c -= 95; //If the ascii table maximum is exceeded
+			} 
+			else if (c < 32) {
+				c += 95; //If it is less than the allowable limit of the ASCII table
+			}
+			encrypted += (char) c;
 		}
-		return key;
+		return encrypted;
 	}
 
-	public static void decryptMessage(String encryptedString,int key)
-	{
-		char[] chars = encryptedString.toCharArray();
-		for(char c : chars)
-		{
-			c-=key;
-			
-			//anti gia syso tha ginetai eggrafh tou minimatos sto TextArea ths sunomilias
-			System.out.print(c);
-		}
-		
+	 
+	//Method of decrypting an encrypted message
+	public static String decryptMessage(String encryptedMessage, int shift) {
+		   
+		return encryptMessage(encryptedMessage, -shift);  //The method of encryption is called with the parameter of the encrypted message and the reverse of the key used for encryption
 	}
+	   
+	   
+	   
 	
 	public static int encryptPassword(Password aPassword)
 	{
