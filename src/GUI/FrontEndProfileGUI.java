@@ -6,8 +6,12 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
 import javax.swing.JRadioButton;
@@ -84,7 +88,7 @@ public class FrontEndProfileGUI {
 		panel.add(btnNewButton_1);
 		
 		JTextArea textArea = new JTextArea();
-		textArea.setBounds(35, 599, 810, 362);
+		textArea.setBounds(32, 586, 810, 362);
 		panel.add(textArea);
 		
 		JLabel lblNewLabel_1 = new JLabel("Name LastName");
@@ -97,7 +101,7 @@ public class FrontEndProfileGUI {
 		panel.add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel("Specialization");
-		lblNewLabel_3.setBounds(350, 279, 78, 16);
+		lblNewLabel_3.setBounds(363, 279, 78, 16);
 		panel.add(lblNewLabel_3);
 		
 		JLabel lblNewLabel_4 = new JLabel("example@gmail.com");
