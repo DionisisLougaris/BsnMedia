@@ -103,11 +103,7 @@ public class BackendProfileBossGUI {
 		});
 		btnNewButton_1_1.setBounds(824, 929, 46, 38);
 		panel.add(btnNewButton_1_1);
-		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(333, 27, 268, 30);
-		panel.add(textField_1);
+
 		
 		JButton btnNewButton_1 = new JButton("friend request icon");
 		btnNewButton_1.setBounds(714, 27, 37, 30);
@@ -194,11 +190,7 @@ public class BackendProfileBossGUI {
 		textField.setBounds(661, 709, 63, 22);
 		panel.add(textField);
 		textField.setColumns(10);
-		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(326, 27, 268, 30);
-		panel.add(textField_1);
+
 		
 		textField = new JTextField();
 		textField.setColumns(10);
