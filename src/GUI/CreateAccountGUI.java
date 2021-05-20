@@ -26,8 +26,6 @@ public class CreateAccountGUI {
 	private JTextField txtGender;
 	private JTextField txtBirthday;
 	private JTextField txtSpeciality;
-	private JCheckBox chckbxNewCheckBox;
-	private JCheckBox chckbxNewCheckBox_1;
 	private JButton btnNewButton;
 	private JButton btnNewButton_1;
 
@@ -139,14 +137,6 @@ public class CreateAccountGUI {
 		lblNewLabel.setBounds(133, 452, 88, 16);
 		frame.getContentPane().add(lblNewLabel);
 		
-		chckbxNewCheckBox = new JCheckBox("Employee");
-		chckbxNewCheckBox.setBounds(222, 448, 88, 25);
-		frame.getContentPane().add(chckbxNewCheckBox);
-		
-		chckbxNewCheckBox_1 = new JCheckBox("Chief");
-		chckbxNewCheckBox_1.setBounds(314, 448, 113, 25);
-		frame.getContentPane().add(chckbxNewCheckBox_1);
-		
 		btnNewButton = new JButton("Create New Account");
 		btnNewButton.setBounds(177, 515, 169, 25);
 		frame.getContentPane().add(btnNewButton);
@@ -154,5 +144,13 @@ public class CreateAccountGUI {
 		btnNewButton_1 = new JButton("Log In");
 		btnNewButton_1.setBounds(385, 515, 97, 25);
 		frame.getContentPane().add(btnNewButton_1);
+		
+		JRadioButton rdbtnNewRadioButton = new JRadioButton("Employee");
+		rdbtnNewRadioButton.setBounds(219, 448, 88, 25);
+		frame.getContentPane().add(rdbtnNewRadioButton);
+		
+		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("Chief");
+		rdbtnNewRadioButton_1.setBounds(311, 448, 64, 25);
+		frame.getContentPane().add(rdbtnNewRadioButton_1);
 	}
 }
