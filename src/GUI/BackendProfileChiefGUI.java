@@ -10,16 +10,16 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JScrollBar;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.JRadioButton;
 
-public class BackendProfileEmployeeGUI {
+public class BackendProfileChiefGUI {
 
 	private JFrame frame;
-	private JTextField textField_1;
 	private JTextField textField;
+	private JTextField textField_1;
 
 	/**
 	 * Launch the application.
@@ -28,7 +28,7 @@ public class BackendProfileEmployeeGUI {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					BackendProfileEmployeeGUI window = new BackendProfileEmployeeGUI();
+					BackendProfileChiefGUI window = new BackendProfileChiefGUI();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -40,7 +40,7 @@ public class BackendProfileEmployeeGUI {
 	/**
 	 * Create the application.
 	 */
-	public BackendProfileEmployeeGUI() {
+	public BackendProfileChiefGUI() {
 		initialize();
 	}
 
@@ -211,5 +211,31 @@ public class BackendProfileEmployeeGUI {
 		JButton btnNewButton_7 = new JButton("Disconnect");
 		btnNewButton_7.setBounds(754, 98, 97, 25);
 		panel.add(btnNewButton_7);
+		
+		JButton btnNewButton_2_1 = new JButton("Create Project");
+		btnNewButton_2_1.setBounds(255, 310, 116, 25);
+		panel.add(btnNewButton_2_1);
+		
+		JButton btnNewButton_8 = new JButton("Edit");
+		btnNewButton_8.setBounds(44, 327, 55, 25);
+		panel.add(btnNewButton_8);
+		
+		JButton btnNewButton_8_1 = new JButton("Edit");
+		btnNewButton_8_1.setBounds(111, 327, 55, 25);
+		panel.add(btnNewButton_8_1);
+		
+		JButton btnNewButton_8_2 = new JButton("Edit");
+		btnNewButton_8_2.setBounds(174, 327, 55, 25);
+		panel.add(btnNewButton_8_2);
+		
+		textField = new JTextField();
+		textField.setBounds(661, 709, 63, 22);
+		panel.add(textField);
+		textField.setColumns(10);
+		
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		textField_1.setBounds(326, 27, 268, 30);
+		panel.add(textField_1);
 	}
 }

@@ -10,15 +10,14 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JScrollBar;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.JRadioButton;
 
-public class BackendProfileEmployeeGUI {
+public class BackendProfileBossGUI {
 
 	private JFrame frame;
-	private JTextField textField_1;
 	private JTextField textField;
 
 	/**
@@ -28,7 +27,7 @@ public class BackendProfileEmployeeGUI {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					BackendProfileEmployeeGUI window = new BackendProfileEmployeeGUI();
+					BackendProfileBossGUI window = new BackendProfileBossGUI();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -40,7 +39,7 @@ public class BackendProfileEmployeeGUI {
 	/**
 	 * Create the application.
 	 */
-	public BackendProfileEmployeeGUI() {
+	public BackendProfileBossGUI() {
 		initialize();
 	}
 
@@ -93,30 +92,9 @@ public class BackendProfileEmployeeGUI {
 		lblNewLabel_2.setBounds(221, 202, 89, 16);
 		panel.add(lblNewLabel_2);
 		
-		JLabel lblNewLabel_3 = new JLabel("Specialization");
-		lblNewLabel_3.setBounds(310, 202, 78, 16);
-		panel.add(lblNewLabel_3);
-		
 		JLabel lblNewLabel_4 = new JLabel("example@gmail.com");
 		lblNewLabel_4.setBounds(69, 221, 125, 16);
 		panel.add(lblNewLabel_4);
-		
-		JLabel lblNewLabel_5 = new JLabel("Currently apart of:");
-		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_5.setBounds(49, 285, 133, 16);
-		panel.add(lblNewLabel_5);
-		
-		JLabel lblNewLabel_6 = new JLabel("Group A");
-		lblNewLabel_6.setBounds(49, 314, 56, 16);
-		panel.add(lblNewLabel_6);
-		
-		JLabel lblNewLabel_7 = new JLabel("Group B");
-		lblNewLabel_7.setBounds(114, 314, 56, 16);
-		panel.add(lblNewLabel_7);
-		
-		JLabel lblNewLabel_8 = new JLabel("Group C");
-		lblNewLabel_8.setBounds(174, 314, 56, 16);
-		panel.add(lblNewLabel_8);
 		
 		JButton btnNewButton_1_1 = new JButton("Help");
 		btnNewButton_1_1.addActionListener(new ActionListener() {
@@ -176,16 +154,12 @@ public class BackendProfileEmployeeGUI {
 		panel.add(textArea_1);
 		
 		JRadioButton rdbtnNewRadioButton = new JRadioButton("Connections");
-		rdbtnNewRadioButton.setBounds(458, 675, 112, 25);
+		rdbtnNewRadioButton.setBounds(506, 675, 112, 25);
 		panel.add(rdbtnNewRadioButton);
 		
 		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("Public");
-		rdbtnNewRadioButton_1.setBounds(574, 675, 78, 25);
+		rdbtnNewRadioButton_1.setBounds(642, 675, 78, 25);
 		panel.add(rdbtnNewRadioButton_1);
-		
-		JRadioButton rdbtnNewRadioButton_2 = new JRadioButton("Group");
-		rdbtnNewRadioButton_2.setBounds(651, 675, 89, 25);
-		panel.add(rdbtnNewRadioButton_2);
 		
 		JButton btnNewButton_3 = new JButton("Post");
 		btnNewButton_3.setBounds(754, 675, 97, 25);
@@ -211,5 +185,25 @@ public class BackendProfileEmployeeGUI {
 		JButton btnNewButton_7 = new JButton("Disconnect");
 		btnNewButton_7.setBounds(754, 98, 97, 25);
 		panel.add(btnNewButton_7);
+		
+		JButton btnNewButton_2_1 = new JButton("Edit Company Info");
+		btnNewButton_2_1.setBounds(216, 282, 155, 25);
+		panel.add(btnNewButton_2_1);
+		
+		textField = new JTextField();
+		textField.setBounds(661, 709, 63, 22);
+		panel.add(textField);
+		textField.setColumns(10);
+		
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		textField_1.setBounds(326, 27, 268, 30);
+		panel.add(textField_1);
+		
+		textField = new JTextField();
+		textField.setColumns(10);
+		textField.setBounds(334, 27, 268, 30);
+		panel.add(textField);
 	}
+
 }
