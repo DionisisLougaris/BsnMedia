@@ -52,17 +52,17 @@ public class FrontEndProfileGUI {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 900, 1100);
+		frame.setBounds(100, 100, 893, 1020);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 0, 882, 1053);
+		panel.setBounds(0, 0, 875, 973);
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(85, 105, 181, 152);
+		panel_1.setBounds(108, 75, 181, 152);
 		panel.add(panel_1);
 		panel_1.setLayout(null);
 		
@@ -88,41 +88,41 @@ public class FrontEndProfileGUI {
 		panel.add(btnNewButton_1);
 		
 		JTextArea textArea = new JTextArea();
-		textArea.setBounds(32, 586, 810, 362);
+		textArea.setBounds(32, 561, 810, 336);
 		panel.add(textArea);
 		
 		JLabel lblNewLabel_1 = new JLabel("Name LastName");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 19));
-		lblNewLabel_1.setBounds(113, 269, 137, 30);
+		lblNewLabel_1.setBounds(118, 240, 137, 30);
 		panel.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("Company Post, ");
-		lblNewLabel_2.setBounds(262, 279, 89, 16);
+		lblNewLabel_2.setBounds(286, 250, 89, 16);
 		panel.add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel("Specialization");
-		lblNewLabel_3.setBounds(363, 279, 78, 16);
+		lblNewLabel_3.setBounds(387, 250, 78, 16);
 		panel.add(lblNewLabel_3);
 		
 		JLabel lblNewLabel_4 = new JLabel("example@gmail.com");
-		lblNewLabel_4.setBounds(117, 313, 125, 16);
+		lblNewLabel_4.setBounds(130, 413, 125, 16);
 		panel.add(lblNewLabel_4);
 		
 		JLabel lblNewLabel_5 = new JLabel("Currently apart of:");
 		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_5.setBounds(117, 348, 133, 16);
+		lblNewLabel_5.setBounds(108, 287, 133, 16);
 		panel.add(lblNewLabel_5);
 		
 		JLabel lblNewLabel_6 = new JLabel("Group A");
-		lblNewLabel_6.setBounds(97, 377, 56, 16);
+		lblNewLabel_6.setBounds(85, 317, 56, 16);
 		panel.add(lblNewLabel_6);
 		
 		JLabel lblNewLabel_7 = new JLabel("Group B");
-		lblNewLabel_7.setBounds(165, 377, 56, 16);
+		lblNewLabel_7.setBounds(153, 317, 56, 16);
 		panel.add(lblNewLabel_7);
 		
 		JLabel lblNewLabel_8 = new JLabel("Group C");
-		lblNewLabel_8.setBounds(233, 377, 56, 16);
+		lblNewLabel_8.setBounds(221, 317, 56, 16);
 		panel.add(lblNewLabel_8);
 		
 		JButton btnNewButton_2 = new JButton("Chat");
@@ -130,7 +130,7 @@ public class FrontEndProfileGUI {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNewButton_2.setBounds(460, 345, 62, 25);
+		btnNewButton_2.setBounds(479, 313, 62, 25);
 		panel.add(btnNewButton_2);
 		
 		JButton btnNewButton_3 = new JButton("Add connection");
@@ -138,7 +138,7 @@ public class FrontEndProfileGUI {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNewButton_3.setBounds(545, 345, 131, 25);
+		btnNewButton_3.setBounds(553, 313, 131, 25);
 		panel.add(btnNewButton_3);
 		
 		JButton btnNewButton_4 = new JButton("Remove connection");
@@ -146,24 +146,24 @@ public class FrontEndProfileGUI {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNewButton_4.setBounds(688, 345, 148, 25);
+		btnNewButton_4.setBounds(694, 313, 148, 25);
 		panel.add(btnNewButton_4);
 		
 		JLabel lblNewLabel_9 = new JLabel("Information:");
 		lblNewLabel_9.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_9.setBounds(69, 421, 84, 16);
+		lblNewLabel_9.setBounds(74, 376, 84, 16);
 		panel.add(lblNewLabel_9);
 		
 		JLabel lblNewLabel_10 = new JLabel("69000000000");
-		lblNewLabel_10.setBounds(128, 462, 78, 16);
+		lblNewLabel_10.setBounds(131, 442, 78, 16);
 		panel.add(lblNewLabel_10);
 		
 		JLabel lblNewLabel_11 = new JLabel("Valtetsioy, 3");
-		lblNewLabel_11.setBounds(128, 491, 78, 16);
+		lblNewLabel_11.setBounds(131, 476, 78, 16);
 		panel.add(lblNewLabel_11);
 		
 		JLabel lblNewLabel_12 = new JLabel("19/12/01");
-		lblNewLabel_12.setBounds(128, 520, 56, 16);
+		lblNewLabel_12.setBounds(130, 510, 56, 16);
 		panel.add(lblNewLabel_12);
 		
 		JButton btnNewButton_5 = new JButton("telephone icon");
@@ -171,31 +171,31 @@ public class FrontEndProfileGUI {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNewButton_5.setBounds(85, 460, 22, 21);
+		btnNewButton_5.setBounds(85, 440, 22, 21);
 		panel.add(btnNewButton_5);
 		
 		JButton btnNewButton_5_1 = new JButton("adress icon");
-		btnNewButton_5_1.setBounds(85, 487, 22, 21);
+		btnNewButton_5_1.setBounds(85, 474, 22, 21);
 		panel.add(btnNewButton_5_1);
 		
 		JButton btnNewButton_5_2 = new JButton("birthday icon");
-		btnNewButton_5_2.setBounds(85, 516, 22, 21);
+		btnNewButton_5_2.setBounds(85, 508, 22, 21);
 		panel.add(btnNewButton_5_2);
 		
 		JLabel lblNewLabel_13 = new JLabel("Mutual connections");
-		lblNewLabel_13.setBounds(698, 406, 109, 16);
+		lblNewLabel_13.setBounds(712, 377, 109, 16);
 		panel.add(lblNewLabel_13);
 		
 		JList list = new JList();
-		list.setBounds(688, 435, 133, 127);
+		list.setBounds(709, 409, 133, 127);
 		panel.add(list);
 		
 		JScrollBar scrollBar = new JScrollBar();
-		scrollBar.setBounds(786, 435, 21, 127);
+		scrollBar.setBounds(821, 409, 21, 127);
 		panel.add(scrollBar);
 		
 		JScrollBar scrollBar_1 = new JScrollBar();
-		scrollBar_1.setBounds(817, 599, 28, 362);
+		scrollBar_1.setBounds(814, 561, 28, 336);
 		panel.add(scrollBar_1);
 		
 		JButton btnNewButton_1_1 = new JButton("Help");
@@ -203,7 +203,15 @@ public class FrontEndProfileGUI {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNewButton_1_1.setBounds(824, 1002, 46, 38);
+		btnNewButton_1_1.setBounds(824, 929, 46, 38);
 		panel.add(btnNewButton_1_1);
+		
+		JButton btnNewButton_5_3 = new JButton("email icon");
+		btnNewButton_5_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnNewButton_5_3.setBounds(85, 406, 22, 21);
+		panel.add(btnNewButton_5_3);
 	}
 }
