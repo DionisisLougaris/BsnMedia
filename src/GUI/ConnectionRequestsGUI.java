@@ -61,7 +61,7 @@ public class ConnectionRequestsGUI {
 		list.setBounds(10, 11, 163, 147);
 		frmConnectionRequests.getContentPane().add(list);
 		
-		BufferedImage buttonIcon1 = ImageIO.read(new File("C:\\Users\\Μηνας\\Documents\\BsnMedia\\Buttons_backgrounds\\ok_48px.png"));
+		BufferedImage buttonIcon1 = ImageIO.read(new File("Buttons_backgrounds/ok_48px.png"));
 		JButton btnNewButton = new JButton(new ImageIcon(buttonIcon1));
 		btnNewButton.setBounds(41, 160, 39, 34);
 		btnNewButton.setBorder(BorderFactory.createEmptyBorder());
@@ -73,7 +73,7 @@ public class ConnectionRequestsGUI {
 			}
 		});
 		
-		BufferedImage buttonIcon2 = ImageIO.read(new File("C:\\Users\\Μηνας\\Documents\\BsnMedia\\Buttons_backgrounds\\cancel_48px.png"));
+		BufferedImage buttonIcon2 = ImageIO.read(new File("Buttons_backgrounds/cancel_48px.png"));
 		JButton btnNewButton_1 = new JButton(new ImageIcon(buttonIcon2));
 		btnNewButton_1.setBounds(105, 160, 39, 34);
 		btnNewButton_1.setBorder(BorderFactory.createEmptyBorder());

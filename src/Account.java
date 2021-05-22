@@ -73,8 +73,12 @@ public class Account implements Serializable{
 	
 	/*This is a method that changes or not a user's password in case he has forgotten the previous one.
 	 If all checks are finished without any error the creators of application sends email to user.*/
-	public User forgotPassword (String inputUsername, String inputEmail, String desiredPassword)
-	{
+	public User forgotPassword (String inputUsername, String inputEmail, String desiredPassword) {
+		
+	  String textForEmailBody = "";
+	  String [] recievers = new String[1];
+	  recievers[0] = inputEmail;
+	  
 	  if(myCompany.isCompanyMember(inputUsername) != null)
 		{
 			if(!emailAvailability(inputEmail))
@@ -84,7 +88,7 @@ public class Account implements Serializable{
 						if(inputEmail.equalsIgnoreCase(myCompany.getCompanyMembers().get(i).getMyAccount().getEmail()))
 						{
 							User user = myCompany.getCompanyMembers().get(i);
-							//Help.sendGmail("itintelligenceuom@gmail.com",email, myPassword.getPassword(),"Verification code");
+							Help.sendGMail("itintelligenceuom@gmail.com", "ITintelligence2001", recievers, "Account Recovery", textForEmailBody);
 							return user;
 						}
 				}

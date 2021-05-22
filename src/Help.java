@@ -1,12 +1,12 @@
 import java.util.Properties;
 
-/*import javax.mail.Message;
+import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;*/
+import javax.mail.internet.MimeMessage;
 
 public class Help {
 	
@@ -35,7 +35,7 @@ public class Help {
 	
 	
 	//A method that sends email to someone
-	 /*private static void sendFromGMail(String from, String pass, String[] to, String subject, String body) {
+	 public static void sendGMail(String from, String pass, String[] to, String subject, String body) {
 	        Properties props = System.getProperties();
 	        String host = "smtp.gmail.com";
 	        props.put("mail.smtp.starttls.enable", "true");
@@ -74,7 +74,7 @@ public class Help {
 	        catch (MessagingException me) {
 	            me.printStackTrace();
 	        }
-	    }*/
+	    }
 	
 
 }

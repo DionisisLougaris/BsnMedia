@@ -29,35 +29,33 @@ public class Encryption {
 		return encryptMessage(encryptedMessage, -shift);  //The method of encryption is called with the parameter of the encrypted message and the reverse of the key used for encryption
 	}
 	   
-	   
-	   
-	
-	public static int encryptPassword(Password aPassword)
-	{
-		char[] chars = aPassword.getPassword().toCharArray();
+	      
+	//Password encryption algorithm
+	public static String encryptPassword(String originalPassword, int key) {
 		
-		//prepei na allaksei to key den einai swsto
-		int key= (aPassword.getAccountCreationTime().getSecond()+1);
-		
-		for(char c : chars)
-		{
-			c+=key;
-			//metatrepetai ksana se String kai epistrefetai
+		String encrypted = ""; //The encrypted password to be saved
+	       
+		for (int i = 0; i < originalPassword.length(); i++) {
+	    	   
+			int c = originalPassword.charAt(i) + key; //We modify each character of the alphanumeric
+	           
+			if (c > 126) {
+				c -= 95; //If the ascii table maximum is exceeded
+			} 
+			else if (c < 32) {
+				c += 95; //If it is less than the allowable limit of the ASCII table
+			}
+			encrypted += (char) c;
 		}
-		return key;
+		return encrypted;
 	}
 	
-	public static String decryptPassword(String encryptedString,int key)
-	{
-		char[] chars = encryptedString.toCharArray();
-		for(char c : chars)
-		{
-			c-=key;
-			//prepei na doume pws tha sundesoume thn klash password me tis 2 methodous kruptografishs
-			System.out.print(c);
-		}
+	
+	//Method of decrypting an encrypted Password
+	public static String decryptPassword(String encryptedPassword, int key) {
 		
-		return  String.valueOf(chars); 
-		
+		return encryptMessage(encryptedPassword, -key);
 	}
+	
+	
 }

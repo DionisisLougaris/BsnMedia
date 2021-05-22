@@ -74,10 +74,17 @@ public class Password implements Serializable
 	public String getPassword() {
 		return password;
 	}
-
 	public LocalDateTime getAccountCreationTime() {
 		return timestamp;
 	}
-	
+	public LocalDateTime getTimestamp() {
+		return timestamp;
+	}
+	public void setTimestamp(LocalDateTime timestamp) {
+		this.timestamp = timestamp;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
 		
 }

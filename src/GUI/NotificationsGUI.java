@@ -60,7 +60,7 @@ public class NotificationsGUI {
 		list.setBounds(10, 11, 163, 147);
 		frmNotifications.getContentPane().add(list);
 		
-		BufferedImage buttonIcon = ImageIO.read(new File("C:\\Users\\Μηνας\\Documents\\BsnMedia\\Buttons_backgrounds\\search_property_32px.png"));
+		BufferedImage buttonIcon = ImageIO.read(new File("Buttons_backgrounds/search_property_32px.png"));
 		JButton btnNewButton = new JButton(new ImageIcon(buttonIcon));
 		btnNewButton.setBounds(142, 158, 42, 36);
 		btnNewButton.setBorder(BorderFactory.createEmptyBorder());

@@ -62,7 +62,7 @@ public class NewMessagesGUI {
 		list.setBounds(10, 11, 163, 147);
 		frmNewMessages.getContentPane().add(list);
 		
-		BufferedImage buttonIcon = ImageIO.read(new File("C:\\Users\\Μηνας\\Documents\\BsnMedia\\Buttons_backgrounds\\open_in_popup_48px.png"));
+		BufferedImage buttonIcon = ImageIO.read(new File("Buttons_backgrounds/open_in_popup_48px.png"));
 		JButton btnNewButton = new JButton(new ImageIcon(buttonIcon));
 		btnNewButton.setBorder(BorderFactory.createEmptyBorder());
 		btnNewButton.setContentAreaFilled(false);

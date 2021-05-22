@@ -4,13 +4,13 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		Message testMessage = new Message(" !Hallo World~");
+		Password testPassword = new Password("bsnMedia!4322", "Minas", "Charakopoulos", "ics20072");
 		
-		String encryptedMessage = Encryption.encryptMessage(testMessage.getContent(), testMessage.getTimesent().getSecond()+1);
-		System.out.println(encryptedMessage);
-		System.out.println(Encryption.decryptMessage(encryptedMessage, testMessage.getTimesent().getSecond()+1));
-		System.out.println("Seconds: "+testMessage.getTimesent().getSecond());
-		
+		String encryptedPassword = Encryption.encryptPassword(testPassword.getPassword(), testPassword.getAccountCreationTime().getSecond());
+		System.out.println(encryptedPassword);
+		testPassword.setPassword(encryptedPassword); //The field that holds the password is now stored encrypted
+		System.out.println(Encryption.decryptPassword(testPassword.getPassword(), testPassword.getTimestamp().getSecond())); /*Recover the encrypted code, 
+																															in normal format, possible for access control.*/	
 	}
 }
 
