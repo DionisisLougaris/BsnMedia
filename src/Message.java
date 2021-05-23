@@ -35,7 +35,10 @@ public class Message {
 	public User getSender() {
 		return sender;
 	}
-
+	
+	public User getReciever() {
+		return reciever;
+	}
 	
 	
 }

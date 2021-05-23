@@ -3,7 +3,7 @@ import java.util.*;
 
 abstract public class Conversation extends Notification{
 	
-	protected TreeSet<Message> allMessages = new TreeSet<Message>();
+	protected ArrayList<Message> allMessages = new ArrayList<Message>();
 	File conversationName = new File("uniqueConversationFIleName.txt");
 	
 	

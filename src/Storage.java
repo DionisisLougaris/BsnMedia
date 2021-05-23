@@ -47,6 +47,21 @@ public class Storage {
 	
 	//Saving each conversation in a unique file
 	public static void saveConversation(Conversation aConversation) {
+		try {
+			FileWriter writer= new FileWriter(aConversation.conversationName);
+			for(int i=0;i<aConversation.allMessages.size();i++)
+			{
+				writer.write(aConversation.allMessages.get(i).getContent());
+				writer.write(aConversation.allMessages.get(i).getTimesent().toString());
+				writer.write(aConversation.allMessages.get(i).getSender().toString());
+				writer.write(aConversation.allMessages.get(i).getReciever().toString());
+			}
+			writer.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	
 	}
 	
