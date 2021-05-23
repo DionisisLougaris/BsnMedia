@@ -67,11 +67,6 @@ public class BackendProfileChiefGUI {
 		lblNewLabel.setBounds(51, 66, 72, 16);
 		panel_1.add(lblNewLabel);
 		
-		textField = new JTextField();
-		textField.setBounds(437, 38, 317, 30);
-		panel.add(textField);
-		textField.setColumns(10);
-		
 		JButton btnNewButton = new JButton("icon");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {

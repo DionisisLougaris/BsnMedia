@@ -10,6 +10,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JList;
 import javax.swing.JButton;
+import javax.swing.JScrollBar;
 
 
 public class CreateProjectGUI {
@@ -64,14 +65,6 @@ public class CreateProjectGUI {
 		lblNewLabel_1.setBounds(59, 90, 126, 16);
 		frame.getContentPane().add(lblNewLabel_1);
 		
-		JTextArea textArea = new JTextArea();
-		textArea.setBounds(210, 92, 116, 73);
-		frame.getContentPane().add(textArea);
-		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(186, 167, 116, -73);
-		frame.getContentPane().add(scrollPane);
-		
 		JLabel lblNewLabel_2 = new JLabel("Deadline");
 		lblNewLabel_2.setBounds(96, 193, 56, 16);
 		frame.getContentPane().add(lblNewLabel_2);
@@ -117,6 +110,10 @@ public class CreateProjectGUI {
 		JButton btnNewButton_2 = new JButton("Create");
 		btnNewButton_2.setBounds(414, 609, 77, 22);
 		frame.getContentPane().add(btnNewButton_2);
+		
+		JTextArea textArea = new JTextArea();
+		textArea.setBounds(210, 90, 116, 68);
+		frame.getContentPane().add(textArea);
 		
 		
 		frame.setTitle("Create project");
