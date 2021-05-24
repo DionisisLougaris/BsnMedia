@@ -28,6 +28,7 @@ public class CreateAccountGUI {
 	private JTextField txtSpeciality;
 	private JButton btnNewButton;
 	private JButton btnNewButton_1;
+	private JButton btnNewButton_2;
 
 	/**
 	 * Launch the application.
@@ -57,7 +58,7 @@ public class CreateAccountGUI {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 541, 611);
+		frame.setBounds(100, 100, 541, 636);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -152,5 +153,9 @@ public class CreateAccountGUI {
 		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("Chief");
 		rdbtnNewRadioButton_1.setBounds(311, 448, 64, 25);
 		frame.getContentPane().add(rdbtnNewRadioButton_1);
+		
+		btnNewButton_2 = new JButton("Help");
+		btnNewButton_2.setBounds(385, 551, 97, 25);
+		frame.getContentPane().add(btnNewButton_2);
 	}
 }

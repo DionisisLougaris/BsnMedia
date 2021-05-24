@@ -111,6 +111,10 @@ public class CompanyProfileGUI {
 		lblNewLabel_9.setBounds(0, 0, 80, 16);
 		panel_1.add(lblNewLabel_9);
 		
+		JButton btnNewButton_2 = new JButton("Help");
+		btnNewButton_2.setBounds(857, 697, 97, 25);
+		frame.getContentPane().add(btnNewButton_2);
+		
 		
 		ImageIcon logoimage = new ImageIcon();
 	     frame.setTitle("Company");

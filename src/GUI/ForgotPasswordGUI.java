@@ -16,6 +16,7 @@ public class ForgotPasswordGUI {
 	private JTextField txtCode;
 	private JTextField txtNewPassword;
 	private JTextField txtConfirmPassword;
+	private JButton btnNewButton_4;
 
 	/**
 	 * Launch the application.
@@ -98,6 +99,10 @@ public class ForgotPasswordGUI {
 		JButton btnNewButton_3 = new JButton("Log In");
 		btnNewButton_3.setBounds(385, 332, 97, 25);
 		frame.getContentPane().add(btnNewButton_3);
+		
+		btnNewButton_4 = new JButton("Help");
+		btnNewButton_4.setBounds(385, 370, 97, 25);
+		frame.getContentPane().add(btnNewButton_4);
 	}
 
 }

@@ -96,6 +96,10 @@ public class WelcomeScreenGUI {
 		btnNewButton_2.setBounds(169, 327, 132, 25);
 		panel.add(btnNewButton_2);
 		
+		JButton btnNewButton_3 = new JButton("Help");
+		btnNewButton_3.setBounds(340, 545, 97, 25);
+		panel.add(btnNewButton_3);
+		
 		JLabel lblNewLabel = new JLabel("Welcome to BSN Media!");
 		lblNewLabel.setBounds(83, 47, 285, 27);
 		frame.getContentPane().add(lblNewLabel);

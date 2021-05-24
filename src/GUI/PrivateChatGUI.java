@@ -41,7 +41,7 @@ public class PrivateChatGUI {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 685, 796);
+		frame.setBounds(100, 100, 685, 840);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -71,5 +71,9 @@ public class PrivateChatGUI {
 		JPanel panel_2 = new JPanel();
 		panel_2.setBounds(12, 519, 619, 120);
 		panel.add(panel_2);
+		
+		JButton btnNewButton_1 = new JButton("Help");
+		btnNewButton_1.setBounds(558, 749, 97, 25);
+		frame.getContentPane().add(btnNewButton_1);
 	}
 }

@@ -50,7 +50,7 @@ public class GroupProfileGUI {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 854, 718);
+		frame.setBounds(100, 100, 854, 755);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -132,5 +132,9 @@ public class GroupProfileGUI {
 		JLabel lblNewLabel_10 = new JLabel("New label");
 		lblNewLabel_10.setBounds(175, 175, 56, 16);
 		frame.getContentPane().add(lblNewLabel_10);
+		
+		JButton btnNewButton_3 = new JButton("Help");
+		btnNewButton_3.setBounds(691, 671, 97, 25);
+		frame.getContentPane().add(btnNewButton_3);
 	}
 }
