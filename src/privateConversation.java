@@ -13,5 +13,17 @@ public class privateConversation extends Conversation{
 	}
 	
 	
-	
+	public User getDiscussant1() {
+		return discussant1;
+	}
+	public void setDiscussant1(User discussant1) {
+		this.discussant1 = discussant1;
+	}
+	public User getDiscussant2() {
+		return discussant2;
+	}
+	public void setDiscussant2(User discussant2) {
+		this.discussant2 = discussant2;
+	}
+		
 }

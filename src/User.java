@@ -18,7 +18,7 @@ abstract public class User implements Serializable{
 	protected ArrayList<User> listOfConnections = new ArrayList<User>();
 	protected TreeSet<Post> listOfPosts = new TreeSet<Post>(); //Only his Posts
 	protected ArrayList<Notification> listOfNotifications = new ArrayList<Notification>();
-	protected ArrayList<User> pendingConnectionRequests = new ArrayList<User>();
+	protected ArrayList<User> pendingConnectionRequests = new ArrayList<User>(); //The pending requests he has sent to others
 	protected TreeSet<Conversation> listOfConversations = new TreeSet<Conversation>();
 	
 	
@@ -168,6 +168,63 @@ abstract public class User implements Serializable{
 	
 	//This is a method that calculates and returns a list of suggested connections for a user.
 	abstract public TreeSet<User> suggestedConnections();
+	
+	
+	//This is a method that removes a User item from the list of requests sent by the logged in user.
+	public void cancelPendingRequest(User requestToThisUser) {
+		
+		//The request is deleted and therefore removed from the list of requests sent by the user.
+		if (pendingConnectionRequests.contains(requestToThisUser)) {
+			requestToThisUser.pendingConnectionRequests.remove(this);
+			
+			/*The notification must now be removed from the user who get the connection request.*/
+			for(Notification currNotification: this.listOfNotifications) {
+				if (currNotification instanceof Connection) {
+					if (currNotification.getAboutThisUser().getMyAccount().getUsername().equalsIgnoreCase(requestToThisUser.myAccount.getUsername()))
+						this.listOfNotifications.remove(currNotification);
+				}
+			}
+		}
+		else {
+			String message = "There is no pending connection request for this User!";
+			JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+			        JOptionPane.INFORMATION_MESSAGE);
+		}	
+	}
+	
+	
+	/*This is a method that examines whether the user logged in to the account 
+	has chatted with the user or the group he searched for. */
+	public Conversation searchConversation(String searchedConversation) {
+		
+		Conversation correctConversation = null;
+		
+		for(Conversation currConversation: listOfConversations) {
+			if (currConversation instanceof privateConversation) {
+				if (searchedConversation.equalsIgnoreCase(((privateConversation) currConversation).getDiscussant1().getFirstName())
+						|| searchedConversation.equalsIgnoreCase(((privateConversation) currConversation).getDiscussant1().getLastName())
+						|| searchedConversation.equalsIgnoreCase(((privateConversation) currConversation).getDiscussant2().getFirstName())
+						|| searchedConversation.equalsIgnoreCase(((privateConversation) currConversation).getDiscussant2().getLastName())) {
+					correctConversation = currConversation;
+					break;
+				}
+			}
+			else if(currConversation instanceof groupConversation){
+				if(searchedConversation.equalsIgnoreCase(((groupConversation) currConversation).getTheGroup().getName())) {
+					correctConversation = currConversation;
+					break;
+				}
+			}
+		}
+		
+		return correctConversation;	//If it returns null, then the appropriate notification will appear from Gui.
+	}
+	
+	
+	/*This is a method that adds a post to the list of user-maintained posts.*/
+	public void addPost(Post thePost) {
+		listOfPosts.add(thePost);
+	}
 
 	
 	
@@ -280,7 +337,6 @@ abstract public class User implements Serializable{
 	public void setListOfConversations(TreeSet<Conversation> listOfConversations) {
 		this.listOfConversations = listOfConversations;
 	}
-
 
 	public void addPendingConnectionRequest(User user) {
 		pendingConnectionRequests.add(user);

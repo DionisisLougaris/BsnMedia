@@ -1,7 +1,12 @@
 import java.util.*;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 public class Employee extends User{
 
+	private static final int limitOfGroups = 3; //The limit of Groups in which the employee can be a member at the same time.
+	
 	private ArrayList<Group> listOfGroups = new ArrayList<Group>();
 	
 	
@@ -76,8 +81,35 @@ public class Employee extends User{
 		return listWithSuggestedConnections;
 	}
 
-
 	
-
+	//This is a method that deletes a Group object from the list of Groups it is a member of.
+	public void RemoveGroupFromUsersList(Group theGroup) {
+		
+		//There is a two-way deletion.
+		listOfGroups.remove(theGroup);
+		theGroup.removeUserFromGroup(this);
+	}
+	
+	
+	//This is a method that adds a Group item to the list of Groups that the employee is a member of
+	public void addGroupToEmployeesList(Group theGroup) {
+		
+		if (listOfGroups.size() < limitOfGroups) {
+			if (!theGroup.isMember(this)) {
+				listOfGroups.add(theGroup);
+				theGroup.addMember(this);
+			}
+			else {
+				String message = "The employee "+this.getFirstName()+" "+this.getLastName()+" is already member!";
+				JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+				        JOptionPane.INFORMATION_MESSAGE);
+			}
+		}
+		else {
+			String message = "The employee "+this.getFirstName()+" "+this.getLastName()+" has reached the limit of "+limitOfGroups+" Groups!";
+			JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+			        JOptionPane.INFORMATION_MESSAGE);
+		}
+	}
 
 }

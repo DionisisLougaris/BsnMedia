@@ -42,4 +42,37 @@ abstract public class Notification implements Serializable{
 		
 	}
 	
+	
+	//Getters and setters for Notification class
+	public String getNotificationContent() {
+		return notificationContent;
+	}
+	public void setNotificationContent(String notificationContent) {
+		this.notificationContent = notificationContent;
+	}
+	public LocalDateTime getTimestamp() {
+		return timestamp;
+	}
+	public void setTimestamp(LocalDateTime timestamp) {
+		this.timestamp = timestamp;
+	}
+	public Group getAboutThisGroup() {
+		return aboutThisGroup;
+	}
+	public void setAboutThisGroup(Group aboutThisGroup) {
+		this.aboutThisGroup = aboutThisGroup;
+	}
+	public User getAboutThisUser() {
+		return aboutThisUser;
+	}
+	public void setAboutThisUser(User aboutThisUser) {
+		this.aboutThisUser = aboutThisUser;
+	}
+	public Conversation getAboutThisConversation() {
+		return aboutThisConversation;
+	}
+	public void setAboutThisConversation(Conversation aboutThisConversation) {
+		this.aboutThisConversation = aboutThisConversation;
+	}
+	
 }

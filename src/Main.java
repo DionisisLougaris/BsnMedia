@@ -10,9 +10,7 @@ public class Main {
 		System.out.println(encryptedPassword);
 		testPassword.setPassword(encryptedPassword); //The field that holds the password is now stored encrypted
 		System.out.println(Encryption.decryptPassword(testPassword.getPassword(), testPassword.getTimestamp().getSecond())); /*Recover the encrypted code, 
-												
-																													in normal format, possible for access control.*/	
-	//test//
+																															in normal format, possible for access control.*/	
 	}
 	
 }

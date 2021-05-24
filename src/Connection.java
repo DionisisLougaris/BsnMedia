@@ -117,5 +117,17 @@ public class Connection extends Notification{
 	
 	
 	
-
+	public User getFirstUser() {
+		return firstUser;
+	}
+	public void setFirstUser(User firstUser) {
+		this.firstUser = firstUser;
+	}
+	public User getSecondUser() {
+		return secondUser;
+	}
+	public void setSecondUser(User secondUser) {
+		this.secondUser = secondUser;
+	}
+	
 }
