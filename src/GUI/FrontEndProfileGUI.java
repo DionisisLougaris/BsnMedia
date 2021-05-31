@@ -1,5 +1,6 @@
 package GUI;
 
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -125,13 +126,15 @@ public class FrontEndProfileGUI {
 		lblNewLabel_8.setBounds(221, 317, 56, 16);
 		panel.add(lblNewLabel_8);
 		
-		JButton btnNewButton_2 = new JButton("Chat");
-		btnNewButton_2.addActionListener(new ActionListener() {
+		JButton buttonchat= new JButton("Chat");
+		buttonchat.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				new PrivateChatGUI();// prepei na baloume twn xhrhsrh
 			}
 		});
-		btnNewButton_2.setBounds(479, 313, 62, 25);
-		panel.add(btnNewButton_2);
+		buttonchat.setBounds(479, 313, 62, 25);
+		panel.add(buttonchat);
 		
 		JButton btnNewButton_3 = new JButton("Add connection");
 		btnNewButton_3.addActionListener(new ActionListener() {
@@ -207,11 +210,11 @@ public class FrontEndProfileGUI {
 		panel.add(btnNewButton_1_1);
 		
 		JButton btnNewButton_5_3 = new JButton("email icon");
+		btnNewButton_5_3.setBounds(85, 406, 22, 21);
+		panel.add(btnNewButton_5_3);
 		btnNewButton_5_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		btnNewButton_5_3.setBounds(85, 406, 22, 21);
-		panel.add(btnNewButton_5_3);
 	}
 }
