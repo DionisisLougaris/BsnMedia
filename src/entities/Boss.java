@@ -1,6 +1,14 @@
 package entities;
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -66,7 +74,29 @@ public class Boss extends User{
 	
 	/*This is a method by which Boss has the ability to change the photo that appears on the 
 	public profile of the Company hosted on Bsn Media*/
-	public void changeCompanyPhoto(String photoUrl) {
+	public void changeCompanyPhoto(String photoUrl) throws IOException {
+		
+			
+			if(photoUrl != " ")
+			{
+				
+			     BufferedImage companyimage = ImageIO.read(new File(photoUrl));
+				 int height = companyimage.getHeight();
+				 int width = companyimage.getWidth();
+				 File imageofcompany; 
+				 if(height>60 && width>80)
+				 {
+					 ImageIcon imagec = new ImageIcon(companyimage);
+					 Image imagerisize = imagec.getImage().getScaledInstance(50, 40, 70) ;
+					 
+					imagec.setImage(imagerisize);
+					 imageofcompany = new File("companyimage.png");
+	                 ImageIO.write((RenderedImage) imagerisize, "png", imageofcompany) ;
+				}
+				 myAccount.getMyCompany().setImage("companyimage.png");
+				 
+			}
+			
 		
 	}
 
@@ -114,6 +144,9 @@ public class Boss extends User{
 		
 		return listWithSuggestedConnections;
 	}
+	
+	
+	
 	
 	
 }
