@@ -7,6 +7,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class GroupChatGUI {
 
@@ -68,12 +70,20 @@ public class GroupChatGUI {
 		panel.add(panel_1);
 		
 		JPanel panel_2 = new JPanel();
-		panel_2.setBounds(12, 519, 619, 120);
+		panel_2.setBounds(12, 519, 532, 120);
 		panel.add(panel_2);
 		
-		JButton btnNewButton_1 = new JButton("Help");
-		btnNewButton_1.setBounds(558, 749, 97, 25);
-		frame.getContentPane().add(btnNewButton_1);
+		JButton btnNewButton_1_1_1 = new JButton("Send");
+		btnNewButton_1_1_1.setBounds(572, 601, 46, 38);
+		panel.add(btnNewButton_1_1_1);
+		
+		JButton btnNewButton_1_1 = new JButton("Help");
+		btnNewButton_1_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnNewButton_1_1.setBounds(609, 742, 46, 38);
+		frame.getContentPane().add(btnNewButton_1_1);
 	}
 
 }
