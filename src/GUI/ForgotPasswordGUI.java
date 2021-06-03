@@ -4,6 +4,9 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JTextField;
+
+import entities.Company;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -17,10 +20,11 @@ public class ForgotPasswordGUI {
 	private JTextField txtNewPassword;
 	private JTextField txtConfirmPassword;
 	private JButton btnNewButton_4;
+	private Company theCompany;
 
 	/**
 	 * Launch the application.
-	 */
+	 *
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -33,22 +37,23 @@ public class ForgotPasswordGUI {
 			}
 		});
 	}
-
-	/**
 	 * Create the application.
 	 */
-	public ForgotPasswordGUI() {
-		initialize();
+	public ForgotPasswordGUI(Company aCompany) {
+		initialize(aCompany);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(Company aCompany) {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 566, 452);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setVisible(true);
+		frame.setResizable(false);
 		frame.getContentPane().setLayout(null);
+		
+		theCompany = aCompany;
 		
 		txtUsername = new JTextField();
 		txtUsername.setText("Username");

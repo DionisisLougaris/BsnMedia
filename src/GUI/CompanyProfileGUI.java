@@ -117,6 +117,7 @@ public class CompanyProfileGUI {
 		
 		
 		ImageIcon logoimage = new ImageIcon();
-	     frame.setTitle("Company");
+	    frame.setTitle("Company");
+	    frame.setVisible(true);
 	}
 }

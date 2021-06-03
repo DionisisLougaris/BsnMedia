@@ -4,6 +4,9 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JTextField;
+
+import entities.Company;
+
 import java.awt.Component;
 import javax.swing.Box;
 import javax.swing.JLabel;
@@ -29,10 +32,11 @@ public class CreateAccountGUI {
 	private JButton btnNewButton;
 	private JButton btnNewButton_1;
 	private JButton btnNewButton_2;
+	private Company theCompany;
 
 	/**
 	 * Launch the application.
-	 */
+	 *
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -46,21 +50,24 @@ public class CreateAccountGUI {
 		});
 	}
 
-	/**
+	*
 	 * Create the application.
 	 */
-	public CreateAccountGUI() {
-		initialize();
+	public CreateAccountGUI(Company aCompany) {
+		initialize(aCompany);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(Company aCompany) {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 541, 636);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		frame.setVisible(true);
+		frame.setResizable(false);
+		
+		theCompany = aCompany;
 		
 		txtCompanyCode = new JTextField();
 		txtCompanyCode.setText("Company Code");

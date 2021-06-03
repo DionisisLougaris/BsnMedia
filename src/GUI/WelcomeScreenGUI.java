@@ -1,16 +1,15 @@
 package GUI;
 
+import entities.*;
+
 import java.awt.*;
 import java.awt.event.*;
-
 import javax.swing.*;
 
 
+public class WelcomeScreenGUI extends JFrame{
 
-
-public class WelcomeScreenGUI<Company> {
-
-	JFrame frame;
+	private JFrame frame;
 	private JTextField usernameField;
 	private JPasswordField passwordField;
 	private Company theCompany;
@@ -20,18 +19,15 @@ public class WelcomeScreenGUI<Company> {
 	private JButton helpButton;
 	private JPanel panel;
 	
-	
-
-	
-	public WelcomeScreenGUI(Company aCompany) {
-		theCompany=aCompany;
+	public WelcomeScreenGUI(Company company) {
+		theCompany = company;
 		frame = new JFrame();
 		frame.getContentPane().setBackground(new Color(153, 204, 204));
 		frame.setBounds(100, 100, 909, 630);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JPanel panel = new JPanel();
+		panel = new JPanel();
 		panel.setForeground(new Color(0, 0, 0));
 		panel.setBackground(new Color(255, 153, 0));
 		panel.setBounds(442, 0, 449, 583);
@@ -42,7 +38,7 @@ public class WelcomeScreenGUI<Company> {
 		usernameField.setForeground(new Color(0, 51, 153));
 		usernameField.setBackground(new Color(255, 153, 0));
 		usernameField.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		usernameField.setText("          Username");
+		usernameField.setText("          Username...");
 		usernameField.setBounds(134, 158, 179, 33);
 		panel.add(usernameField);
 		usernameField.setColumns(10);
@@ -81,37 +77,30 @@ public class WelcomeScreenGUI<Company> {
 		lblNewLabel_1.setBounds(133, 87, 207, 16);
 		frame.getContentPane().add(lblNewLabel_1);
 		
-		ButtonListener listener=new ButtonListener();
+		ButtonListener listener = new ButtonListener();
 		logInButton.addActionListener(listener);
 		newAccountButton.addActionListener(listener);
 		forgotPasswordButton.addActionListener(listener);
 		helpButton.addActionListener(listener);
+		
+		this.setContentPane(panel);
+		
+		this.setVisible(true);
+		this.setSize(1000, 600);
 	}
 	
-	class ButtonListener implements ActionListener
-	{
-		public void actionPerformed(ActionEvent e)
-		{
-			if(e.getSource()==logInButton)
-			{
-				String username= usernameField.getText();
-				String password= passwordField.getPassword();  //mallon prepei anagkastika na to kanoume char giati to bgazei error
+	class ButtonListener implements ActionListener {
+		
+			public void actionPerformed(ActionEvent e) {
 				
-				theCompany.isCompanyMember(username).getMyAccount().loginAttempt(username,password);
-				
+				if (e.getSource().equals(logInButton)) {
+					
+					String theUsername = usernameField.getText();
+					char [] thePasswordArray = passwordField.getPassword();
+					String thePassword = String.valueOf(thePasswordArray);
+					
+					System.out.println(theUsername+"  "+thePassword);
+				}
 			}
-			else if(e.getSource()==newAccountButton)
-			{
-				new CreateAccountGUI(); //thelei parametro company
-			}
-			else if(e.getSource()==forgotPasswordButton)
-			{
-				new ForgotPasswordGUI();  //thelei parametro company
-			}
-			else if(e.getSource()==helpButton)
-			{
-				new HelpGUI();
-			}
-		}
 	}
 }
