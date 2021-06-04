@@ -1,15 +1,25 @@
 package GUI;
 
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 
+import entities.Account;
+import entities.Chief;
 import entities.Company;
+import entities.Employee;
+import entities.Password;
+import entities.User;
 
 import java.awt.Component;
 import javax.swing.Box;
+import javax.swing.ButtonGroup;
+import javax.swing.ButtonModel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 import javax.swing.JCheckBox;
 import javax.swing.JButton;
@@ -29,7 +39,7 @@ public class CreateAccountGUI {
 	private JTextField txtGender;
 	private JTextField txtBirthday;
 	private JTextField txtSpeciality;
-	private JButton btnNewButton;
+	private JButton createAccountButton;
 	private JButton btnNewButton_1;
 	private JButton btnNewButton_2;
 	private Company theCompany;
@@ -145,24 +155,76 @@ public class CreateAccountGUI {
 		lblNewLabel.setBounds(133, 452, 88, 16);
 		frame.getContentPane().add(lblNewLabel);
 		
-		btnNewButton = new JButton("Create New Account");
-		btnNewButton.setBounds(177, 515, 169, 25);
-		frame.getContentPane().add(btnNewButton);
+		createAccountButton = new JButton("Create New Account");
+		createAccountButton.setBounds(177, 515, 169, 25);
+		frame.getContentPane().add(createAccountButton);
 		
 		btnNewButton_1 = new JButton("Log In");
 		btnNewButton_1.setBounds(385, 515, 97, 25);
 		frame.getContentPane().add(btnNewButton_1);
 		
-		JRadioButton rdbtnNewRadioButton = new JRadioButton("Employee");
-		rdbtnNewRadioButton.setBounds(219, 448, 88, 25);
-		frame.getContentPane().add(rdbtnNewRadioButton);
+		JRadioButton rdbtnEmployee= new JRadioButton("Employee");
+		rdbtnEmployee.setBounds(219, 448, 88, 25);
+		frame.getContentPane().add(rdbtnEmployee);
 		
-		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("Chief");
-		rdbtnNewRadioButton_1.setBounds(311, 448, 64, 25);
-		frame.getContentPane().add(rdbtnNewRadioButton_1);
+		JRadioButton rdbtnChief= new JRadioButton("Chief");
+		rdbtnChief.setBounds(311, 448, 64, 25);
+		frame.getContentPane().add(rdbtnChief);
+		
+		ButtonGroup radioGroup = new ButtonGroup();
+		radioGroup.add(rdbtnEmployee);
+		radioGroup.add(rdbtnChief);
 		
 		btnNewButton_2 = new JButton("Help");
 		btnNewButton_2.setBounds(385, 551, 97, 25);
 		frame.getContentPane().add(btnNewButton_2);
+		
+		createAccountButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+			   
+				radioGroup.isSelected((ButtonModel) radioGroup);
+				if(theCompany.isCompanyMember(txtUsername.getText()) == null && txtUsername.getText()!= "")
+				{
+					if(txtPassword.getText().equals(txtComfirmPassword.getText()))
+					{
+						Password createdPassword = new Password(txtPassword.getText(), txtUsername.getText(), txtFirstName.getText(), txtLastName.getText());
+						Account createdAccount = new Account(txtUsername.getText(),txtEmail.getText(),theCompany,createdPassword);
+						if(rdbtnEmployee.isSelected())
+						 {
+							 Employee createdUser = new Employee(txtFirstName.getText(), txtLastName.getText(), txtTelephone.getText(), txtAddress.getText(), txtGender.getText(), txtBirthday.getText(),txtSpeciality.getText(), createdAccount);
+						 }
+						 else if(rdbtnChief.isSelected())
+						 {
+							 Chief createdUser = new Chief(txtFirstName.getText(), txtLastName.getText(), txtTelephone.getText(), txtAddress.getText(), txtGender.getText(), txtBirthday.getText(),txtSpeciality.getText(), createdAccount);
+						 }
+						 else
+						 {
+							 String message = "You have not selected your position.Please check your position";
+								JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+								        JOptionPane.INFORMATION_MESSAGE);
+						 }
+					}
+					else
+					{
+						String message = "The password and confirm password is not the same.Please to contimue they must be identical ";
+						JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+						        JOptionPane.INFORMATION_MESSAGE);
+					}
+				}
+				else
+				{
+					String message = "This user with this username already exists.Change the username.";
+					JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+					        JOptionPane.INFORMATION_MESSAGE);
+				}
+			 
+				
+			}
+			
+		});
+		
+		
 	}
 }

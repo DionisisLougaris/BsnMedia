@@ -5,10 +5,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 
@@ -25,12 +28,12 @@ public class WelcomeScreen_GUI {
 	private JButton btnSingUp;
 	private JButton btnNewButton_1;
 	
-	public WelcomeScreen_GUI(Company aCompany) {
+	public WelcomeScreen_GUI(Company aCompany) throws IOException {
 		theCompany = aCompany;
 		initialize();
 	}
 
-	private void initialize() {
+	private void initialize() throws IOException {
 		frmWelcomeToBsn = new JFrame();
 		frmWelcomeToBsn.setResizable(false); //It does not change dimensions, so that the positions and appearance of the graphic elements are not altered.
 		frmWelcomeToBsn.setVisible(true);
@@ -49,7 +52,7 @@ public class WelcomeScreen_GUI {
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(255, 102, 51));
-		panel_1.setBounds(0, 0, 447, 557);
+		panel_1.setBounds(0, 0, 460, 557);
 		panel.add(panel_1);
 		panel_1.setLayout(null);
 		
@@ -66,19 +69,22 @@ public class WelcomeScreen_GUI {
 		panel_1.add(lblNewLabel_3);
 		
 		JLabel lblNewLabel_4 = new JLabel("");
-		lblNewLabel_4.setIcon(new ImageIcon("label_backgrounds/facebook_167px.png"));
-		lblNewLabel_4.setBounds(113, 210, 167, 126);
+		BufferedImage imageicon = ImageIO.read(new File("label_backgrounds/BSNlogo.jpg"));
+		ImageIcon image = new ImageIcon(imageicon);
+		Image imagerisize = image.getImage().getScaledInstance(190, 190, 140) ;
+		lblNewLabel_4.setIcon(new ImageIcon(imagerisize));
+		lblNewLabel_4.setBounds(98, 182, 229, 182);
 		panel_1.add(lblNewLabel_4);
 		
 		JLabel lblNewLabel_5 = new JLabel("\u00A9  2021 All rights reserved");
 		lblNewLabel_5.setForeground(new Color(255, 255, 255));
-		lblNewLabel_5.setBounds(142, 532, 172, 14);
+		lblNewLabel_5.setBounds(133, 517, 172, 14);
 		panel_1.add(lblNewLabel_5);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new LineBorder(new Color(255, 255, 255)));
 		panel_2.setBackground(new Color(255, 153, 102));
-		panel_2.setBounds(446, 0, 530, 557);
+		panel_2.setBounds(456, 0, 520, 557);
 		panel.add(panel_2);
 		panel_2.setLayout(null);
 		
@@ -174,7 +180,7 @@ public class WelcomeScreen_GUI {
 		JLabel hyperLink = new JLabel("IT Intelligence");
 		hyperLink.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		hyperLink.setForeground(new Color(255, 255, 255));
-		hyperLink.setBounds(425, 516, 95, 18);
+		hyperLink.setBounds(423, 495, 95, 18);
 		hyperLink.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		hyperLink.addMouseListener(new MouseAdapter() {
         	 
@@ -203,12 +209,12 @@ public class WelcomeScreen_GUI {
 		JLabel lblNewLabel_6 = new JLabel("Since 2021");
 		lblNewLabel_6.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		lblNewLabel_6.setForeground(new Color(255, 255, 255));
-		lblNewLabel_6.setBounds(447, 532, 53, 14);
+		lblNewLabel_6.setBounds(433, 512, 53, 14);
 		panel_2.add(lblNewLabel_6);
 		
 		JLabel lblNewLabel_7 = new JLabel();
 		lblNewLabel_7.setIcon(new ImageIcon("label_backgrounds/apple_logo_35px.png"));
-		lblNewLabel_7.setBounds(380, 516, 35, 26);
+		lblNewLabel_7.setBounds(376, 500, 35, 26);
 		panel_2.add(lblNewLabel_7);
 		
 		ButtonListener listener = new ButtonListener();
