@@ -1,9 +1,13 @@
 package GUI;
 
 import java.awt.EventQueue;
+import java.awt.event.*;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -16,7 +20,12 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import java.awt.TextArea;
 import java.awt.Component;
+import java.awt.Cursor;
+import java.awt.Desktop;
+
 import javax.swing.Box;
+import javax.swing.ImageIcon;
+
 import java.awt.Color;
 import java.awt.SystemColor;
 
@@ -200,74 +209,94 @@ public class HelpGUI {
 		lblNewLabel.setBounds(39, 60, 163, 27);
 		panel_2.add(lblNewLabel);
 		
-		JButton btnNewButton = new JButton("Github icon");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		btnNewButton.setBounds(39, 123, 37, 27);
-		panel_2.add(btnNewButton);
-		
-		JButton btnLinkedinIcon = new JButton("LinkedIn icon");
-		btnLinkedinIcon.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnLinkedinIcon.setBounds(107, 123, 37, 27);
-		panel_2.add(btnLinkedinIcon);
-		
-		JButton btnGmailIcon = new JButton("Gmail icon");
-		btnGmailIcon.setBounds(173, 123, 37, 27);
-		panel_2.add(btnGmailIcon);
-		
 		JLabel lblNewLabel_1 = new JLabel("Creators:");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.ITALIC, 15));
 		lblNewLabel_1.setBounds(349, 41, 77, 16);
 		panel_2.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("Kosmidou Eleni");
-		lblNewLabel_2.setBounds(475, 42, 105, 16);
+		lblNewLabel_2.setBounds(475, 83, 105, 16);
 		panel_2.add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel("Kwnstantinidi Styliana");
-		lblNewLabel_3.setBounds(475, 83, 134, 16);
+		lblNewLabel_3.setBounds(475, 128, 134, 16);
 		panel_2.add(lblNewLabel_3);
 		
 		JLabel lblNewLabel_4 = new JLabel("Lougaris Dionisis");
-		lblNewLabel_4.setBounds(475, 123, 105, 16);
+		lblNewLabel_4.setBounds(475, 163, 105, 16);
 		panel_2.add(lblNewLabel_4);
 		
 		JLabel lblNewLabel_5 = new JLabel("Mazaraki Eleni");
-		lblNewLabel_5.setBounds(475, 163, 105, 16);
+		lblNewLabel_5.setBounds(475, 206, 105, 16);
 		panel_2.add(lblNewLabel_5);
 		
 		JLabel lblNewLabel_6 = new JLabel("Machairas Panagiotis");
-		lblNewLabel_6.setBounds(475, 206, 134, 16);
+		lblNewLabel_6.setBounds(701, 42, 134, 16);
 		panel_2.add(lblNewLabel_6);
 		
 		JLabel lblNewLabel_7 = new JLabel("Melissanidou Kwnstantina");
-		lblNewLabel_7.setBounds(621, 42, 146, 16);
+		lblNewLabel_7.setBounds(701, 83, 146, 16);
 		panel_2.add(lblNewLabel_7);
 		
 		JLabel lblNewLabel_8 = new JLabel("Mertzanhs Antwnhs");
-		lblNewLabel_8.setBounds(621, 83, 117, 16);
+		lblNewLabel_8.setBounds(701, 128, 117, 16);
 		panel_2.add(lblNewLabel_8);
 		
 		JLabel lblNewLabel_9 = new JLabel("Nanou Eleftheria");
-		lblNewLabel_9.setBounds(621, 128, 117, 16);
+		lblNewLabel_9.setBounds(701, 163, 117, 16);
 		panel_2.add(lblNewLabel_9);
 		
 		JLabel lblNewLabel_10 = new JLabel("Stefou Giwrgos-Giannis");
-		lblNewLabel_10.setBounds(621, 163, 134, 16);
+		lblNewLabel_10.setBounds(701, 206, 134, 16);
 		panel_2.add(lblNewLabel_10);
 		
 		JLabel lblNewLabel_11 = new JLabel("Charakopoulos Minas-Theodoros");
-		lblNewLabel_11.setBounds(625, 206, 222, 16);
+		lblNewLabel_11.setBounds(467, 42, 222, 16);
 		panel_2.add(lblNewLabel_11);
 		
 		JLabel lblNewLabel_12 = new JLabel("\u00A9 Bsn Media 2021");
 		lblNewLabel_12.setBounds(12, 240, 117, 16);
 		panel_2.add(lblNewLabel_12);
+		
+		JLabel lblNewLabel_18 = new JLabel("");
+		lblNewLabel_18.setIcon(new ImageIcon("label_backgrounds/gmail_32px.png"));
+		lblNewLabel_18.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		lblNewLabel_18.setBounds(150, 128, 56, 46);
+		panel_2.add(lblNewLabel_18);
+		
+		JLabel lblNewLabel_19 = new JLabel("");
+		lblNewLabel_19.setIcon(new ImageIcon("label_backgrounds/linkedin_32px.png"));
+		lblNewLabel_19.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		lblNewLabel_19.setBounds(93, 128, 56, 46);
+		lblNewLabel_19.addMouseListener(new MouseAdapter() {
+	       	 
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                try {
+                    Desktop.getDesktop().browse(new URI("https://linkedin.com"));
+                } catch (IOException | URISyntaxException e1) {
+                    e1.printStackTrace();
+                }
+            }
+		});
+		panel_2.add(lblNewLabel_19);
+		
+		JLabel lblNewLabel_20 = new JLabel("");
+		lblNewLabel_20.setIcon(new ImageIcon("label_backgrounds/github_32px.png"));
+		lblNewLabel_20.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		lblNewLabel_20.setBounds(39, 128, 56, 46);
+		lblNewLabel_20.addMouseListener(new MouseAdapter() {
+       	 
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                try {
+                    Desktop.getDesktop().browse(new URI("https://github.com/DionisisLougaris/BsnMedia"));
+                } catch (IOException | URISyntaxException e1) {
+                    e1.printStackTrace();
+                }
+            }
+		});
+		panel_2.add(lblNewLabel_20);
 		
 		frame.setVisible(true); // den anoige diaforetika
 	
