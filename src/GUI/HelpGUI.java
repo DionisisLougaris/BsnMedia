@@ -268,6 +268,8 @@ public class HelpGUI {
 		JLabel lblNewLabel_12 = new JLabel("\u00A9 Bsn Media 2021");
 		lblNewLabel_12.setBounds(12, 240, 117, 16);
 		panel_2.add(lblNewLabel_12);
+		
+		frame.setVisible(true); // den anoige diaforetika
 	
 	}
 }

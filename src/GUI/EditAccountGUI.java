@@ -223,5 +223,6 @@ public class EditAccountGUI {
 		JLabel lblNewLabel_17 = new JLabel("Confirm Password");
 		lblNewLabel_17.setBounds(35, 682, 116, 16);
 		frame.getContentPane().add(lblNewLabel_17);
+		
 	}
 }

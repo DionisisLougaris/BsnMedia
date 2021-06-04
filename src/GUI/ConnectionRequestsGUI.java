@@ -84,6 +84,7 @@ public class ConnectionRequestsGUI {
 				System.out.println("And there all good");
 			}
 		});
+		frmConnectionRequests.setVisible(true); //den anoige diaforetika
 	}
 
 }

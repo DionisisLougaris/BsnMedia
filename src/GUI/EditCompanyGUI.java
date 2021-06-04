@@ -129,6 +129,8 @@ public class EditCompanyGUI {
 		btnNewButton_2 = new JButton("View Changes");
 		btnNewButton_2.setBounds(455, 503, 156, 25);
 		frame.getContentPane().add(btnNewButton_2);
+		
+		frame.setVisible(true);
 	}
 
 }

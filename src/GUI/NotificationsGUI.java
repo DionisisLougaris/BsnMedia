@@ -71,6 +71,7 @@ public class NotificationsGUI {
 				System.out.println("All good");
 			}
 		});
+		frmNotifications.setVisible(true); //den anoige diaforetika
 	}
 
 }
