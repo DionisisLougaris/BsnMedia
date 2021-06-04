@@ -3,6 +3,9 @@ package entities;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 public class Company implements Serializable{
 	
 	private String name;
@@ -36,10 +39,17 @@ public class Company implements Serializable{
 			if(this.companyMembers.get(i).firstName.equals(aString) 
 					|| this.companyMembers.get(i).lastName.equals(aString)
 					|| this.companyMembers.get(i).myAccount.getUsername().equals(aString)
-					|| this.companyMembers.get(i).myAccount.getEmail().equals(aString))
+					|| this.companyMembers.get(i).myAccount.getEmail().equals(aString)) 
 							return this.companyMembers.get(i);
 		
 		return null;
+	}
+	
+	
+	//This is a method that adds a User to the members of the company.
+	public void addUser(User theUser) {
+			
+		companyMembers.add(theUser);
 	}
 	
 	public ArrayList<Group> getCompanyGroups()

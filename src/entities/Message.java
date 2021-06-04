@@ -7,20 +7,12 @@ public class Message {
 	private String content;
 	private LocalDateTime timesent;
 	private User sender;
-	private User reciever;
 	
 	
-	public Message(String content, User sender, User reciever) {
+	public Message(String content, User sender) {
 		this.content = content;
 		this.timesent = LocalDateTime.now();
 		this.sender = sender;
-		this.reciever = reciever;
-	}
-	
-	//Constructor for testing encryption
-	public Message(String content) {
-		this.content = content;
-		this.timesent = LocalDateTime.now();
 	}
 
 
@@ -36,10 +28,6 @@ public class Message {
 
 	public User getSender() {
 		return sender;
-	}
-	
-	public User getReciever() {
-		return reciever;
 	}
 	
 	

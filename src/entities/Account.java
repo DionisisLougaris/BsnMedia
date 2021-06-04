@@ -17,11 +17,11 @@ public class Account implements Serializable{
 	public Account(String username, String email, Company myCompany, Password myPassword) {
 		/*A prerequisite for the creation of the object is the email and the Username that 
 		 * will be given not to be used already, for this reason the following checks also occur.*/
-		if(this.emailAvailability(email)){  //Check if email is used
+		this.myCompany = myCompany;
+		if(this.emailAvailability(email)){//Check if email is used
 			if (myCompany.isCompanyMember(username)==null) { //Check if username is used
 				this.username = username;
 				this.email = email;
-				this.myCompany = myCompany;
 				this.myPassword = myPassword;
 			}
 			else {

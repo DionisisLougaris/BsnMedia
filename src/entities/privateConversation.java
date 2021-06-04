@@ -1,5 +1,7 @@
 package entities;
 
+import java.io.File;
+
 public class privateConversation extends Conversation{
 	
 	private User discussant1; //Συνομιλιτης 1
@@ -26,5 +28,4 @@ public class privateConversation extends Conversation{
 	public void setDiscussant2(User discussant2) {
 		this.discussant2 = discussant2;
 	}
-		
 }

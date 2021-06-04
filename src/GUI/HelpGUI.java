@@ -34,7 +34,7 @@ public class HelpGUI {
 	private JFrame frame;
 	private JTextField txtYourFullName;
 	private JTextField txtYourEmail;
-	private JTextField txtYourMessage;
+	private JTextArea txtYourMessage;
 
 	/**
 	 * Launch the application.
@@ -65,7 +65,7 @@ public class HelpGUI {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 893, 1020);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setLocation(450, 0);
 		frame.getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
@@ -93,17 +93,17 @@ public class HelpGUI {
 		
 		JLabel lblNewLabel_14 = new JLabel("1. Is Bsn Media accesible online?");
 		lblNewLabel_14.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_14.setBounds(34, 212, 213, 16);
+		lblNewLabel_14.setBounds(34, 212, 314, 16);
 		panel.add(lblNewLabel_14);
 		
-		JLabel lblNewLabel_15 = new JLabel("Bsn Media is currently not accesible online and can be used localy from one computer.");
+		JLabel lblNewLabel_15 = new JLabel("Bsn Media is currently not accesible online");
 		lblNewLabel_15.setFont(new Font("Tahoma", Font.ITALIC, 14));
-		lblNewLabel_15.setBounds(44, 247, 265, 16);
+		lblNewLabel_15.setBounds(44, 247, 356, 16);
 		panel.add(lblNewLabel_15);
 		
 		JLabel lblNewLabel_14_1 = new JLabel("2. Who is the audience of Bsn Media?");
 		lblNewLabel_14_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_14_1.setBounds(34, 298, 275, 16);
+		lblNewLabel_14_1.setBounds(34, 304, 275, 16);
 		panel.add(lblNewLabel_14_1);
 		
 		JLabel lblNewLabel_15_1 = new JLabel("Bsn Media is addressed to companies with");
@@ -146,6 +146,11 @@ public class HelpGUI {
 		lblNewLabel_15_1_1_1_1.setBounds(44, 571, 265, 16);
 		panel.add(lblNewLabel_15_1_1_1_1);
 		
+		JLabel lblNewLabel_15_2 = new JLabel(" and can be used localy from one computer.");
+		lblNewLabel_15_2.setFont(new Font("Tahoma", Font.ITALIC, 14));
+		lblNewLabel_15_2.setBounds(44, 262, 356, 16);
+		panel.add(lblNewLabel_15_2);
+		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(255, 153, 0));
 		panel_1.setBounds(410, 0, 465, 705);
@@ -160,6 +165,12 @@ public class HelpGUI {
 		txtYourFullName = new JTextField();
 		txtYourFullName.setText("Your full name...");
 		txtYourFullName.setBounds(57, 230, 273, 36);
+		txtYourFullName.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseClicked(MouseEvent e){
+            	txtYourFullName.setText("");
+            }
+        });
 		panel_1.add(txtYourFullName);
 		txtYourFullName.setColumns(10);
 		
@@ -167,16 +178,28 @@ public class HelpGUI {
 		txtYourEmail.setText("Your email...");
 		txtYourEmail.setColumns(10);
 		txtYourEmail.setBounds(57, 301, 273, 36);
+		txtYourEmail.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseClicked(MouseEvent e){
+            	txtYourEmail.setText("");
+            }
+        });
 		panel_1.add(txtYourEmail);
 		
 		Component verticalStrut = Box.createVerticalStrut(20);
 		verticalStrut.setBounds(0, 0, 1, 626);
 		panel_1.add(verticalStrut);
 		
-		txtYourMessage = new JTextField();
+		txtYourMessage = new JTextArea();
 		txtYourMessage.setText("Your message...");
 		txtYourMessage.setColumns(10);
 		txtYourMessage.setBounds(57, 386, 273, 100);
+		txtYourMessage.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseClicked(MouseEvent e){
+            	txtYourMessage.setText("");
+            }
+        });
 		panel_1.add(txtYourMessage);
 		
 		JLabel lblNewLabel_16 = new JLabel("Name");

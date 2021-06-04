@@ -89,6 +89,7 @@ public class WelcomeScreen_GUI {
 		txtUsername.setForeground(new Color(255, 255, 255));
 		txtUsername.setBounds(188, 197, 174, 29);
 		txtUsername.setColumns(10);
+		//When the mouse click on the TextField, the text removed
 		txtUsername.addMouseListener(new MouseAdapter(){
             @Override
             public void mouseClicked(MouseEvent e){

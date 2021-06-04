@@ -64,7 +64,7 @@ public class Post implements Serializable{
 	public void  shareToConversation(User userSharing, Conversation conversationSharing, User userSherdPost)
 	{
 		String messageshare = content + "\n" + "Creator: " + creator.getFirstName() + " " + creator.getLastName() + " " + "Time: " + timestamp;
-		Message message = new Message(messageshare, userSharing, userSherdPost);
+		Message message = new Message(messageshare, userSharing);
 		conversationSharing.addMesage(message);
 	}
 

@@ -6,7 +6,6 @@ import java.util.*;
 abstract public class Conversation extends Notification{
 	
 	protected ArrayList<Message> allMessages = new ArrayList<Message>();
-	File conversationName = new File("uniqueConversationFIleName.txt");
 	
 	
 	//Add a message to the message List
@@ -16,9 +15,11 @@ abstract public class Conversation extends Notification{
 	}
 
 
-	public File getConversationName() {
-		return conversationName;
+	public ArrayList<Message> getAllMessages() {
+		return allMessages;
 	}
-	
+	public void setAllMessages(ArrayList<Message> allMessages) {
+		this.allMessages = allMessages;
+	}
 	
 }
