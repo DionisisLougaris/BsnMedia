@@ -19,8 +19,8 @@ public class WelcomeScreenGUI extends JFrame{
 	private JButton helpButton;
 	private JPanel panel;
 	
-	public WelcomeScreenGUI(Company company) {
-		theCompany = company;
+	public WelcomeScreenGUI() {
+		//theCompany = company;
 		frame = new JFrame();
 		frame.getContentPane().setBackground(new Color(153, 204, 204));
 		frame.setBounds(100, 100, 909, 630);
