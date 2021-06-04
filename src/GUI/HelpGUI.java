@@ -3,8 +3,11 @@ package GUI;
 import java.awt.EventQueue;
 import java.awt.event.*;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -23,6 +26,7 @@ import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Desktop;
 
+import javax.imageio.ImageIO;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
 
@@ -54,15 +58,17 @@ public class HelpGUI {
 
 	/**
 	 * Create the application.
+	 * @throws IOException 
 	 */
-	public HelpGUI() {
+	public HelpGUI() throws IOException {
 		initialize();
 	}
 
 	/**
 	 * Initialize the contents of the frame.
+	 * @throws IOException 
 	 */
-	private void initialize() {
+	private void initialize() throws IOException {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 893, 1020);
 		frame.setLocation(450, 0);
@@ -74,13 +80,22 @@ public class HelpGUI {
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 		
-		JButton btnNewButton_1_1 = new JButton("Help");
-		btnNewButton_1_1.addActionListener(new ActionListener() {
+		
+	   
+		BufferedImage imageicon = ImageIO.read(new File("label_backgrounds/BSNlogo.jpg"));
+	    ImageIcon image = new ImageIcon(imageicon);
+		Image imagerisize = image.getImage().getScaledInstance(30, 40, 20) ;
+		ImageIcon imagebutton = new ImageIcon(imagerisize);
+	    JButton buttonLogo = new JButton( imagebutton);
+	    buttonLogo.setBounds(824, 929, 46, 38);
+		buttonLogo.setBorderPainted(false);
+		buttonLogo.setFocusPainted(false);
+		buttonLogo.setContentAreaFilled(false);
+		panel.add(buttonLogo);
+		buttonLogo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNewButton_1_1.setBounds(824, 929, 46, 38);
-		panel.add(btnNewButton_1_1);
 		
 		JButton btnNewButton_1 = new JButton("logo");
 		btnNewButton_1.setBounds(34, 26, 73, 65);
