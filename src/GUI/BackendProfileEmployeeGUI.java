@@ -15,6 +15,9 @@ import javax.swing.JScrollBar;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import entities.Connection;
+import entities.User;
+
 import javax.swing.JRadioButton;
 
 public class BackendProfileEmployeeGUI {
@@ -23,14 +26,16 @@ public class BackendProfileEmployeeGUI {
 	private JTextField searchField;
 	private JTextField textField;
 	private JPanel panel, picturePanel;
-	JLabel lblNewLabel;
-	JButton searchButton, helpButton, requestsButton, messagesButton, notifsButton, editAccountButton, postButton, checkprofileButton, sendMessageButton, sendRequestButton, disconnectButton;
-	JTextArea postsArea;
-	JLabel emailLabel;
-	JLabel groupALabel, groupBLabel, groupCLabel;
-	JList connectionsList, suggestedList;
-	JTextArea writePostArea;
-	JRadioButton connectionsRadio, PublicRadio, GroupRadio;
+	private JLabel lblNewLabel;
+	private JButton searchButton, helpButton, requestsButton, messagesButton, notifsButton, editAccountButton, postButton, checkprofileButton, sendMessageButton, sendRequestButton, disconnectButton;
+	private JTextArea postsArea;
+	private JLabel emailLabel;
+	private JLabel groupALabel, groupBLabel, groupCLabel;
+	private JList connectionsList, suggestedList; // xreiazetai na kanoume to suggested connections
+	private JTextArea writePostArea;
+	private JRadioButton connectionsRadio, PublicRadio, GroupRadio;
+	private static User user; // static??
+	
 
 	/**
 	 * Launch the application.
@@ -39,7 +44,8 @@ public class BackendProfileEmployeeGUI {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					BackendProfileEmployeeGUI window = new BackendProfileEmployeeGUI();
+					// oxi sigourh gia thn parametro prepei na thn doume sto testing
+					BackendProfileEmployeeGUI window = new BackendProfileEmployeeGUI(user);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -51,7 +57,8 @@ public class BackendProfileEmployeeGUI {
 	/**
 	 * Create the application.
 	 */
-	public BackendProfileEmployeeGUI() {
+	public BackendProfileEmployeeGUI(User aUser) {
+		user = aUser;
 		initialize();
 		ButtonListener listener = new ButtonListener();
 		requestsButton.addActionListener(listener);
@@ -59,6 +66,7 @@ public class BackendProfileEmployeeGUI {
 		notifsButton.addActionListener(listener);
 		editAccountButton.addActionListener(listener);
 		helpButton.addActionListener(listener);
+		disconnectButton.addActionListener(listener);
 	}
 
 	/**
@@ -163,7 +171,7 @@ public class BackendProfileEmployeeGUI {
 		editAccountButton.setBounds(216, 250, 155, 25);
 		panel.add(editAccountButton);
 		
-		connectionsList = new JList();
+		connectionsList = new JList(user.getListOfConnections().toArray());
 		connectionsList.setBounds(44, 402, 116, 152);
 		panel.add(connectionsList);
 		
@@ -171,7 +179,7 @@ public class BackendProfileEmployeeGUI {
 		suggestedList.setBounds(221, 402, 116, 152);
 		panel.add(suggestedList);
 		
-		JLabel lblNewLabel_9 = new JLabel("Connections(0)");
+		JLabel lblNewLabel_9 = new JLabel("Connections (" + user.getListOfConnections().size() + ")");
 		lblNewLabel_9.setBounds(49, 373, 99, 16);
 		panel.add(lblNewLabel_9);
 		
@@ -230,8 +238,9 @@ public class BackendProfileEmployeeGUI {
 		
 	}
 	
-	public void disconnectUser() {
-		
+	public void disconnectUser() throws IOException {
+		frame.dispose();
+		new WelcomeScreen_GUI(null); // null?
 	}
 	
 	class ButtonListener implements ActionListener {
@@ -267,6 +276,27 @@ public class BackendProfileEmployeeGUI {
 			}
 			else if(e.getSource().equals(helpButton)) {
 				new HelpGUI();
+			}
+			else if(e.getSource().equals(disconnectButton)) {
+				try {
+					disconnectUser();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+			else if(e.getSource().equals(checkprofileButton)) {
+				if(!connectionsList.isSelectionEmpty()) {
+					User anotherUser = (User) connectionsList.getSelectedValue();
+					Connection conn = new Connection(user, anotherUser);
+					conn.sendConnectionRequest();
+				}
+			}
+			else if(e.getSource().equals(sendMessageButton)) {
+				if(!connectionsList.isSelectionEmpty()) {
+					User anotherUser = (User) connectionsList.getSelectedValue();
+					new PrivateChatGUI(anotherUser, user, null); //null?
+				}
 			}
 		}
 		

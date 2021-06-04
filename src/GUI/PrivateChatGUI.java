@@ -4,6 +4,10 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JTextField;
+
+import entities.Conversation;
+import entities.User;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -12,6 +16,9 @@ import javax.swing.JPanel;
 public class PrivateChatGUI {
 
 	private JFrame frame;
+	private static User receiver;
+	private static User sender;
+	private static Conversation convo; 
 
 	/**
 	 * Launch the application.
@@ -20,7 +27,7 @@ public class PrivateChatGUI {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					PrivateChatGUI window = new PrivateChatGUI();
+					PrivateChatGUI window = new PrivateChatGUI(receiver, sender, convo);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -32,7 +39,9 @@ public class PrivateChatGUI {
 	/**
 	 * Create the application.
 	 */
-	public PrivateChatGUI() {
+	public PrivateChatGUI(User aReceiver, User aSender, Conversation aConvo) {
+		receiver = aReceiver;
+		sender = aSender;
 		initialize();
 	}
 
