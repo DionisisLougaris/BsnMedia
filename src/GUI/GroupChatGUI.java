@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class GroupChatGUI {
 
@@ -44,6 +45,7 @@ public class GroupChatGUI {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.getContentPane().setBackground(Color.WHITE);
 		frame.setBounds(100, 100, 685, 840);
 		frame.getContentPane().setLayout(null);
 		
@@ -62,6 +64,7 @@ public class GroupChatGUI {
 		frame.getContentPane().add(lblNewLabel_1);
 		
 		JPanel panel = new JPanel();
+		panel.setBackground(Color.WHITE);
 		panel.setBounds(12, 84, 643, 652);
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);

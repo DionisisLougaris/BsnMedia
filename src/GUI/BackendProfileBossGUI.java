@@ -167,11 +167,11 @@ public class BackendProfileBossGUI {
 		panel.add(btnNewButton_3);
 		
 		JButton btnNewButton_4 = new JButton("Check profile");
-		btnNewButton_4.setBounds(49, 567, 97, 25);
+		btnNewButton_4.setBounds(44, 567, 116, 25);
 		panel.add(btnNewButton_4);
 		
 		JButton btnNewButton_5 = new JButton("Send Message");
-		btnNewButton_5.setBounds(49, 601, 97, 25);
+		btnNewButton_5.setBounds(44, 601, 116, 25);
 		panel.add(btnNewButton_5);
 		
 		JButton btnNewButton_6 = new JButton("Send request");

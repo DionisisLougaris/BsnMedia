@@ -14,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JPanel;
+import java.awt.Color;
 
 public class PrivateChatGUI {
 
@@ -52,6 +53,7 @@ public class PrivateChatGUI {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.getContentPane().setBackground(Color.WHITE);
 		frame.setBounds(100, 100, 685, 840);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
@@ -71,6 +73,7 @@ public class PrivateChatGUI {
 		frame.getContentPane().add(lblNewLabel_1);
 		
 		JPanel panel = new JPanel();
+		panel.setBackground(Color.WHITE);
 		panel.setBounds(12, 84, 643, 652);
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);

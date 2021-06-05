@@ -204,11 +204,11 @@ public class BackendProfileChiefGUI {
 		panel.add(textField);
 		
 		JButton btnNewButton_4 = new JButton("Check profile");
-		btnNewButton_4.setBounds(49, 567, 97, 25);
+		btnNewButton_4.setBounds(44, 567, 116, 25);
 		panel.add(btnNewButton_4);
 		
 		JButton btnNewButton_5 = new JButton("Send Message");
-		btnNewButton_5.setBounds(49, 601, 97, 25);
+		btnNewButton_5.setBounds(44, 601, 116, 25);
 		panel.add(btnNewButton_5);
 		
 		JButton btnNewButton_6 = new JButton("Send request");
@@ -226,15 +226,19 @@ public class BackendProfileChiefGUI {
 		
 		Icon edit = new ImageIcon("Buttons_backgrounds/edit_20px.png");
 		JButton btnNewButton_8 = new JButton(edit);
-		btnNewButton_8.setBounds(44, 327, 55, 25);
+		btnNewButton_8.setBounds(59, 335, 27, 25);
 		panel.add(btnNewButton_8);
 		
 		JButton btnNewButton_8_1 = new JButton(edit);
-		btnNewButton_8_1.setBounds(111, 327, 55, 25);
+		btnNewButton_8_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnNewButton_8_1.setBounds(124, 335, 27, 25);
 		panel.add(btnNewButton_8_1);
 		
 		JButton btnNewButton_8_2 = new JButton(edit);
-		btnNewButton_8_2.setBounds(174, 327, 55, 25);
+		btnNewButton_8_2.setBounds(184, 335, 27, 25);
 		panel.add(btnNewButton_8_2);
 		
 		textField = new JTextField();

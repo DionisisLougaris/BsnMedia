@@ -54,7 +54,6 @@ public class CreateAccountGUI {
 	private JTextField txtSpeciality;
 	private JButton createAccountButton;
 	private JButton loginButton;
-	private JButton helpButton;
 	private Company theCompany;
 
 
@@ -221,13 +220,6 @@ public class CreateAccountGUI {
 		radioGroup.add(rdbtnEmployee);
 		radioGroup.add(rdbtnChief);
 		
-		helpButton = new JButton("Help");
-		helpButton.setBackground(new Color(255, 153, 102));
-		helpButton.setBorder(new LineBorder(new Color(255, 255, 255)));
-		helpButton.setForeground(new Color(255, 255, 255));
-		helpButton.setBounds(385, 551, 97, 25);
-		frame.getContentPane().add(helpButton);
-		
 		JLabel lblNewLabel_1 = new JLabel("Company Code:");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lblNewLabel_1.setForeground(new Color(255, 255, 255));
@@ -309,14 +301,14 @@ public class CreateAccountGUI {
 		lblNewLabel_13.setBounds(41, 11, 115, 97);
 		panel.add(lblNewLabel_13);
 		
-		JLabel lblNewLabel_14 = new JLabel("Create easy your Account!");
+		JLabel lblNewLabel_14 = new JLabel("Create an account now!");
 		lblNewLabel_14.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 16));
 		lblNewLabel_14.setBounds(234, 57, 211, 29);
 		panel.add(lblNewLabel_14);
 		
-		JLabel lblNewLabel_14_1 = new JLabel("You are new here?");
+		JLabel lblNewLabel_14_1 = new JLabel("Want to be apart of BSN Media?");
 		lblNewLabel_14_1.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 16));
-		lblNewLabel_14_1.setBounds(250, 17, 179, 29);
+		lblNewLabel_14_1.setBounds(234, 15, 217, 29);
 		panel.add(lblNewLabel_14_1);
 		
 		JSeparator separator = new JSeparator();
@@ -333,6 +325,16 @@ public class CreateAccountGUI {
 		separator_1_1.setForeground(Color.WHITE);
 		separator_1_1.setBounds(289, 184, 101, 2);
 		frame.getContentPane().add(separator_1_1);
+		
+		JSeparator separator_1_1_1 = new JSeparator();
+		separator_1_1_1.setForeground(Color.WHITE);
+		separator_1_1_1.setBounds(289, 211, 101, 2);
+		frame.getContentPane().add(separator_1_1_1);
+		
+		JSeparator separator_1_1_2 = new JSeparator();
+		separator_1_1_2.setForeground(Color.WHITE);
+		separator_1_1_2.setBounds(289, 211, 101, 2);
+		frame.getContentPane().add(separator_1_1_2);
 		
 		createAccountButton.addActionListener(new ActionListener() {
 
@@ -376,20 +378,6 @@ public class CreateAccountGUI {
 				}
 			 
 				
-			}
-		});
-		
-		helpButton.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				
-				try {
-					new HelpGUI();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
 			}
 		});
 		

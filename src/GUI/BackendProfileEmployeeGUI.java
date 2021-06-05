@@ -227,11 +227,11 @@ public class BackendProfileEmployeeGUI {
 		panel.add(textField);
 		
 		checkprofileButton = new JButton("Check profile");
-		checkprofileButton.setBounds(49, 567, 97, 25);
+		checkprofileButton.setBounds(44, 567, 116, 25);
 		panel.add(checkprofileButton);
 		
 		sendMessageButton = new JButton("Send Message");
-		sendMessageButton.setBounds(49, 601, 97, 25);
+		sendMessageButton.setBounds(44, 601, 116, 25);
 		panel.add(sendMessageButton);
 		
 		sendRequestButton = new JButton("Send request");
