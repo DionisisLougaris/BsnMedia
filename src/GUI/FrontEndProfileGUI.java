@@ -130,7 +130,7 @@ public class FrontEndProfileGUI {
 		buttonchat.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				new PrivateChatGUI();// prepei na baloume twn xhrhsrh
+				//new PrivateChatGUI();// prepei na baloume twn xhrhsrh
 			}
 		});
 		buttonchat.setBounds(479, 313, 62, 25);

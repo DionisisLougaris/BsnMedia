@@ -15,15 +15,18 @@ import javax.swing.JScrollBar;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import entities.*;
+
 public class BackendProfileChiefGUI {
 
 	private JFrame frame;
 	private JTextField textField;
 	private JTextField textField_1;
+	private User chief;
 
 	/**
 	 * Launch the application.
-	 */
+	 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -37,10 +40,10 @@ public class BackendProfileChiefGUI {
 		});
 	}
 
-	/**
 	 * Create the application.
 	 */
-	public BackendProfileChiefGUI() {
+	public BackendProfileChiefGUI(User theChief) {
+		chief = theChief;
 		initialize();
 	}
 
@@ -50,7 +53,8 @@ public class BackendProfileChiefGUI {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 893, 1020);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setVisible(true);
+		frame.setResizable(false);
 		frame.getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();

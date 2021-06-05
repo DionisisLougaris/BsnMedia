@@ -52,26 +52,6 @@ public class Account implements Serializable{
 	}
 	
 	
-	/*This is a method that allows or does not allow the User to access in Bsn Media. If all checks are finished without 
-	any error the user's backend Profile window on  network  opens.*/ 
-	public void loginAttempt (String inputUsername, String inputPassword)
-	{
-		if(myCompany.isCompanyMember(inputUsername) != null)
-		{
-			String decryptedPassword = Encryption.decryptPassword(myPassword.getPassword(), myPassword.getAccountCreationTime().getSecond() + 1);
-			if(decryptedPassword.equals(inputPassword) )
-			{
-				// prepei me instance of the doume pio apo ta 3 gui xrhstwn tha anoiksoume
-			}
-			else
-			{
-				JOptionPane.showMessageDialog(null, "Failed Login",inputPassword , 0);
-			}
-			
-
-	      }
-	}
-	
 	/*This is a method that changes or not a user's password in case he has forgotten the previous one.
 	 If all checks are finished without any error the creators of application sends email to user.*/
 	public User forgotPassword (String inputUsername, String inputEmail, String desiredPassword) {
@@ -100,16 +80,15 @@ public class Account implements Serializable{
 	
 
 	//This is a method that deletes the user account.
-	public void deleteAccount(String inputPassword , String confirmedPassword, User deletedUser)
-	{
-		String decryptPassword = Encryption.decryptPassword(myPassword.getPassword(), myPassword.getAccountCreationTime().getSecond() + 1);
-		if(decryptPassword.equals(inputPassword)   && inputPassword.equals(confirmedPassword) )
-		{
+	public void deleteAccount(String inputPassword , String confirmedPassword, User deletedUser) {
+		
+		//The stored code must first be decrypted to verify that there is a correct match.
+		String decryptedSoredPassword = Encryption.decryptPassword(this.myPassword.getPassword(), this.myPassword.getTimestamp().getSecond());
+		if(decryptedSoredPassword.equals(inputPassword) && inputPassword.equals(confirmedPassword)) {
 			
 			myCompany.getCompanyMembers().remove(deletedUser);
 		}
-		else
-		{
+		else {
 			JOptionPane.showMessageDialog(null, "Failed to delete User",deletedUser.getLastName() , 0);
 		}
 	}

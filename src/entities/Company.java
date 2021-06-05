@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import GUI.*;
+
 public class Company implements Serializable{
 	
 	private String name;
@@ -50,6 +52,31 @@ public class Company implements Serializable{
 	public void addUser(User theUser) {
 			
 		companyMembers.add(theUser);
+	}
+	
+	
+	/*This is a method that allows or does not allow the User to access in Bsn Media. If all checks are finished without 
+	any error the user's backend Profile window on  network  opens.*/ 
+	public boolean loginAttempt (String inputUsername, String inputPassword) {
+		
+		for (User member: companyMembers) {
+			String memberDecryptedPassword = Encryption.decryptPassword(member.getMyAccount().getMyPassword().getPassword(), 
+														member.getMyAccount().getMyPassword().getTimestamp().getSecond());
+			if (member.getMyAccount().getUsername().equals(inputUsername) && memberDecryptedPassword.equals(inputPassword)) {
+				
+				if (member instanceof Employee) {
+					new BackendProfileEmployeeGUI(member);
+					return true;
+				}else if (member instanceof Chief) {
+					new BackendProfileChiefGUI(member);
+					return true;
+				}else {
+					new BackendProfileBossGUI(member);
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 	
 	public ArrayList<Group> getCompanyGroups()

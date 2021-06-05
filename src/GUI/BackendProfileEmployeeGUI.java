@@ -75,7 +75,8 @@ public class BackendProfileEmployeeGUI {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 893, 1020);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setVisible(true);
+		frame.setResizable(false);
 		frame.getContentPane().setLayout(null);
 		
 		panel = new JPanel();
@@ -275,7 +276,12 @@ public class BackendProfileEmployeeGUI {
 				new EditAccountGUI();
 			}
 			else if(e.getSource().equals(helpButton)) {
-				new HelpGUI();
+				try {
+					new HelpGUI();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 			else if(e.getSource().equals(disconnectButton)) {
 				try {

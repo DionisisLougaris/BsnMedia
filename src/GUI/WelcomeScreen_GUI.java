@@ -237,8 +237,13 @@ public class WelcomeScreen_GUI {
 				
 				System.out.println(username+" "+password);
 				
-				//Prepei na klithei i login attemp apo tin klasi Account. Den ginetai na dimioyrgithei antikeimeno account, ara mallon
-				// tha prepei i methodos ayti na paei stin klasi Company
+				if (theCompany.loginAttempt(username, password)) {
+					frmWelcomeToBsn.setVisible(false);
+				}else {
+					String message = "Wrong username or password!";
+					JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+					        JOptionPane.INFORMATION_MESSAGE);
+				}
 			}else if (e.getSource().equals(btnSingUp)) {
 				
 				new CreateAccountGUI(theCompany);

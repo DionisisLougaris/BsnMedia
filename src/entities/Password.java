@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 public class Password implements Serializable
 {
 	
-	private String password;
+	private String password; //The password stored encrypted
 	private LocalDateTime timestamp;
 	
 	//Constructor for Password
@@ -19,9 +19,9 @@ public class Password implements Serializable
 		if (password.length()>=8 && !password.equalsIgnoreCase(username) 
 								 && !password.equalsIgnoreCase(firstName)
 								 && !password.equalsIgnoreCase(lastName)) { 
-			//Πριν οριστει τιμη στο πεδιο, θα μεσολαβει η κρυπτοφραφιση του κωδικου
-			this.password = password;
 			this.timestamp = LocalDateTime.now(); //takes the current time the object is to be created
+			//The password is stored encrypted
+			this.password = Encryption.encryptPassword(password, timestamp.getSecond());
 		}
 		else {
 			String message = "Password is weak! Try a stronger one";
@@ -38,8 +38,8 @@ public class Password implements Serializable
 								&& !newPass.equalsIgnoreCase(theUser.myAccount.getUsername())
 								&& !newPass.equalsIgnoreCase(theUser.lastName)) {
 			if (newPass.equalsIgnoreCase(confirmedPass)) {
-				//Εδω θα κληθει μεθοδος για κρυπρογραφιση του καινουργιου κωδικού
-				this.password = newPass; //the code is updated
+				//The new password is stored encrypted
+				this.password = Encryption.encryptPassword(newPass, timestamp.getSecond());
 				String message = "The code has updated succesfully";
 				JOptionPane.showMessageDialog(new JFrame(), message, "Message",
 				        JOptionPane.INFORMATION_MESSAGE);

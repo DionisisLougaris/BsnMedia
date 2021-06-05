@@ -10,7 +10,7 @@ public class Main {
 		
 		Company theCompany = new Company("IT Intelligence", "A Technology Company", "25012001", "6971657008", "Thessaloniki", "itintelligenceuom@gmail.com");
 		
-		/*Password thePassword = new Password("12345678", "minasch", "Minas", "Charakopoulos");
+		Password thePassword = new Password("12345678", "minasch", "Minas", "Charakopoulos");
 		Account theAccount = new Account("minasch", "m.charakopoulos@gmail.com", theCompany, thePassword);
 		Employee first = new Employee("Minas", "Charakopoulos", "6971657008", "Dervenakion", "male", "25/01/2001", "Programmer", theAccount);
 		
@@ -32,7 +32,7 @@ public class Main {
 		theCompany.addUser(first3);
 		theCompany.addUser(first4);
 		
-		privateConversation conversation = new privateConversation(first, first2);
+		/*privateConversation conversation = new privateConversation(first, first2);
 		Message firstMessage = new Message("Geiaaa", first);
 		Message firstMessage1 = new Message("Geiaaa", first2);
 		Message firstMessage2 = new Message("Ti kaneis", first);
