@@ -71,7 +71,7 @@ public class HelpGUI {
 	private void initialize() throws IOException {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 893, 1020);
-		frame.setLocation(450, 0);
+		frame.setLocation(500, 0);
 		frame.getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
@@ -108,63 +108,73 @@ public class HelpGUI {
 		
 		JLabel lblNewLabel_14 = new JLabel("1. Is Bsn Media accesible online?");
 		lblNewLabel_14.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_14.setBounds(34, 212, 314, 16);
+		lblNewLabel_14.setBounds(34, 201, 314, 16);
 		panel.add(lblNewLabel_14);
 		
 		JLabel lblNewLabel_15 = new JLabel("Bsn Media is currently not accesible online");
 		lblNewLabel_15.setFont(new Font("Tahoma", Font.ITALIC, 14));
-		lblNewLabel_15.setBounds(44, 247, 356, 16);
+		lblNewLabel_15.setBounds(44, 230, 356, 16);
 		panel.add(lblNewLabel_15);
 		
 		JLabel lblNewLabel_14_1 = new JLabel("2. Who is the audience of Bsn Media?");
 		lblNewLabel_14_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_14_1.setBounds(34, 304, 275, 16);
+		lblNewLabel_14_1.setBounds(34, 293, 275, 16);
 		panel.add(lblNewLabel_14_1);
 		
 		JLabel lblNewLabel_15_1 = new JLabel("Bsn Media is addressed to companies with");
 		lblNewLabel_15_1.setFont(new Font("Tahoma", Font.ITALIC, 14));
-		lblNewLabel_15_1.setBounds(44, 340, 265, 16);
+		lblNewLabel_15_1.setBounds(44, 322, 265, 16);
 		panel.add(lblNewLabel_15_1);
 		
 		JLabel lblNewLabel_15_1_1 = new JLabel("a big social network!");
 		lblNewLabel_15_1_1.setFont(new Font("Tahoma", Font.ITALIC, 14));
-		lblNewLabel_15_1_1.setBounds(44, 362, 265, 16);
+		lblNewLabel_15_1_1.setBounds(44, 340, 265, 16);
 		panel.add(lblNewLabel_15_1_1);
 		
 		JLabel lblNewLabel_14_1_1 = new JLabel("3. Can there be more than one Boss");
 		lblNewLabel_14_1_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_14_1_1.setBounds(34, 406, 251, 16);
+		lblNewLabel_14_1_1.setBounds(34, 383, 251, 16);
 		panel.add(lblNewLabel_14_1_1);
 		
 		JLabel lblNewLabel_14_1_1_1 = new JLabel("on the Bsn Media network?");
 		lblNewLabel_14_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_14_1_1_1.setBounds(56, 427, 364, 16);
+		lblNewLabel_14_1_1_1.setBounds(56, 402, 364, 16);
 		panel.add(lblNewLabel_14_1_1_1);
 		
 		JLabel lblNewLabel_15_1_1_1 = new JLabel("Currently no.");
 		lblNewLabel_15_1_1_1.setFont(new Font("Tahoma", Font.ITALIC, 14));
-		lblNewLabel_15_1_1_1.setBounds(44, 468, 265, 16);
+		lblNewLabel_15_1_1_1.setBounds(44, 436, 265, 16);
 		panel.add(lblNewLabel_15_1_1_1);
 		
 		JLabel lblNewLabel_14_1_1_2 = new JLabel("4. Can there be more than one Company");
 		lblNewLabel_14_1_1_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_14_1_1_2.setBounds(34, 512, 291, 16);
+		lblNewLabel_14_1_1_2.setBounds(39, 478, 291, 16);
 		panel.add(lblNewLabel_14_1_1_2);
 		
 		JLabel lblNewLabel_14_1_1_1_1 = new JLabel("on the Bsn Media network?");
 		lblNewLabel_14_1_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_14_1_1_1_1.setBounds(56, 535, 364, 16);
+		lblNewLabel_14_1_1_1_1.setBounds(56, 496, 364, 16);
 		panel.add(lblNewLabel_14_1_1_1_1);
 		
 		JLabel lblNewLabel_15_1_1_1_1 = new JLabel("Currently no.");
 		lblNewLabel_15_1_1_1_1.setFont(new Font("Tahoma", Font.ITALIC, 14));
-		lblNewLabel_15_1_1_1_1.setBounds(44, 571, 265, 16);
+		lblNewLabel_15_1_1_1_1.setBounds(44, 525, 265, 16);
 		panel.add(lblNewLabel_15_1_1_1_1);
 		
 		JLabel lblNewLabel_15_2 = new JLabel(" and can be used localy from one computer.");
 		lblNewLabel_15_2.setFont(new Font("Tahoma", Font.ITALIC, 14));
-		lblNewLabel_15_2.setBounds(44, 262, 356, 16);
+		lblNewLabel_15_2.setBounds(44, 249, 356, 16);
 		panel.add(lblNewLabel_15_2);
+		
+		JLabel lblNewLabel_14_1_1_2_1 = new JLabel("5. Can I use the greek alphabet on Bsn Media?");
+		lblNewLabel_14_1_1_2_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblNewLabel_14_1_1_2_1.setBounds(34, 565, 314, 27);
+		panel.add(lblNewLabel_14_1_1_2_1);
+		
+		JLabel lblNewLabel_15_1_1_1_1_1 = new JLabel("No, greek letters cannot be encrypted currently.");
+		lblNewLabel_15_1_1_1_1_1.setFont(new Font("Tahoma", Font.ITALIC, 14));
+		lblNewLabel_15_1_1_1_1_1.setBounds(44, 605, 304, 16);
+		panel.add(lblNewLabel_15_1_1_1_1_1);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(255, 153, 0));

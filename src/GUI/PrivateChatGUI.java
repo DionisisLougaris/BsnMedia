@@ -8,6 +8,8 @@ import javax.swing.JTextField;
 import entities.Conversation;
 import entities.User;
 
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -81,11 +83,13 @@ public class PrivateChatGUI {
 		panel_2.setBounds(12, 519, 521, 120);
 		panel.add(panel_2);
 		
-		JButton btnNewButton_1_1_1 = new JButton("Send");
+		Icon send = new ImageIcon("Buttons_backgrounds/email_send_32px.png");
+		JButton btnNewButton_1_1_1 = new JButton(send);
 		btnNewButton_1_1_1.setBounds(569, 601, 46, 38);
 		panel.add(btnNewButton_1_1_1);
 		
-		JButton btnNewButton_1_1 = new JButton("Help");
+		Icon help = new ImageIcon("Buttons_backgrounds/customer_support_40px.png");
+		JButton btnNewButton_1_1 = new JButton(help);
 		btnNewButton_1_1.setBounds(609, 749, 46, 38);
 		frame.getContentPane().add(btnNewButton_1_1);
 	}

@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import java.awt.Font;
 import javax.swing.JList;
+import javax.swing.Icon;
 
 public class CompanyProfileGUI {
 
@@ -49,7 +50,7 @@ public class CompanyProfileGUI {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 893, 1020);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setLocation(500, 0);
 		
 		
 		ImageIcon logoimage = new ImageIcon();
@@ -65,8 +66,9 @@ public class CompanyProfileGUI {
 	    textField.setBounds(409, 38, 317, 30);
 	    frame.getContentPane().add(textField);
 	    
-	    JButton btnNewButton = new JButton("icon");
-	    btnNewButton.setBounds(738, 41, 55, 25);
+	    Icon search = new ImageIcon("Buttons_backgrounds/search_30px.png");
+	    JButton btnNewButton = new JButton(search);
+	    btnNewButton.setBounds(738, 27, 55, 39);
 	    frame.getContentPane().add(btnNewButton);
 	    
 	    JPanel panel_1 = new JPanel();
@@ -107,19 +109,7 @@ public class CompanyProfileGUI {
 	    JLabel lblNewLabel_2_1 = new JLabel("Chiefs(0)");
 	    lblNewLabel_2_1.setBounds(520, 723, 91, 16);
 	    frame.getContentPane().add(lblNewLabel_2_1);
-	    
-	    JButton btnNewButton_5_3 = new JButton("email icon");
-	    btnNewButton_5_3.setBounds(50, 824, 22, 21);
-	    frame.getContentPane().add(btnNewButton_5_3);
-	    
-	    JButton btnNewButton_5 = new JButton("telephone icon");
-	    btnNewButton_5.setBounds(50, 858, 22, 21);
-	    frame.getContentPane().add(btnNewButton_5);
-	    
-	    JButton btnNewButton_5_1 = new JButton("adress icon");
-	    btnNewButton_5_1.setBounds(50, 892, 22, 21);
-	    frame.getContentPane().add(btnNewButton_5_1);
-	    
+
 	    JLabel lblNewLabel_4 = new JLabel("example@gmail.com");
 	    lblNewLabel_4.setBounds(98, 829, 125, 16);
 	    frame.getContentPane().add(lblNewLabel_4);
@@ -139,6 +129,23 @@ public class CompanyProfileGUI {
 	    JLabel lblNewLabel_6 = new JLabel("Boss' Profile");
 	    lblNewLabel_6.setBounds(50, 743, 106, 16);
 	    frame.getContentPane().add(lblNewLabel_6);
+	    
+	    Icon help = new ImageIcon("Buttons_backgrounds/customer_support_40px.png");
+		JButton btnNewButton_7 = new JButton(help);
+	    btnNewButton_7.setBounds(817, 922, 46, 38);
+	    frame.getContentPane().add(btnNewButton_7);
+	    
+	    JLabel lblNewLabel_7 = new JLabel(new ImageIcon("label_backgrounds/email_20px.png"));
+	    lblNewLabel_7.setBounds(54, 820, 28, 25);
+	    frame.getContentPane().add(lblNewLabel_7);
+	    
+	    JLabel lblNewLabel_7_1 = new JLabel(new ImageIcon("label_backgrounds/telephone_20px.png"));
+	    lblNewLabel_7_1.setBounds(50, 860, 28, 25);
+	    frame.getContentPane().add(lblNewLabel_7_1);
+	    
+	    JLabel lblNewLabel_7_2 = new JLabel(new ImageIcon("label_backgrounds/address_20px.png"));
+	    lblNewLabel_7_2.setBounds(50, 894, 28, 25);
+	    frame.getContentPane().add(lblNewLabel_7_2);
 	    frame.setVisible(true);
 	}
 }

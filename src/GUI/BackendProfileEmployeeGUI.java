@@ -6,6 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -35,6 +37,7 @@ public class BackendProfileEmployeeGUI {
 	private JTextArea writePostArea;
 	private JRadioButton connectionsRadio, PublicRadio, GroupRadio;
 	private static User user; // static??
+	private JLabel lblNewLabel_1;
 	
 
 	/**
@@ -75,6 +78,7 @@ public class BackendProfileEmployeeGUI {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 893, 1020);
+		frame.setLocation(500, 0);
 		frame.setVisible(true);
 		frame.setResizable(false);
 		frame.getContentPane().setLayout(null);
@@ -93,12 +97,13 @@ public class BackendProfileEmployeeGUI {
 		lblNewLabel.setBounds(51, 66, 72, 16);
 		picturePanel.add(lblNewLabel);
 		
-		searchButton = new JButton("icon");
+		Icon search = new ImageIcon("Buttons_backgrounds/search_30px.png");
+		searchButton = new JButton(search);
 		searchButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		searchButton.setBounds(613, 27, 55, 30);
+		searchButton.setBounds(613, 13, 55, 44);
 		panel.add(searchButton);
 		
 		postsArea = new JTextArea();
@@ -139,7 +144,8 @@ public class BackendProfileEmployeeGUI {
 		groupCLabel.setBounds(174, 314, 56, 16);
 		panel.add(groupCLabel);
 		
-		helpButton = new JButton("Help");
+		Icon help = new ImageIcon("Buttons_backgrounds/customer_support_40px.png");
+		helpButton = new JButton(help);
 		helpButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -152,15 +158,18 @@ public class BackendProfileEmployeeGUI {
 		searchField.setBounds(333, 27, 268, 30);
 		panel.add(searchField);
 		
-		requestsButton = new JButton("friend request icon");
+		Icon friends = new ImageIcon("Buttons_backgrounds/friends_30px.png");
+		requestsButton = new JButton(friends);
 		requestsButton.setBounds(714, 27, 37, 30);
 		panel.add(requestsButton);
 		
-		messagesButton = new JButton("message icon");
+		Icon messages = new ImageIcon("Buttons_backgrounds/Messages_30px.png");
+		messagesButton = new JButton(messages);
 		messagesButton.setBounds(763, 27, 37, 30);
 		panel.add(messagesButton);
 		
-		notifsButton = new JButton("bell icon");
+		Icon bell = new ImageIcon("Buttons_backgrounds/bell_30px.png");
+		notifsButton = new JButton(bell);
 		notifsButton.setBounds(814, 27, 37, 30);
 		panel.add(notifsButton);
 		
@@ -229,9 +238,14 @@ public class BackendProfileEmployeeGUI {
 		sendRequestButton.setBounds(221, 567, 116, 25);
 		panel.add(sendRequestButton);
 		
-		disconnectButton = new JButton("Disconnect");
+		Icon logout = new ImageIcon("Buttons_backgrounds/exit_35px.png");
+		disconnectButton = new JButton(logout);
 		disconnectButton.setBounds(754, 98, 97, 25);
 		panel.add(disconnectButton);
+		
+		lblNewLabel_1 = new JLabel("logo");
+		lblNewLabel_1.setBounds(12, 917, 56, 43);
+		panel.add(lblNewLabel_1);
 		
 		
 		

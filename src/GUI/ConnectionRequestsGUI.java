@@ -13,6 +13,7 @@ import java.awt.Color;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
@@ -54,36 +55,26 @@ public class ConnectionRequestsGUI {
 		frmConnectionRequests.setTitle("Connection Requests");
 		frmConnectionRequests.getContentPane().setBackground(new Color(255, 153, 102));
 		frmConnectionRequests.setBounds(100, 100, 200, 244);
-		frmConnectionRequests.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmConnectionRequests.getContentPane().setLayout(null);
 		
 		JList list = new JList();
-		list.setBounds(10, 11, 163, 147);
+		list.setBounds(10, 11, 172, 145);
 		frmConnectionRequests.getContentPane().add(list);
 		
-		BufferedImage buttonIcon1 = ImageIO.read(new File("Buttons_backgrounds/ok_48px.png"));
-		JButton btnNewButton = new JButton(new ImageIcon(buttonIcon1));
-		btnNewButton.setBounds(41, 160, 39, 34);
-		btnNewButton.setBorder(BorderFactory.createEmptyBorder());
-		btnNewButton.setContentAreaFilled(false);
-		frmConnectionRequests.getContentPane().add(btnNewButton);
-		btnNewButton.addActionListener(new ActionListener() {
+		Icon accept = new ImageIcon("Buttons_backgrounds/accept_32px.png");
+		JButton btnNewButton_2 = new JButton(accept);
+		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("All good");
 			}
 		});
+		btnNewButton_2.setBounds(10, 165, 75, 36);
+		frmConnectionRequests.getContentPane().add(btnNewButton_2);
 		
-		BufferedImage buttonIcon2 = ImageIO.read(new File("Buttons_backgrounds/cancel_48px.png"));
-		JButton btnNewButton_1 = new JButton(new ImageIcon(buttonIcon2));
-		btnNewButton_1.setBounds(105, 160, 39, 34);
-		btnNewButton_1.setBorder(BorderFactory.createEmptyBorder());
-		btnNewButton_1.setContentAreaFilled(false);
-		frmConnectionRequests.getContentPane().add(btnNewButton_1);
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("And there all good");
-			}
-		});
+		Icon decline = new ImageIcon("Buttons_backgrounds/decline_32px.png");
+		JButton btnNewButton_2_1 = new JButton(decline);
+		btnNewButton_2_1.setBounds(107, 165, 75, 36);
+		frmConnectionRequests.getContentPane().add(btnNewButton_2_1);
+		
 		frmConnectionRequests.setVisible(true); //den anoige diaforetika
 	}
 

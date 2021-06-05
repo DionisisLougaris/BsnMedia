@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.JList;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -55,23 +56,15 @@ public class NewMessagesGUI {
 		frmNewMessages.setResizable(false);
 		frmNewMessages.setTitle("New Messages");
 		frmNewMessages.setBounds(100, 100, 200, 244);
-		frmNewMessages.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmNewMessages.getContentPane().setLayout(null);
 		
 		JList list = new JList();
-		list.setBounds(10, 11, 163, 147);
+		list.setBounds(10, 11, 172, 138);
 		frmNewMessages.getContentPane().add(list);
 		
-		BufferedImage buttonIcon = ImageIO.read(new File("Buttons_backgrounds/open_in_popup_48px.png"));
-		JButton btnNewButton = new JButton(new ImageIcon(buttonIcon));
-		btnNewButton.setBorder(BorderFactory.createEmptyBorder());
-		btnNewButton.setContentAreaFilled(false);
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("All good");
-			}
-		});
-		btnNewButton.setBounds(66, 162, 41, 42);
+		Icon open = new ImageIcon("Buttons_backgrounds/open_32px.png");
+		JButton btnNewButton = new JButton(open);
+		btnNewButton.setBounds(70, 156, 53, 40);
 		frmNewMessages.getContentPane().add(btnNewButton);
 		frmNewMessages.setVisible(true);
 	}

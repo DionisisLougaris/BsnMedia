@@ -3,6 +3,8 @@ package GUI;
 import java.awt.EventQueue;
 import java.awt.Font;
 
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -43,7 +45,6 @@ public class GroupChatGUI {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 685, 840);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		JButton btnNewButton = new JButton("Go to User Profile");
@@ -73,11 +74,13 @@ public class GroupChatGUI {
 		panel_2.setBounds(12, 519, 532, 120);
 		panel.add(panel_2);
 		
-		JButton btnNewButton_1_1_1 = new JButton("Send");
+		Icon send = new ImageIcon("Buttons_backgrounds/email_send_32px.png");
+		JButton btnNewButton_1_1_1 = new JButton(send);
 		btnNewButton_1_1_1.setBounds(572, 601, 46, 38);
 		panel.add(btnNewButton_1_1_1);
 		
-		JButton btnNewButton_1_1 = new JButton("Help");
+		Icon help = new ImageIcon("Buttons_backgrounds/customer_support_40px.png");
+		JButton btnNewButton_1_1 = new JButton(help);
 		btnNewButton_1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}

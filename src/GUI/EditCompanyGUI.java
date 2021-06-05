@@ -55,7 +55,7 @@ public class EditCompanyGUI {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 792, 602);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 		frame.getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();

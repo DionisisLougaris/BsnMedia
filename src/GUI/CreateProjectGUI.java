@@ -49,7 +49,6 @@ public class CreateProjectGUI {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 535, 704);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		textField = new JTextField();

@@ -5,6 +5,8 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -53,6 +55,7 @@ public class BackendProfileChiefGUI {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 893, 1020);
+		frame.setLocation(500, 0);
 		frame.setVisible(true);
 		frame.setResizable(false);
 		frame.getContentPane().setLayout(null);
@@ -71,12 +74,13 @@ public class BackendProfileChiefGUI {
 		lblNewLabel.setBounds(51, 66, 72, 16);
 		panel_1.add(lblNewLabel);
 		
-		JButton btnNewButton = new JButton("icon");
+		Icon search = new ImageIcon("Buttons_backgrounds/search_30px.png");
+		JButton btnNewButton = new JButton(search);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		btnNewButton.setBounds(613, 27, 55, 30);
+		btnNewButton.setBounds(613, 13, 55, 44);
 		panel.add(btnNewButton);
 		
 		JTextArea textArea = new JTextArea();
@@ -117,7 +121,8 @@ public class BackendProfileChiefGUI {
 		lblNewLabel_8.setBounds(174, 314, 56, 16);
 		panel.add(lblNewLabel_8);
 		
-		JButton btnNewButton_1_1 = new JButton("Help");
+		Icon help = new ImageIcon("Buttons_backgrounds/customer_support_40px.png");
+		JButton btnNewButton_1_1 = new JButton(help);
 		btnNewButton_1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -130,15 +135,18 @@ public class BackendProfileChiefGUI {
 		textField_1.setBounds(333, 27, 268, 30);
 		panel.add(textField_1);
 		
-		JButton btnNewButton_1 = new JButton("friend request icon");
+		Icon friends = new ImageIcon("Buttons_backgrounds/friends_30px.png");
+		JButton btnNewButton_1 = new JButton(friends);
 		btnNewButton_1.setBounds(714, 27, 37, 30);
 		panel.add(btnNewButton_1);
 		
-		JButton btnNewButton_1_2 = new JButton("message icon");
+		Icon messages = new ImageIcon("Buttons_backgrounds/messages_Messages_30px.png");
+		JButton btnNewButton_1_2 = new JButton(messages);
 		btnNewButton_1_2.setBounds(763, 27, 37, 30);
 		panel.add(btnNewButton_1_2);
 		
-		JButton btnNewButton_1_3 = new JButton("bell icon");
+		Icon bell = new ImageIcon("Buttons_backgrounds/bell_30px.png");
+		JButton btnNewButton_1_3 = new JButton(bell);
 		btnNewButton_1_3.setBounds(814, 27, 37, 30);
 		panel.add(btnNewButton_1_3);
 		
@@ -207,7 +215,8 @@ public class BackendProfileChiefGUI {
 		btnNewButton_6.setBounds(221, 567, 116, 25);
 		panel.add(btnNewButton_6);
 		
-		JButton btnNewButton_7 = new JButton("Disconnect");
+		Icon logout = new ImageIcon("Buttons_backgrounds/exit_35px.png");
+		JButton btnNewButton_7 = new JButton(logout);
 		btnNewButton_7.setBounds(754, 98, 97, 25);
 		panel.add(btnNewButton_7);
 		
@@ -215,15 +224,16 @@ public class BackendProfileChiefGUI {
 		btnNewButton_2_1.setBounds(255, 310, 116, 25);
 		panel.add(btnNewButton_2_1);
 		
-		JButton btnNewButton_8 = new JButton("Edit");
+		Icon edit = new ImageIcon("Buttons_backgrounds/edit_20px.png");
+		JButton btnNewButton_8 = new JButton(edit);
 		btnNewButton_8.setBounds(44, 327, 55, 25);
 		panel.add(btnNewButton_8);
 		
-		JButton btnNewButton_8_1 = new JButton("Edit");
+		JButton btnNewButton_8_1 = new JButton(edit);
 		btnNewButton_8_1.setBounds(111, 327, 55, 25);
 		panel.add(btnNewButton_8_1);
 		
-		JButton btnNewButton_8_2 = new JButton("Edit");
+		JButton btnNewButton_8_2 = new JButton(edit);
 		btnNewButton_8_2.setBounds(174, 327, 55, 25);
 		panel.add(btnNewButton_8_2);
 		
@@ -236,5 +246,9 @@ public class BackendProfileChiefGUI {
 		textField_1.setColumns(10);
 		textField_1.setBounds(326, 27, 268, 30);
 		panel.add(textField_1);
+		
+		JLabel lblNewLabel_3_1 = new JLabel("logo");
+		lblNewLabel_3_1.setBounds(12, 917, 56, 43);
+		panel.add(lblNewLabel_3_1);
 	}
 }

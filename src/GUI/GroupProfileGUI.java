@@ -12,6 +12,9 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Component;
 import javax.swing.Box;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+
 import java.awt.Color;
 import java.awt.SystemColor;
 import javax.swing.JSlider;
@@ -51,7 +54,7 @@ public class GroupProfileGUI {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 893, 1020);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setLocation(500, 0);
 		frame.getContentPane().setLayout(null);
 		
 		textField = new JTextField();
@@ -129,11 +132,13 @@ public class GroupProfileGUI {
 		btnNewButton_1_1.setBounds(38, 20, 62, 53);
 		frame.getContentPane().add(btnNewButton_1_1);
 		
-		JButton btnNewButton_1 = new JButton("icon");
-		btnNewButton_1.setBounds(744, 34, 55, 25);
+		Icon search = new ImageIcon("Buttons_backgrounds/search_30px.png");
+		JButton btnNewButton_1 = new JButton(search);
+		btnNewButton_1.setBounds(744, 20, 55, 39);
 		frame.getContentPane().add(btnNewButton_1);
 		
-		JButton btnNewButton_1_1_1 = new JButton("Help");
+		Icon help = new ImageIcon("Buttons_backgrounds/customer_support_40px.png");
+		JButton btnNewButton_1_1_1 = new JButton(help);
 		btnNewButton_1_1_1.setBounds(817, 922, 46, 38);
 		frame.getContentPane().add(btnNewButton_1_1_1);
 	}

@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Color;
@@ -53,24 +54,17 @@ public class NotificationsGUI {
 		frmNotifications.setResizable(false);
 		frmNotifications.getContentPane().setBackground(new Color(255, 153, 102));
 		frmNotifications.setBounds(100, 100, 200, 244);
-		frmNotifications.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmNotifications.getContentPane().setLayout(null);
 		
 		JList list = new JList();
-		list.setBounds(10, 11, 163, 147);
+		list.setBounds(10, 11, 174, 134);
 		frmNotifications.getContentPane().add(list);
 		
-		BufferedImage buttonIcon = ImageIO.read(new File("Buttons_backgrounds/search_property_32px.png"));
-		JButton btnNewButton = new JButton(new ImageIcon(buttonIcon));
-		btnNewButton.setBounds(142, 158, 42, 36);
-		btnNewButton.setBorder(BorderFactory.createEmptyBorder());
-		btnNewButton.setContentAreaFilled(false);
+		Icon takealook = new ImageIcon("Buttons_backgrounds/takealook_32px.png");
+		JButton btnNewButton = new JButton(takealook);
+		btnNewButton.setBounds(66, 158, 66, 38);
 		frmNotifications.getContentPane().add(btnNewButton);
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("All good");
-			}
-		});
+		
 		frmNotifications.setVisible(true); //den anoige diaforetika
 	}
 

@@ -5,6 +5,8 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -51,12 +53,13 @@ public class BackendProfileBossGUI {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 893, 1020);
+		frame.setLocation(500, 0);
 		frame.setVisible(true);
 		frame.setResizable(false);
 		frame.getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 0, 875, 973);
+		panel.setBounds(0, 0, 887, 985);
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 		
@@ -69,12 +72,13 @@ public class BackendProfileBossGUI {
 		lblNewLabel.setBounds(51, 66, 72, 16);
 		panel_1.add(lblNewLabel);
 		
-		JButton btnNewButton = new JButton("icon");
+		Icon search = new ImageIcon("Buttons_backgrounds/search_30px.png");
+		JButton btnNewButton = new JButton(search);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		btnNewButton.setBounds(613, 27, 55, 30);
+		btnNewButton.setBounds(613, 13, 55, 44);
 		panel.add(btnNewButton);
 		
 		JTextArea textArea = new JTextArea();
@@ -94,7 +98,8 @@ public class BackendProfileBossGUI {
 		lblNewLabel_4.setBounds(69, 221, 125, 16);
 		panel.add(lblNewLabel_4);
 		
-		JButton btnNewButton_1_1 = new JButton("Help");
+		Icon help = new ImageIcon("Buttons_backgrounds/customer_support_40px.png");
+		JButton btnNewButton_1_1 = new JButton(help);
 		btnNewButton_1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -102,16 +107,18 @@ public class BackendProfileBossGUI {
 		btnNewButton_1_1.setBounds(824, 929, 46, 38);
 		panel.add(btnNewButton_1_1);
 
-		
-		JButton btnNewButton_1 = new JButton("friend request icon");
+		Icon friends = new ImageIcon("Buttons_backgrounds/friends_30px.png");
+		JButton btnNewButton_1 = new JButton(friends);
 		btnNewButton_1.setBounds(714, 27, 37, 30);
 		panel.add(btnNewButton_1);
 		
-		JButton btnNewButton_1_2 = new JButton("message icon");
+		Icon messages = new ImageIcon("Buttons_backgrounds/Messages_30px.png");
+		JButton btnNewButton_1_2 = new JButton(messages);
 		btnNewButton_1_2.setBounds(763, 27, 37, 30);
 		panel.add(btnNewButton_1_2);
 		
-		JButton btnNewButton_1_3 = new JButton("bell icon");
+		Icon bell = new ImageIcon("Buttons_backgrounds/bell_30px.png");
+		JButton btnNewButton_1_3 = new JButton(bell);
 		btnNewButton_1_3.setBounds(814, 27, 37, 30);
 		panel.add(btnNewButton_1_3);
 		
@@ -159,11 +166,6 @@ public class BackendProfileBossGUI {
 		btnNewButton_3.setBounds(754, 675, 97, 25);
 		panel.add(btnNewButton_3);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(661, 709, 64, 25);
-		panel.add(textField);
-		
 		JButton btnNewButton_4 = new JButton("Check profile");
 		btnNewButton_4.setBounds(49, 567, 97, 25);
 		panel.add(btnNewButton_4);
@@ -176,24 +178,23 @@ public class BackendProfileBossGUI {
 		btnNewButton_6.setBounds(221, 567, 116, 25);
 		panel.add(btnNewButton_6);
 		
-		JButton btnNewButton_7 = new JButton("Disconnect");
-		btnNewButton_7.setBounds(754, 98, 97, 25);
+		Icon logout = new ImageIcon("Buttons_backgrounds/exit_35px.png");
+		JButton btnNewButton_7 = new JButton(logout);
+		btnNewButton_7.setBounds(784, 98, 67, 38);
 		panel.add(btnNewButton_7);
 		
 		JButton btnNewButton_2_1 = new JButton("Edit Company Info");
 		btnNewButton_2_1.setBounds(216, 282, 155, 25);
 		panel.add(btnNewButton_2_1);
-		
-		textField = new JTextField();
-		textField.setBounds(661, 709, 63, 22);
-		panel.add(textField);
-		textField.setColumns(10);
 
 		
 		textField = new JTextField();
 		textField.setColumns(10);
 		textField.setBounds(334, 27, 268, 30);
 		panel.add(textField);
+		
+		JLabel lblNewLabel_3 = new JLabel("logo");
+		lblNewLabel_3.setBounds(12, 927, 56, 43);
+		panel.add(lblNewLabel_3);
 	}
-
 }

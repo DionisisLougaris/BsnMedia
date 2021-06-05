@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.imageio.ImageIO;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -54,7 +55,7 @@ public class FrontEndProfileGUI {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 893, 1020);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setLocation(500, 0);
 		frame.getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
@@ -76,8 +77,9 @@ public class FrontEndProfileGUI {
 		panel.add(textField);
 		textField.setColumns(10);
 		
-		JButton btnNewButton = new JButton("icon");
-		btnNewButton.setBounds(766, 41, 55, 25);
+		Icon search = new ImageIcon("Buttons_backgrounds/search_30px.png");
+		JButton btnNewButton = new JButton(search);
+		btnNewButton.setBounds(766, 28, 55, 38);
 		panel.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("logo");
@@ -169,22 +171,6 @@ public class FrontEndProfileGUI {
 		lblNewLabel_12.setBounds(130, 510, 56, 16);
 		panel.add(lblNewLabel_12);
 		
-		JButton btnNewButton_5 = new JButton("telephone icon");
-		btnNewButton_5.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnNewButton_5.setBounds(85, 440, 22, 21);
-		panel.add(btnNewButton_5);
-		
-		JButton btnNewButton_5_1 = new JButton("adress icon");
-		btnNewButton_5_1.setBounds(85, 474, 22, 21);
-		panel.add(btnNewButton_5_1);
-		
-		JButton btnNewButton_5_2 = new JButton("birthday icon");
-		btnNewButton_5_2.setBounds(85, 508, 22, 21);
-		panel.add(btnNewButton_5_2);
-		
 		JLabel lblNewLabel_13 = new JLabel("Mutual connections");
 		lblNewLabel_13.setBounds(712, 377, 109, 16);
 		panel.add(lblNewLabel_13);
@@ -201,7 +187,8 @@ public class FrontEndProfileGUI {
 		scrollBar_1.setBounds(814, 561, 28, 336);
 		panel.add(scrollBar_1);
 		
-		JButton btnNewButton_1_1 = new JButton("Help");
+		Icon help = new ImageIcon("Buttons_backgrounds/customer_support_40px.png");
+		JButton btnNewButton_1_1 = new JButton(help);
 		btnNewButton_1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -209,12 +196,20 @@ public class FrontEndProfileGUI {
 		btnNewButton_1_1.setBounds(824, 929, 46, 38);
 		panel.add(btnNewButton_1_1);
 		
-		JButton btnNewButton_5_3 = new JButton("email icon");
-		btnNewButton_5_3.setBounds(85, 406, 22, 21);
-		panel.add(btnNewButton_5_3);
-		btnNewButton_5_3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
+		JLabel lblNewLabel_14 = new JLabel(new ImageIcon("label_backgrounds/email_20px.png"));
+		lblNewLabel_14.setBounds(85, 409, 28, 25);
+		panel.add(lblNewLabel_14);
+		
+		JLabel lblNewLabel_14_1 = new JLabel(new ImageIcon("label_backgrounds/telephone_20px.png"));
+		lblNewLabel_14_1.setBounds(85, 438, 28, 25);
+		panel.add(lblNewLabel_14_1);
+		
+		JLabel lblNewLabel_14_2 = new JLabel(new ImageIcon("label_backgrounds/address_20px.png"));
+		lblNewLabel_14_2.setBounds(85, 467, 28, 25);
+		panel.add(lblNewLabel_14_2);
+		
+		JLabel lblNewLabel_14_3 = new JLabel(new ImageIcon("label_backgrounds/birthday_cake_20px.png"));
+		lblNewLabel_14_3.setBounds(85, 501, 28, 25);
+		panel.add(lblNewLabel_14_3);
 	}
 }
