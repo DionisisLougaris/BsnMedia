@@ -1,12 +1,10 @@
 package GUI;
 
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JTextField;
-
-import entities.Company;
-
+import entities.*;
+import java.awt.*;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -16,17 +14,23 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Random;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.Dimension;
-
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
 import javax.swing.JSeparator;
 import javax.swing.border.LineBorder;
+
+
+
 
 public class ForgotPasswordGUI {
 
@@ -34,9 +38,8 @@ public class ForgotPasswordGUI {
 	private JTextField txtUsername;
 	private JTextField txtEmail;
 	private JTextField txtCode;
-	private JTextField txtNewPassword;
-	private JTextField txtConfirmPassword;
-	private JButton btnNewButton_4;
+	private JPasswordField txtNewPassword;
+	private JPasswordField txtConfirmPassword;
 	private Company theCompany;
 	private JPanel panel;
 	private JLabel lblNewLabel;
@@ -51,31 +54,20 @@ public class ForgotPasswordGUI {
 	private JLabel lblNewLabel_4;
 	private JLabel lblNewLabel_5;
 	private JLabel lblNewLabel_6;
+	private JButton btnNewButton;
+	private JButton btnNewButton_1;
+	private JButton btnNewButton_2;
+	private JButton btnNewButton_3;
+	
+	private User userToRetrieve = null;
+	private String recoveryCode = "";
+	private boolean correctCodeInput = false;
 
-	/**
-	 * Launch the application.
-	 *
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ForgotPasswordGUI window = new ForgotPasswordGUI();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-	 * Create the application.
-	 */
-	public ForgotPasswordGUI(Company aCompany) {
+
+	public ForgotPasswordGUI(Company aCompany){
 		initialize(aCompany);
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
 	private void initialize(Company aCompany) {
 		frmForgotPassword = new JFrame();
 		frmForgotPassword.setTitle("Forgot Password?");
@@ -122,7 +114,7 @@ public class ForgotPasswordGUI {
 		frmForgotPassword.getContentPane().add(txtEmail);
 		txtEmail.setColumns(10);
 		
-		JButton btnNewButton = new JButton("Send Verification Code");
+		btnNewButton = new JButton("Send Verification Code");
 		btnNewButton.setForeground(new Color(255, 255, 255));
 		btnNewButton.setBackground(new Color(255, 153, 102));
 		btnNewButton.setBorder(new LineBorder(new Color(255, 255, 255)));
@@ -145,7 +137,7 @@ public class ForgotPasswordGUI {
 		frmForgotPassword.getContentPane().add(txtCode);
 		txtCode.setColumns(10);
 		
-		JButton btnNewButton_1 = new JButton("Check");
+		btnNewButton_1 = new JButton("Check");
 		btnNewButton_1.setForeground(new Color(255, 255, 255));
 		btnNewButton_1.setBackground(new Color(0, 153, 51));
 		btnNewButton_1.setBorder(new LineBorder(new Color(255, 255, 255)));
@@ -156,11 +148,11 @@ public class ForgotPasswordGUI {
 		btnNewButton_1.setBounds(430, 148, 81, 22);
 		frmForgotPassword.getContentPane().add(btnNewButton_1);
 		
-		txtNewPassword = new JTextField();
+		txtNewPassword = new JPasswordField();
 		txtNewPassword.setBorder(null);
 		txtNewPassword.setBackground(new Color(255, 153, 102));
 		txtNewPassword.setForeground(new Color(255, 255, 255));
-		txtNewPassword.setText("New Password");
+		txtNewPassword.setText("Password");
 		//When the mouse click on the TextField, the text removed
 		txtNewPassword.addMouseListener(new MouseAdapter(){
             @Override
@@ -172,11 +164,11 @@ public class ForgotPasswordGUI {
 		frmForgotPassword.getContentPane().add(txtNewPassword);
 		txtNewPassword.setColumns(10);
 		
-		txtConfirmPassword = new JTextField();
+		txtConfirmPassword = new JPasswordField();
 		txtConfirmPassword.setBorder(null);
 		txtConfirmPassword.setBackground(new Color(255, 153, 102));
 		txtConfirmPassword.setForeground(new Color(255, 255, 255));
-		txtConfirmPassword.setText("Confirm Password");
+		txtConfirmPassword.setText("Password");
 		//When the mouse click on the TextField, the text removed
 		txtConfirmPassword.addMouseListener(new MouseAdapter(){
             @Override
@@ -188,26 +180,19 @@ public class ForgotPasswordGUI {
 		frmForgotPassword.getContentPane().add(txtConfirmPassword);
 		txtConfirmPassword.setColumns(10);
 		
-		JButton btnNewButton_2 = new JButton("Done");
+		btnNewButton_2 = new JButton("Done");
 		btnNewButton_2.setForeground(new Color(255, 255, 255));
 		btnNewButton_2.setBackground(new Color(255, 153, 102));
 		btnNewButton_2.setBorder(new LineBorder(new Color(255, 255, 255)));
 		btnNewButton_2.setBounds(400, 271, 81, 25);
 		frmForgotPassword.getContentPane().add(btnNewButton_2);
 		
-		JButton btnNewButton_3 = new JButton("Log In");
+		btnNewButton_3 = new JButton("Log In");
 		btnNewButton_3.setForeground(new Color(255, 255, 255));
 		btnNewButton_3.setBackground(new Color(255, 153, 102));
 		btnNewButton_3.setBorder(new LineBorder(new Color(255, 255, 255)));
-		btnNewButton_3.setBounds(491, 309, 97, 25);
+		btnNewButton_3.setBounds(477, 336, 97, 25);
 		frmForgotPassword.getContentPane().add(btnNewButton_3);
-		
-		btnNewButton_4 = new JButton("Help");
-		btnNewButton_4.setForeground(new Color(255, 255, 255));
-		btnNewButton_4.setBackground(new Color(255, 153, 102));
-		btnNewButton_4.setBorder(new LineBorder(new Color(255, 255, 255)));
-		btnNewButton_4.setBounds(491, 336, 97, 25);
-		frmForgotPassword.getContentPane().add(btnNewButton_4);
 		
 		panel = new JPanel();
 		panel.setBackground(new Color(255, 255, 255));
@@ -282,6 +267,92 @@ public class ForgotPasswordGUI {
 		lblNewLabel_6.setIcon(new ImageIcon("label_backgrounds/verified_account_32px.png"));
 		lblNewLabel_6.setBounds(343, 223, 27, 22);
 		frmForgotPassword.getContentPane().add(lblNewLabel_6);
+		
+		ButtonListener listener = new ButtonListener();
+		btnNewButton.addActionListener(listener);
+		btnNewButton_1.addActionListener(listener);
+		btnNewButton_2.addActionListener(listener);
+		btnNewButton_3.addActionListener(listener);
+	}
+	
+	
+	class ButtonListener implements ActionListener {
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			
+			if(e.getSource().equals(btnNewButton)) {
+				
+				String inputUsername = txtUsername.getText();
+				String inputEmail = txtEmail.getText();
+				
+				Random rand = new Random();
+				recoveryCode = "";
+				int upperbound = 10;
+				//Generate an 8-digit code to be sent for user confirmation
+				for(int i=0; i<8; i++ ) {
+					int int_random = rand.nextInt(upperbound);
+					recoveryCode = recoveryCode + int_random;
+				}
+				
+				//The account with this information may be recovered
+				Account retrievedAccount = new Account(inputUsername, inputEmail, theCompany);
+				
+				userToRetrieve = retrievedAccount.forgotPassword(inputUsername, inputEmail, "The Recovery Code is: "+recoveryCode);
+				
+				if (userToRetrieve == null) {
+					String message = "The information you provided does not correspond to a user of the system.";
+					JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+					        JOptionPane.ERROR_MESSAGE);
+				}else {
+					String message = "Check your Email! A confirmation code has been sent to you!";
+					JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+					        JOptionPane.INFORMATION_MESSAGE);
+					
+				}
+			}else if (e.getSource().equals(btnNewButton_1)) {
+				if (userToRetrieve == null ) {
+					String message = "Fill in or check your details in the Username and Email fields and select to recieve the Recovery Code!";
+					JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+					        JOptionPane.ERROR_MESSAGE);
+				}else{
+					String recoveryCodeInput = txtCode.getText();
+					
+					if (recoveryCodeInput.equals(recoveryCode)) {
+						correctCodeInput = true;
+						String message = "Recovery Code accepted! You can recover your account!";
+						JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+						        JOptionPane.INFORMATION_MESSAGE);
+						
+					}else {
+						String message = "The recovery code we sent you is not the same as the one given!";
+						JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+						        JOptionPane.ERROR_MESSAGE);
+					}
+				}
+			}else if (e.getSource().equals(btnNewButton_2)) {
+				if (userToRetrieve == null ) {
+					String message = "Fill in or check your details in the Username and Email fields and select to recieve the Recovery Code!";
+					JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+					        JOptionPane.ERROR_MESSAGE);
+				}else if (!correctCodeInput) {
+					String message = "You must first fill in the recovery code correctly!";
+					JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+					        JOptionPane.ERROR_MESSAGE);
+				}else {
+					char [] passwordCharArray = txtNewPassword.getPassword();
+					String newPasswordInput = String.valueOf(passwordCharArray);
+					
+					char [] confirmedPasswordCharArray = txtConfirmPassword.getPassword();
+					String confirmedPasswordInput = String.valueOf(confirmedPasswordCharArray);
+					
+					userToRetrieve.getMyAccount().getMyPassword().newPassword(newPasswordInput, confirmedPasswordInput, userToRetrieve);
+				}
+			}else {
+				frmForgotPassword.setVisible(false);
+			}
+		}
 	}
 
 }

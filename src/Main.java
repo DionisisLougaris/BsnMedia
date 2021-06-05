@@ -19,7 +19,7 @@ public class Main {
 		Employee first2 = new Employee("Dionisis", "Lougaris", "6971657008", "Valtetsiou", "male", "19/12/2001", "Programmer", theAccount2);
 		
 		Password thePassword3 = new Password("12345678", "panos", "Panos", "Maxairas");
-		Account theAccount3 = new Account("panos", "panos@gmail.com", theCompany, thePassword3);
+		Account theAccount3 = new Account("panos", "ics20044@uom.edu.gr", theCompany, thePassword3);
 		Employee first3 = new Employee("Panos", "Maxairas", "6971657008", "Valtetsiou", "male", "19/12/2001", "Programmer", theAccount3);
 		
 		Password thePassword4 = new Password("12345678", "Eleni", "Eleni", "Maz");

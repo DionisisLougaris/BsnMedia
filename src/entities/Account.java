@@ -38,6 +38,15 @@ public class Account implements Serializable{
 	}
 	
 	
+	//Constructor for Account Recovery
+	public Account(String username, String Email, Company myCompany) {
+		
+		this.myCompany = myCompany;
+		this.username = username;
+		this.email = Email;
+	}
+	
+	
 	/*This is a method that goes through the list of Users of the company checking if everyone's email 
 	 * coincides with the potential email of type String that is taken as a parameter. 
 	 * Returns a reasonable value (boolean*/
@@ -54,13 +63,12 @@ public class Account implements Serializable{
 	
 	/*This is a method that changes or not a user's password in case he has forgotten the previous one.
 	 If all checks are finished without any error the creators of application sends email to user.*/
-	public User forgotPassword (String inputUsername, String inputEmail, String desiredPassword) {
+	public User forgotPassword (String inputUsername, String inputEmail, String textForEmailBody) {
 		
-	  String textForEmailBody = "";
 	  String [] recievers = new String[1];
 	  recievers[0] = inputEmail;
 	  
-	  if(myCompany.isCompanyMember(inputUsername) != null)
+	  if( this.myCompany.isCompanyMember(inputUsername) != null)
 		{
 			if(!emailAvailability(inputEmail))
 			{

@@ -235,14 +235,12 @@ public class WelcomeScreen_GUI {
 				char [] passwordCharArray = pwdPassword.getPassword();
 				String password = String.valueOf(passwordCharArray);
 				
-				System.out.println(username+" "+password);
-				
 				if (theCompany.loginAttempt(username, password)) {
 					frmWelcomeToBsn.setVisible(false);
 				}else {
 					String message = "Wrong username or password!";
 					JOptionPane.showMessageDialog(new JFrame(), message, "Message",
-					        JOptionPane.INFORMATION_MESSAGE);
+					        JOptionPane.ERROR_MESSAGE);
 				}
 			}else if (e.getSource().equals(btnSingUp)) {
 				

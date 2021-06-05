@@ -47,13 +47,13 @@ public class Password implements Serializable
 			else {
 				String message = "The code and the confirmed code are not the same!";
 				JOptionPane.showMessageDialog(new JFrame(), message, "Message",
-				        JOptionPane.INFORMATION_MESSAGE);
+				        JOptionPane.ERROR_MESSAGE);
 			}
 		}
 		else {
 			String message = "Password is weak! Try a stronger one";
 			JOptionPane.showMessageDialog(new JFrame(), message, "Message",
-			        JOptionPane.INFORMATION_MESSAGE);
+			        JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	
