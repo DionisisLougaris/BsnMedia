@@ -11,6 +11,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Component;
+import java.awt.Cursor;
+
 import javax.swing.Box;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -53,12 +55,14 @@ public class GroupProfileGUI {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.getContentPane().setBackground(Color.WHITE);
 		frame.setBounds(100, 100, 893, 1020);
 		frame.setLocation(500, 0);
 		frame.getContentPane().setLayout(null);
 		
 		textField = new JTextField();
-		textField.setBounds(440, 35, 286, 22);
+		textField.setBackground(new Color(255, 250, 240));
+		textField.setBounds(401, 33, 286, 26);
 		frame.getContentPane().add(textField);
 		textField.setColumns(10);
 		
@@ -84,10 +88,15 @@ public class GroupProfileGUI {
 		frame.getContentPane().add(lblNewLabel_4);
 		
 		JSlider slider = new JSlider();
+		slider.setBackground(Color.WHITE);
 		slider.setBounds(240, 350, 200, 26);
 		frame.getContentPane().add(slider);
 		
 		JButton btnNewButton_2 = new JButton("Submit");
+		btnNewButton_2.setContentAreaFilled(false); 
+		btnNewButton_2.setFocusPainted(false); 
+		btnNewButton_2.setOpaque(false);
+		btnNewButton_2.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
@@ -129,16 +138,40 @@ public class GroupProfileGUI {
 		frame.getContentPane().add(lblNewLabel_10);
 		
 		JButton btnNewButton_1_1 = new JButton("logo");
+		btnNewButton_1_1.setContentAreaFilled(false); 
+		btnNewButton_1_1.setFocusPainted(false); 
+		btnNewButton_1_1.setOpaque(false);
+		btnNewButton_1_1.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		btnNewButton_1_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnNewButton_1_1.setBounds(38, 20, 62, 53);
 		frame.getContentPane().add(btnNewButton_1_1);
 		
 		Icon search = new ImageIcon("Buttons_backgrounds/search_30px.png");
 		JButton btnNewButton_1 = new JButton(search);
-		btnNewButton_1.setBounds(744, 20, 55, 39);
+		btnNewButton_1.setContentAreaFilled(false); 
+		btnNewButton_1.setFocusPainted(false); 
+		btnNewButton_1.setOpaque(false);
+		btnNewButton_1.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnNewButton_1.setBounds(696, 33, 55, 39);
 		frame.getContentPane().add(btnNewButton_1);
 		
 		Icon help = new ImageIcon("Buttons_backgrounds/customer_support_40px.png");
 		JButton btnNewButton_1_1_1 = new JButton(help);
+		btnNewButton_1_1_1.setContentAreaFilled(false); 
+		btnNewButton_1_1_1.setFocusPainted(false); 
+		btnNewButton_1_1_1.setOpaque(false);
+		btnNewButton_1_1_1.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		btnNewButton_1_1_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnNewButton_1_1_1.setBounds(817, 922, 46, 38);
 		frame.getContentPane().add(btnNewButton_1_1_1);
 	}

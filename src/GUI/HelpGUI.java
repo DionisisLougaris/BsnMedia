@@ -98,6 +98,14 @@ public class HelpGUI {
 		});
 		
 		JButton btnNewButton_1 = new JButton("logo");
+		btnNewButton_1.setContentAreaFilled(false); 
+		btnNewButton_1.setFocusPainted(false); 
+		btnNewButton_1.setOpaque(false);
+		btnNewButton_1.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnNewButton_1.setBounds(34, 26, 73, 65);
 		panel.add(btnNewButton_1);
 		
@@ -243,6 +251,14 @@ public class HelpGUI {
 		panel_1.add(lblNewLabel_17);
 		
 		JButton btnNewButton_2 = new JButton("Submit");
+		btnNewButton_2.setContentAreaFilled(false); 
+		btnNewButton_2.setFocusPainted(false); 
+		btnNewButton_2.setOpaque(false);
+		btnNewButton_2.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnNewButton_2.setBounds(243, 528, 97, 25);
 		panel_1.add(btnNewButton_2);
 		
