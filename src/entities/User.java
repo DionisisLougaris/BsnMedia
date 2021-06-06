@@ -346,5 +346,7 @@ abstract public class User implements Serializable{
 	public TreeSet<Post> getListOfPosts() {
 		return listOfPosts;
 	}
+	
+	abstract public ArrayList<Group> getGroups();
 		
 }

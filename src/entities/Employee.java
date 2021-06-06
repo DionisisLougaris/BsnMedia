@@ -113,5 +113,9 @@ public class Employee extends User{
 			        JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
+	
+	public ArrayList<Group> getGroups() {
+		return listOfGroups;
+	}
 
 }

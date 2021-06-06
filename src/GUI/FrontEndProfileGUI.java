@@ -7,6 +7,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+
+import entities.User;
+
 import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -25,6 +28,7 @@ public class FrontEndProfileGUI {
 
 	private JFrame frame;
 	private JTextField textField;
+	private static User user;
 
 	/**
 	 * Launch the application.
@@ -33,7 +37,7 @@ public class FrontEndProfileGUI {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					FrontEndProfileGUI window = new FrontEndProfileGUI();
+					FrontEndProfileGUI window = new FrontEndProfileGUI(user);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -45,7 +49,8 @@ public class FrontEndProfileGUI {
 	/**
 	 * Create the application.
 	 */
-	public FrontEndProfileGUI() {
+	public FrontEndProfileGUI(User aUser) {
+		user = aUser;
 		initialize();
 	}
 

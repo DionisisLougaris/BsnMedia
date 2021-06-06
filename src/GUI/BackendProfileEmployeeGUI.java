@@ -5,7 +5,9 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.TreeSet;
 
+import javax.swing.ButtonGroup;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -13,14 +15,16 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import entities.Connection;
+import entities.Employee;
+import entities.Post;
 import entities.User;
-
-import javax.swing.JRadioButton;
 
 public class BackendProfileEmployeeGUI {
 
@@ -30,14 +34,17 @@ public class BackendProfileEmployeeGUI {
 	private JPanel panel, picturePanel;
 	private JLabel lblNewLabel;
 	private JButton searchButton, helpButton, requestsButton, messagesButton, notifsButton, editAccountButton, postButton, checkprofileButton, sendMessageButton, sendRequestButton, disconnectButton;
-	private JTextArea postsArea;
 	private JLabel emailLabel;
 	private JLabel groupALabel, groupBLabel, groupCLabel;
-	private JList connectionsList, suggestedList; // xreiazetai na kanoume to suggested connections
-	private JTextArea writePostArea;
-	private JRadioButton connectionsRadio, PublicRadio, GroupRadio;
-	private static User user; // static??
+	private JList connectionsList, suggestedList, postList; // xreiazetai na kanoume to suggested connections
+	private JTextArea writePostArea, postArea;
+	private JRadioButton connectionsRadio, PublicRadio, GroupARadio, GroupBRadio, GroupCRadio;
+	private static Employee employee; // static??
 	private JLabel lblNewLabel_1;
+	TreeSet<User> suggestedListConnections = new TreeSet<>();
+	TreeSet<Post> allPosts = new TreeSet<>();
+	private JScrollPane scrollPane;
+	ButtonGroup radioGroup;
 	
 
 	/**
@@ -48,7 +55,7 @@ public class BackendProfileEmployeeGUI {
 			public void run() {
 				try {
 					// oxi sigourh gia thn parametro prepei na thn doume sto testing
-					BackendProfileEmployeeGUI window = new BackendProfileEmployeeGUI(user);
+					BackendProfileEmployeeGUI window = new BackendProfileEmployeeGUI(employee);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -61,7 +68,7 @@ public class BackendProfileEmployeeGUI {
 	 * Create the application.
 	 */
 	public BackendProfileEmployeeGUI(User aUser) {
-		user = aUser;
+		employee = (Employee) aUser;
 		initialize();
 		ButtonListener listener = new ButtonListener();
 		requestsButton.addActionListener(listener);
@@ -106,24 +113,20 @@ public class BackendProfileEmployeeGUI {
 		searchButton.setBounds(613, 13, 55, 44);
 		panel.add(searchButton);
 		
-		postsArea = new JTextArea();
-		postsArea.setBounds(427, 171, 424, 409);
-		panel.add(postsArea);
-		
 		JLabel nameLabel = new JLabel("Name LastName");
 		nameLabel.setFont(new Font("Tahoma", Font.PLAIN, 19));
 		nameLabel.setBounds(59, 192, 137, 30);
 		panel.add(nameLabel);
 		
-		JLabel lblNewLabel_2 = new JLabel("Company Post, ");
-		lblNewLabel_2.setBounds(221, 202, 89, 16);
-		panel.add(lblNewLabel_2);
+		JLabel companyPostLabel = new JLabel("Employee, ");
+		companyPostLabel.setBounds(221, 202, 89, 16);
+		panel.add(companyPostLabel);
 		
-		JLabel lblNewLabel_3 = new JLabel("Specialization");
-		lblNewLabel_3.setBounds(310, 202, 78, 16);
-		panel.add(lblNewLabel_3);
+		JLabel specializationLabel = new JLabel("Specialization");
+		specializationLabel.setBounds(285, 202, 78, 16);
+		panel.add(specializationLabel);
 		
-		emailLabel = new JLabel("example@gmail.com");
+		emailLabel = new JLabel(employee.getMyAccount().getEmail());
 		emailLabel.setBounds(69, 221, 125, 16);
 		panel.add(emailLabel);
 		
@@ -132,15 +135,46 @@ public class BackendProfileEmployeeGUI {
 		lblNewLabel_5.setBounds(49, 285, 133, 16);
 		panel.add(lblNewLabel_5);
 		
-		groupALabel = new JLabel("Group A");
+		String name;
+		if(employee.getGroups().size()>0) {
+			name = employee.getGroups().get(0).getName();
+			
+			GroupARadio = new JRadioButton(name);
+			GroupARadio.setBounds(625, 675, 126, 25);
+			panel.add(GroupARadio);
+		}
+		else {
+			name = "";
+		}
+		groupALabel = new JLabel(name);
 		groupALabel.setBounds(49, 314, 56, 16);
 		panel.add(groupALabel);
 		
-		groupBLabel = new JLabel("Group B");
+		if(employee.getGroups().size()>1) {
+			name = employee.getGroups().get(1).getName();
+			
+			GroupBRadio = new JRadioButton(name);
+			GroupBRadio.setBounds(625, 709, 126, 25);
+			panel.add(GroupBRadio);
+		}
+		else {
+			name = "";
+		}
+		groupBLabel = new JLabel(name);
 		groupBLabel.setBounds(114, 314, 56, 16);
 		panel.add(groupBLabel);
 		
-		groupCLabel = new JLabel("Group C");
+		if(employee.getGroups().size()>2) {
+			name = employee.getGroups().get(2).getName();
+			
+			GroupCRadio = new JRadioButton(name);
+			GroupCRadio.setBounds(625, 739, 127, 25);
+			panel.add(GroupCRadio);
+		}
+		else {
+			name = "";
+		}
+		groupCLabel = new JLabel(name);
 		groupCLabel.setBounds(174, 314, 56, 16);
 		panel.add(groupCLabel);
 		
@@ -181,15 +215,16 @@ public class BackendProfileEmployeeGUI {
 		editAccountButton.setBounds(216, 250, 155, 25);
 		panel.add(editAccountButton);
 		
-		connectionsList = new JList(user.getListOfConnections().toArray());
+		connectionsList = new JList(employee.getListOfConnections().toArray());
 		connectionsList.setBounds(44, 402, 116, 152);
 		panel.add(connectionsList);
 		
-		suggestedList = new JList();
+		suggestedListConnections = employee.suggestedConnections();
+		suggestedList = new JList(suggestedListConnections.toArray());
 		suggestedList.setBounds(221, 402, 116, 152);
 		panel.add(suggestedList);
 		
-		JLabel lblNewLabel_9 = new JLabel("Connections (" + user.getListOfConnections().size() + ")");
+		JLabel lblNewLabel_9 = new JLabel("Connections (" + employee.getListOfConnections().size() + ")");
 		lblNewLabel_9.setBounds(49, 373, 99, 16);
 		panel.add(lblNewLabel_9);
 		
@@ -206,24 +241,28 @@ public class BackendProfileEmployeeGUI {
 		panel.add(writePostArea);
 		
 		connectionsRadio = new JRadioButton("Connections");
-		connectionsRadio.setBounds(458, 675, 112, 25);
+		connectionsRadio.setBounds(427, 675, 112, 25);
 		panel.add(connectionsRadio);
 		
 		PublicRadio = new JRadioButton("Public");
-		PublicRadio.setBounds(574, 675, 78, 25);
+		PublicRadio.setBounds(543, 675, 78, 25);
 		panel.add(PublicRadio);
-		
-		GroupRadio = new JRadioButton("Group");
-		GroupRadio.setBounds(651, 675, 89, 25);
-		panel.add(GroupRadio);
 		
 		postButton = new JButton("Post");
 		postButton.setBounds(754, 675, 97, 25);
 		panel.add(postButton);
 		
+		// create button group for the radio button to know which one was selected
+		radioGroup = new ButtonGroup();
+		radioGroup.add(connectionsRadio);
+		radioGroup.add(PublicRadio);
+		radioGroup.add(GroupARadio);
+		radioGroup.add(GroupBRadio);
+		radioGroup.add(GroupCRadio);
+		
 		textField = new JTextField();
 		textField.setColumns(10);
-		textField.setBounds(661, 709, 64, 25);
+		textField.setBounds(468, 709, 64, 25);
 		panel.add(textField);
 		
 		checkprofileButton = new JButton("Check profile");
@@ -246,10 +285,15 @@ public class BackendProfileEmployeeGUI {
 		lblNewLabel_1 = new JLabel("logo");
 		lblNewLabel_1.setBounds(12, 917, 56, 43);
 		panel.add(lblNewLabel_1);
-		
-		
-		
-		
+
+		postArea = new JTextArea();
+		postArea.setBounds(427, 175, 424, 409);
+		allPosts = employee.returnAllPosts();
+		// not finished
+		for(int i = 0; i < allPosts.size(); i++) {
+			
+		}
+		panel.add(postArea);
 		
 	}
 	
@@ -308,15 +352,34 @@ public class BackendProfileEmployeeGUI {
 			else if(e.getSource().equals(checkprofileButton)) {
 				if(!connectionsList.isSelectionEmpty()) {
 					User anotherUser = (User) connectionsList.getSelectedValue();
-					Connection conn = new Connection(user, anotherUser);
-					conn.sendConnectionRequest();
+					new FrontEndProfileGUI(anotherUser);
 				}
 			}
 			else if(e.getSource().equals(sendMessageButton)) {
 				if(!connectionsList.isSelectionEmpty()) {
 					User anotherUser = (User) connectionsList.getSelectedValue();
-					new PrivateChatGUI(anotherUser, user, null); //null?
+					new PrivateChatGUI(anotherUser, employee, null); //null?
 				}
+			}
+			else if(e.getSource().equals(sendRequestButton)) {
+				if(!suggestedList.isSelectionEmpty()) {
+					User anotherUser = (User) suggestedList.getSelectedValue();
+					Connection conn = new Connection(employee, anotherUser);
+					conn.sendConnectionRequest();
+				}
+			}
+			// not finished
+			else if(e.getSource().equals(postButton)) {
+				String postText = writePostArea.getText();
+				if(connectionsRadio.isSelected() || PublicRadio.isSelected() || GroupARadio.isSelected() || GroupBRadio.isSelected() || GroupCRadio.isSelected()) {
+					String selected = radioGroup.getSelection().toString();
+					Post newPost = new Post(employee, postText, selected);
+					employee.addPost(newPost);
+					postList.remove(postList); //den eimai sigourh an douleuei
+					
+				}
+				
+				
 			}
 		}
 		

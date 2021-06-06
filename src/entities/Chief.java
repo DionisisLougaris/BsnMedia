@@ -111,5 +111,9 @@ public class Chief extends User{
 		
 		return listWithSuggestedConnections;
 	}
+	
+	public ArrayList<Group> getGroups() {
+		return groupsSupervising;
+	}
 
 }
