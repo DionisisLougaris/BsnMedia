@@ -27,13 +27,13 @@ public class Account implements Serializable{
 			else {
 				String message = "The username you selected is already in use!";
 				JOptionPane.showMessageDialog(new JFrame(), message, "Message",
-				        JOptionPane.INFORMATION_MESSAGE);
+				        JOptionPane.ERROR_MESSAGE);
 			}
 		}
 		else {
 			String message = "The email you selected is already in use!";
 			JOptionPane.showMessageDialog(new JFrame(), message, "Message",
-			        JOptionPane.INFORMATION_MESSAGE);
+			        JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	
@@ -49,7 +49,7 @@ public class Account implements Serializable{
 	
 	/*This is a method that goes through the list of Users of the company checking if everyone's email 
 	 * coincides with the potential email of type String that is taken as a parameter. 
-	 * Returns a reasonable value (boolean*/
+	 * Returns a reasonable value (boolean)*/
 	public boolean emailAvailability (String desiredEmail) {
 		
 		ArrayList<User> companyMembers = myCompany.getCompanyMembers();
