@@ -147,7 +147,7 @@ public class Boss extends User{
 	
 	// o boss den exei na kanei kati me ta group den kserw ti na kanw me auth thn methodo
 	public ArrayList<Group> getGroups() {
-		
+		return null;
 	}
 	
 	

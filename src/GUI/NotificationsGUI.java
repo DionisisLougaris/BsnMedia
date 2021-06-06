@@ -15,6 +15,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Color;
+import java.awt.Cursor;
 
 public class NotificationsGUI {
 
@@ -62,6 +63,14 @@ public class NotificationsGUI {
 		
 		Icon takealook = new ImageIcon("Buttons_backgrounds/takealook_32px.png");
 		JButton btnNewButton = new JButton(takealook);
+		btnNewButton.setContentAreaFilled(false); 
+		btnNewButton.setFocusPainted(false); 
+		btnNewButton.setOpaque(false);
+		btnNewButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnNewButton.setBounds(66, 158, 66, 38);
 		frmNotifications.getContentPane().add(btnNewButton);
 		

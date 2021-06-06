@@ -54,7 +54,7 @@ public class Main {
 			public void run() {
 				try {
 					WelcomeScreen_GUI window = new WelcomeScreen_GUI(theCompany);
-				} catch (Exception e) {
+					} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}

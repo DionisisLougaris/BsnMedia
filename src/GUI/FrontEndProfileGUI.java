@@ -1,6 +1,7 @@
 package GUI;
 
 
+import java.awt.Cursor;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -23,6 +24,7 @@ import javax.swing.JRadioButton;
 import java.awt.Font;
 import javax.swing.JList;
 import javax.swing.JScrollBar;
+import java.awt.Color;
 
 public class FrontEndProfileGUI {
 
@@ -64,6 +66,7 @@ public class FrontEndProfileGUI {
 		frame.getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
+		panel.setBackground(Color.WHITE);
 		panel.setBounds(0, 0, 875, 973);
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
@@ -78,16 +81,29 @@ public class FrontEndProfileGUI {
 		panel_1.add(lblNewLabel);
 		
 		textField = new JTextField();
+		textField.setBackground(new Color(255, 250, 240));
 		textField.setBounds(437, 38, 317, 30);
 		panel.add(textField);
 		textField.setColumns(10);
 		
 		Icon search = new ImageIcon("Buttons_backgrounds/search_30px.png");
 		JButton btnNewButton = new JButton(search);
-		btnNewButton.setBounds(766, 28, 55, 38);
+		btnNewButton.setContentAreaFilled(false); 
+		btnNewButton.setFocusPainted(false); 
+		btnNewButton.setOpaque(false);
+		btnNewButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnNewButton.setBounds(766, 27, 55, 44);
 		panel.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("logo");
+		btnNewButton_1.setContentAreaFilled(false); 
+		btnNewButton_1.setFocusPainted(false); 
+		btnNewButton_1.setOpaque(false);
+		btnNewButton_1.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
@@ -96,6 +112,7 @@ public class FrontEndProfileGUI {
 		panel.add(btnNewButton_1);
 		
 		JTextArea textArea = new JTextArea();
+		textArea.setBackground(new Color(255, 250, 240));
 		textArea.setBounds(32, 561, 810, 336);
 		panel.add(textArea);
 		
@@ -105,11 +122,11 @@ public class FrontEndProfileGUI {
 		panel.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("Company Post, ");
-		lblNewLabel_2.setBounds(286, 250, 89, 16);
+		lblNewLabel_2.setBounds(267, 250, 89, 16);
 		panel.add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel("Specialization");
-		lblNewLabel_3.setBounds(387, 250, 78, 16);
+		lblNewLabel_3.setBounds(354, 250, 78, 16);
 		panel.add(lblNewLabel_3);
 		
 		JLabel lblNewLabel_4 = new JLabel("example@gmail.com");
@@ -122,18 +139,22 @@ public class FrontEndProfileGUI {
 		panel.add(lblNewLabel_5);
 		
 		JLabel lblNewLabel_6 = new JLabel("Group A");
-		lblNewLabel_6.setBounds(85, 317, 56, 16);
+		lblNewLabel_6.setBounds(108, 316, 56, 16);
 		panel.add(lblNewLabel_6);
 		
 		JLabel lblNewLabel_7 = new JLabel("Group B");
-		lblNewLabel_7.setBounds(153, 317, 56, 16);
+		lblNewLabel_7.setBounds(185, 316, 56, 16);
 		panel.add(lblNewLabel_7);
 		
 		JLabel lblNewLabel_8 = new JLabel("Group C");
-		lblNewLabel_8.setBounds(221, 317, 56, 16);
+		lblNewLabel_8.setBounds(253, 316, 56, 16);
 		panel.add(lblNewLabel_8);
 		
 		JButton buttonchat= new JButton("Chat");
+		buttonchat.setContentAreaFilled(false); 
+		buttonchat.setFocusPainted(false); 
+		buttonchat.setOpaque(false);
+		buttonchat.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		buttonchat.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -144,6 +165,10 @@ public class FrontEndProfileGUI {
 		panel.add(buttonchat);
 		
 		JButton btnNewButton_3 = new JButton("Add connection");
+		btnNewButton_3.setContentAreaFilled(false); 
+		btnNewButton_3.setFocusPainted(false); 
+		btnNewButton_3.setOpaque(false);
+		btnNewButton_3.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -152,6 +177,10 @@ public class FrontEndProfileGUI {
 		panel.add(btnNewButton_3);
 		
 		JButton btnNewButton_4 = new JButton("Remove connection");
+		btnNewButton_4.setContentAreaFilled(false); 
+		btnNewButton_4.setFocusPainted(false); 
+		btnNewButton_4.setOpaque(false);
+		btnNewButton_4.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		btnNewButton_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -181,6 +210,7 @@ public class FrontEndProfileGUI {
 		panel.add(lblNewLabel_13);
 		
 		JList list = new JList();
+		list.setBackground(new Color(255, 250, 240));
 		list.setBounds(709, 409, 133, 127);
 		panel.add(list);
 		
@@ -194,6 +224,10 @@ public class FrontEndProfileGUI {
 		
 		Icon help = new ImageIcon("Buttons_backgrounds/customer_support_40px.png");
 		JButton btnNewButton_1_1 = new JButton(help);
+		btnNewButton_1_1.setContentAreaFilled(false); 
+		btnNewButton_1_1.setFocusPainted(false); 
+		btnNewButton_1_1.setOpaque(false);
+		btnNewButton_1_1.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		btnNewButton_1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}

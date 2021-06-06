@@ -10,6 +10,7 @@ import java.io.IOException;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import java.awt.Color;
+import java.awt.Cursor;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
@@ -63,6 +64,10 @@ public class ConnectionRequestsGUI {
 		
 		Icon accept = new ImageIcon("Buttons_backgrounds/accept_32px.png");
 		JButton btnNewButton_2 = new JButton(accept);
+		btnNewButton_2.setContentAreaFilled(false); 
+		btnNewButton_2.setFocusPainted(false); 
+		btnNewButton_2.setOpaque(false);
+		btnNewButton_2.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -72,6 +77,10 @@ public class ConnectionRequestsGUI {
 		
 		Icon decline = new ImageIcon("Buttons_backgrounds/decline_32px.png");
 		JButton btnNewButton_2_1 = new JButton(decline);
+		btnNewButton_2_1.setContentAreaFilled(false); 
+		btnNewButton_2_1.setFocusPainted(false); 
+		btnNewButton_2_1.setOpaque(false);
+		btnNewButton_2_1.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		btnNewButton_2_1.setBounds(107, 165, 75, 36);
 		frmConnectionRequests.getContentPane().add(btnNewButton_2_1);
 		

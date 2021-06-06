@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
+import java.awt.Cursor;
 
 public class GroupChatGUI {
 
@@ -50,12 +51,20 @@ public class GroupChatGUI {
 		frame.getContentPane().setLayout(null);
 		
 		JButton btnNewButton = new JButton("Go to User Profile");
+		btnNewButton.setContentAreaFilled(false); 
+		btnNewButton.setFocusPainted(false); 
+		btnNewButton.setOpaque(false);
+		btnNewButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnNewButton.setBounds(522, 14, 133, 25);
 		frame.getContentPane().add(btnNewButton);
 		
 		JLabel lblNewLabel = new JLabel("Your messages are encrypted");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel.setBounds(50, 17, 215, 16);
+		lblNewLabel.setBounds(80, 9, 215, 32);
 		frame.getContentPane().add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Group Conversation of \" \"");
@@ -64,32 +73,50 @@ public class GroupChatGUI {
 		frame.getContentPane().add(lblNewLabel_1);
 		
 		JPanel panel = new JPanel();
-		panel.setBackground(Color.WHITE);
+		panel.setBackground(new Color(60, 179, 113));
 		panel.setBounds(12, 84, 643, 652);
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 		
 		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(new Color(255, 250, 240));
 		panel_1.setBounds(12, 13, 619, 493);
 		panel.add(panel_1);
 		
 		JPanel panel_2 = new JPanel();
+		panel_2.setBackground(new Color(255, 250, 240));
 		panel_2.setBounds(12, 519, 532, 120);
 		panel.add(panel_2);
 		
 		Icon send = new ImageIcon("Buttons_backgrounds/email_send_32px.png");
 		JButton btnNewButton_1_1_1 = new JButton(send);
+		btnNewButton_1_1_1.setContentAreaFilled(false); 
+		btnNewButton_1_1_1.setFocusPainted(false); 
+		btnNewButton_1_1_1.setOpaque(false);
+		btnNewButton_1_1_1.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		btnNewButton_1_1_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnNewButton_1_1_1.setBounds(572, 601, 46, 38);
 		panel.add(btnNewButton_1_1_1);
 		
 		Icon help = new ImageIcon("Buttons_backgrounds/customer_support_40px.png");
 		JButton btnNewButton_1_1 = new JButton(help);
+		btnNewButton_1_1.setContentAreaFilled(false); 
+		btnNewButton_1_1.setFocusPainted(false); 
+		btnNewButton_1_1.setOpaque(false);
+		btnNewButton_1_1.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		btnNewButton_1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
 		btnNewButton_1_1.setBounds(609, 742, 46, 38);
 		frame.getContentPane().add(btnNewButton_1_1);
+		
+		Icon lock = new ImageIcon("label_backgrounds/lock_32px.png");
+		JLabel lblNewLabel_2 = new JLabel(lock);
+		lblNewLabel_2.setBounds(22, 14, 46, 38);
+		frame.getContentPane().add(lblNewLabel_2);
 	}
-
 }

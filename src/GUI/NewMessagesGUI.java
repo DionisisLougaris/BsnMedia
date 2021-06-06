@@ -17,6 +17,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
+import java.awt.Cursor;
 
 public class NewMessagesGUI {
 
@@ -64,6 +65,14 @@ public class NewMessagesGUI {
 		
 		Icon open = new ImageIcon("Buttons_backgrounds/open_32px.png");
 		JButton btnNewButton = new JButton(open);
+		btnNewButton.setContentAreaFilled(false); 
+		btnNewButton.setFocusPainted(false); 
+		btnNewButton.setOpaque(false);
+		btnNewButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnNewButton.setBounds(70, 156, 53, 40);
 		frmNewMessages.getContentPane().add(btnNewButton);
 		frmNewMessages.setVisible(true);

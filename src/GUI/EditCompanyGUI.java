@@ -1,5 +1,6 @@
 package GUI;
 
+import java.awt.Cursor;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -9,6 +10,8 @@ import javax.swing.JTextField;
 import javax.swing.JScrollPane;
 import javax.swing.JScrollBar;
 import javax.swing.JLabel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class EditCompanyGUI {
 
@@ -63,6 +66,14 @@ public class EditCompanyGUI {
 		frame.getContentPane().add(panel);
 		
 		JButton btnNewButton = new JButton("Change company photo");
+		btnNewButton.setContentAreaFilled(false); 
+		btnNewButton.setFocusPainted(false); 
+		btnNewButton.setOpaque(false);
+		btnNewButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnNewButton.setBounds(584, 178, 178, 25);
 		frame.getContentPane().add(btnNewButton);
 		
@@ -123,10 +134,22 @@ public class EditCompanyGUI {
 		frame.getContentPane().add(lblNewLabel_4);
 		
 		btnNewButton_1 = new JButton("Save All");
+		btnNewButton_1.setContentAreaFilled(false); 
+		btnNewButton_1.setFocusPainted(false); 
+		btnNewButton_1.setOpaque(false);
+		btnNewButton_1.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnNewButton_1.setBounds(71, 503, 279, 25);
 		frame.getContentPane().add(btnNewButton_1);
 		
 		btnNewButton_2 = new JButton("View Changes");
+		btnNewButton_2.setContentAreaFilled(false); 
+		btnNewButton_2.setFocusPainted(false); 
+		btnNewButton_2.setOpaque(false);
+		btnNewButton_2.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		btnNewButton_2.setBounds(455, 503, 156, 25);
 		frame.getContentPane().add(btnNewButton_2);
 		

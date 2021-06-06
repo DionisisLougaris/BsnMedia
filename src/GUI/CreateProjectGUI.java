@@ -1,5 +1,6 @@
 package GUI;
 
+import java.awt.Cursor;
 import java.awt.EventQueue;
 
 
@@ -11,6 +12,8 @@ import javax.swing.JTextArea;
 import javax.swing.JList;
 import javax.swing.JButton;
 import javax.swing.JScrollBar;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 
 public class CreateProjectGUI {
@@ -99,14 +102,34 @@ public class CreateProjectGUI {
 		frame.getContentPane().add(lblNewLabel_5);
 		
 		JButton btnNewButton = new JButton("Add to Group");
+		btnNewButton.setContentAreaFilled(false); 
+		btnNewButton.setFocusPainted(false); 
+		btnNewButton.setOpaque(false);
+		btnNewButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnNewButton.setBounds(71, 571, 126, 25);
 		frame.getContentPane().add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Remove");
+		btnNewButton_1.setContentAreaFilled(false); 
+		btnNewButton_1.setFocusPainted(false); 
+		btnNewButton_1.setOpaque(false);
+		btnNewButton_1.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnNewButton_1.setBounds(337, 571, 85, 25);
 		frame.getContentPane().add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("Create");
+		btnNewButton_2.setContentAreaFilled(false); 
+		btnNewButton_2.setFocusPainted(false); 
+		btnNewButton_2.setOpaque(false);
+		btnNewButton_2.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		btnNewButton_2.setBounds(414, 609, 77, 22);
 		frame.getContentPane().add(btnNewButton_2);
 		

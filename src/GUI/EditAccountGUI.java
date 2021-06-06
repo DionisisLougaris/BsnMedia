@@ -1,5 +1,6 @@
 package GUI;
 
+import java.awt.Cursor;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -8,6 +9,8 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class EditAccountGUI {
 
@@ -78,6 +81,14 @@ public class EditAccountGUI {
 		textField_1.setColumns(10);
 		
 		JButton btnNewButton = new JButton("Change Photo");
+		btnNewButton.setContentAreaFilled(false); 
+		btnNewButton.setFocusPainted(false); 
+		btnNewButton.setOpaque(false);
+		btnNewButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnNewButton.setBounds(12, 126, 116, 25);
 		frame.getContentPane().add(btnNewButton);
 		
@@ -112,6 +123,14 @@ public class EditAccountGUI {
 		textField_7.setColumns(10);
 		
 		JButton btnNewButton_1 = new JButton("Done");
+		btnNewButton_1.setContentAreaFilled(false); 
+		btnNewButton_1.setFocusPainted(false); 
+		btnNewButton_1.setOpaque(false);
+		btnNewButton_1.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnNewButton_1.setBounds(444, 268, 82, 25);
 		frame.getContentPane().add(btnNewButton_1);
 		
@@ -173,6 +192,14 @@ public class EditAccountGUI {
 		textField_11.setColumns(10);
 		
 		JButton btnNewButton_2 = new JButton("Done");
+		btnNewButton_2.setContentAreaFilled(false); 
+		btnNewButton_2.setFocusPainted(false); 
+		btnNewButton_2.setOpaque(false);
+		btnNewButton_2.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnNewButton_2.setBounds(334, 489, 97, 25);
 		frame.getContentPane().add(btnNewButton_2);
 		
@@ -212,6 +239,14 @@ public class EditAccountGUI {
 		textField_13.setColumns(10);
 		
 		JButton btnNewButton_3 = new JButton("Deactivate my account");
+		btnNewButton_3.setContentAreaFilled(false); 
+		btnNewButton_3.setFocusPainted(false); 
+		btnNewButton_3.setOpaque(false);
+		btnNewButton_3.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		btnNewButton_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnNewButton_3.setBounds(299, 714, 174, 25);
 		frame.getContentPane().add(btnNewButton_3);
 		

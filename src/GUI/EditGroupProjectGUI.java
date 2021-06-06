@@ -1,5 +1,6 @@
 package GUI;
 
+import java.awt.Cursor;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -106,28 +107,40 @@ public class EditGroupProjectGUI {
 		frame.getContentPane().add(lblNewLabel_5);
 		
 		JButton btnNewButton = new JButton("Add to group");
+		btnNewButton.setContentAreaFilled(false); 
+		btnNewButton.setFocusPainted(false); 
+		btnNewButton.setOpaque(false);
+		btnNewButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnNewButton.setBounds(70, 484, 141, 25);
 		frame.getContentPane().add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Remove");
+		btnNewButton_1.setContentAreaFilled(false); 
+		btnNewButton_1.setFocusPainted(false); 
+		btnNewButton_1.setOpaque(false);
+		btnNewButton_1.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		btnNewButton_1.setBounds(414, 484, 142, 25);
 		frame.getContentPane().add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("Save all");
+		btnNewButton_2.setContentAreaFilled(false); 
+		btnNewButton_2.setFocusPainted(false); 
+		btnNewButton_2.setOpaque(false);
+		btnNewButton_2.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		btnNewButton_2.setBounds(355, 541, 116, 25);
 		frame.getContentPane().add(btnNewButton_2);
 		
 		JButton btnNewButton_3 = new JButton("View changes");
+		btnNewButton_3.setContentAreaFilled(false); 
+		btnNewButton_3.setFocusPainted(false); 
+		btnNewButton_3.setOpaque(false);
+		btnNewButton_3.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		btnNewButton_3.setBounds(494, 541, 116, 25);
 		frame.getContentPane().add(btnNewButton_3);
-		
-		JButton btnNewButton_4 = new JButton("Help");
-		btnNewButton_4.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		btnNewButton_4.setBounds(526, 593, 97, 25);
-		frame.getContentPane().add(btnNewButton_4);
 		
 		JScrollPane scrollPane_2 = new JScrollPane();
 		scrollPane_2.setBounds(183, 64, 308, 90);
