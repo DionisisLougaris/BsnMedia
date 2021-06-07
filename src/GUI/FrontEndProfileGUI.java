@@ -10,6 +10,8 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import entities.Connection;
+import entities.Employee;
+import entities.Group;
 import entities.User;
 
 import javax.imageio.ImageIO;
@@ -19,6 +21,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
 import javax.swing.JRadioButton;
@@ -30,7 +33,7 @@ import java.awt.Color;
 public class FrontEndProfileGUI {
 
 	private JFrame frame;
-	private JTextField textField;
+	private JTextField searchtext;
 	private static User tuser;
 	private static User auser;
 
@@ -78,32 +81,33 @@ public class FrontEndProfileGUI {
 		panel.setLayout(null);
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(108, 75, 181, 152);
+		panel_1.setBounds(108, 75, 183, 152);
 		panel.add(panel_1);
 		panel_1.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Profile photo");
-		lblNewLabel.setBounds(51, 66, 72, 16);
-		panel_1.add(lblNewLabel);
+		JLabel labeldefaulprofilephoto = new JLabel("default photo/defaultProfilePhoto.png");
+		labeldefaulprofilephoto.setBounds(51, 66, 99, 16);
+		panel_1.add(labeldefaulprofilephoto);
 		
-		textField = new JTextField();
-		textField.setBackground(new Color(255, 250, 240));
-		textField.setBounds(437, 38, 317, 30);
-		panel.add(textField);
-		textField.setColumns(10);
+		searchtext = new JTextField();
+		searchtext.setBackground(new Color(255, 250, 240));
+		searchtext.setBounds(437, 38, 317, 30);
+		panel.add(searchtext);
+		searchtext.setColumns(10);
 		
 		Icon search = new ImageIcon("Buttons_backgrounds/search_30px.png");
-		JButton btnNewButton = new JButton(search);
-		btnNewButton.setContentAreaFilled(false); 
-		btnNewButton.setFocusPainted(false); 
-		btnNewButton.setOpaque(false);
-		btnNewButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton searchbutton = new JButton(search);
+		searchbutton.setContentAreaFilled(false); 
+		searchbutton.setFocusPainted(false); 
+		searchbutton.setOpaque(false);
+		searchbutton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		searchbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				tuser.getMyAccount().getMyCompany().searchObject(searchtext.getText());
 			}
 		});
-		btnNewButton.setBounds(766, 27, 55, 44);
-		panel.add(btnNewButton);
+		searchbutton.setBounds(766, 27, 55, 44);
+		panel.add(searchbutton);
 		
 		JButton btnNewButton_1 = new JButton("logo");
 		btnNewButton_1.setContentAreaFilled(false); 
@@ -128,7 +132,9 @@ public class FrontEndProfileGUI {
 		labelnamelastname.setBounds(60, 240, 202, 26);
 		panel.add(labelnamelastname);
 		
-		JLabel labelcompanypost = new JLabel("Company Post:");
+		
+		String companypost = auser.getCompanyPost();
+		JLabel labelcompanypost = new JLabel(companypost);
 		labelcompanypost.setBounds(267, 250, 89, 16);
 		panel.add(labelcompanypost);
 		
@@ -147,17 +153,46 @@ public class FrontEndProfileGUI {
 		lblNewLabel_5.setBounds(108, 287, 133, 16);
 		panel.add(lblNewLabel_5);
 		
-		JLabel lblNewLabel_6 = new JLabel("Group A");
+		ArrayList<Group> ausersgroups = auser.getGroups();
+	
+
+	   if( ausersgroups.size() ==1)
+	   {
+		 JLabel lblNewLabel_6 = new JLabel(ausersgroups.get(0).getName());
 		lblNewLabel_6.setBounds(108, 316, 56, 16);
 		panel.add(lblNewLabel_6);
-		
-		JLabel lblNewLabel_7 = new JLabel("Group B");
+	   }
+	   else if(ausersgroups.size() == 2)
+	   {
+		   
+		   JLabel lblNewLabel_6 = new JLabel(ausersgroups.get(0).getName());
+			lblNewLabel_6.setBounds(108, 316, 56, 16);
+			panel.add(lblNewLabel_6);
+		   
+		  JLabel lblNewLabel_7 = new JLabel(ausersgroups.get(1).getName());
 		lblNewLabel_7.setBounds(185, 316, 56, 16);
 		panel.add(lblNewLabel_7);
-		
-		JLabel lblNewLabel_8 = new JLabel("Group C");
+	   }
+	   else if(ausersgroups.size() == 3)
+	   {
+		   JLabel lblNewLabel_6 = new JLabel(ausersgroups.get(0).getName());
+			lblNewLabel_6.setBounds(108, 316, 56, 16);
+			panel.add(lblNewLabel_6);
+		   
+		   JLabel lblNewLabel_7 = new JLabel(ausersgroups.get(1).getName());
+		lblNewLabel_7.setBounds(185, 316, 56, 16);
+		panel.add(lblNewLabel_7);
+		   
+		JLabel lblNewLabel_8 = new JLabel(ausersgroups.get(2).getName());
 		lblNewLabel_8.setBounds(253, 316, 56, 16);
 		panel.add(lblNewLabel_8);
+	   }
+		
+	
+	     
+		
+		
+		
 		
 		JButton buttonchat= new JButton("Chat");
 		buttonchat.setContentAreaFilled(false); 
