@@ -53,7 +53,8 @@ public class CreateProjectGUI {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 535, 704);
 		frame.getContentPane().setLayout(null);
-		
+		frame.setVisible(true);
+		frame.setLocation(885, 200);
 		textField = new JTextField();
 		textField.setBounds(210, 23, 116, 22);
 		frame.getContentPane().add(textField);

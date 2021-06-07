@@ -55,7 +55,7 @@ public class CompanyProfileGUI {
 		frame.getContentPane().setBackground(Color.WHITE);
 		frame.setBounds(100, 100, 893, 1020);
 		frame.setLocation(500, 0);
-		
+		frame.setVisible(true);
 		
 		ImageIcon logoimage = new ImageIcon();
 	    frame.setTitle("Company");

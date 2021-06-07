@@ -64,6 +64,7 @@ public class FrontEndProfileGUI {
 		frame.setBounds(100, 100, 893, 1020);
 		frame.setLocation(500, 0);
 		frame.getContentPane().setLayout(null);
+		frame.setVisible(true);
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);

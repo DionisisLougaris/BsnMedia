@@ -58,9 +58,9 @@ public class EditCompanyGUI {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 792, 602);
-
+		frame.setLocation(870, 200);
 		frame.getContentPane().setLayout(null);
-		
+		frame.setVisible(true);
 		JPanel panel = new JPanel();
 		panel.setBounds(12, 13, 750, 152);
 		frame.getContentPane().add(panel);

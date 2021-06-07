@@ -263,7 +263,7 @@ public class HelpGUI {
 		panel_1.add(btnNewButton_2);
 		
 		JPanel panel_2 = new JPanel();
-		panel_2.setBackground(SystemColor.info);
+		panel_2.setBackground(new Color(255, 250, 240));
 		panel_2.setBounds(0, 704, 875, 269);
 		frame.getContentPane().add(panel_2);
 		panel_2.setLayout(null);
@@ -337,7 +337,7 @@ public class HelpGUI {
             @Override
             public void mouseClicked(MouseEvent e) {
                 try {
-                    Desktop.getDesktop().browse(new URI("https://linkedin.com"));
+                    Desktop.getDesktop().browse(new URI("https://www.linkedin.com/in/it-intelligence-7067aa213/"));
                 } catch (IOException | URISyntaxException e1) {
                     e1.printStackTrace();
                 }

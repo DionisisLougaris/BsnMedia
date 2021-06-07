@@ -2,6 +2,7 @@ package GUI;
 
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Toolkit;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -13,6 +14,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Dimension;
 
 public class GroupChatGUI {
 
@@ -49,6 +51,9 @@ public class GroupChatGUI {
 		frame.getContentPane().setBackground(Color.WHITE);
 		frame.setBounds(100, 100, 685, 840);
 		frame.getContentPane().setLayout(null);
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
+		frame.setVisible(true);
 		
 		JButton btnNewButton = new JButton("Go to User Profile");
 		btnNewButton.setContentAreaFilled(false); 

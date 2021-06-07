@@ -60,7 +60,8 @@ public class EditAccountGUI {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 574, 825);
 		frame.getContentPane().setLayout(null);
-		
+		frame.setVisible(true);
+		frame.setLocation(870, 200);
 		JPanel panel = new JPanel();
 		panel.setBounds(12, 13, 116, 109);
 		frame.getContentPane().add(panel);

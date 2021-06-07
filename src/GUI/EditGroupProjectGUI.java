@@ -51,6 +51,8 @@ public class EditGroupProjectGUI {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 653, 678);
 		frame.getContentPane().setLayout(null);
+		frame.setVisible(true);
+		frame.setLocation(720, 300);
 		
 		textField = new JTextField();
 		textField.setBounds(183, 29, 116, 22);

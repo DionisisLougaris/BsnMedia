@@ -59,7 +59,7 @@ public class GroupProfileGUI {
 		frame.setBounds(100, 100, 893, 1020);
 		frame.setLocation(500, 0);
 		frame.getContentPane().setLayout(null);
-		
+		frame.setVisible(true);
 		textField = new JTextField();
 		textField.setBackground(new Color(255, 250, 240));
 		textField.setBounds(401, 33, 286, 26);
