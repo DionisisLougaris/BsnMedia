@@ -52,7 +52,8 @@ public class FrontEndProfileGUI {
 	 * Create the application.
 	 */
 	public FrontEndProfileGUI(User aUser) {
-		user = aUser;
+		
+		user = aUser; 
 		initialize();
 	}
 
@@ -117,22 +118,25 @@ public class FrontEndProfileGUI {
 		textArea.setBounds(32, 561, 810, 336);
 		panel.add(textArea);
 		
-		JLabel lblNewLabel_1 = new JLabel("Name LastName");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 19));
-		lblNewLabel_1.setBounds(118, 240, 137, 30);
-		panel.add(lblNewLabel_1);
+		String namelastname = user.getFirstName() + " " + user.getLastName();
+		JLabel labelnamelastname= new JLabel(namelastname);
+		labelnamelastname.setFont(new Font("Tahoma", Font.PLAIN, 19));
+		labelnamelastname.setBounds(60, 240, 202, 26);
+		panel.add(labelnamelastname);
 		
-		JLabel lblNewLabel_2 = new JLabel("Company Post, ");
-		lblNewLabel_2.setBounds(267, 250, 89, 16);
-		panel.add(lblNewLabel_2);
+		String companypost = user.getCompanyPost();
+		JLabel labelcompanypost = new JLabel(companypost);
+		labelcompanypost.setBounds(267, 250, 89, 16);
+		panel.add(labelcompanypost);
 		
 		JLabel lblNewLabel_3 = new JLabel("Specialization");
 		lblNewLabel_3.setBounds(354, 250, 78, 16);
 		panel.add(lblNewLabel_3);
 		
-		JLabel lblNewLabel_4 = new JLabel("example@gmail.com");
-		lblNewLabel_4.setBounds(130, 413, 125, 16);
-		panel.add(lblNewLabel_4);
+		String email = user.getMyAccount().getEmail()
+;		JLabel labelemail = new JLabel(email);
+        labelemail.setBounds(130, 413, 125, 16);
+		panel.add(labelemail);
 		
 		JLabel lblNewLabel_5 = new JLabel("Currently apart of:");
 		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -165,46 +169,51 @@ public class FrontEndProfileGUI {
 		buttonchat.setBounds(479, 313, 62, 25);
 		panel.add(buttonchat);
 		
-		JButton btnNewButton_3 = new JButton("Add connection");
-		btnNewButton_3.setContentAreaFilled(false); 
-		btnNewButton_3.setFocusPainted(false); 
-		btnNewButton_3.setOpaque(false);
-		btnNewButton_3.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		btnNewButton_3.addActionListener(new ActionListener() {
+		JButton addConnection = new JButton("Add connection");
+		addConnection.setContentAreaFilled(false); 
+		addConnection.setFocusPainted(false); 
+		addConnection.setOpaque(false);
+		addConnection.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		addConnection.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 			}
 		});
-		btnNewButton_3.setBounds(553, 313, 131, 25);
-		panel.add(btnNewButton_3);
+		addConnection.setBounds(553, 313, 131, 25);
+		panel.add(addConnection);
 		
-		JButton btnNewButton_4 = new JButton("Remove connection");
-		btnNewButton_4.setContentAreaFilled(false); 
-		btnNewButton_4.setFocusPainted(false); 
-		btnNewButton_4.setOpaque(false);
-		btnNewButton_4.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		btnNewButton_4.addActionListener(new ActionListener() {
+		JButton removeConnection = new JButton("Remove connection");
+		removeConnection.setContentAreaFilled(false); 
+		removeConnection.setFocusPainted(false); 
+		removeConnection.setOpaque(false);
+		removeConnection.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		removeConnection.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 			}
 		});
-		btnNewButton_4.setBounds(694, 313, 148, 25);
-		panel.add(btnNewButton_4);
+		removeConnection.setBounds(694, 313, 148, 25);
+		panel.add(removeConnection);
 		
 		JLabel lblNewLabel_9 = new JLabel("Information:");
 		lblNewLabel_9.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblNewLabel_9.setBounds(74, 376, 84, 16);
 		panel.add(lblNewLabel_9);
 		
-		JLabel lblNewLabel_10 = new JLabel("69000000000");
-		lblNewLabel_10.setBounds(131, 442, 78, 16);
-		panel.add(lblNewLabel_10);
+		String telephone = user.getTelephone();
+		JLabel labeltelephone = new JLabel(telephone);
+		labeltelephone.setBounds(131, 442, 78, 16);
+		panel.add(labeltelephone);
 		
-		JLabel lblNewLabel_11 = new JLabel("Valtetsioy, 3");
-		lblNewLabel_11.setBounds(131, 476, 78, 16);
-		panel.add(lblNewLabel_11);
+		String address = user.getAddress();
+		JLabel labeladdress = new JLabel(address);
+		labeladdress.setBounds(131, 476, 78, 16);
+		panel.add(labeladdress);
 		
-		JLabel lblNewLabel_12 = new JLabel("19/12/01");
-		lblNewLabel_12.setBounds(130, 510, 56, 16);
-		panel.add(lblNewLabel_12);
+		String birthday = user.getBirthday();
+		JLabel labelbirthday = new JLabel(birthday);
+		labelbirthday.setBounds(130, 510, 79, 16);
+		panel.add(labelbirthday);
 		
 		JLabel lblNewLabel_13 = new JLabel("Mutual connections");
 		lblNewLabel_13.setBounds(712, 377, 109, 16);
