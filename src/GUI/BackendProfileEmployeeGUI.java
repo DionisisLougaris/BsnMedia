@@ -5,15 +5,18 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.TreeSet;
 
 import javax.swing.ButtonGroup;
+import javax.swing.DefaultListModel;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollBar;
@@ -21,10 +24,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import entities.Connection;
-import entities.Employee;
-import entities.Post;
-import entities.User;
+import entities.*;
 import java.awt.Color;
 import java.awt.Cursor;
 
@@ -38,7 +38,7 @@ public class BackendProfileEmployeeGUI {
 	private JButton searchButton, helpButton, requestsButton, messagesButton, notifsButton, editAccountButton, postButton, checkprofileButton, sendMessageButton, sendRequestButton, disconnectButton;
 	private JLabel emailLabel;
 	private JLabel groupALabel, groupBLabel, groupCLabel;
-	private JList connectionsList, suggestedList, postList; // xreiazetai na kanoume to suggested connections
+	private JList<String> connectionsList, suggestedList, postList; // xreiazetai na kanoume to suggested connections
 	private JTextArea writePostArea, postArea;
 	private JRadioButton connectionsRadio, PublicRadio, GroupARadio, GroupBRadio, GroupCRadio;
 	private static Employee employee; // static??
@@ -47,6 +47,8 @@ public class BackendProfileEmployeeGUI {
 	TreeSet<Post> allPosts = new TreeSet<>();
 	private JScrollPane scrollPane;
 	ButtonGroup radioGroup;
+	
+	ArrayList<User> listOfConnections;
 	
 
 	/**
@@ -120,7 +122,8 @@ public class BackendProfileEmployeeGUI {
 		searchButton.setBounds(612, 47, 55, 44);
 		panel.add(searchButton);
 		
-		JLabel nameLabel = new JLabel("Name LastName");
+		JLabel nameLabel = new JLabel();
+		nameLabel.setText(employee.getFirstName()+" "+employee.getLastName());
 		nameLabel.setFont(new Font("Tahoma", Font.PLAIN, 19));
 		nameLabel.setBounds(47, 244, 137, 30);
 		panel.add(nameLabel);
@@ -243,13 +246,24 @@ public class BackendProfileEmployeeGUI {
 		editAccountButton.setBounds(208, 297, 155, 25);
 		panel.add(editAccountButton);
 		
-		connectionsList = new JList(employee.getListOfConnections().toArray());
+		connectionsList = new JList<String>();
+		DefaultListModel<String> model = new DefaultListModel<String>();
+		listOfConnections = employee.getListOfConnections(); //Get all his Connections
+		for (User theUser: listOfConnections) {
+			model.addElement(theUser.getFirstName()+" "+theUser.getLastName()); 
+		}
+		connectionsList.setModel(model);
 		connectionsList.setBackground(new Color(255, 250, 240));
 		connectionsList.setBounds(44, 483, 116, 152);
 		panel.add(connectionsList);
 		
-		suggestedListConnections = employee.suggestedConnections();
-		suggestedList = new JList(suggestedListConnections.toArray());
+		suggestedListConnections = employee.suggestedConnections(); //Get all Suggested Connections
+		suggestedList = new JList<String>();
+		DefaultListModel<String> model2 = new DefaultListModel<String>();
+		for (User suggestedUser: suggestedListConnections) {
+			model2.addElement(suggestedUser.getFirstName()+" "+suggestedUser.getLastName());
+		}
+		suggestedList.setModel(model2);
 		suggestedList.setBackground(new Color(255, 250, 240));
 		suggestedList.setBounds(221, 483, 116, 152);
 		panel.add(suggestedList);
@@ -426,23 +440,91 @@ public class BackendProfileEmployeeGUI {
 				}
 			}
 			else if(e.getSource().equals(checkprofileButton)) {
-				if(!connectionsList.isSelectionEmpty()) {
-					User anotherUser = (User) connectionsList.getSelectedValue();
-					new FrontEndProfileGUI(anotherUser);
+				
+				String selectedUserString = connectionsList.getSelectedValue();
+				User selectedUser = null;
+				
+				for(User theUser: listOfConnections) {
+					String userFullName = theUser.getFirstName()+" "+theUser.getLastName();
+					
+					if (userFullName.equalsIgnoreCase(selectedUserString)) {
+						selectedUser = theUser;
+						break;
+					}
+				}
+				
+				if (selectedUser == null) {
+					 String message = "You have not selected any user!";
+						JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+						        JOptionPane.INFORMATION_MESSAGE);
+				}else {
+					new FrontEndProfileGUI(employee, selectedUser);
 				}
 			}
 			else if(e.getSource().equals(sendMessageButton)) {
-				if(!connectionsList.isSelectionEmpty()) {
-					User anotherUser = (User) connectionsList.getSelectedValue();
-					new PrivateChatGUI(anotherUser, employee, null); //null?
+				
+				String selectedUserString = connectionsList.getSelectedValue();
+				User selectedUser = null;
+				
+				for(User theUser: listOfConnections) {
+					String userFullName = theUser.getFirstName()+" "+theUser.getLastName();
+					
+					if (userFullName.equalsIgnoreCase(selectedUserString)) {
+						selectedUser = theUser;
+						break;
+					}
+				}
+				
+				if (selectedUser == null) {
+					 String message = "You have not selected any user!";
+						JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+						        JOptionPane.INFORMATION_MESSAGE);
+				}else {
+					TreeSet<Conversation> listOfConversation = employee.getListOfConversations();
+					Conversation selectedUserToChat = null;
+					
+					for (Conversation theConversation: listOfConversation) {
+						
+						if ((((privateConversation)theConversation).getDiscussant1().equals(employee) && ((privateConversation)theConversation).getDiscussant2().equals(selectedUser)) ||
+							(((privateConversation)theConversation).getDiscussant2().equals(employee) && ((privateConversation)theConversation).getDiscussant1().equals(selectedUser))) {
+							
+							selectedUserToChat = theConversation;
+							break;
+						}
+					}
+					
+					if(selectedUserToChat == null) {
+						 String message = "Something gone Wrong!";
+							JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+							        JOptionPane.INFORMATION_MESSAGE);
+					}else {
+						new PrivateChatGUI(employee, selectedUser, selectedUserToChat);
+					}
 				}
 			}
 			else if(e.getSource().equals(sendRequestButton)) {
-				if(!suggestedList.isSelectionEmpty()) {
-					User anotherUser = (User) suggestedList.getSelectedValue();
-					Connection conn = new Connection(employee, anotherUser);
-					conn.sendConnectionRequest();
+				
+				String selectedUserString = suggestedList.getSelectedValue();
+				User selectedUser = null;
+				
+				for(User suggestedUser: suggestedListConnections) {
+					String usersFullName = suggestedUser.getFirstName()+" "+suggestedUser.getLastName();
+					
+					if (usersFullName.equalsIgnoreCase(selectedUserString)) {
+						selectedUser = suggestedUser;
+						break;
+					}
 				}
+				
+				if (selectedUser == null) {
+					 String message = "You have not selected any user!";
+						JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+						        JOptionPane.INFORMATION_MESSAGE);
+				}else {
+					Connection possibleConnection = new Connection(employee, selectedUser);
+					possibleConnection.sendConnectionRequest();
+				}
+				
 			}
 			// not finished
 			else if(e.getSource().equals(postButton)) {

@@ -54,7 +54,7 @@ public class NotificationsGUI {
 		frmNotifications.setTitle("Notifications");
 		frmNotifications.setResizable(false);
 		frmNotifications.getContentPane().setBackground(new Color(255, 153, 102));
-		frmNotifications.setBounds(100, 100, 200, 244);
+		frmNotifications.setBounds(1325, 88, 200, 244);
 		frmNotifications.getContentPane().setLayout(null);
 		
 		JList list = new JList();

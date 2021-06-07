@@ -42,6 +42,7 @@ public class WelcomeScreen_GUI {
 		//Appears in the center of the screen
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		frmWelcomeToBsn.setLocation(dim.width/2-frmWelcomeToBsn.getSize().width/2, dim.height/2-frmWelcomeToBsn.getSize().height/2);
+		frmWelcomeToBsn.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmWelcomeToBsn.getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();

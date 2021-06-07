@@ -56,7 +56,7 @@ public class NewMessagesGUI {
 		frmNewMessages.getContentPane().setBackground(new Color(255, 153, 102));
 		frmNewMessages.setResizable(false);
 		frmNewMessages.setTitle("New Messages");
-		frmNewMessages.setBounds(100, 100, 200, 244);
+		frmNewMessages.setBounds(1200, 88, 200, 244);
 		frmNewMessages.getContentPane().setLayout(null);
 		
 		JList list = new JList();

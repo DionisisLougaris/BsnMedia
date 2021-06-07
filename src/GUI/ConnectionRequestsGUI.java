@@ -55,7 +55,7 @@ public class ConnectionRequestsGUI {
 		frmConnectionRequests.setResizable(false);
 		frmConnectionRequests.setTitle("Connection Requests");
 		frmConnectionRequests.getContentPane().setBackground(new Color(255, 153, 102));
-		frmConnectionRequests.setBounds(100, 100, 200, 244);
+		frmConnectionRequests.setBounds(1060, 88, 200, 244);
 		frmConnectionRequests.getContentPane().setLayout(null);
 		
 		JList list = new JList();

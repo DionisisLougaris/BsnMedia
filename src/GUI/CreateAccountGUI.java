@@ -414,32 +414,38 @@ public class CreateAccountGUI {
 							if(password.equals(confirmedPassword))
 							{
 								Password createdPassword = new Password(password, txtUsername.getText(), txtFirstName.getText(), txtLastName.getText());
-								Account createdAccount = new Account(txtUsername.getText(), txtEmail.getText(), theCompany, createdPassword);
 								
-								if (createdAccount.emailAvailability(txtEmail.getText())) {
+								if (password.length()>=8 && !password.equalsIgnoreCase(txtUsername.getText()) 
+										 				 && !password.equalsIgnoreCase(txtFirstName.getText())
+										 				 && !password.equalsIgnoreCase(txtLastName.getText())) {
 									
-									if(rdbtnEmployee.isSelected())
-									 {
-										 Employee createdUser = new Employee(txtFirstName.getText(), txtLastName.getText(), txtTelephone.getText(), txtAddress.getText(), txtGender.getText(), txtBirthday.getText(),txtSpeciality.getText(), createdAccount);
-										 theCompany.addUser(createdUser);
-										 String message = "Successful registration of a new Employee!!!";
-											JOptionPane.showMessageDialog(new JFrame(), message, "Message",
-											        JOptionPane.INFORMATION_MESSAGE);
-									 }
-									 else if(rdbtnChief.isSelected())
-									 {
-										 Chief createdUser = new Chief(txtFirstName.getText(), txtLastName.getText(), txtTelephone.getText(), txtAddress.getText(), txtGender.getText(), txtBirthday.getText(),txtSpeciality.getText(), createdAccount);
-										 theCompany.addUser(createdUser);
-										 String message = "Successful registration of a new Chief!!!";
-											JOptionPane.showMessageDialog(new JFrame(), message, "Message",
-											        JOptionPane.INFORMATION_MESSAGE);
-									 }
-									 else
-									 {
-										 String message = "You have not selected your position. Please check your position";
-											JOptionPane.showMessageDialog(new JFrame(), message, "Message",
-											        JOptionPane.INFORMATION_MESSAGE);
-									 }
+									Account createdAccount = new Account(txtUsername.getText(), txtEmail.getText(), theCompany, createdPassword);
+									
+									if (createdAccount.emailAvailability(txtEmail.getText())) {
+										
+										if(rdbtnEmployee.isSelected())
+										 {
+											 Employee createdUser = new Employee(txtFirstName.getText(), txtLastName.getText(), txtTelephone.getText(), txtAddress.getText(), txtGender.getText(), txtBirthday.getText(),txtSpeciality.getText(), createdAccount);
+											 theCompany.addUser(createdUser);
+											 String message = "Successful registration of a new Employee!!!";
+												JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+												        JOptionPane.INFORMATION_MESSAGE);
+										 }
+										 else if(rdbtnChief.isSelected())
+										 {
+											 Chief createdUser = new Chief(txtFirstName.getText(), txtLastName.getText(), txtTelephone.getText(), txtAddress.getText(), txtGender.getText(), txtBirthday.getText(),txtSpeciality.getText(), createdAccount);
+											 theCompany.addUser(createdUser);
+											 String message = "Successful registration of a new Chief!!!";
+												JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+												        JOptionPane.INFORMATION_MESSAGE);
+										 }
+										 else
+										 {
+											 String message = "You have not selected your position. Please check your position";
+												JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+												        JOptionPane.INFORMATION_MESSAGE);
+										 }
+									}
 								}
 							}
 							else
