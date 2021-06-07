@@ -57,9 +57,9 @@ public class Connection extends Notification{
 		boolean pendingConnectionRequest = false;
 		if(!areConnected())
 		{
-			for(int i=0; i<secondUser.getPendingConnectionRequests().size(); i++)
+			for(int i=0; i<firstUser.getPendingConnectionRequests().size(); i++)
 			{
-				if(firstUser == secondUser.getPendingConnectionRequests().get(i))
+				if(secondUser == firstUser.getPendingConnectionRequests().get(i))
 				{
 					pendingConnectionRequest = true;
 					break;

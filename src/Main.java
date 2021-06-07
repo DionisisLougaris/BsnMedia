@@ -53,7 +53,7 @@ public class Main {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					new WelcomeScreen_GUI(theCompany);
+					new FrontEndProfileGUI(first,first3);
 					} catch (Exception e) {
 					e.printStackTrace();
 				}

@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import entities.Connection;
 import entities.User;
 
 import javax.imageio.ImageIO;
@@ -30,7 +31,8 @@ public class FrontEndProfileGUI {
 
 	private JFrame frame;
 	private JTextField textField;
-	private static User user;
+	private static User tuser;
+	private static User auser;
 
 	/**
 	 * Launch the application.
@@ -39,7 +41,7 @@ public class FrontEndProfileGUI {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					FrontEndProfileGUI window = new FrontEndProfileGUI(user);
+					FrontEndProfileGUI window = new FrontEndProfileGUI(tuser, auser);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -51,9 +53,9 @@ public class FrontEndProfileGUI {
 	/**
 	 * Create the application.
 	 */
-	public FrontEndProfileGUI(User aUser) {
-		
-		user = aUser; 
+	public FrontEndProfileGUI(User tUser,User aUser) {
+		tuser = tUser;
+		auser = aUser; 
 		initialize();
 	}
 
@@ -66,6 +68,8 @@ public class FrontEndProfileGUI {
 		frame.setLocation(500, 0);
 		frame.getContentPane().setLayout(null);
 		frame.setVisible(true);
+		
+		Connection usersconnection = new Connection(tuser,auser);
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
@@ -118,23 +122,23 @@ public class FrontEndProfileGUI {
 		textArea.setBounds(32, 561, 810, 336);
 		panel.add(textArea);
 		
-		String namelastname = user.getFirstName() + " " + user.getLastName();
+		String namelastname = auser.getFirstName() + " " + auser.getLastName();
 		JLabel labelnamelastname= new JLabel(namelastname);
 		labelnamelastname.setFont(new Font("Tahoma", Font.PLAIN, 19));
 		labelnamelastname.setBounds(60, 240, 202, 26);
 		panel.add(labelnamelastname);
 		
-		String companypost = user.getCompanyPost();
-		JLabel labelcompanypost = new JLabel(companypost);
+		JLabel labelcompanypost = new JLabel("Company Post:");
 		labelcompanypost.setBounds(267, 250, 89, 16);
 		panel.add(labelcompanypost);
 		
-		JLabel lblNewLabel_3 = new JLabel("Specialization");
-		lblNewLabel_3.setBounds(354, 250, 78, 16);
-		panel.add(lblNewLabel_3);
+		String spacialization = auser.getCompanyPost();
+		JLabel labelspacialization = new JLabel(spacialization);
+		labelspacialization.setBounds(354, 250, 78, 16);
+		panel.add(labelspacialization);
 		
-		String email = user.getMyAccount().getEmail()
-;		JLabel labelemail = new JLabel(email);
+		String email = auser.getMyAccount().getEmail();
+		JLabel labelemail = new JLabel(email);
         labelemail.setBounds(130, 413, 125, 16);
 		panel.add(labelemail);
 		
@@ -177,6 +181,7 @@ public class FrontEndProfileGUI {
 		addConnection.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				usersconnection.sendConnectionRequest();
 			}
 		});
 		addConnection.setBounds(553, 313, 131, 25);
@@ -190,6 +195,8 @@ public class FrontEndProfileGUI {
 		removeConnection.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				usersconnection.removeConnection();
+				
 			}
 		});
 		removeConnection.setBounds(694, 313, 148, 25);
@@ -200,17 +207,17 @@ public class FrontEndProfileGUI {
 		lblNewLabel_9.setBounds(74, 376, 84, 16);
 		panel.add(lblNewLabel_9);
 		
-		String telephone = user.getTelephone();
+		String telephone = auser.getTelephone();
 		JLabel labeltelephone = new JLabel(telephone);
 		labeltelephone.setBounds(131, 442, 78, 16);
 		panel.add(labeltelephone);
 		
-		String address = user.getAddress();
+		String address = auser.getAddress();
 		JLabel labeladdress = new JLabel(address);
 		labeladdress.setBounds(131, 476, 78, 16);
 		panel.add(labeladdress);
 		
-		String birthday = user.getBirthday();
+		String birthday = auser.getBirthday();
 		JLabel labelbirthday = new JLabel(birthday);
 		labelbirthday.setBounds(130, 510, 79, 16);
 		panel.add(labelbirthday);
@@ -219,10 +226,14 @@ public class FrontEndProfileGUI {
 		lblNewLabel_13.setBounds(712, 377, 109, 16);
 		panel.add(lblNewLabel_13);
 		
-		JList list = new JList();
-		list.setBackground(new Color(255, 250, 240));
-		list.setBounds(709, 409, 133, 127);
-		panel.add(list);
+		JList listmutualconnections = new JList();
+		listmutualconnections.setBackground(new Color(255, 250, 240));
+		listmutualconnections.setBounds(709, 409, 133, 127);
+		for(int i=0; i<usersconnection.mutualConnections().size(); i++)
+		{
+			listmutualconnections.add(listmutualconnections, usersconnection.mutualConnections() + "\n");
+		}
+		panel.add(listmutualconnections);
 		
 		JScrollBar scrollBar = new JScrollBar();
 		scrollBar.setBounds(821, 409, 21, 127);
