@@ -5,10 +5,19 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import java.awt.Dimension;
 import javax.swing.JTextField;
+
+import entities.Boss;
+import entities.Chief;
+import entities.Employee;
+import entities.Group;
+import entities.User;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.Component;
 import java.awt.Cursor;
@@ -26,6 +35,8 @@ public class GroupProfileGUI {
 
 	private JFrame frame;
 	private JTextField textField;
+	private static User myUser;
+	private static Group myGroup;
 
 	/**
 	 * Launch the application.
@@ -34,7 +45,7 @@ public class GroupProfileGUI {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					GroupProfileGUI window = new GroupProfileGUI();
+					GroupProfileGUI window = new GroupProfileGUI(myUser,myGroup);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -46,7 +57,9 @@ public class GroupProfileGUI {
 	/**
 	 * Create the application.
 	 */
-	public GroupProfileGUI() {
+	public GroupProfileGUI(User myUser,Group myGroup) {
+		this.myUser = myUser;
+		this.myGroup = myGroup;
 		initialize();
 	}
 
@@ -99,6 +112,19 @@ public class GroupProfileGUI {
 		btnNewButton_2.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				if(myUser instanceof Boss)
+				{
+					//uparxei problhma me thn apothikeush tou value tou JSlider se int enw leei oti einai int ,prepei na elegxthei
+					int value = slider.getValue();
+					//myGroup.setRating(value);
+					System.out.println(slider.getValue());
+				}
+				else
+				{
+					String message = "Only the boss can rate Groups...";
+					JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+					        JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 		btnNewButton_2.setBounds(452, 346, 86, 25);
@@ -144,6 +170,21 @@ public class GroupProfileGUI {
 		btnNewButton_1_1.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		btnNewButton_1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				//Closing previous GUI
+				frame.setVisible(false);
+				//Returning to the right backend profile
+				if(myUser instanceof Chief)
+				{
+					BackendProfileChiefGUI myProfile = new BackendProfileChiefGUI(myUser);
+				}
+				else if(myUser instanceof Boss)
+				{
+					BackendProfileBossGUI myProfile = new BackendProfileBossGUI(myUser);
+				}
+				else if(myUser instanceof Employee)
+				{
+					BackendProfileEmployeeGUI myProfile = new BackendProfileEmployeeGUI(myUser);
+				}
 			}
 		});
 		btnNewButton_1_1.setBounds(38, 20, 62, 53);

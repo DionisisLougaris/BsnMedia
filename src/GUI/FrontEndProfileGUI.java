@@ -9,6 +9,8 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import entities.Boss;
+import entities.Chief;
 import entities.Connection;
 import entities.Employee;
 import entities.Group;
@@ -116,6 +118,21 @@ public class FrontEndProfileGUI {
 		btnNewButton_1.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				//Closing previous GUI
+				frame.setVisible(false);
+				//Returning to the right backend profile
+				if(tuser instanceof Chief)
+				{
+					BackendProfileChiefGUI myProfile = new BackendProfileChiefGUI(tuser);
+				}
+				else if(tuser instanceof Boss)
+				{
+					BackendProfileBossGUI myProfile = new BackendProfileBossGUI(tuser);
+				}
+				else if(tuser instanceof Employee)
+				{
+					BackendProfileEmployeeGUI myProfile = new BackendProfileEmployeeGUI(tuser);
+				}
 			}
 		});
 		btnNewButton_1.setBounds(12, 13, 62, 53);

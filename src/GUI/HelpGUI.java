@@ -21,6 +21,12 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollBar;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+
+import entities.Boss;
+import entities.Chief;
+import entities.Employee;
+import entities.User;
+
 import java.awt.TextArea;
 import java.awt.Component;
 import java.awt.Cursor;
@@ -39,6 +45,7 @@ public class HelpGUI {
 	private JTextField txtYourFullName;
 	private JTextField txtYourEmail;
 	private JTextArea txtYourMessage;
+	private static User myUser;
 
 	/**
 	 * Launch the application.
@@ -47,7 +54,7 @@ public class HelpGUI {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					HelpGUI window = new HelpGUI();
+					HelpGUI window = new HelpGUI(myUser);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -60,7 +67,8 @@ public class HelpGUI {
 	 * Create the application.
 	 * @throws IOException 
 	 */
-	public HelpGUI() throws IOException {
+	public HelpGUI(User myUser) throws IOException {
+		this.myUser = myUser;
 		initialize();
 	}
 
@@ -104,6 +112,21 @@ public class HelpGUI {
 		btnNewButton_1.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				//Closing previous GUI
+				frame.setVisible(false);
+				//Returning to the right backend profile
+				if(myUser instanceof Chief)
+				{
+					BackendProfileChiefGUI myProfile = new BackendProfileChiefGUI(myUser);
+				}
+				else if(myUser instanceof Boss)
+				{
+					BackendProfileBossGUI myProfile = new BackendProfileBossGUI(myUser);
+				}
+				else if(myUser instanceof Employee)
+				{
+					BackendProfileEmployeeGUI myProfile = new BackendProfileEmployeeGUI(myUser);
+				}
 			}
 		});
 		btnNewButton_1.setBounds(34, 26, 73, 65);

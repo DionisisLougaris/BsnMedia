@@ -14,6 +14,13 @@ import java.awt.Cursor;
 
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import entities.Boss;
+import entities.Chief;
+import entities.Company;
+import entities.Employee;
+import entities.User;
+
 import java.awt.Font;
 import javax.swing.JList;
 import javax.swing.Icon;
@@ -23,6 +30,8 @@ public class CompanyProfileGUI {
 
 	private JFrame frame;
 	private JTextField textField;
+	private static User myUser;
+	private static Company theCompany;
 
 	/**
 	 * Launch the application.
@@ -31,7 +40,7 @@ public class CompanyProfileGUI {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CompanyProfileGUI window = new CompanyProfileGUI();
+					CompanyProfileGUI window = new CompanyProfileGUI(myUser);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -43,7 +52,9 @@ public class CompanyProfileGUI {
 	/**
 	 * Create the application.
 	 */
-	public CompanyProfileGUI() {
+	public CompanyProfileGUI(User myUser) {
+		this.myUser = myUser;
+		this.theCompany = myUser.getMyAccount().getMyCompany();
 		initialize();
 	}
 
@@ -68,6 +79,21 @@ public class CompanyProfileGUI {
 		btnNewButton_1.setCursor(new Cursor(Cursor.HAND_CURSOR));
 	    btnNewButton_1.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) {
+	    		//Closing previous GUI
+				frame.setVisible(false);
+				//Returning to the right backend profile
+				if(myUser instanceof Chief)
+				{
+					BackendProfileChiefGUI myProfile = new BackendProfileChiefGUI(myUser);
+				}
+				else if(myUser instanceof Boss)
+				{
+					BackendProfileBossGUI myProfile = new BackendProfileBossGUI(myUser);
+				}
+				else if(myUser instanceof Employee)
+				{
+					BackendProfileEmployeeGUI myProfile = new BackendProfileEmployeeGUI(myUser);
+				}
 	    	}
 	    });
 	    btnNewButton_1.setBounds(26, 27, 62, 53);
@@ -94,7 +120,7 @@ public class CompanyProfileGUI {
 	    
 	    JPanel panel_1 = new JPanel();
 	    panel_1.setLayout(null);
-	    panel_1.setBounds(50, 142, 743, 285);
+	    panel_1.setBounds(70, 140, 743, 285);
 	    frame.getContentPane().add(panel_1);
 	    
 	    JLabel lblCompanyPhoto = new JLabel("Company photo");
@@ -103,7 +129,7 @@ public class CompanyProfileGUI {
 	    
 	    JLabel lblNewLabel_1 = new JLabel("Company_Name");
 	    lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 23));
-	    lblNewLabel_1.setBounds(328, 440, 226, 30);
+	    lblNewLabel_1.setBounds(347, 438, 226, 30);
 	    frame.getContentPane().add(lblNewLabel_1);
 	    
 	    JLabel lblNewLabel_5 = new JLabel("What we are all about :");
@@ -149,10 +175,6 @@ public class CompanyProfileGUI {
 	    lblNewLabel_3.setBounds(70, 661, 128, 16);
 	    frame.getContentPane().add(lblNewLabel_3);
 	    
-	    JLabel lblNewLabel_6 = new JLabel("Boss' Profile");
-	    lblNewLabel_6.setBounds(198, 661, 106, 16);
-	    frame.getContentPane().add(lblNewLabel_6);
-	    
 	    Icon help = new ImageIcon("Buttons_backgrounds/customer_support_40px.png");
 		JButton btnNewButton_7 = new JButton(help);
 		btnNewButton_7.setContentAreaFilled(false); 
@@ -177,6 +199,19 @@ public class CompanyProfileGUI {
 	    JLabel lblNewLabel_7_2 = new JLabel(new ImageIcon("label_backgrounds/address_20px.png"));
 	    lblNewLabel_7_2.setBounds(106, 809, 28, 25);
 	    frame.getContentPane().add(lblNewLabel_7_2);
+	    
+	    JButton btnNewButton_2 = new JButton("Boss' Profile");
+	    btnNewButton_2.setContentAreaFilled(false); 
+	    btnNewButton_2.setFocusPainted(false); 
+	    btnNewButton_2.setOpaque(false);
+	    btnNewButton_2.setCursor(new Cursor(Cursor.HAND_CURSOR));
+	    btnNewButton_2.setBorderPainted(false);
+	    btnNewButton_2.addActionListener(new ActionListener() {
+	    	public void actionPerformed(ActionEvent arg0) {
+	    	}
+	    });
+	    btnNewButton_2.setBounds(180, 657, 106, 25);
+	    frame.getContentPane().add(btnNewButton_2);
 	    frame.setVisible(true);
 	}
 }

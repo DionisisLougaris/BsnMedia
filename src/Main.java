@@ -16,7 +16,7 @@ public class Main {
 		
 		Password thePassword2 = new Password("12345678", "d.lougaris", "Dionisis", "Lougaris");
 		Account theAccount2 = new Account("d.lougaris", "d.lougaris@gmail.com", theCompany, thePassword2);
-		Employee first2 = new Employee("Dionisis", "Lougaris", "6971657008", "Valtetsiou", "male", "19/12/2001", "Programmer", theAccount2);
+		Boss first2 = new Boss("Dionisis", "Lougaris", "6971657008", "Valtetsiou", "male", "19/12/2001", "Programmer", theAccount2);
 		
 		Password thePassword3 = new Password("12345678", "panos", "Panos", "Maxairas");
 		Account theAccount3 = new Account("panos", "ics20044@uom.edu.gr", theCompany, thePassword3);
@@ -27,7 +27,7 @@ public class Main {
 		Chief first4 = new Chief("Eleni", "Maz", "6971657008", "Valtetsiou", "female", "19/12/2001", "Programmer", theAccount4);
 		
 		Password thePassword5 = new Password("12345678", "elenikos", "Eleni", "Kosmidou");
-		Account theAccount5 = new Account("elenikos", "elenikos01@gmail.com", theCompany5, thePassword5);
+		Account theAccount5 = new Account("elenikos", "elenikos01@gmail.com", theCompany, thePassword5);
 		Employee first5 = new Employee("Eleni", "Kosmidou", "6939445593", "Dervenakion", "female", "26/08/2001", "Programmer", theAccount5);
 		
 		
@@ -58,7 +58,7 @@ public class Main {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					new FrontEndProfileGUI(first,first3);
+					new GroupProfileGUI(first2,null);
 					} catch (Exception e) {
 					e.printStackTrace();
 				}
