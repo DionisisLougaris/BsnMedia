@@ -59,8 +59,8 @@ public class FrontEndProfileGUI {
 	 * Create the application.
 	 */
 	public FrontEndProfileGUI(User tUser,User aUser) {
-		tuser = tUser;
-		auser = aUser; 
+		tuser = tUser; //The user who is connected
+		auser = aUser; //The other User
 		initialize();
 	}
 
@@ -105,7 +105,7 @@ public class FrontEndProfileGUI {
 		searchbutton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		searchbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				tuser.getMyAccount().getMyCompany().searchObject(searchtext.getText());
+				tuser.getMyAccount().getMyCompany().searchObject(searchtext.getText(), tuser);
 			}
 		});
 		searchbutton.setBounds(766, 27, 55, 44);

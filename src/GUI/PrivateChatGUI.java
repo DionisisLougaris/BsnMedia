@@ -73,6 +73,8 @@ public class PrivateChatGUI {
 		btnNewButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				new FrontEndProfileGUI(sender, receiver);
+				frame.setVisible(false);
 			}
 		});
 		btnNewButton.setBounds(522, 14, 133, 25);
@@ -83,7 +85,7 @@ public class PrivateChatGUI {
 		lblNewLabel.setBounds(70, 23, 215, 16);
 		frame.getContentPane().add(lblNewLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("Private Conversation with \" \"");
+		JLabel lblNewLabel_1 = new JLabel("Private Conversation with "+receiver.getFirstName());
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		lblNewLabel_1.setBounds(12, 56, 593, 25);
 		frame.getContentPane().add(lblNewLabel_1);

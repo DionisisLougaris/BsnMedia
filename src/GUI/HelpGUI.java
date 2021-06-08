@@ -16,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollBar;
@@ -25,6 +26,7 @@ import javax.swing.JTextField;
 import entities.Boss;
 import entities.Chief;
 import entities.Employee;
+import entities.Help;
 import entities.User;
 
 import java.awt.TextArea;
@@ -45,6 +47,7 @@ public class HelpGUI {
 	private JTextField txtYourFullName;
 	private JTextField txtYourEmail;
 	private JTextArea txtYourMessage;
+	private JButton btnNewButton_2;
 	private static User myUser;
 
 	/**
@@ -81,6 +84,7 @@ public class HelpGUI {
 		frame.setBounds(100, 100, 893, 1020);
 		frame.setLocation(500, 0);
 		frame.getContentPane().setLayout(null);
+		frame.setVisible(true);
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
@@ -95,7 +99,7 @@ public class HelpGUI {
 		Image imagerisize = image.getImage().getScaledInstance(30, 40, 20) ;
 		ImageIcon imagebutton = new ImageIcon(imagerisize);
 	    JButton buttonLogo = new JButton( imagebutton);
-	    buttonLogo.setBounds(824, 929, 46, 38);
+	    buttonLogo.setBounds(824, 929, 150, 150);
 		buttonLogo.setBorderPainted(false);
 		buttonLogo.setFocusPainted(false);
 		buttonLogo.setContentAreaFilled(false);
@@ -105,7 +109,11 @@ public class HelpGUI {
 			}
 		});
 		
-		JButton btnNewButton_1 = new JButton("logo");
+		JButton btnNewButton_1 = new JButton();
+		BufferedImage imageicon2 = ImageIO.read(new File("label_backgrounds/BSNlogo.jpg"));
+		ImageIcon image2 = new ImageIcon(imageicon2);
+		Image imagerisize2 = image2.getImage().getScaledInstance(110, 110, 170) ;
+		btnNewButton_1.setIcon(new ImageIcon(imagerisize2));
 		btnNewButton_1.setContentAreaFilled(false); 
 		btnNewButton_1.setFocusPainted(false); 
 		btnNewButton_1.setOpaque(false);
@@ -129,7 +137,7 @@ public class HelpGUI {
 				}
 			}
 		});
-		btnNewButton_1.setBounds(34, 26, 73, 65);
+		btnNewButton_1.setBounds(22, 11, 127, 122);
 		panel.add(btnNewButton_1);
 		
 		JLabel lblNewLabel_13 = new JLabel("Frequently asked questions:");
@@ -273,7 +281,7 @@ public class HelpGUI {
 		lblNewLabel_17.setBounds(57, 361, 73, 27);
 		panel_1.add(lblNewLabel_17);
 		
-		JButton btnNewButton_2 = new JButton("Submit");
+		btnNewButton_2 = new JButton("Submit");
 		btnNewButton_2.setContentAreaFilled(false); 
 		btnNewButton_2.setFocusPainted(false); 
 		btnNewButton_2.setOpaque(false);
@@ -302,43 +310,43 @@ public class HelpGUI {
 		panel_2.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("Kosmidou Eleni");
-		lblNewLabel_2.setBounds(475, 83, 105, 16);
+		lblNewLabel_2.setBounds(470, 80, 105, 16);
 		panel_2.add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel("Kwnstantinidi Styliana");
-		lblNewLabel_3.setBounds(475, 128, 134, 16);
+		lblNewLabel_3.setBounds(470, 120, 134, 16);
 		panel_2.add(lblNewLabel_3);
 		
 		JLabel lblNewLabel_4 = new JLabel("Lougaris Dionisis");
-		lblNewLabel_4.setBounds(475, 163, 105, 16);
+		lblNewLabel_4.setBounds(470, 160, 105, 16);
 		panel_2.add(lblNewLabel_4);
 		
 		JLabel lblNewLabel_5 = new JLabel("Mazaraki Eleni");
-		lblNewLabel_5.setBounds(475, 206, 105, 16);
+		lblNewLabel_5.setBounds(470, 200, 105, 16);
 		panel_2.add(lblNewLabel_5);
 		
 		JLabel lblNewLabel_6 = new JLabel("Machairas Panagiotis");
-		lblNewLabel_6.setBounds(701, 42, 134, 16);
+		lblNewLabel_6.setBounds(700, 40, 134, 16);
 		panel_2.add(lblNewLabel_6);
 		
 		JLabel lblNewLabel_7 = new JLabel("Melissanidou Kwnstantina");
-		lblNewLabel_7.setBounds(701, 83, 146, 16);
+		lblNewLabel_7.setBounds(700, 80, 146, 16);
 		panel_2.add(lblNewLabel_7);
 		
 		JLabel lblNewLabel_8 = new JLabel("Mertzanhs Antwnhs");
-		lblNewLabel_8.setBounds(701, 128, 117, 16);
+		lblNewLabel_8.setBounds(700, 120, 117, 16);
 		panel_2.add(lblNewLabel_8);
 		
 		JLabel lblNewLabel_9 = new JLabel("Nanou Eleftheria");
-		lblNewLabel_9.setBounds(701, 163, 117, 16);
+		lblNewLabel_9.setBounds(700, 160, 117, 16);
 		panel_2.add(lblNewLabel_9);
 		
 		JLabel lblNewLabel_10 = new JLabel("Stefou Giwrgos-Giannis");
-		lblNewLabel_10.setBounds(701, 206, 134, 16);
+		lblNewLabel_10.setBounds(700, 200, 134, 16);
 		panel_2.add(lblNewLabel_10);
 		
 		JLabel lblNewLabel_11 = new JLabel("Charakopoulos Minas-Theodoros");
-		lblNewLabel_11.setBounds(467, 42, 222, 16);
+		lblNewLabel_11.setBounds(470, 40, 222, 16);
 		panel_2.add(lblNewLabel_11);
 		
 		JLabel lblNewLabel_12 = new JLabel("\u00A9 Bsn Media 2021");
@@ -348,12 +356,25 @@ public class HelpGUI {
 		JLabel lblNewLabel_18 = new JLabel("");
 		lblNewLabel_18.setIcon(new ImageIcon("label_backgrounds/gmail_32px.png"));
 		lblNewLabel_18.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		lblNewLabel_18.setToolTipText("Send an email to our Company");
 		lblNewLabel_18.setBounds(150, 128, 56, 46);
+		lblNewLabel_18.addMouseListener(new MouseAdapter() {
+	       	 
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                try {
+                    Desktop.getDesktop().browse(new URI("mailto:itintelligenceuomgmail.com"));
+                } catch (IOException | URISyntaxException e1) {
+                    e1.printStackTrace();
+                }
+            }
+		});
 		panel_2.add(lblNewLabel_18);
 		
 		JLabel lblNewLabel_19 = new JLabel("");
 		lblNewLabel_19.setIcon(new ImageIcon("label_backgrounds/linkedin_32px.png"));
 		lblNewLabel_19.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		lblNewLabel_19.setToolTipText("Find us on LinkedIn");
 		lblNewLabel_19.setBounds(93, 128, 56, 46);
 		lblNewLabel_19.addMouseListener(new MouseAdapter() {
 	       	 
@@ -371,6 +392,7 @@ public class HelpGUI {
 		JLabel lblNewLabel_20 = new JLabel("");
 		lblNewLabel_20.setIcon(new ImageIcon("label_backgrounds/github_32px.png"));
 		lblNewLabel_20.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		lblNewLabel_20.setToolTipText("Find us on GitHub");
 		lblNewLabel_20.setBounds(39, 128, 56, 46);
 		lblNewLabel_20.addMouseListener(new MouseAdapter() {
        	 
@@ -385,7 +407,35 @@ public class HelpGUI {
 		});
 		panel_2.add(lblNewLabel_20);
 		
-		frame.setVisible(true); // den anoige diaforetika
+		ButtonListener listener = new ButtonListener();
+		btnNewButton_2.addActionListener(listener);
+	}
 	
+	class ButtonListener implements ActionListener {
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			
+			if (e.getSource().equals(btnNewButton_2)) {
+				
+				String userFullName = txtYourFullName.getText();
+				String usersEmail = txtYourEmail.getText();
+				String usersMessage = txtYourMessage.getText();
+				
+				if (!userFullName.equalsIgnoreCase("") && !usersEmail.equalsIgnoreCase("") && !usersMessage.equalsIgnoreCase("")
+					&& !userFullName.equalsIgnoreCase("Your full name...") && !usersEmail.equalsIgnoreCase("Your email...") && !usersMessage.equalsIgnoreCase("Your message...")) {
+					Help questionFromUser = new Help(userFullName, usersEmail, usersMessage);
+					questionFromUser.sendQuestion();
+					String message = "Successful submission! Thank you for your feedback!";
+					JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+					        JOptionPane.INFORMATION_MESSAGE);
+				}else {
+					String message = "There are fields you need to fill in!";
+					JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+					        JOptionPane.ERROR_MESSAGE);
+				}	
+			}
+		}
 	}
 }

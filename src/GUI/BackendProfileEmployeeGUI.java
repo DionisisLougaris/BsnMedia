@@ -38,10 +38,10 @@ public class BackendProfileEmployeeGUI {
 	private JButton searchButton, helpButton, requestsButton, messagesButton, notifsButton, editAccountButton, postButton, checkprofileButton, sendMessageButton, sendRequestButton, disconnectButton;
 	private JLabel emailLabel;
 	private JLabel groupALabel, groupBLabel, groupCLabel;
-	private JList<String> connectionsList, suggestedList, postList; // xreiazetai na kanoume to suggested connections
+	private JList<String> connectionsList, suggestedList, postList; 
 	private JTextArea writePostArea, postArea;
 	private JRadioButton connectionsRadio, PublicRadio, GroupARadio, GroupBRadio, GroupCRadio;
-	private static Employee employee; // static??
+	private static Employee employee;
 	private JLabel lblNewLabel_1;
 	TreeSet<User> suggestedListConnections = new TreeSet<>();
 	TreeSet<Post> allPosts = new TreeSet<>();
@@ -430,7 +430,7 @@ public class BackendProfileEmployeeGUI {
 			}
 			else if(e.getSource().equals(helpButton)) {
 				try {
-					new HelpGUI();
+					new HelpGUI(employee);
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -545,7 +545,16 @@ public class BackendProfileEmployeeGUI {
 			else if(e.getSource().equals(searchButton)) {
 				String text = searchField.getText();
 				if(!text.isEmpty()) {
-					employee.getMyAccount().getMyCompany().searchObject(text);
+					boolean result = employee.getMyAccount().getMyCompany().searchObject(text, employee);
+					
+					if (!result) {
+						ArrayList<String> suggestedOptions = new ArrayList<String>();
+						new SearchSuggestionsGUI(suggestedOptions, employee);
+					}
+				}else {
+					 String message = "Type something in the Search field";
+						JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+						        JOptionPane.INFORMATION_MESSAGE);
 				}
 			}
 		}

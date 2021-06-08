@@ -33,6 +33,19 @@ public class Help {
 	//A method that allows users to contact the Bsn Media technical support team.
 	public void sendQuestion() {
 		
+		String [] reciverForConfirmation = new String[1];
+		reciverForConfirmation[0] = authorEmail;
+		String subject = "Inquiry confirmation!";
+		String body = "Thank you very much for your comments "+authorName;
+		
+		Help.sendGMail(supportEmail, supportEmailPassword, reciverForConfirmation, subject, body);
+		
+		
+		String [] usAsRecievers = new String[1];
+		usAsRecievers[0] = supportEmail;
+		String subject2 = "Requested by user";
+		String body2 = "Question: "+this.question+"\nFrom the User: "+this.authorName+"\nEmail for Contact: "+this.authorEmail;
+		Help.sendGMail(supportEmail, supportEmailPassword, usAsRecievers, subject2, body2);
 	}
 	
 	

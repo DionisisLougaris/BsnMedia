@@ -139,51 +139,46 @@ public class Company implements Serializable{
 	}
 	
 	
-	public void searchObject(String aString)
-	{
-		boolean found=false;
+	
+	public boolean searchObject(String aString, User theUser) {
 		
+		boolean found = false;
 		
 		//Searching for the company
-		if(aString.equals(this.name))
-		{
-			found=true;
-			new CompanyProfileGUI();
+		if(aString.equalsIgnoreCase(this.name)) {
+			
+			found = true;
+			new CompanyProfileGUI(theUser);
 		}
-		
-		//Searching for a group
-		for(int i=0;i<this.companyGroups.size();i++)
-			if(this.companyGroups.get(i).getName().equals(aString))
-			{
-				found=true;
-				new GroupProfileGUI();
+		//Search for Group
+		if (!found) {
+			for(Group theGroup: companyGroups) {
+				if (theGroup.getName().equalsIgnoreCase(aString)) {
+					found = true;
+					new GroupProfileGUI(theUser, theGroup);
+					break;
+				}
 			}
-		//Searching for a User by Full name or email
-		for(int i=0;i<this.companyMembers.size();i++)
-		{
-			if((this.companyMembers.get(i).getFirstName()+ " " +  this.companyMembers.get(i).getLastName()).equals(aString)
-					||this.companyMembers.get(i).myAccount.getEmail().equals(aString))
+		}
+		//Searching for a User by FirstName, Surname, Full name or email
+		if (!found) {
+			
+			for(int i=0;i<this.companyMembers.size();i++)
 			{
-				found=true;
-				if(companyMembers.get(i) instanceof Employee )
-				{
-					new BackendProfileEmployeeGUI(companyMembers.get(i));
+				if((this.companyMembers.get(i).getFirstName()+ " " + this.companyMembers.get(i).getLastName()).equalsIgnoreCase(aString)
+						||this.companyMembers.get(i).myAccount.getEmail().equals(aString) || this.companyMembers.get(i).getFirstName().equalsIgnoreCase(aString)
+						|| this.companyMembers.get(i).getLastName().equalsIgnoreCase(aString)) {
+					
+					found = true;
+					new FrontEndProfileGUI(theUser, companyMembers.get(i));
+					break;
 				}
-				else if(companyMembers.get(i) instanceof Chief)
-				{
-					new BackendProfileChiefGUI(companyMembers.get(i));
-				}
-				else
-				{
-					new BackendProfileChiefGUI(companyMembers.get(i));
-				}
-				
-			}
+			}	
 		}
 		//No entity was found so suggested search options appear to User
-		if (found=false)
-			this.suggestedSearchOption(aString);
+		return found;
 	}
+	
 	
 	
 	//This methods returns if a Group Name is taken or not

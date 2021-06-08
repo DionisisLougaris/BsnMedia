@@ -482,7 +482,7 @@ public class BackendProfileChiefGUI {
 			}
 			else if(e.getSource().equals(helpButton)) {
 				try {
-					new HelpGUI();
+					new HelpGUI(chief);
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

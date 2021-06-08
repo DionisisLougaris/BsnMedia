@@ -37,6 +37,7 @@ public class Main {
 		theCompany.addUser(first4);
 		theCompany.addUser(first5);
 		
+		
 		/*privateConversation conversation = new privateConversation(first, first2);
 		Message firstMessage = new Message("Geiaaa", first);
 		Message firstMessage1 = new Message("Geiaaa", first2);
@@ -58,7 +59,7 @@ public class Main {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					new GroupProfileGUI(first2,null);
+					new WelcomeScreen_GUI(theCompany);
 					} catch (Exception e) {
 					e.printStackTrace();
 				}
