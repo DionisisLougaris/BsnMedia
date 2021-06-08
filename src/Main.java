@@ -30,6 +30,12 @@ public class Main {
 		Account theAccount5 = new Account("elenikos", "elenikos01@gmail.com", theCompany, thePassword5);
 		Employee first5 = new Employee("Eleni", "Kosmidou", "6939445593", "Dervenakion", "female", "26/08/2001", "Programmer", theAccount5);
 		
+		Connection c = new Connection(first, first3);
+		Connection c1 = new Connection(first, first4);
+		c.manageConnectionRequest(true);
+		c1.manageConnectionRequest(true);
+		
+		
 		
 		theCompany.addUser(first);
 		theCompany.addUser(first2);
@@ -59,7 +65,7 @@ public class Main {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					new WelcomeScreen_GUI(theCompany);
+					new CreateProjectGUI(first4);
 					} catch (Exception e) {
 					e.printStackTrace();
 				}

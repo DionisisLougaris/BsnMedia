@@ -63,9 +63,24 @@ public class Post implements Serializable{
 	//This method share a post to a conversation.
 	public void  shareToConversation(User userSharing, Conversation conversationSharing, User userSherdPost)
 	{
+		ArrayList<Post> userSherdPostGP = new ArrayList<Post>(); //Post of user who will see the posts
+		for(int i=0; i<userSherdPost.getGroups().size(); i++)
+		{
+				userSherdPostGP.addAll(userSherdPost.getGroups().get(i).getGroupPosts());	
+		}
+		if(postScope.equalsIgnoreCase("public") || userSherdPost.getListOfConnections().contains(creator) || userSherdPostGP.contains(this))
+		{
 		String messageshare = content + "\n" + "Creator: " + creator.getFirstName() + " " + creator.getLastName() + " " + "Time: " + timestamp;
 		Message message = new Message(messageshare, userSharing);
 		conversationSharing.addMesage(message);
+		}
+		else
+		{
+			String message = "You have not the permission to share this post to this user";
+			JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+			        JOptionPane.INFORMATION_MESSAGE);
+		}
+		
 	}
 
 

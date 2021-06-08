@@ -14,9 +14,11 @@ import entities.Chief;
 import entities.Connection;
 import entities.Employee;
 import entities.Group;
+import entities.Post;
 import entities.User;
 
 import javax.imageio.ImageIO;
+import javax.swing.DefaultListModel;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -28,6 +30,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
 import javax.swing.JRadioButton;
 import java.awt.Font;
+import java.awt.Image;
+
 import javax.swing.JList;
 import javax.swing.JScrollBar;
 import java.awt.Color;
@@ -87,8 +91,11 @@ public class FrontEndProfileGUI {
 		panel.add(panel_1);
 		panel_1.setLayout(null);
 		
-		JLabel labeldefaulprofilephoto = new JLabel("default photo/defaultProfilePhoto.png");
-		labeldefaulprofilephoto.setBounds(51, 66, 99, 16);
+		ImageIcon defaultprofilephoto = new ImageIcon("default photo/defaultProfilePhoto.png");
+		Image imagerisize = defaultprofilephoto.getImage().getScaledInstance(70, 120, 80) ;
+		ImageIcon ndefaultprofilephoto = new ImageIcon(imagerisize);
+		JLabel labeldefaulprofilephoto = new JLabel(ndefaultprofilephoto);
+		labeldefaulprofilephoto.setBounds(0, 0, 183, 152);
 		panel_1.add(labeldefaulprofilephoto);
 		
 		searchtext = new JTextField();
@@ -111,12 +118,13 @@ public class FrontEndProfileGUI {
 		searchbutton.setBounds(766, 27, 55, 44);
 		panel.add(searchbutton);
 		
-		JButton btnNewButton_1 = new JButton("logo");
-		btnNewButton_1.setContentAreaFilled(false); 
-		btnNewButton_1.setFocusPainted(false); 
-		btnNewButton_1.setOpaque(false);
-		btnNewButton_1.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		btnNewButton_1.addActionListener(new ActionListener() {
+		
+		JButton buttongotomyprofile = new JButton("logo");
+		buttongotomyprofile.setContentAreaFilled(false); 
+		buttongotomyprofile.setFocusPainted(false); 
+		buttongotomyprofile.setOpaque(false);
+		buttongotomyprofile.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		buttongotomyprofile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//Closing previous GUI
 				frame.setVisible(false);
@@ -135,29 +143,33 @@ public class FrontEndProfileGUI {
 				}
 			}
 		});
-		btnNewButton_1.setBounds(12, 13, 62, 53);
-		panel.add(btnNewButton_1);
+		buttongotomyprofile.setBounds(12, 13, 62, 53);
+		panel.add(buttongotomyprofile);
 		
-		JTextArea textArea = new JTextArea();
-		textArea.setBackground(new Color(255, 250, 240));
-		textArea.setBounds(32, 561, 810, 336);
-		panel.add(textArea);
+		JTextArea ausersposts = new JTextArea();
+		ausersposts.setBackground(new Color(255, 250, 240));
+		ausersposts.setBounds(32, 561, 810, 336);
+	    for(Post post : auser.getListOfPosts())
+		{
+			  ausersposts.append(post.getContent());
+		}
+		panel.add(ausersposts);
 		
 		String namelastname = auser.getFirstName() + " " + auser.getLastName();
 		JLabel labelnamelastname= new JLabel(namelastname);
 		labelnamelastname.setFont(new Font("Tahoma", Font.PLAIN, 19));
-		labelnamelastname.setBounds(60, 240, 202, 26);
+		labelnamelastname.setBounds(108, 240, 202, 26);
 		panel.add(labelnamelastname);
 		
 		
-		String companypost = auser.getCompanyPost();
-		JLabel labelcompanypost = new JLabel(companypost);
-		labelcompanypost.setBounds(267, 250, 89, 16);
+		
+		JLabel labelcompanypost = new JLabel("Currently Post:");
+		labelcompanypost.setBounds(322, 248, 89, 16);
 		panel.add(labelcompanypost);
 		
 		String spacialization = auser.getCompanyPost();
 		JLabel labelspacialization = new JLabel(spacialization);
-		labelspacialization.setBounds(354, 250, 78, 16);
+		labelspacialization.setBounds(410, 248, 78, 16);
 		panel.add(labelspacialization);
 		
 		String email = auser.getMyAccount().getEmail();
@@ -209,50 +221,51 @@ public class FrontEndProfileGUI {
 	     
 		
 		
-		
-		
-		JButton buttonchat= new JButton("Chat");
-		buttonchat.setContentAreaFilled(false); 
-		buttonchat.setFocusPainted(false); 
-		buttonchat.setOpaque(false);
-		buttonchat.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		buttonchat.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				//new PrivateChatGUI();// prepei na baloume twn xhrhsrh
-			}
-		});
-		buttonchat.setBounds(479, 313, 62, 25);
-		panel.add(buttonchat);
-		
-		JButton addConnection = new JButton("Add connection");
-		addConnection.setContentAreaFilled(false); 
-		addConnection.setFocusPainted(false); 
-		addConnection.setOpaque(false);
-		addConnection.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		addConnection.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				usersconnection.sendConnectionRequest();
-			}
-		});
-		addConnection.setBounds(553, 313, 131, 25);
-		panel.add(addConnection);
-		
-		JButton removeConnection = new JButton("Remove connection");
-		removeConnection.setContentAreaFilled(false); 
-		removeConnection.setFocusPainted(false); 
-		removeConnection.setOpaque(false);
-		removeConnection.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		removeConnection.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				usersconnection.removeConnection();
-				
-			}
-		});
-		removeConnection.setBounds(694, 313, 148, 25);
-		panel.add(removeConnection);
+		if(!tuser.equals(auser))
+		{
+			JButton buttonchat= new JButton("Chat");
+			buttonchat.setContentAreaFilled(false); 
+			buttonchat.setFocusPainted(false); 
+			buttonchat.setOpaque(false);
+			buttonchat.setCursor(new Cursor(Cursor.HAND_CURSOR));
+			buttonchat.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					
+					//new PrivateChatGUI();// prepei na baloume twn xhrhsrh
+				}
+			});
+			buttonchat.setBounds(479, 313, 62, 25);
+			panel.add(buttonchat);
+			
+			JButton addConnection = new JButton("Add connection");
+			addConnection.setContentAreaFilled(false); 
+			addConnection.setFocusPainted(false); 
+			addConnection.setOpaque(false);
+			addConnection.setCursor(new Cursor(Cursor.HAND_CURSOR));
+			addConnection.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					
+					usersconnection.sendConnectionRequest();
+				}
+			});
+			addConnection.setBounds(553, 313, 131, 25);
+			panel.add(addConnection);
+			
+			JButton removeConnection = new JButton("Remove connection");
+			removeConnection.setContentAreaFilled(false); 
+			removeConnection.setFocusPainted(false); 
+			removeConnection.setOpaque(false);
+			removeConnection.setCursor(new Cursor(Cursor.HAND_CURSOR));
+			removeConnection.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					
+					usersconnection.removeConnection();
+					
+				}
+			});
+			removeConnection.setBounds(694, 313, 148, 25);
+			panel.add(removeConnection);
+		}
 		
 		JLabel lblNewLabel_9 = new JLabel("Information:");
 		lblNewLabel_9.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -278,13 +291,15 @@ public class FrontEndProfileGUI {
 		lblNewLabel_13.setBounds(712, 377, 109, 16);
 		panel.add(lblNewLabel_13);
 		
+		DefaultListModel mutualmodel = new DefaultListModel();
 		JList listmutualconnections = new JList();
 		listmutualconnections.setBackground(new Color(255, 250, 240));
 		listmutualconnections.setBounds(709, 409, 133, 127);
 		for(int i=0; i<usersconnection.mutualConnections().size(); i++)
 		{
-			listmutualconnections.add(listmutualconnections, usersconnection.mutualConnections() + "\n");
+			mutualmodel.addElement(usersconnection.mutualConnections().get(i).getMyAccount().getUsername() + "\n");
 		}
+		listmutualconnections.setModel(mutualmodel);
 		panel.add(listmutualconnections);
 		
 		JScrollBar scrollBar = new JScrollBar();
@@ -323,5 +338,8 @@ public class FrontEndProfileGUI {
 		JLabel lblNewLabel_14_3 = new JLabel(new ImageIcon("label_backgrounds/birthday_cake_20px.png"));
 		lblNewLabel_14_3.setBounds(85, 501, 28, 25);
 		panel.add(lblNewLabel_14_3);
+		
+		
+		frame.setTitle(auser.getMyAccount().getUsername());
 	}
 }

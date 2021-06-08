@@ -6,10 +6,16 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JTextField;
+
+import entities.Chief;
+import entities.Group;
+import entities.Project;
+
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import javax.swing.JScrollBar;
 import java.awt.event.ActionListener;
@@ -19,9 +25,11 @@ import java.awt.event.ActionEvent;
 public class CreateProjectGUI {
 
 	private JFrame frame;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
+	private JTextField textProjectName;
+	private JTextField textGroupName;
+	private JTextField textProjectDescription;
+	private JTextField textDeadline;
+	private static Chief pchief;
 
 	/**
 	 * Launch the application.
@@ -30,7 +38,7 @@ public class CreateProjectGUI {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CreateProjectGUI window = new CreateProjectGUI();
+					CreateProjectGUI window = new CreateProjectGUI(pchief);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -42,7 +50,8 @@ public class CreateProjectGUI {
 	/**
 	 * Create the application.
 	 */
-	public CreateProjectGUI() {
+	public CreateProjectGUI(Chief chief ) {
+		pchief = chief;
 		initialize();
 	}
 
@@ -55,36 +64,40 @@ public class CreateProjectGUI {
 		frame.getContentPane().setLayout(null);
 		frame.setVisible(true);
 		frame.setLocation(885, 200);
-		textField = new JTextField();
-		textField.setBounds(210, 23, 116, 22);
-		frame.getContentPane().add(textField);
-		textField.setColumns(10);
+		textProjectName = new JTextField();
+		textProjectName.setBounds(210, 23, 116, 22);
+		frame.getContentPane().add(textProjectName);
+		textProjectName.setColumns(10);
 		
-		JLabel lblNewLabel = new JLabel("Project name :");
-		lblNewLabel.setBounds(82, 26, 103, 16);
-		frame.getContentPane().add(lblNewLabel);
+		JLabel lblProjectName = new JLabel("Project name :");
+		lblProjectName.setBounds(82, 26, 103, 16);
+		frame.getContentPane().add(lblProjectName);
 		
-		JLabel lblNewLabel_1 = new JLabel("Project description :");
-		lblNewLabel_1.setBounds(59, 90, 126, 16);
-		frame.getContentPane().add(lblNewLabel_1);
+		JLabel lblProjectDescription= new JLabel("Project description :");
+		lblProjectDescription.setBounds(59, 90, 126, 16);
+		frame.getContentPane().add(lblProjectDescription);
 		
-		JLabel lblNewLabel_2 = new JLabel("Deadline");
-		lblNewLabel_2.setBounds(96, 193, 56, 16);
-		frame.getContentPane().add(lblNewLabel_2);
+		JTextArea textProjectDescription = new JTextArea();
+		textProjectDescription.setBounds(210, 90, 116, 68);
+		frame.getContentPane().add(textProjectDescription);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(210, 190, 116, 22);
-		frame.getContentPane().add(textField_1);
-		textField_1.setColumns(10);
+		JLabel lblDeadline = new JLabel("Deadline");
+		lblDeadline.setBounds(96, 193, 56, 16);
+		frame.getContentPane().add(lblDeadline);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(210, 284, 116, 22);
-		frame.getContentPane().add(textField_2);
-		textField_2.setColumns(10);
+		textDeadline = new JTextField();
+		textDeadline.setBounds(210, 190, 116, 22);
+		frame.getContentPane().add(textDeadline);
+		textDeadline.setColumns(10);
 		
-		JLabel lblNewLabel_3 = new JLabel("Group name :");
-		lblNewLabel_3.setBounds(74, 287, 91, 16);
-		frame.getContentPane().add(lblNewLabel_3);
+		textGroupName = new JTextField();
+		textGroupName.setBounds(210, 284, 116, 22);
+		frame.getContentPane().add(textGroupName);
+		textGroupName.setColumns(10);
+		
+		JLabel lblGroupName = new JLabel("Group name :");
+		lblGroupName.setBounds(74, 287, 91, 16);
+		frame.getContentPane().add(lblGroupName);
 		
 		JList list = new JList();
 		list.setBounds(71, 399, 126, 157);
@@ -126,17 +139,52 @@ public class CreateProjectGUI {
 		btnNewButton_1.setBounds(337, 571, 85, 25);
 		frame.getContentPane().add(btnNewButton_1);
 		
-		JButton btnNewButton_2 = new JButton("Create");
-		btnNewButton_2.setContentAreaFilled(false); 
-		btnNewButton_2.setFocusPainted(false); 
-		btnNewButton_2.setOpaque(false);
-		btnNewButton_2.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		btnNewButton_2.setBounds(414, 609, 77, 22);
-		frame.getContentPane().add(btnNewButton_2);
+		JButton btnCreateProject = new JButton("Create");
+		btnCreateProject.setContentAreaFilled(false); 
+		btnCreateProject.setFocusPainted(false); 
+		btnCreateProject.setOpaque(false);
+		btnCreateProject.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		btnCreateProject.setBounds(414, 609, 77, 22);
+		btnCreateProject.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				boolean groupfound = false;
+				
+				if(!textProjectName.getText().equals("")  && !textProjectDescription.getText().equals("")  && !textDeadline.getText().equals("")   && !textGroupName.getText().equals("")  )
+				{
+					System.out.println("j8soi");
+					for(int i=0; i<pchief.getMyAccount().getMyCompany().getCompanyGroups().size(); i++)
+					{
+						if(pchief.getMyAccount().getMyCompany().getCompanyGroups().get(i).getName().equals(lblGroupName.getText()))
+						{
+							groupfound = true;
+							break;
+						}
+					}
+					if(groupfound)
+					{
+						String message = "The group already exists. You can create group with the same name";
+						JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+						        JOptionPane.INFORMATION_MESSAGE);
+					}
+					else
+					{
+						Group createdGroup = new Group(textGroupName.getText(), null, pchief);
+						Project createdProject = new Project(textProjectName.getText(), textProjectDescription.getText(), textDeadline.getText(), createdGroup);
+						createdGroup.setMyProject(createdProject);
+					}
+				}
+				else
+				{
+					String message = "You can create Project or Group";
+					JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+					        JOptionPane.INFORMATION_MESSAGE);
+				}
+			}
+		});
+		frame.getContentPane().add(btnCreateProject);
 		
-		JTextArea textArea = new JTextArea();
-		textArea.setBounds(210, 90, 116, 68);
-		frame.getContentPane().add(textArea);
+		
 		
 		
 		frame.setTitle("Create project");
