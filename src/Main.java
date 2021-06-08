@@ -26,11 +26,16 @@ public class Main {
 		Account theAccount4 = new Account("eleni", "eleni@gmail.com", theCompany, thePassword4);
 		Chief first4 = new Chief("Eleni", "Maz", "6971657008", "Valtetsiou", "female", "19/12/2001", "Programmer", theAccount4);
 		
+		Password thePassword5 = new Password("12345678", "elenikos", "Eleni", "Kosmidou");
+		Account theAccount5 = new Account("elenikos", "elenikos01@gmail.com", theCompany5, thePassword5);
+		Employee first5 = new Employee("Eleni", "Kosmidou", "6939445593", "Dervenakion", "female", "26/08/2001", "Programmer", theAccount5);
+		
 		
 		theCompany.addUser(first);
 		theCompany.addUser(first2);
 		theCompany.addUser(first3);
 		theCompany.addUser(first4);
+		theCompany.addUser(first5);
 		
 		/*privateConversation conversation = new privateConversation(first, first2);
 		Message firstMessage = new Message("Geiaaa", first);

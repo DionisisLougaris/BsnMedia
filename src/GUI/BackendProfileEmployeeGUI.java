@@ -494,7 +494,7 @@ public class BackendProfileEmployeeGUI {
 					}
 					
 					if(selectedUserToChat == null) {
-						 String message = "Something gone Wrong!";
+						 String message = "Something went Wrong!";
 							JOptionPane.showMessageDialog(new JFrame(), message, "Message",
 							        JOptionPane.INFORMATION_MESSAGE);
 					}else {

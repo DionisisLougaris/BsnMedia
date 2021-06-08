@@ -5,19 +5,26 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.TreeSet;
 
+import javax.swing.ButtonGroup;
+import javax.swing.DefaultListModel;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollBar;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import GUI.BackendProfileEmployeeGUI.ButtonListener;
 import entities.*;
 import java.awt.Color;
 
@@ -25,17 +32,31 @@ public class BackendProfileChiefGUI {
 
 	private JFrame frame;
 	private JTextField textField;
-	private JTextField textField_1;
-	private User chief;
-
+	private JTextField searchField;
+	private static Chief chief;
+	private JPanel panel, picturePanel;
+	private JLabel lblNewLabel;
+	private JButton searchButton, helpButton, requestsButton, messagesButton, notifsButton, editAccountButton,createProjectButton, editGroupAButton, editGroupBButton, editGroupCButton , postButton, checkprofileButton, sendMessageButton, sendRequestButton, disconnectButton;
+	private JLabel emailLabel;
+	private JLabel groupALabel, groupBLabel, groupCLabel;
+	private JRadioButton connectionsRadio, PublicRadio, GroupARadio, GroupBRadio, GroupCRadio;
+	private JTextArea writePostArea, postArea;
+	private JList<String> connectionsList, suggestedList, postList;
+	ArrayList<User> listOfConnections;
+	TreeSet<User> suggestedListConnections = new TreeSet<>();
+	ButtonGroup radioGroup;
+	private JLabel lblNewLabel_1;
+	TreeSet<Post> allPosts = new TreeSet<>();
+	
+	
 	/**
 	 * Launch the application.
-	 
+	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					BackendProfileChiefGUI window = new BackendProfileChiefGUI();
+					BackendProfileChiefGUI window = new BackendProfileChiefGUI(chief);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -43,13 +64,21 @@ public class BackendProfileChiefGUI {
 			}
 		});
 	}
-
+     /**
 	 * Create the application.
 	 */
 	public BackendProfileChiefGUI(User theChief) {
-		chief = theChief;
+		chief = (Chief) theChief;
 		initialize();
+		ButtonListener listener = new ButtonListener();
+		requestsButton.addActionListener(listener);
+		messagesButton.addActionListener(listener);
+		notifsButton.addActionListener(listener);
+		editAccountButton.addActionListener(listener);
+		helpButton.addActionListener(listener);
+		disconnectButton.addActionListener(listener);
 	}
+	
 
 	/**
 	 * Initialize the contents of the frame.
@@ -62,292 +91,515 @@ public class BackendProfileChiefGUI {
 		frame.setResizable(false);
 		frame.getContentPane().setLayout(null);
 		
-		JPanel panel = new JPanel();
+	    panel = new JPanel();
 		panel.setBackground(Color.WHITE);
 		panel.setBounds(0, 0, 875, 973);
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(49, 76, 181, 152);
-		panel.add(panel_1);
-		panel_1.setLayout(null);
+		picturePanel = new JPanel();
+		picturePanel.setBounds(49, 76, 181, 152);
+		panel.add(picturePanel);
+		picturePanel.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Profile photo");
+	    lblNewLabel = new JLabel("Profile photo");
 		lblNewLabel.setBounds(51, 66, 72, 16);
-		panel_1.add(lblNewLabel);
+		picturePanel.add(lblNewLabel);
 		
 		Icon search = new ImageIcon("Buttons_backgrounds/search_30px.png");
-		JButton btnNewButton = new JButton(search);
-		btnNewButton.setContentAreaFilled(false); 
-		btnNewButton.setFocusPainted(false); 
-		btnNewButton.setOpaque(false);
-		btnNewButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		btnNewButton.addActionListener(new ActionListener() {
+		searchButton= new JButton(search);
+		searchButton.setContentAreaFilled(false); 
+		searchButton.setFocusPainted(false); 
+		searchButton.setOpaque(false);
+		searchButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		searchButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		btnNewButton.setBounds(612, 38, 55, 44);
-		panel.add(btnNewButton);
+		searchButton.setBounds(612, 38, 55, 44);
+		panel.add(searchButton);
 		
 		JTextArea textArea = new JTextArea();
 		textArea.setBackground(new Color(255, 250, 240));
 		textArea.setBounds(427, 225, 424, 409);
 		panel.add(textArea);
 		
-		JLabel lblNewLabel_1 = new JLabel("Name LastName");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 19));
-		lblNewLabel_1.setBounds(49, 254, 137, 30);
-		panel.add(lblNewLabel_1);
+		JLabel nameLabel = new JLabel();
+		nameLabel.setText(chief.getFirstName()+" "+chief.getLastName());
+		nameLabel.setFont(new Font("Tahoma", Font.PLAIN, 19));
+		nameLabel.setBounds(49, 254, 137, 30);
+		panel.add(nameLabel);
 		
-		JLabel lblNewLabel_2 = new JLabel("Company Post, ");
-		lblNewLabel_2.setBounds(193, 264, 89, 16);
-		panel.add(lblNewLabel_2);
+		JLabel companyPostLabel = new JLabel("Chief, ");
+		companyPostLabel.setBounds(193, 264, 89, 16);
+		panel.add(companyPostLabel);
 		
-		JLabel lblNewLabel_3 = new JLabel("Specialization");
-		lblNewLabel_3.setBounds(282, 264, 89, 16);
-		panel.add(lblNewLabel_3);
+		JLabel specializationLabel = new JLabel("Specialization");
+		specializationLabel.setBounds(282, 264, 89, 16);
+		panel.add(specializationLabel);
 		
-		JLabel lblNewLabel_4 = new JLabel("example@gmail.com");
-		lblNewLabel_4.setBounds(52, 297, 125, 16);
-		panel.add(lblNewLabel_4);
+		emailLabel = new JLabel(chief.getMyAccount().getEmail());
+		emailLabel.setBounds(52, 297, 125, 16);
+		panel.add(emailLabel);
 		
-		JLabel lblNewLabel_5 = new JLabel("Currently apart of:");
+		JLabel lblNewLabel_5 = new JLabel("Currently supervising:");
 		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblNewLabel_5.setBounds(44, 351, 133, 16);
 		panel.add(lblNewLabel_5);
 		
-		JLabel lblNewLabel_6 = new JLabel("Group A");
-		lblNewLabel_6.setBounds(44, 380, 56, 16);
-		panel.add(lblNewLabel_6);
+		// na balw ta buttoms//
 		
-		JLabel lblNewLabel_7 = new JLabel("Group B");
-		lblNewLabel_7.setBounds(112, 380, 56, 16);
-		panel.add(lblNewLabel_7);
+		String name;
+		if(chief.getGroups().size()>0) {
+			name = chief.getGroups().get(0).getName();
+			
+			GroupARadio = new JRadioButton(name);
+			GroupARadio.setBounds(625, 675, 126, 25);
+			panel.add(GroupARadio);
+		}
+		else {
+			name = "";
+		}
+		groupALabel = new JLabel(name);
+		groupALabel.setBounds(49, 386, 56, 16);
+		panel.add(groupALabel);
 		
-		JLabel lblNewLabel_8 = new JLabel("Group C");
-		lblNewLabel_8.setBounds(174, 380, 56, 16);
-		panel.add(lblNewLabel_8);
+		if(chief.getGroups().size()>1) {
+			name = chief.getGroups().get(1).getName();
+			
+			GroupBRadio = new JRadioButton(name);
+			GroupBRadio.setBounds(625, 709, 126, 25);
+			panel.add(GroupBRadio);
+		}
+		else {
+			name = "";
+		}
+		groupBLabel = new JLabel(name);
+		groupBLabel.setBounds(104, 386, 56, 16);
+		panel.add(groupBLabel);
+		
+		if(chief.getGroups().size()>2) {
+			name = chief.getGroups().get(2).getName();
+			
+			GroupCRadio = new JRadioButton(name);
+			GroupCRadio.setBounds(625, 739, 127, 25);
+			panel.add(GroupCRadio);
+		}
+		else {
+			name = "";
+		}
+		groupCLabel = new JLabel(name);
+		groupCLabel.setBounds(172, 386, 56, 16);
+		panel.add(groupCLabel);
+		
 		
 		Icon help = new ImageIcon("Buttons_backgrounds/customer_support_40px.png");
-		JButton btnNewButton_1_1 = new JButton(help);
-		btnNewButton_1_1.setContentAreaFilled(false); 
-		btnNewButton_1_1.setFocusPainted(false); 
-		btnNewButton_1_1.setOpaque(false);
-		btnNewButton_1_1.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		btnNewButton_1_1.addActionListener(new ActionListener() {
+		helpButton = new JButton(help);
+		helpButton.setContentAreaFilled(false); 
+		helpButton.setFocusPainted(false); 
+		helpButton.setOpaque(false);
+		helpButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		helpButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNewButton_1_1.setBounds(824, 929, 46, 38);
-		panel.add(btnNewButton_1_1);
+		helpButton.setBounds(824, 929, 46, 38);
+		panel.add(helpButton);
 		
-		textField_1 = new JTextField();
-		textField_1.setBackground(new Color(255, 250, 240));
-		textField_1.setColumns(10);
-		textField_1.setBounds(324, 42, 275, 30);
-		panel.add(textField_1);
+		searchField = new JTextField();
+		searchField.setBackground(new Color(255, 250, 240));
+		searchField.setColumns(10);
+		searchField.setBounds(324, 42, 275, 30);
+		panel.add(searchField);
 		
 		Icon friends = new ImageIcon("Buttons_backgrounds/friends_30px.png");
-		JButton btnNewButton_1 = new JButton(friends);
-		btnNewButton_1.setContentAreaFilled(false); 
-		btnNewButton_1.setFocusPainted(false); 
-		btnNewButton_1.setOpaque(false);
-		btnNewButton_1.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		btnNewButton_1.setBounds(714, 27, 37, 30);
-		panel.add(btnNewButton_1);
+		requestsButton= new JButton(friends);
+		requestsButton.setContentAreaFilled(false); 
+		requestsButton.setFocusPainted(false); 
+		requestsButton.setOpaque(false);
+		requestsButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		requestsButton.setBounds(714, 27, 37, 30);
+		panel.add(requestsButton);
 		
 		Icon messages = new ImageIcon("Buttons_backgrounds/Messages_30px.png");
-		JButton btnNewButton_1_2 = new JButton(messages);
-		btnNewButton_1_2.addActionListener(new ActionListener() {
+		messagesButton = new JButton(messages);
+		messagesButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNewButton_1_2.setContentAreaFilled(false); 
-		btnNewButton_1_2.setFocusPainted(false); 
-		btnNewButton_1_2.setOpaque(false);
-		btnNewButton_1_2.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		btnNewButton_1_2.setBounds(763, 27, 37, 30);
-		panel.add(btnNewButton_1_2);
+		messagesButton.setContentAreaFilled(false); 
+		messagesButton.setFocusPainted(false); 
+		messagesButton.setOpaque(false);
+		messagesButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		messagesButton.setBounds(763, 27, 37, 30);
+		panel.add(messagesButton);
 		
 		Icon bell = new ImageIcon("Buttons_backgrounds/bell_30px.png");
-		JButton btnNewButton_1_3 = new JButton(bell);
-		btnNewButton_1_3.setContentAreaFilled(false); 
-		btnNewButton_1_3.setFocusPainted(false); 
-		btnNewButton_1_3.setOpaque(false);
-		btnNewButton_1_3.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		btnNewButton_1_3.setBounds(814, 27, 37, 30);
-		panel.add(btnNewButton_1_3);
+		notifsButton = new JButton(bell);
+		notifsButton.setContentAreaFilled(false); 
+		notifsButton.setFocusPainted(false); 
+		notifsButton.setOpaque(false);
+		notifsButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		notifsButton.setBounds(814, 27, 37, 30);
+		panel.add(notifsButton);
 		
-		JButton btnNewButton_2 = new JButton("Edit Account Info");
-		btnNewButton_2.setContentAreaFilled(false); 
-		btnNewButton_2.setFocusPainted(false); 
-		btnNewButton_2.setOpaque(false);
-		btnNewButton_2.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		btnNewButton_2.addActionListener(new ActionListener() {
+		editAccountButton = new JButton("Edit Account Info");
+		editAccountButton.setContentAreaFilled(false); 
+		editAccountButton.setFocusPainted(false); 
+		editAccountButton.setOpaque(false);
+		editAccountButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		editAccountButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNewButton_2.setBounds(216, 293, 155, 25);
-		panel.add(btnNewButton_2);
+		editAccountButton.setBounds(216, 293, 155, 25);
+		panel.add(editAccountButton);
 		
-		JList list = new JList();
-		list.setBackground(new Color(255, 250, 240));
-		list.setBounds(44, 500, 124, 162);
-		panel.add(list);
 		
-		JList list_1 = new JList();
-		list_1.setBackground(new Color(255, 250, 240));
-		list_1.setBounds(221, 500, 125, 162);
-		panel.add(list_1);
 		
-		JLabel lblNewLabel_9 = new JLabel("Connections(0)");
-		lblNewLabel_9.setBounds(49, 471, 99, 16);
+		connectionsList = new JList<String>();
+		DefaultListModel<String> model = new DefaultListModel<String>();
+		listOfConnections = chief.getListOfConnections(); //Get all his Connections
+		for (User theUser: listOfConnections) {
+			model.addElement(theUser.getFirstName()+" "+theUser.getLastName()); 
+		}
+		connectionsList.setModel(model);
+		connectionsList.setBackground(new Color(255, 250, 240));
+		connectionsList.setBounds(44, 483, 116, 152);
+		panel.add(connectionsList);
+		
+		suggestedListConnections = chief.suggestedConnections(); //Get all Suggested Connections
+		suggestedList = new JList<String>();
+		DefaultListModel<String> model2 = new DefaultListModel<String>();
+		for (User suggestedUser: suggestedListConnections) {
+			model2.addElement(suggestedUser.getFirstName()+" "+suggestedUser.getLastName());
+		}
+		suggestedList.setModel(model2);
+		suggestedList.setBackground(new Color(255, 250, 240));
+		suggestedList.setBounds(221, 483, 116, 152);
+		panel.add(suggestedList);
+		
+		JLabel lblNewLabel_9 = new JLabel("Connections (" + chief.getListOfConnections().size() + ")");
+		lblNewLabel_9.setBounds(49, 454, 99, 16);
 		panel.add(lblNewLabel_9);
 		
 		JLabel lblNewLabel_9_1 = new JLabel("Suggested Connections");
-		lblNewLabel_9_1.setBounds(221, 471, 139, 16);
+		lblNewLabel_9_1.setBounds(216, 454, 139, 16);
 		panel.add(lblNewLabel_9_1);
 		
 		JScrollBar scrollBar = new JScrollBar();
-		scrollBar.setBounds(830, 225, 21, 409);
+		scrollBar.setBounds(830, 254, 21, 411);
 		panel.add(scrollBar);
 		
-		JTextArea textArea_1 = new JTextArea();
-		textArea_1.setBackground(new Color(255, 250, 240));
-		textArea_1.setBounds(427, 647, 424, 49);
-		panel.add(textArea_1);
+		writePostArea = new JTextArea();
+		writePostArea.setBackground(new Color(255, 250, 240));
+		writePostArea.setBounds(427, 688, 424, 49);
+		panel.add(writePostArea);
 		
-		JRadioButton rdbtnNewRadioButton = new JRadioButton("Connections");
-		rdbtnNewRadioButton.setBackground(Color.WHITE);
-		rdbtnNewRadioButton.setBounds(473, 709, 99, 25);
-		panel.add(rdbtnNewRadioButton);
+		connectionsRadio = new JRadioButton("Connections");
+		connectionsRadio.setBackground(Color.WHITE);
+		connectionsRadio.setBounds(441, 746, 112, 25);
+		panel.add(connectionsRadio);
 		
-		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("Public");
-		rdbtnNewRadioButton_1.setBackground(Color.WHITE);
-		rdbtnNewRadioButton_1.setBounds(570, 709, 78, 25);
-		panel.add(rdbtnNewRadioButton_1);
+		PublicRadio = new JRadioButton("Public");
+		PublicRadio.setBackground(Color.WHITE);
+		PublicRadio.setBounds(557, 746, 78, 25);
+		panel.add(PublicRadio);
 		
-		JRadioButton rdbtnNewRadioButton_2 = new JRadioButton("Group");
-		rdbtnNewRadioButton_2.setBackground(Color.WHITE);
-		rdbtnNewRadioButton_2.setBounds(649, 709, 89, 25);
-		panel.add(rdbtnNewRadioButton_2);
-		
-		JButton btnNewButton_3 = new JButton("Post");
-		btnNewButton_3.setContentAreaFilled(false); 
-		btnNewButton_3.setFocusPainted(false); 
-		btnNewButton_3.setOpaque(false);
-		btnNewButton_3.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		btnNewButton_3.addActionListener(new ActionListener() {
+		postButton = new JButton("Post");
+		postButton.setContentAreaFilled(false); 
+		postButton.setFocusPainted(false); 
+		postButton.setOpaque(false);
+		postButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		postButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNewButton_3.setBounds(754, 709, 97, 25);
-		panel.add(btnNewButton_3);
+		postButton.setBounds(754, 750, 97, 25);
+		panel.add(postButton);
+		
+		// create button group for the radio button to know which one was selected
+		radioGroup = new ButtonGroup();
+		radioGroup.add(connectionsRadio);
+		radioGroup.add(PublicRadio);
+		radioGroup.add(GroupARadio);
+		radioGroup.add(GroupBRadio);
+		radioGroup.add(GroupCRadio);
 		
 		textField = new JTextField();
 		textField.setBackground(new Color(255, 250, 240));
 		textField.setColumns(10);
-		textField.setBounds(649, 743, 64, 25);
+		textField.setBounds(639, 780, 64, 25);
 		panel.add(textField);
 		
-		JButton btnNewButton_4 = new JButton("Check profile");
-		btnNewButton_4.setContentAreaFilled(false); 
-		btnNewButton_4.setFocusPainted(false); 
-		btnNewButton_4.setOpaque(false);
-		btnNewButton_4.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		btnNewButton_4.addActionListener(new ActionListener() {
+		checkprofileButton = new JButton("Check profile");
+		checkprofileButton.setContentAreaFilled(false); 
+		checkprofileButton.setFocusPainted(false); 
+		checkprofileButton.setOpaque(false);
+		checkprofileButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		checkprofileButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNewButton_4.setBounds(44, 675, 125, 25);
-		panel.add(btnNewButton_4);
+		checkprofileButton.setBounds(44, 648, 116, 25);
+		panel.add(checkprofileButton);
 		
-		JButton btnNewButton_5 = new JButton("Send Message");
-		btnNewButton_5.setContentAreaFilled(false); 
-		btnNewButton_5.setFocusPainted(false); 
-		btnNewButton_5.setOpaque(false);
-		btnNewButton_5.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		btnNewButton_5.addActionListener(new ActionListener() {
+		sendMessageButton = new JButton("Send Message");
+		sendMessageButton.setContentAreaFilled(false); 
+		sendMessageButton.setFocusPainted(false); 
+		sendMessageButton.setOpaque(false);
+		sendMessageButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		sendMessageButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNewButton_5.setBounds(44, 709, 125, 25);
-		panel.add(btnNewButton_5);
+		sendMessageButton.setBounds(44, 686, 116, 25);
+		panel.add(sendMessageButton);
 		
-		JButton btnNewButton_6 = new JButton("Send request");
-		btnNewButton_6.setContentAreaFilled(false); 
-		btnNewButton_6.setFocusPainted(false); 
-		btnNewButton_6.setOpaque(false);
-		btnNewButton_6.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		btnNewButton_6.addActionListener(new ActionListener() {
+		sendRequestButton = new JButton("Send request");
+		sendRequestButton.setContentAreaFilled(false); 
+		sendRequestButton.setFocusPainted(false); 
+		sendRequestButton.setOpaque(false);
+		sendRequestButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		sendRequestButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNewButton_6.setBounds(221, 675, 125, 25);
-		panel.add(btnNewButton_6);
+		sendRequestButton.setBounds(221, 648, 116, 25);
+		panel.add(sendRequestButton);
 		
 		Icon logout = new ImageIcon("Buttons_backgrounds/exit_50px.png");
-		JButton btnNewButton_7 = new JButton(logout);
-		btnNewButton_7.setContentAreaFilled(false); 
-		btnNewButton_7.setFocusPainted(false); 
-		btnNewButton_7.setOpaque(false);
-		btnNewButton_7.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		btnNewButton_7.setBounds(796, 141, 55, 55);
-		panel.add(btnNewButton_7);
+		disconnectButton = new JButton(logout);
+		disconnectButton.setContentAreaFilled(false); 
+		disconnectButton.setFocusPainted(false); 
+		disconnectButton.setOpaque(false);
+		disconnectButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		disconnectButton.setBounds(796, 169, 55, 54);
+		panel.add(disconnectButton);
 		
-		JButton btnNewButton_2_1 = new JButton("Create Project");
-		btnNewButton_2_1.setContentAreaFilled(false); 
-		btnNewButton_2_1.setFocusPainted(false); 
-		btnNewButton_2_1.setOpaque(false);
-		btnNewButton_2_1.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		btnNewButton_2_1.addActionListener(new ActionListener() {
+	 createProjectButton = new JButton("Create Project");
+	
+		createProjectButton.setContentAreaFilled(false); 
+		createProjectButton.setFocusPainted(false); 
+		createProjectButton.setOpaque(false);
+		createProjectButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+			createProjectButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNewButton_2_1.setBounds(265, 376, 116, 25);
-		panel.add(btnNewButton_2_1);
+		createProjectButton.setBounds(216, 332, 155, 25);
+		panel.add(createProjectButton);
 		
 		Icon edit = new ImageIcon("Buttons_backgrounds/edit_20px.png");
-		JButton btnNewButton_8 = new JButton(edit);
-		btnNewButton_8.setContentAreaFilled(false); 
-		btnNewButton_8.setFocusPainted(false); 
-		btnNewButton_8.setOpaque(false);
-		btnNewButton_8.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		btnNewButton_8.addActionListener(new ActionListener() {
+		editGroupAButton = new JButton(edit);
+		editGroupAButton.setContentAreaFilled(false); 
+		editGroupAButton.setFocusPainted(false); 
+		editGroupAButton.setOpaque(false);
+		editGroupAButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		editGroupAButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNewButton_8.setBounds(58, 409, 27, 25);
-		panel.add(btnNewButton_8);
+		editGroupAButton.setBounds(58, 409, 27, 25);
+		panel.add(editGroupAButton);
 		
-		JButton btnNewButton_8_1 = new JButton(edit);
-		btnNewButton_8_1.setContentAreaFilled(false); 
-		btnNewButton_8_1.setFocusPainted(false); 
-		btnNewButton_8_1.setOpaque(false);
-		btnNewButton_8_1.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		btnNewButton_8_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		editGroupBButton = new JButton(edit);
+		editGroupBButton.setContentAreaFilled(false); 
+		editGroupBButton.setFocusPainted(false); 
+		editGroupBButton.setOpaque(false);
+		editGroupBButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		editGroupBButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNewButton_8_1.setBounds(121, 409, 27, 25);
-		panel.add(btnNewButton_8_1);
+		editGroupBButton.setBounds(121, 409, 27, 25);
+		panel.add(editGroupBButton);
 		
-		JButton btnNewButton_8_2 = new JButton(edit);
-		btnNewButton_8_2.setContentAreaFilled(false); 
-		btnNewButton_8_2.setFocusPainted(false); 
-		btnNewButton_8_2.setOpaque(false);
-		btnNewButton_8_2.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		btnNewButton_8_2.setBounds(183, 409, 27, 25);
-		panel.add(btnNewButton_8_2);
+		editGroupCButton = new JButton(edit);
+		editGroupCButton.setContentAreaFilled(false); 
+		editGroupCButton.setFocusPainted(false); 
+		editGroupCButton.setOpaque(false);
+		editGroupCButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		editGroupCButton.setBounds(183, 409, 27, 25);
+		panel.add(editGroupCButton);
 		
-		textField = new JTextField();
-		textField.setBounds(661, 709, 63, 22);
-		panel.add(textField);
-		textField.setColumns(10);
+		lblNewLabel_1 = new JLabel("logo");
+		lblNewLabel_1.setBounds(12, 917, 56, 43);
+		panel.add(lblNewLabel_1);
+
+		postArea = new JTextArea();
+		postArea.setBackground(new Color(255, 250, 240));
+		postArea.setBounds(427, 256, 424, 409);
+		allPosts = chief.returnAllPosts();
+		// not finished
+		for(int i = 0; i < allPosts.size(); i++) {
+			
+		}
+		panel.add(postArea);
 		
-		JLabel lblNewLabel_3_1 = new JLabel("logo");
-		lblNewLabel_3_1.setBounds(12, 917, 56, 43);
-		panel.add(lblNewLabel_3_1);
+		JRadioButton rdbtnGroup = new JRadioButton("Group");
+		rdbtnGroup.setBackground(Color.WHITE);
+		rdbtnGroup.setBounds(639, 746, 78, 25);
+		panel.add(rdbtnGroup);
+	}
+	
+	public void disconnectUser() throws IOException {
+		frame.dispose();
+		new WelcomeScreen_GUI(null); // null?
+	}
+	
+	
+	class ButtonListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if(e.getSource().equals(requestsButton)) {
+				try {
+					new ConnectionRequestsGUI();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+			else if(e.getSource().equals(messagesButton)) {
+				try {
+					new NewMessagesGUI();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+			else if(e.getSource().equals(notifsButton)) {
+				try {
+					new NotificationsGUI();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+			else if(e.getSource().equals(editAccountButton)) {
+				new EditAccountGUI();
+			}
+			else if(e.getSource().equals(helpButton)) {
+				try {
+					new HelpGUI();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+			else if(e.getSource().equals(disconnectButton)) {
+				try {
+					disconnectUser();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+			else if(e.getSource().equals(checkprofileButton)) {
+				
+				String selectedUserString = connectionsList.getSelectedValue();
+				User selectedUser = null;
+				
+				for(User theUser: listOfConnections) {
+					String userFullName = theUser.getFirstName()+" "+theUser.getLastName();
+					
+					if (userFullName.equalsIgnoreCase(selectedUserString)) {
+						selectedUser = theUser;
+						break;
+					}
+				}
+				
+				if (selectedUser == null) {
+					 String message = "You have not selected any user!";
+						JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+						        JOptionPane.INFORMATION_MESSAGE);
+				}else {
+					new FrontEndProfileGUI(chief, selectedUser);
+				}
+			}
+			else if(e.getSource().equals(sendMessageButton)) {
+				
+				String selectedUserString = connectionsList.getSelectedValue();
+				User selectedUser = null;
+				
+				for(User theUser: listOfConnections) {
+					String userFullName = theUser.getFirstName()+" "+theUser.getLastName();
+					
+					if (userFullName.equalsIgnoreCase(selectedUserString)) {
+						selectedUser = theUser;
+						break;
+					}
+				}
+				
+				if (selectedUser == null) {
+					 String message = "You have not selected any user!";
+						JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+						        JOptionPane.INFORMATION_MESSAGE);
+				}else {
+					TreeSet<Conversation> listOfConversation = chief.getListOfConversations();
+					Conversation selectedUserToChat = null;
+					
+					for (Conversation theConversation: listOfConversation) {
+						
+						if ((((privateConversation)theConversation).getDiscussant1().equals(chief) && ((privateConversation)theConversation).getDiscussant2().equals(selectedUser)) ||
+							(((privateConversation)theConversation).getDiscussant2().equals(chief) && ((privateConversation)theConversation).getDiscussant1().equals(selectedUser))) {
+							
+							selectedUserToChat = theConversation;
+							break;
+						}
+					}
+					
+					if(selectedUserToChat == null) {
+						 String message = "Something went Wrong!";
+							JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+							        JOptionPane.INFORMATION_MESSAGE);
+					}else {
+						new PrivateChatGUI(chief, selectedUser, selectedUserToChat);
+					}
+				}
+			}
+			else if(e.getSource().equals(sendRequestButton)) {
+				
+				String selectedUserString = suggestedList.getSelectedValue();
+				User selectedUser = null;
+				
+				for(User suggestedUser: suggestedListConnections) {
+					String usersFullName = suggestedUser.getFirstName()+" "+suggestedUser.getLastName();
+					
+					if (usersFullName.equalsIgnoreCase(selectedUserString)) {
+						selectedUser = suggestedUser;
+						break;
+					}
+				}
+				
+				if (selectedUser == null) {
+					 String message = "You have not selected any user!";
+						JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+						        JOptionPane.INFORMATION_MESSAGE);
+				}else {
+					Connection possibleConnection = new Connection(chief, selectedUser);
+					possibleConnection.sendConnectionRequest();
+				}
+				
+			}
+			// not finished
+			else if(e.getSource().equals(postButton)) {
+				String postText = writePostArea.getText();
+				if(connectionsRadio.isSelected() || PublicRadio.isSelected() || GroupARadio.isSelected() || GroupBRadio.isSelected() || GroupCRadio.isSelected()) {
+					String selected = radioGroup.getSelection().toString();
+					Post newPost = new Post(chief, postText, selected);
+					chief.addPost(newPost);
+					postList.remove(postList); 
+					
+				}
+				
+				
+			}
+			
+		}
+		
+		
+		
 	}
 }
