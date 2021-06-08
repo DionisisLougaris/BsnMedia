@@ -81,6 +81,11 @@ public class BackendProfileEmployeeGUI {
 		editAccountButton.addActionListener(listener);
 		helpButton.addActionListener(listener);
 		disconnectButton.addActionListener(listener);
+		checkprofileButton.addActionListener(listener);
+		sendMessageButton.addActionListener(listener);
+		sendRequestButton.addActionListener(listener);
+		postButton.addActionListener(listener);
+		searchButton.addActionListener(listener);
 	}
 
 	/**
@@ -535,9 +540,13 @@ public class BackendProfileEmployeeGUI {
 					employee.addPost(newPost);
 					postList.remove(postList); //den eimai sigourh an douleuei
 					
+				}	
+			}
+			else if(e.getSource().equals(searchButton)) {
+				String text = searchField.getText();
+				if(!text.isEmpty()) {
+					employee.getMyAccount().getMyCompany().searchObject(text);
 				}
-				
-				
 			}
 		}
 		
