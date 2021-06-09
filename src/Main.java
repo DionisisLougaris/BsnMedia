@@ -32,8 +32,11 @@ public class Main {
 		
 		Connection c = new Connection(first, first3);
 		Connection c1 = new Connection(first, first4);
+		Connection c2 = new Connection(first, first2);
 		c.manageConnectionRequest(true);
 		c1.manageConnectionRequest(true);
+		c2.manageConnectionRequest(true);
+		
 		
 		
 		

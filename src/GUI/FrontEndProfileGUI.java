@@ -33,6 +33,7 @@ import java.awt.Font;
 import java.awt.Image;
 
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollBar;
 import java.awt.Color;
 
@@ -112,7 +113,22 @@ public class FrontEndProfileGUI {
 		searchbutton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		searchbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				tuser.getMyAccount().getMyCompany().searchObject(searchtext.getText(), tuser);
+				
+				String searchedText = searchtext.getText();
+				if(!searchedText.isEmpty()) {
+					boolean result = tuser.getMyAccount().getMyCompany().searchObject(searchedText, tuser);
+					
+					if (!result) {
+						ArrayList<String> suggestedOptions = new ArrayList<String>();
+						new SearchSuggestionsGUI(suggestedOptions, tuser);
+					}else {
+						frame.setVisible(false);
+					}
+				}else {
+					 String message = "Type something in the Search field";
+						JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+						        JOptionPane.INFORMATION_MESSAGE);
+				}
 			}
 		});
 		searchbutton.setBounds(766, 27, 55, 44);
@@ -129,17 +145,14 @@ public class FrontEndProfileGUI {
 				//Closing previous GUI
 				frame.setVisible(false);
 				//Returning to the right backend profile
-				if(tuser instanceof Chief)
-				{
-					BackendProfileChiefGUI myProfile = new BackendProfileChiefGUI(tuser);
+				if(tuser instanceof Chief){
+					new BackendProfileChiefGUI(tuser);
 				}
-				else if(tuser instanceof Boss)
-				{
-					BackendProfileBossGUI myProfile = new BackendProfileBossGUI(tuser);
+				else if(tuser instanceof Boss){
+					new BackendProfileBossGUI(tuser);
 				}
-				else if(tuser instanceof Employee)
-				{
-					BackendProfileEmployeeGUI myProfile = new BackendProfileEmployeeGUI(tuser);
+				else if(tuser instanceof Employee){
+					new BackendProfileEmployeeGUI(tuser);
 				}
 			}
 		});

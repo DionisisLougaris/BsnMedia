@@ -2,12 +2,16 @@ package GUI;
 
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.TreeSet;
 
+import javax.imageio.ImageIO;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultListModel;
 import javax.swing.Icon;
@@ -30,12 +34,13 @@ import java.awt.Cursor;
 
 public class BackendProfileEmployeeGUI {
 
-	private JFrame frame;
+	private JFrame frmStartingPage;
 	private JTextField searchField;
 	private JTextField textField;
 	private JPanel panel, picturePanel;
 	private JLabel lblNewLabel;
-	private JButton searchButton, helpButton, requestsButton, messagesButton, notifsButton, editAccountButton, postButton, checkprofileButton, sendMessageButton, sendRequestButton, disconnectButton;
+	private JButton searchButton, helpButton, requestsButton, messagesButton, notifsButton, editAccountButton, postButton, 
+	checkprofileButton, sendMessageButton, sendRequestButton, disconnectButton;
 	private JLabel emailLabel;
 	private JLabel groupALabel, groupBLabel, groupCLabel;
 	private JList<String> connectionsList, suggestedList, postList; 
@@ -50,59 +55,28 @@ public class BackendProfileEmployeeGUI {
 	
 	ArrayList<User> listOfConnections;
 	
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					// oxi sigourh gia thn parametro prepei na thn doume sto testing
-					BackendProfileEmployeeGUI window = new BackendProfileEmployeeGUI(employee);
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 */
 	public BackendProfileEmployeeGUI(User aUser) {
-		employee = (Employee) aUser;
-		initialize();
-		ButtonListener listener = new ButtonListener();
-		requestsButton.addActionListener(listener);
-		messagesButton.addActionListener(listener);
-		notifsButton.addActionListener(listener);
-		editAccountButton.addActionListener(listener);
-		helpButton.addActionListener(listener);
-		disconnectButton.addActionListener(listener);
-		checkprofileButton.addActionListener(listener);
-		sendMessageButton.addActionListener(listener);
-		sendRequestButton.addActionListener(listener);
-		postButton.addActionListener(listener);
-		searchButton.addActionListener(listener);
+		initialize(aUser);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 893, 1020);
-		frame.setLocation(500, 0);
-		frame.setVisible(true);
-		frame.setResizable(false);
-		frame.getContentPane().setLayout(null);
+	private void initialize(User aUser) {
+		frmStartingPage = new JFrame();
+		frmStartingPage.setTitle("Starting Page");
+		frmStartingPage.setBounds(100, 100, 893, 1020);
+		frmStartingPage.setLocation(500, 0);
+		frmStartingPage.setVisible(true);
+		frmStartingPage.setResizable(false);
+		frmStartingPage.getContentPane().setLayout(null);
+		
+		employee = (Employee)aUser;
 		
 		panel = new JPanel();
 		panel.setBackground(Color.WHITE);
 		panel.setBounds(0, 0, 887, 985);
-		frame.getContentPane().add(panel);
+		frmStartingPage.getContentPane().add(panel);
 		panel.setLayout(null);
 		
 		picturePanel = new JPanel();
@@ -110,8 +84,18 @@ public class BackendProfileEmployeeGUI {
 		panel.add(picturePanel);
 		picturePanel.setLayout(null);
 		
-		lblNewLabel = new JLabel("Profile photo");
-		lblNewLabel.setBounds(51, 66, 72, 16);
+		lblNewLabel = new JLabel();
+		BufferedImage imageicon;
+		try {
+			imageicon = ImageIO.read(new File(employee.getImage()));
+			ImageIcon image = new ImageIcon(imageicon);
+			Image imagerisize = image.getImage().getScaledInstance(181, 152, 170);
+			lblNewLabel.setIcon(new ImageIcon(imagerisize));
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		lblNewLabel.setBounds(0, 0, 181, 152);
 		picturePanel.add(lblNewLabel);
 		
 		Icon search = new ImageIcon("Buttons_backgrounds/search_30px.png");
@@ -122,6 +106,22 @@ public class BackendProfileEmployeeGUI {
 		searchButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		searchButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
+				String searchedText = searchField.getText();
+				if(!searchedText.isEmpty()) {
+					boolean result = employee.getMyAccount().getMyCompany().searchObject(searchedText, employee);
+					
+					if (!result) {
+						ArrayList<String> suggestedOptions = new ArrayList<String>();
+						new SearchSuggestionsGUI(suggestedOptions, employee);
+					}else {
+						frmStartingPage.setVisible(false);
+					}
+				}else {
+					 String message = "Type something in the Search field";
+						JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+						        JOptionPane.INFORMATION_MESSAGE);
+				}
 			}
 		});
 		searchButton.setBounds(612, 47, 55, 44);
@@ -130,19 +130,19 @@ public class BackendProfileEmployeeGUI {
 		JLabel nameLabel = new JLabel();
 		nameLabel.setText(employee.getFirstName()+" "+employee.getLastName());
 		nameLabel.setFont(new Font("Tahoma", Font.PLAIN, 19));
-		nameLabel.setBounds(47, 244, 137, 30);
+		nameLabel.setBounds(47, 244, 229, 30);
 		panel.add(nameLabel);
 		
 		JLabel companyPostLabel = new JLabel("Employee, ");
-		companyPostLabel.setBounds(196, 254, 89, 16);
+		companyPostLabel.setBounds(47, 285, 64, 16);
 		panel.add(companyPostLabel);
 		
-		JLabel specializationLabel = new JLabel("Specialization");
-		specializationLabel.setBounds(261, 254, 78, 16);
+		JLabel specializationLabel = new JLabel(employee.getCompanyPost());
+		specializationLabel.setBounds(116, 285, 112, 16);
 		panel.add(specializationLabel);
 		
 		emailLabel = new JLabel(employee.getMyAccount().getEmail());
-		emailLabel.setBounds(49, 287, 125, 16);
+		emailLabel.setBounds(47, 311, 204, 16);
 		panel.add(emailLabel);
 		
 		JLabel lblNewLabel_5 = new JLabel("Currently apart of:");
@@ -201,9 +201,16 @@ public class BackendProfileEmployeeGUI {
 		helpButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		helpButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				try {
+					frmStartingPage.setVisible(false);
+					new HelpGUI(employee);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
-		helpButton.setBounds(824, 929, 46, 38);
+		helpButton.setBounds(814, 917, 56, 50);
 		panel.add(helpButton);
 		
 		searchField = new JTextField();
@@ -244,11 +251,7 @@ public class BackendProfileEmployeeGUI {
 		editAccountButton.setFocusPainted(false); 
 		editAccountButton.setOpaque(false);
 		editAccountButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		editAccountButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		editAccountButton.setBounds(208, 297, 155, 25);
+		editAccountButton.setBounds(250, 307, 126, 25);
 		panel.add(editAccountButton);
 		
 		connectionsList = new JList<String>();
@@ -300,6 +303,11 @@ public class BackendProfileEmployeeGUI {
 		PublicRadio.setBounds(557, 746, 78, 25);
 		panel.add(PublicRadio);
 		
+		JRadioButton rdbtnGroup = new JRadioButton("Group");
+		rdbtnGroup.setBackground(Color.WHITE);
+		rdbtnGroup.setBounds(639, 746, 78, 25);
+		panel.add(rdbtnGroup);
+		
 		postButton = new JButton("Post");
 		postButton.setContentAreaFilled(false); 
 		postButton.setFocusPainted(false); 
@@ -331,10 +339,6 @@ public class BackendProfileEmployeeGUI {
 		checkprofileButton.setFocusPainted(false); 
 		checkprofileButton.setOpaque(false);
 		checkprofileButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		checkprofileButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		checkprofileButton.setBounds(44, 648, 116, 25);
 		panel.add(checkprofileButton);
 		
@@ -343,10 +347,6 @@ public class BackendProfileEmployeeGUI {
 		sendMessageButton.setFocusPainted(false); 
 		sendMessageButton.setOpaque(false);
 		sendMessageButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		sendMessageButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		sendMessageButton.setBounds(44, 686, 116, 25);
 		panel.add(sendMessageButton);
 		
@@ -355,10 +355,6 @@ public class BackendProfileEmployeeGUI {
 		sendRequestButton.setFocusPainted(false); 
 		sendRequestButton.setOpaque(false);
 		sendRequestButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		sendRequestButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		sendRequestButton.setBounds(221, 648, 116, 25);
 		panel.add(sendRequestButton);
 		
@@ -371,8 +367,9 @@ public class BackendProfileEmployeeGUI {
 		disconnectButton.setBounds(796, 169, 55, 54);
 		panel.add(disconnectButton);
 		
-		lblNewLabel_1 = new JLabel("logo");
-		lblNewLabel_1.setBounds(12, 917, 56, 43);
+		lblNewLabel_1 = new JLabel();
+		lblNewLabel_1.setIcon(new ImageIcon("label_backgrounds/IT_logo.png"));
+		lblNewLabel_1.setBounds(10, 917, 65, 63);
 		panel.add(lblNewLabel_1);
 
 		postArea = new JTextArea();
@@ -385,16 +382,21 @@ public class BackendProfileEmployeeGUI {
 		}
 		panel.add(postArea);
 		
-		JRadioButton rdbtnGroup = new JRadioButton("Group");
-		rdbtnGroup.setBackground(Color.WHITE);
-		rdbtnGroup.setBounds(639, 746, 78, 25);
-		panel.add(rdbtnGroup);
-		
+		ButtonListener listener = new ButtonListener();
+		requestsButton.addActionListener(listener);
+		messagesButton.addActionListener(listener);
+		notifsButton.addActionListener(listener);
+		editAccountButton.addActionListener(listener);
+		disconnectButton.addActionListener(listener);
+		checkprofileButton.addActionListener(listener);
+		sendMessageButton.addActionListener(listener);
+		sendRequestButton.addActionListener(listener);
+		postButton.addActionListener(listener);
 	}
 	
 	public void disconnectUser() throws IOException {
-		frame.dispose();
-		new WelcomeScreen_GUI(null); // null?
+		frmStartingPage.setVisible(false);
+		new WelcomeScreen_GUI(employee.getMyAccount().getMyCompany());
 	}
 	
 	class ButtonListener implements ActionListener {
@@ -426,15 +428,8 @@ public class BackendProfileEmployeeGUI {
 				}
 			}
 			else if(e.getSource().equals(editAccountButton)) {
-				new EditAccountGUI();
-			}
-			else if(e.getSource().equals(helpButton)) {
-				try {
-					new HelpGUI(employee);
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				
+				new EditAccountGUI(employee);
 			}
 			else if(e.getSource().equals(disconnectButton)) {
 				try {
@@ -464,6 +459,7 @@ public class BackendProfileEmployeeGUI {
 						        JOptionPane.INFORMATION_MESSAGE);
 				}else {
 					new FrontEndProfileGUI(employee, selectedUser);
+					frmStartingPage.setVisible(false);
 				}
 			}
 			else if(e.getSource().equals(sendMessageButton)) {
@@ -485,7 +481,7 @@ public class BackendProfileEmployeeGUI {
 						JOptionPane.showMessageDialog(new JFrame(), message, "Message",
 						        JOptionPane.INFORMATION_MESSAGE);
 				}else {
-					TreeSet<Conversation> listOfConversation = employee.getListOfConversations();
+					ArrayList<Conversation> listOfConversation = employee.getListOfConversations();
 					Conversation selectedUserToChat = null;
 					
 					for (Conversation theConversation: listOfConversation) {
@@ -541,21 +537,6 @@ public class BackendProfileEmployeeGUI {
 					postList.remove(postList); //den eimai sigourh an douleuei
 					
 				}	
-			}
-			else if(e.getSource().equals(searchButton)) {
-				String text = searchField.getText();
-				if(!text.isEmpty()) {
-					boolean result = employee.getMyAccount().getMyCompany().searchObject(text, employee);
-					
-					if (!result) {
-						ArrayList<String> suggestedOptions = new ArrayList<String>();
-						new SearchSuggestionsGUI(suggestedOptions, employee);
-					}
-				}else {
-					 String message = "Type something in the Search field";
-						JOptionPane.showMessageDialog(new JFrame(), message, "Message",
-						        JOptionPane.INFORMATION_MESSAGE);
-				}
 			}
 		}
 		

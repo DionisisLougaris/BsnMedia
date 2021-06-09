@@ -8,6 +8,9 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
+
+import entities.User;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -29,42 +32,28 @@ public class EditAccountGUI {
 	private JTextField textField_11;
 	private JTextField textField_12;
 	private JTextField textField_13;
+	
+	private User user;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					EditAccountGUI window = new EditAccountGUI();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 */
-	public EditAccountGUI() {
-		initialize();
+	public EditAccountGUI(User theUser) {
+		initialize(theUser);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(User theUser) {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 574, 825);
 		frame.getContentPane().setLayout(null);
 		frame.setVisible(true);
+		frame.setResizable(false);
 		frame.setLocation(870, 200);
 		JPanel panel = new JPanel();
 		panel.setBounds(12, 13, 116, 109);
 		frame.getContentPane().add(panel);
+		
+		user = theUser;
 		
 		JLabel lblNewLabel = new JLabel("Public Info");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 22));

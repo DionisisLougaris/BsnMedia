@@ -55,7 +55,7 @@ public class Chief extends User{
 	public TreeSet<Post> returnAllPosts() {
 		// TODO Auto-generated method stub
 	
-		TreeSet<Post> postForBackEndProfile = new TreeSet<Post>(); //List of Posts that will appear in the User's Back-End Profile
+		TreeSet<Post> postForBackEndProfile = new TreeSet<Post>(myPostComp); //List of Posts that will appear in the User's Back-End Profile
 		
 		for(Post hisPost: listOfPosts) 
 			postForBackEndProfile.add(hisPost); //Initially, his own are added
@@ -89,7 +89,7 @@ public class Chief extends User{
 	public TreeSet<User> suggestedConnections() {
 		// TODO Auto-generated method stub
 		
-		TreeSet<User> listWithSuggestedConnections = new TreeSet<User>();
+		TreeSet<User> listWithSuggestedConnections = new TreeSet<User>(myUserComparator);
 		
 		for(User connectedUser: listOfConnections) {
 			ArrayList<User> connectedUserConnections = connectedUser.getListOfConnections();

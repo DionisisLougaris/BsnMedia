@@ -17,10 +17,17 @@ abstract public class User implements Serializable{
 	protected String image;
 	protected Account myAccount;
 	protected ArrayList<User> listOfConnections = new ArrayList<User>();
-	protected TreeSet<Post> listOfPosts = new TreeSet<Post>(); //Only his Posts
+	
+	postComparator myPostComp = new postComparator();
+	protected TreeSet<Post> listOfPosts = new TreeSet<Post>(myPostComp); //Only his Posts
+	
+	NotificationsComparator myNotificationComp = new NotificationsComparator();
+	
+	UserComparator myUserComparator = new UserComparator();
+	
 	protected ArrayList<Notification> listOfNotifications = new ArrayList<Notification>();
 	protected ArrayList<User> pendingConnectionRequests = new ArrayList<User>(); //The pending requests he has sent to others
-	protected TreeSet<Conversation> listOfConversations = new TreeSet<Conversation>();
+	protected ArrayList<Conversation> listOfConversations = new ArrayList<Conversation>();
 	
 	
 	//Initial constructor for user
@@ -44,7 +51,7 @@ abstract public class User implements Serializable{
 	public TreeSet<Post> returnVisiblePosts(User visitedUser) {
 		
 		TreeSet<Post> visitedUserAllPosts = visitedUser.getListOfPosts(); //List of Posts of the user who visited his public profile
-		TreeSet<Post> visiblePostsToBeReturned = new TreeSet<Post>();
+		TreeSet<Post> visiblePostsToBeReturned = new TreeSet<Post>(myPostComp);
 		
 		for (Post visitedUserPost: visitedUserAllPosts) {
 			if(visitedUserPost.getPostScope().equalsIgnoreCase("public"))
@@ -69,7 +76,7 @@ abstract public class User implements Serializable{
 	 * joining a group, a project that has been completed, as well as a Project that has been evaluated.*/
 	public TreeSet<Notification> returnNotification() {
 		
-		TreeSet<Notification> generalNotifications = new TreeSet<Notification>();
+		TreeSet<Notification> generalNotifications = new TreeSet<Notification>(myNotificationComp);
 		
 		//Adds notifications that belong to the special category "General notifications"
 		for(Notification myNotification: listOfNotifications) {
@@ -86,7 +93,7 @@ abstract public class User implements Serializable{
 	//This is a method that returns a TreeSet with all connection requests to the user.
 	public TreeSet<Notification> returnConnectionsRequest() {
 		
-		TreeSet<Notification> connectionsRequest = new TreeSet<Notification>();
+		TreeSet<Notification> connectionsRequest = new TreeSet<Notification>(myNotificationComp);
 		
 		//Adds notifications that belong to the special category "Connections Request (Class Connection)"
 		for(Notification myNotification: listOfNotifications) {
@@ -226,6 +233,10 @@ abstract public class User implements Serializable{
 	public void addPost(Post thePost) {
 		listOfPosts.add(thePost);
 	}
+	
+	public void addConversation(Conversation theConvo) {
+		listOfConversations.add(theConvo);
+	}
 
 	
 	
@@ -331,11 +342,11 @@ abstract public class User implements Serializable{
 		this.pendingConnectionRequests = pendingConnectionRequests;
 	}
 
-	public TreeSet<Conversation> getListOfConversations() {
+	public ArrayList<Conversation> getListOfConversations() {
 		return listOfConversations;
 	}
 
-	public void setListOfConversations(TreeSet<Conversation> listOfConversations) {
+	public void setListOfConversations(ArrayList<Conversation> listOfConversations) {
 		this.listOfConversations = listOfConversations;
 	}
 
@@ -350,3 +361,30 @@ abstract public class User implements Serializable{
 	abstract public ArrayList<Group> getGroups();
 		
 }
+
+
+class NotificationsComparator implements Comparator<Notification>, Serializable {
+
+	@Override
+	public int compare(Notification o1, Notification o2) {
+		
+		if (o1.getTimestamp().isBefore(o2.getTimestamp()))
+			return 1;
+		else 
+			return -1;
+	}
+	
+}
+
+
+class UserComparator implements Comparator<User>, Serializable {
+
+	@Override
+	public int compare(User o1, User o2) {
+		
+		return o2.getFirstName().compareTo(o2.getFirstName());
+	}
+	
+}
+
+

@@ -10,7 +10,9 @@ public class Group implements Serializable{
 	private int rating;
 	private Chief supervisor;
 	private ArrayList<Employee> groupMembers = new ArrayList<Employee>();
-	private TreeSet<Post> groupPosts = new TreeSet<Post>(); //Posts that have for scope this Group
+	postComparator myPostComparator = new postComparator();
+	private TreeSet<Post> groupPosts = new TreeSet<Post>(myPostComparator); //Posts that have for scope this Group
+	
 	private groupConversation myConversation; //field for chatting between group members
 	
 	
@@ -102,3 +104,4 @@ public class Group implements Serializable{
 	}
 	
 }
+

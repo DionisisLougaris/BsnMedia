@@ -3,6 +3,7 @@ package entities;
 import java.io.Serializable;
 import java.time.*;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -135,4 +136,17 @@ public class Post implements Serializable{
 		this.likers = likers;
 	}
 		
+}
+
+class postComparator implements Comparator<Post>, Serializable {
+
+	@Override
+	public int compare(Post o1, Post o2) {
+		
+		if (o1.getTimestamp().isBefore(o2.getTimestamp()))
+			return 1;
+		else  
+			return -1;
+	}
+	
 }

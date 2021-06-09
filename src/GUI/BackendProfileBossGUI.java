@@ -11,8 +11,10 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.TreeSet;
 
 import javax.imageio.ImageIO;
+import javax.swing.DefaultListModel;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -33,27 +35,18 @@ import java.awt.Color;
 
 public class BackendProfileBossGUI {
 
-	private JFrame frame;
+	private JFrame frmStartingPage;
 	private JTextField textField;
+	private JButton btnNewButton_4;
+	private JButton btnNewButton_5;
+	private JButton btnNewButton_6;
+	private JList<String> list;
+	private JList<String> list_1;
 	private User boss;
+	private TreeSet<User> suggestedListConnections;
+	
+	private ArrayList<User> listOfConnections;
 
-	/**
-	 * Launch the application.
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					BackendProfileBossGUI window = new BackendProfileBossGUI();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	 * Create the application.
-	 */
 	public BackendProfileBossGUI(User theBoss){
 		boss = theBoss;
 		initialize();
@@ -61,18 +54,18 @@ public class BackendProfileBossGUI {
 
 
 	private void initialize(){
-		frame = new JFrame();
-		frame.setBounds(100, 100, 893, 1020);
-		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-		frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
-		frame.setVisible(true);
-		frame.setResizable(false);
-		frame.getContentPane().setLayout(null);
+		frmStartingPage = new JFrame();
+		frmStartingPage.setTitle("Starting Page");
+		frmStartingPage.setBounds(100, 100, 893, 1020);
+		frmStartingPage.setLocation(500, 0);
+		frmStartingPage.getContentPane().setLayout(null);
+		frmStartingPage.setResizable(false);
+		frmStartingPage.setVisible(true);
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
-		panel.setBounds(0, 0, 887, 982);
-		frame.getContentPane().add(panel);
+		panel.setBounds(0, 0, 887, 991);
+		frmStartingPage.getContentPane().add(panel);
 		panel.setLayout(null);
 		
 		JPanel panel_1 = new JPanel();
@@ -96,7 +89,6 @@ public class BackendProfileBossGUI {
 		
 		Icon search = new ImageIcon("Buttons_backgrounds/search_30px.png");
 		JButton btnNewButton = new JButton(search);
-		//btnNewButton.setBorderPainted(false);
 		btnNewButton.setContentAreaFilled(false); 
 		btnNewButton.setFocusPainted(false); 
 		btnNewButton.setOpaque(false);
@@ -112,6 +104,8 @@ public class BackendProfileBossGUI {
 					if (!result) {
 						ArrayList<String> suggestedOptions = new ArrayList<String>();
 						new SearchSuggestionsGUI(suggestedOptions, boss);
+					}else {
+						frmStartingPage.setVisible(false);
 					}
 				}else {
 					 String message = "Type something in the Search field";
@@ -130,15 +124,15 @@ public class BackendProfileBossGUI {
 		
 		JLabel lblNewLabel_1 = new JLabel(boss.getFirstName()+" "+boss.getLastName());
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 19));
-		lblNewLabel_1.setBounds(44, 243, 137, 30);
+		lblNewLabel_1.setBounds(44, 243, 293, 30);
 		panel.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel(" Head of company ");
-		lblNewLabel_2.setBounds(193, 253, 116, 16);
+		lblNewLabel_2.setBounds(54, 271, 116, 16);
 		panel.add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_4 = new JLabel(boss.getMyAccount().getEmail());
-		lblNewLabel_4.setBounds(49, 286, 125, 16);
+		lblNewLabel_4.setBounds(54, 298, 206, 16);
 		panel.add(lblNewLabel_4);
 		
 		Icon help = new ImageIcon("Buttons_backgrounds/customer_support_40px.png");
@@ -151,6 +145,7 @@ public class BackendProfileBossGUI {
 			
 			public void actionPerformed(ActionEvent e) {
 				try {
+					frmStartingPage.setVisible(false);
 					new HelpGUI(boss);
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
@@ -158,7 +153,7 @@ public class BackendProfileBossGUI {
 				}
 			}
 		});
-		btnNewButton_1_1.setBounds(824, 929, 46, 38);
+		btnNewButton_1_1.setBounds(814, 922, 63, 58);
 		panel.add(btnNewButton_1_1);
 
 		Icon friends = new ImageIcon("Buttons_backgrounds/friends_30px.png");
@@ -235,15 +230,27 @@ public class BackendProfileBossGUI {
 				new EditAccountBossGUI((Boss)boss);
 			}
 		});
-		btnNewButton_2.setBounds(216, 294, 155, 25);
+		btnNewButton_2.setBounds(44, 332, 155, 25);
 		panel.add(btnNewButton_2);
 		
-		JList<String> list = new JList<String>();
+		list = new JList<String>();
+		DefaultListModel<String> model = new DefaultListModel<String>();
+		listOfConnections = boss.getListOfConnections(); //Get all his Connections
+		for (User theUser: listOfConnections) {
+			model.addElement(theUser.getFirstName()+" "+theUser.getLastName()); 
+		}
+		list.setModel(model);
 		list.setBackground(new Color(255, 250, 240));
 		list.setBounds(44, 467, 116, 169);
 		panel.add(list);
 		
-		JList<String> list_1 = new JList<String>();
+		suggestedListConnections = boss.suggestedConnections(); //Get all Suggested Connections
+		list_1 = new JList<String>();
+		DefaultListModel<String> model2 = new DefaultListModel<String>();
+		for (User suggestedUser: suggestedListConnections) {
+			model2.addElement(suggestedUser.getFirstName()+" "+suggestedUser.getLastName());
+		}
+		list_1.setModel(model2);
 		list_1.setBackground(new Color(255, 250, 240));
 		list_1.setBounds(221, 467, 116, 169);
 		panel.add(list_1);
@@ -284,7 +291,7 @@ public class BackendProfileBossGUI {
 		btnNewButton_3.setBounds(752, 717, 97, 25);
 		panel.add(btnNewButton_3);
 		
-		JButton btnNewButton_4 = new JButton("Check profile");
+		btnNewButton_4 = new JButton("Check profile");
 		btnNewButton_4.setContentAreaFilled(false); 
 		btnNewButton_4.setFocusPainted(false); 
 		btnNewButton_4.setOpaque(false);
@@ -292,7 +299,7 @@ public class BackendProfileBossGUI {
 		btnNewButton_4.setBounds(44, 649, 116, 25);
 		panel.add(btnNewButton_4);
 		
-		JButton btnNewButton_5 = new JButton("Send Message");
+		btnNewButton_5 = new JButton("Send Message");
 		btnNewButton_5.setContentAreaFilled(false); 
 		btnNewButton_5.setFocusPainted(false); 
 		btnNewButton_5.setOpaque(false);
@@ -300,7 +307,7 @@ public class BackendProfileBossGUI {
 		btnNewButton_5.setBounds(44, 675, 116, 25);
 		panel.add(btnNewButton_5);
 		
-		JButton btnNewButton_6 = new JButton("Send request");
+		btnNewButton_6 = new JButton("Send request");
 		btnNewButton_6.setContentAreaFilled(false); 
 		btnNewButton_6.setFocusPainted(false); 
 		btnNewButton_6.setOpaque(false);
@@ -314,6 +321,18 @@ public class BackendProfileBossGUI {
 		btnNewButton_7.setFocusPainted(false); 
 		btnNewButton_7.setOpaque(false);
 		btnNewButton_7.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		btnNewButton_7.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				frmStartingPage.setVisible(false);
+				try {
+					new WelcomeScreen_GUI(boss.getMyAccount().getMyCompany());
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
 		btnNewButton_7.setBounds(793, 110, 56, 56);
 		panel.add(btnNewButton_7);
 		
@@ -338,8 +357,107 @@ public class BackendProfileBossGUI {
 		textField.setBounds(332, 36, 279, 30);
 		panel.add(textField);
 		
-		JLabel lblNewLabel_3 = new JLabel("logo");
-		lblNewLabel_3.setBounds(12, 927, 56, 43);
+		JLabel lblNewLabel_3 = new JLabel();
+		lblNewLabel_3.setIcon(new ImageIcon("label_backgrounds/IT_logo.png"));
+		lblNewLabel_3.setBounds(10, 917, 65, 63);
 		panel.add(lblNewLabel_3);
+		
+		ButtonListener listener = new ButtonListener();
+		btnNewButton_4.addActionListener(listener);
+		btnNewButton_5.addActionListener(listener);
+		btnNewButton_6.addActionListener(listener);
+	}
+	
+	class ButtonListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			if (e.getSource().equals(btnNewButton_4)) {
+				
+				String selectedUserString = list.getSelectedValue();
+				User selectedUser = null;
+				
+				for(User theUser: listOfConnections) {
+					String userFullName = theUser.getFirstName()+" "+theUser.getLastName();
+					
+					if (userFullName.equalsIgnoreCase(selectedUserString)) {
+						selectedUser = theUser;
+						break;
+					}
+				}
+				
+				if (selectedUser == null) {
+					 String message = "You have not selected any user!";
+						JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+						        JOptionPane.INFORMATION_MESSAGE);
+				}else {
+					new FrontEndProfileGUI(boss, selectedUser);
+					frmStartingPage.setVisible(false);
+				}
+			}else if (e.getSource().equals(btnNewButton_5)) {
+				
+				String selectedUserString = list.getSelectedValue();
+				User selectedUser = null;
+				
+				for(User theUser: listOfConnections) {
+					String userFullName = theUser.getFirstName()+" "+theUser.getLastName();
+					
+					if (userFullName.equalsIgnoreCase(selectedUserString)) {
+						selectedUser = theUser;
+						break;
+					}
+				}
+				
+				if (selectedUser == null) {
+					 String message = "You have not selected any user!";
+						JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+						        JOptionPane.INFORMATION_MESSAGE);
+				}else {
+					ArrayList<Conversation> listOfConversation = boss.getListOfConversations();
+					Conversation selectedUserToChat = null;
+					
+					for (Conversation theConversation: listOfConversation) {
+						
+						if ((((privateConversation)theConversation).getDiscussant1().equals(boss) && ((privateConversation)theConversation).getDiscussant2().equals(selectedUser)) ||
+							(((privateConversation)theConversation).getDiscussant2().equals(boss) && ((privateConversation)theConversation).getDiscussant1().equals(selectedUser))) {
+							
+							selectedUserToChat = theConversation;
+							break;
+						}
+					}
+					
+					if(selectedUserToChat == null) {
+						 String message = "Something went Wrong!";
+							JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+							        JOptionPane.INFORMATION_MESSAGE);
+					}else {
+						new PrivateChatGUI(boss, selectedUser, selectedUserToChat);
+					}
+				}
+			}else if (e.getSource().equals(btnNewButton_6)) {
+				
+				String selectedUserString = list_1.getSelectedValue();
+				User selectedUser = null;
+				
+				for(User suggestedUser: suggestedListConnections) {
+					String usersFullName = suggestedUser.getFirstName()+" "+suggestedUser.getLastName();
+					
+					if (usersFullName.equalsIgnoreCase(selectedUserString)) {
+						selectedUser = suggestedUser;
+						break;
+					}
+				}
+				
+				if (selectedUser == null) {
+					 String message = "You have not selected any user!";
+						JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+						        JOptionPane.INFORMATION_MESSAGE);
+				}else {
+					Connection possibleConnection = new Connection(boss, selectedUser);
+					possibleConnection.sendConnectionRequest();
+				}
+			}
+		}
 	}
 }

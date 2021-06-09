@@ -3,12 +3,16 @@ package GUI;
 import java.awt.Cursor;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.TreeSet;
 
+import javax.imageio.ImageIO;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultListModel;
 import javax.swing.Icon;
@@ -30,13 +34,14 @@ import java.awt.Color;
 
 public class BackendProfileChiefGUI {
 
-	private JFrame frame;
+	private JFrame frmStartingPage;
 	private JTextField textField;
 	private JTextField searchField;
 	private static Chief chief;
 	private JPanel panel, picturePanel;
 	private JLabel lblNewLabel;
-	private JButton searchButton, helpButton, requestsButton, messagesButton, notifsButton, editAccountButton,createProjectButton, editGroupAButton, editGroupBButton, editGroupCButton , postButton, checkprofileButton, sendMessageButton, sendRequestButton, disconnectButton;
+	private JButton searchButton, helpButton, requestsButton, messagesButton, notifsButton, editAccountButton,createProjectButton, editGroupAButton, 
+	editGroupBButton, editGroupCButton , postButton, checkprofileButton, sendMessageButton, sendRequestButton, disconnectButton;
 	private JLabel emailLabel;
 	private JLabel groupALabel, groupBLabel, groupCLabel;
 	private JRadioButton connectionsRadio, PublicRadio, GroupARadio, GroupBRadio, GroupCRadio;
@@ -49,34 +54,9 @@ public class BackendProfileChiefGUI {
 	TreeSet<Post> allPosts = new TreeSet<>();
 	
 	
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					BackendProfileChiefGUI window = new BackendProfileChiefGUI(chief);
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-     /**
-	 * Create the application.
-	 */
 	public BackendProfileChiefGUI(User theChief) {
 		chief = (Chief) theChief;
 		initialize();
-		ButtonListener listener = new ButtonListener();
-		requestsButton.addActionListener(listener);
-		messagesButton.addActionListener(listener);
-		notifsButton.addActionListener(listener);
-		editAccountButton.addActionListener(listener);
-		helpButton.addActionListener(listener);
-		disconnectButton.addActionListener(listener);
 	}
 	
 
@@ -84,17 +64,18 @@ public class BackendProfileChiefGUI {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 893, 1020);
-		frame.setLocation(500, 0);
-		frame.setVisible(true);
-		frame.setResizable(false);
-		frame.getContentPane().setLayout(null);
+		frmStartingPage = new JFrame();
+		frmStartingPage.setTitle("Starting Page");
+		frmStartingPage.setBounds(100, 100, 893, 1020);
+		frmStartingPage.setLocation(500, 0);
+		frmStartingPage.setVisible(true);
+		frmStartingPage.setResizable(false);
+		frmStartingPage.getContentPane().setLayout(null);
 		
 	    panel = new JPanel();
 		panel.setBackground(Color.WHITE);
-		panel.setBounds(0, 0, 875, 973);
-		frame.getContentPane().add(panel);
+		panel.setBounds(0, 0, 887, 991);
+		frmStartingPage.getContentPane().add(panel);
 		panel.setLayout(null);
 		
 		picturePanel = new JPanel();
@@ -102,8 +83,18 @@ public class BackendProfileChiefGUI {
 		panel.add(picturePanel);
 		picturePanel.setLayout(null);
 		
-	    lblNewLabel = new JLabel("Profile photo");
-		lblNewLabel.setBounds(51, 66, 72, 16);
+	    lblNewLabel = new JLabel();
+		BufferedImage imageicon;
+		try {
+			imageicon = ImageIO.read(new File(chief.getImage()));
+			ImageIcon image = new ImageIcon(imageicon);
+			Image imagerisize = image.getImage().getScaledInstance(181, 152, 170);
+			lblNewLabel.setIcon(new ImageIcon(imagerisize));
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		lblNewLabel.setBounds(0, 0, 181, 152);
 		picturePanel.add(lblNewLabel);
 		
 		Icon search = new ImageIcon("Buttons_backgrounds/search_30px.png");
@@ -114,6 +105,22 @@ public class BackendProfileChiefGUI {
 		searchButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		searchButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
+				String searchedText = searchField.getText();
+				if(!searchedText.isEmpty()) {
+					boolean result = chief.getMyAccount().getMyCompany().searchObject(searchedText, chief);
+					
+					if (!result) {
+						ArrayList<String> suggestedOptions = new ArrayList<String>();
+						new SearchSuggestionsGUI(suggestedOptions, chief);
+					}else {
+						frmStartingPage.setVisible(false);
+					}
+				}else {
+					 String message = "Type something in the Search field";
+						JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+						        JOptionPane.INFORMATION_MESSAGE);
+				}
 			}
 		});
 		searchButton.setBounds(612, 38, 55, 44);
@@ -127,24 +134,24 @@ public class BackendProfileChiefGUI {
 		JLabel nameLabel = new JLabel();
 		nameLabel.setText(chief.getFirstName()+" "+chief.getLastName());
 		nameLabel.setFont(new Font("Tahoma", Font.PLAIN, 19));
-		nameLabel.setBounds(49, 254, 137, 30);
+		nameLabel.setBounds(49, 254, 322, 30);
 		panel.add(nameLabel);
 		
 		JLabel companyPostLabel = new JLabel("Chief, ");
-		companyPostLabel.setBounds(193, 264, 89, 16);
+		companyPostLabel.setBounds(49, 297, 37, 16);
 		panel.add(companyPostLabel);
 		
-		JLabel specializationLabel = new JLabel("Specialization");
-		specializationLabel.setBounds(282, 264, 89, 16);
+		JLabel specializationLabel = new JLabel(chief.getCompanyPost());
+		specializationLabel.setBounds(86, 295, 124, 16);
 		panel.add(specializationLabel);
 		
 		emailLabel = new JLabel(chief.getMyAccount().getEmail());
-		emailLabel.setBounds(52, 297, 125, 16);
+		emailLabel.setBounds(49, 324, 125, 16);
 		panel.add(emailLabel);
 		
 		JLabel lblNewLabel_5 = new JLabel("Currently supervising:");
 		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_5.setBounds(44, 351, 133, 16);
+		lblNewLabel_5.setBounds(49, 359, 155, 16);
 		panel.add(lblNewLabel_5);
 		
 		// na balw ta buttoms//
@@ -199,11 +206,7 @@ public class BackendProfileChiefGUI {
 		helpButton.setFocusPainted(false); 
 		helpButton.setOpaque(false);
 		helpButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		helpButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		helpButton.setBounds(824, 929, 46, 38);
+		helpButton.setBounds(814, 922, 63, 58);
 		panel.add(helpButton);
 		
 		searchField = new JTextField();
@@ -248,10 +251,6 @@ public class BackendProfileChiefGUI {
 		editAccountButton.setFocusPainted(false); 
 		editAccountButton.setOpaque(false);
 		editAccountButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		editAccountButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		editAccountButton.setBounds(216, 293, 155, 25);
 		panel.add(editAccountButton);
 		
@@ -306,6 +305,11 @@ public class BackendProfileChiefGUI {
 		PublicRadio.setBounds(557, 746, 78, 25);
 		panel.add(PublicRadio);
 		
+		JRadioButton rdbtnGroup = new JRadioButton("Group");
+		rdbtnGroup.setBackground(Color.WHITE);
+		rdbtnGroup.setBounds(639, 746, 78, 25);
+		panel.add(rdbtnGroup);
+		
 		postButton = new JButton("Post");
 		postButton.setContentAreaFilled(false); 
 		postButton.setFocusPainted(false); 
@@ -337,10 +341,6 @@ public class BackendProfileChiefGUI {
 		checkprofileButton.setFocusPainted(false); 
 		checkprofileButton.setOpaque(false);
 		checkprofileButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		checkprofileButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		checkprofileButton.setBounds(44, 648, 116, 25);
 		panel.add(checkprofileButton);
 		
@@ -349,10 +349,6 @@ public class BackendProfileChiefGUI {
 		sendMessageButton.setFocusPainted(false); 
 		sendMessageButton.setOpaque(false);
 		sendMessageButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		sendMessageButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		sendMessageButton.setBounds(44, 686, 116, 25);
 		panel.add(sendMessageButton);
 		
@@ -361,10 +357,6 @@ public class BackendProfileChiefGUI {
 		sendRequestButton.setFocusPainted(false); 
 		sendRequestButton.setOpaque(false);
 		sendRequestButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		sendRequestButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		sendRequestButton.setBounds(221, 648, 116, 25);
 		panel.add(sendRequestButton);
 		
@@ -377,14 +369,15 @@ public class BackendProfileChiefGUI {
 		disconnectButton.setBounds(796, 169, 55, 54);
 		panel.add(disconnectButton);
 		
-	 createProjectButton = new JButton("Create Project");
-	
+		createProjectButton = new JButton("Create Project");
 		createProjectButton.setContentAreaFilled(false); 
 		createProjectButton.setFocusPainted(false); 
 		createProjectButton.setOpaque(false);
 		createProjectButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 			createProjectButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				new CreateProjectGUI(chief);
 			}
 		});
 		createProjectButton.setBounds(216, 332, 155, 25);
@@ -423,8 +416,9 @@ public class BackendProfileChiefGUI {
 		editGroupCButton.setBounds(183, 409, 27, 25);
 		panel.add(editGroupCButton);
 		
-		lblNewLabel_1 = new JLabel("logo");
-		lblNewLabel_1.setBounds(12, 917, 56, 43);
+		lblNewLabel_1 = new JLabel();
+		lblNewLabel_1.setIcon(new ImageIcon("label_backgrounds/IT_logo.png"));
+		lblNewLabel_1.setBounds(10, 917, 65, 63);
 		panel.add(lblNewLabel_1);
 
 		postArea = new JTextArea();
@@ -437,15 +431,21 @@ public class BackendProfileChiefGUI {
 		}
 		panel.add(postArea);
 		
-		JRadioButton rdbtnGroup = new JRadioButton("Group");
-		rdbtnGroup.setBackground(Color.WHITE);
-		rdbtnGroup.setBounds(639, 746, 78, 25);
-		panel.add(rdbtnGroup);
+		ButtonListener listener = new ButtonListener();
+		requestsButton.addActionListener(listener);
+		messagesButton.addActionListener(listener);
+		notifsButton.addActionListener(listener);
+		editAccountButton.addActionListener(listener);
+		helpButton.addActionListener(listener);
+		disconnectButton.addActionListener(listener);
+		checkprofileButton.addActionListener(listener);
+		sendMessageButton.addActionListener(listener);
+		sendRequestButton.addActionListener(listener);
 	}
 	
 	public void disconnectUser() throws IOException {
-		frame.dispose();
-		new WelcomeScreen_GUI(null); // null?
+		frmStartingPage.setVisible(false);
+		new WelcomeScreen_GUI(chief.getMyAccount().getMyCompany());
 	}
 	
 	
@@ -478,10 +478,12 @@ public class BackendProfileChiefGUI {
 				}
 			}
 			else if(e.getSource().equals(editAccountButton)) {
-				new EditAccountGUI();
+				
+				new EditAccountGUI((User)chief);
 			}
 			else if(e.getSource().equals(helpButton)) {
 				try {
+					frmStartingPage.setVisible(false);
 					new HelpGUI(chief);
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
@@ -516,6 +518,7 @@ public class BackendProfileChiefGUI {
 						        JOptionPane.INFORMATION_MESSAGE);
 				}else {
 					new FrontEndProfileGUI(chief, selectedUser);
+					frmStartingPage.setVisible(false);
 				}
 			}
 			else if(e.getSource().equals(sendMessageButton)) {
@@ -537,7 +540,7 @@ public class BackendProfileChiefGUI {
 						JOptionPane.showMessageDialog(new JFrame(), message, "Message",
 						        JOptionPane.INFORMATION_MESSAGE);
 				}else {
-					TreeSet<Conversation> listOfConversation = chief.getListOfConversations();
+					ArrayList<Conversation> listOfConversation = chief.getListOfConversations();
 					Conversation selectedUserToChat = null;
 					
 					for (Conversation theConversation: listOfConversation) {
@@ -593,13 +596,8 @@ public class BackendProfileChiefGUI {
 					postList.remove(postList); 
 					
 				}
-				
-				
 			}
 			
 		}
-		
-		
-		
 	}
 }

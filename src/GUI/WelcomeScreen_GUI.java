@@ -213,9 +213,12 @@ public class WelcomeScreen_GUI {
 		lblNewLabel_6.setBounds(433, 512, 53, 14);
 		panel_2.add(lblNewLabel_6);
 		
-		JLabel lblITLogo= new JLabel();
-		lblITLogo.setIcon(new ImageIcon("label_backgrounds/IT_logo.png"));
-		lblITLogo.setBounds(376, 500, 35, 26);
+		JLabel lblITLogo = new JLabel();
+		BufferedImage imageicon2 = ImageIO.read(new File("label_backgrounds/IT_logo.png"));
+		ImageIcon image2 = new ImageIcon(imageicon2);
+		Image imagerisize2 = image2.getImage().getScaledInstance(40, 35, 140) ;
+		lblITLogo.setIcon(new ImageIcon(imagerisize2));
+		lblITLogo.setBounds(376, 495, 40, 35);
 		panel_2.add(lblITLogo);
 		
 		ButtonListener listener = new ButtonListener();

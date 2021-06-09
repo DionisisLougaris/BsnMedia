@@ -52,7 +52,7 @@ public class Connection extends Notification{
 	}
 	
 	//This is a method in which a connection request is sent to another user.
-	public void  sendConnectionRequest()
+	public void sendConnectionRequest()
 	{
 		boolean pendingConnectionRequest = false;
 		if(!areConnected())
@@ -89,6 +89,10 @@ public class Connection extends Notification{
 			{
 				firstUser.getListOfConnections().add(secondUser);
 				secondUser.getListOfConnections().add(firstUser);
+				
+				privateConversation newConversation = new privateConversation(firstUser, secondUser);
+				firstUser.addConversation(newConversation);
+				secondUser.addConversation(newConversation);
 			}
 		}
 		else
