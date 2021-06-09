@@ -213,10 +213,10 @@ public class WelcomeScreen_GUI {
 		lblNewLabel_6.setBounds(433, 512, 53, 14);
 		panel_2.add(lblNewLabel_6);
 		
-		JLabel lblNewLabel_7 = new JLabel();
-		lblNewLabel_7.setIcon(new ImageIcon("label_backgrounds/apple_logo_35px.png"));
-		lblNewLabel_7.setBounds(376, 500, 35, 26);
-		panel_2.add(lblNewLabel_7);
+		JLabel lblITLogo= new JLabel();
+		lblITLogo.setIcon(new ImageIcon("label_backgrounds/IT_logo.png"));
+		lblITLogo.setBounds(376, 500, 35, 26);
+		panel_2.add(lblITLogo);
 		
 		ButtonListener listener = new ButtonListener();
 		btnNewButton.addActionListener(listener);

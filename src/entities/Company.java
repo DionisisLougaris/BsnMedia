@@ -274,6 +274,13 @@ public class Company implements Serializable{
 		image = i;
 	}
 	
+	public void addCompanyGroups(Group g)
+	{
+		companyGroups.add(g);
+	}
+
+
+
 		
 
 }

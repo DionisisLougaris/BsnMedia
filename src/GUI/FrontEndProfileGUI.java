@@ -91,7 +91,7 @@ public class FrontEndProfileGUI {
 		panel.add(panel_1);
 		panel_1.setLayout(null);
 		
-		ImageIcon defaultprofilephoto = new ImageIcon("default photo/defaultProfilePhoto.png");
+		ImageIcon defaultprofilephoto = new ImageIcon(auser.getImage());
 		Image imagerisize = defaultprofilephoto.getImage().getScaledInstance(70, 120, 80) ;
 		ImageIcon ndefaultprofilephoto = new ImageIcon(imagerisize);
 		JLabel labeldefaulprofilephoto = new JLabel(ndefaultprofilephoto);
