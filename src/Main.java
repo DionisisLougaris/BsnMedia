@@ -30,6 +30,8 @@ public class Main {
 		Account theAccount5 = new Account("elenikos", "elenikos01@gmail.com", theCompany, thePassword5);
 		Employee first5 = new Employee("Eleni", "Kosmidou", "6939445593", "Dervenakion", "female", "26/08/2001", "Programmer", theAccount5);
 		
+		theCompany.setBoss(first2);
+		
 		Connection c = new Connection(first, first3);
 		Connection c1 = new Connection(first, first4);
 		Connection c2 = new Connection(first, first2);
@@ -39,7 +41,8 @@ public class Main {
 		first.addPost(new Post(first,"ГейЬ","public"));
 		
 		
-		
+		Project p1= new Project("project name","this is the Description","deadline");
+		Group g1= new Group("group name",p1,first4);
 		
 		theCompany.addUser(first);
 		theCompany.addUser(first2);
@@ -69,7 +72,7 @@ public class Main {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					new CreateProjectGUI(first4);
+					new CompanyProfileGUI(first2,theCompany);
 					} catch (Exception e) {
 					e.printStackTrace();
 				}

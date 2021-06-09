@@ -247,7 +247,7 @@ public class CreateProjectGUI {
 					else
 					{
 					    createdGroup = new Group(textGroupName.getText(), null, pchief);
-						Project createdProject = new Project(textProjectName.getText(), textProjectDescription.getText(), textDeadline.getText(), createdGroup);
+						Project createdProject = new Project(textProjectName.getText(), textProjectDescription.getText(), textDeadline.getText());
 						createdGroup.setMyProject(createdProject);
 						pchief.getMyAccount().getMyCompany().addCompanyGroups(createdGroup);
 					}

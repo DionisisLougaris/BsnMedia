@@ -8,15 +8,13 @@ public class Project implements Serializable{
 	private String description;
 	private String deadline;
 	private String status; //only values "ongoing" or "done"
-	private Group myGroup;
 	
 	
 	//Constructor for Project class
-	public Project(String name, String description, String deadline, Group myGroup) {
+	public Project(String name, String description, String deadline) {
 		this.name = name;
 		this.description = description;
 		this.deadline = deadline;
-		this.myGroup = myGroup;
 		this.status = "ongoing";
 	}
 	
@@ -44,15 +42,6 @@ public class Project implements Serializable{
 	public void setDeadline(String deadline) {
 		this.deadline = deadline;
 	}
-
-	public Group getMyGroup() {
-		return myGroup;
-	}
-
-	public void setMyGroup(Group myGroup) {
-		this.myGroup = myGroup;
-	}
-
 	public String getStatus() {
 		return status;
 	}

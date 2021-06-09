@@ -3,10 +3,13 @@ package GUI;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.AbstractButton;
 import javax.swing.BorderFactory;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import java.awt.Button;
@@ -40,7 +43,7 @@ public class CompanyProfileGUI {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CompanyProfileGUI window = new CompanyProfileGUI(myUser);
+					CompanyProfileGUI window = new CompanyProfileGUI(myUser,theCompany);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -52,7 +55,7 @@ public class CompanyProfileGUI {
 	/**
 	 * Create the application.
 	 */
-	public CompanyProfileGUI(User myUser) {
+	public CompanyProfileGUI(User myUser,Company theCompany) {
 		this.myUser = myUser;
 		this.theCompany = myUser.getMyAccount().getMyCompany();
 		initialize();
@@ -124,7 +127,7 @@ public class CompanyProfileGUI {
 	    frame.getContentPane().add(panel_1);
 	    
 	    JLabel lblCompanyPhoto = new JLabel("Company photo");
-	    lblCompanyPhoto.setBounds(329, 132, 305, 16);
+	    lblCompanyPhoto.setBounds(0, 0, 743, 285);
 	    panel_1.add(lblCompanyPhoto);
 	    
 	    JLabel lblNewLabel_1 = new JLabel("Company_Name");
@@ -134,45 +137,50 @@ public class CompanyProfileGUI {
 	    
 	    JLabel lblNewLabel_5 = new JLabel("What we are all about :");
 	    lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 15));
-	    lblNewLabel_5.setBounds(50, 487, 160, 30);
+	    lblNewLabel_5.setBounds(60, 487, 160, 30);
 	    frame.getContentPane().add(lblNewLabel_5);
 	    
-	    JLabel lblNewLabel = new JLabel("This is a custom block of text blah blah blah blah");
-	    lblNewLabel.setBounds(60, 530, 226, 118);
+	    JLabel lblNewLabel = new JLabel();
+	    lblNewLabel.setFont(new Font("Tahoma", Font.ITALIC, 17));
+	    lblNewLabel.setText(theCompany.getInfo());
+	    lblNewLabel.setBounds(60, 530, 332, 38);
 	    frame.getContentPane().add(lblNewLabel);
 	    
-	    JList list = new JList();
-	    list.setBackground(new Color(255, 250, 240));
-	    list.setBounds(494, 609, 133, 186);
-	    frame.getContentPane().add(list);
+	    
 	    
 	    JList list_1 = new JList();
 	    list_1.setBackground(new Color(255, 250, 240));
 	    list_1.setBounds(660, 609, 133, 186);
 	    frame.getContentPane().add(list_1);
 	    
-	    JLabel lblNewLabel_2 = new JLabel("Employees(0)");
+	    JLabel lblNewLabel_2 = new JLabel("Employees (" + theCompany.returnEmployees().size() + ")");
 	    lblNewLabel_2.setBounds(660, 580, 91, 16);
 	    frame.getContentPane().add(lblNewLabel_2);
 	    
-	    JLabel lblNewLabel_2_1 = new JLabel("Chiefs(0)");
+	    JLabel lblNewLabel_2_1 = new JLabel("Chiefs (" + theCompany.returnChiefs().size() + ")");
 	    lblNewLabel_2_1.setBounds(500, 580, 91, 16);
 	    frame.getContentPane().add(lblNewLabel_2_1);
 
-	    JLabel lblNewLabel_4 = new JLabel("example@gmail.com");
-	    lblNewLabel_4.setBounds(146, 751, 125, 16);
+	    JLabel lblNewLabel_4 = new JLabel();
+	    lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 18));
+	    lblNewLabel_4.setText(theCompany.getEmail());
+	    lblNewLabel_4.setBounds(112, 704, 337, 25);
 	    frame.getContentPane().add(lblNewLabel_4);
 	    
-	    JLabel lblNewLabel_10 = new JLabel("23100000000");
-	    lblNewLabel_10.setBounds(146, 780, 78, 16);
+	    JLabel lblNewLabel_10 = new JLabel();
+	    lblNewLabel_10.setFont(new Font("Tahoma", Font.PLAIN, 18));
+	    lblNewLabel_10.setText(theCompany.getTelephone());
+	    lblNewLabel_10.setBounds(112, 742, 125, 25);
 	    frame.getContentPane().add(lblNewLabel_10);
 	    
-	    JLabel lblNewLabel_11 = new JLabel("Egnatias, 156");
-	    lblNewLabel_11.setBounds(146, 809, 78, 16);
+	    JLabel lblNewLabel_11 = new JLabel();
+	    lblNewLabel_11.setFont(new Font("Tahoma", Font.PLAIN, 18));
+	    lblNewLabel_11.setText(theCompany.getAddress());
+	    lblNewLabel_11.setBounds(112, 780, 280, 25);
 	    frame.getContentPane().add(lblNewLabel_11);
 	    
 	    JLabel lblNewLabel_3 = new JLabel("Head of company :");
-	    lblNewLabel_3.setBounds(70, 661, 128, 16);
+	    lblNewLabel_3.setBounds(60, 610, 128, 16);
 	    frame.getContentPane().add(lblNewLabel_3);
 	    
 	    Icon help = new ImageIcon("Buttons_backgrounds/customer_support_40px.png");
@@ -189,15 +197,15 @@ public class CompanyProfileGUI {
 	    frame.getContentPane().add(btnNewButton_7);
 	    
 	    JLabel lblNewLabel_7 = new JLabel(new ImageIcon("label_backgrounds/email_20px.png"));
-	    lblNewLabel_7.setBounds(106, 751, 28, 25);
+	    lblNewLabel_7.setBounds(72, 704, 28, 25);
 	    frame.getContentPane().add(lblNewLabel_7);
 	    
 	    JLabel lblNewLabel_7_1 = new JLabel(new ImageIcon("label_backgrounds/telephone_20px.png"));
-	    lblNewLabel_7_1.setBounds(106, 780, 28, 25);
+	    lblNewLabel_7_1.setBounds(72, 742, 28, 25);
 	    frame.getContentPane().add(lblNewLabel_7_1);
 	    
 	    JLabel lblNewLabel_7_2 = new JLabel(new ImageIcon("label_backgrounds/address_20px.png"));
-	    lblNewLabel_7_2.setBounds(106, 809, 28, 25);
+	    lblNewLabel_7_2.setBounds(70, 780, 28, 25);
 	    frame.getContentPane().add(lblNewLabel_7_2);
 	    
 	    JButton btnNewButton_2 = new JButton("Boss' Profile");
@@ -208,10 +216,19 @@ public class CompanyProfileGUI {
 	    btnNewButton_2.setBorderPainted(false);
 	    btnNewButton_2.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent arg0) {
+	    		//Closing previous GUI
+				frame.setVisible(false);
+				//Opening Boss' Profile
+	    		FrontEndProfileGUI bossProfile = new FrontEndProfileGUI(myUser,theCompany.getBoss());
 	    	}
 	    });
-	    btnNewButton_2.setBounds(180, 657, 106, 25);
+	    btnNewButton_2.setBounds(177, 607, 106, 22);
 	    frame.getContentPane().add(btnNewButton_2);
+	    
+	    JList list_1_1 = new JList();
+	    list_1_1.setBackground(new Color(255, 250, 240));
+	    list_1_1.setBounds(461, 609, 133, 186);
+	    frame.getContentPane().add(list_1_1);
 	    frame.setVisible(true);
 	}
 }

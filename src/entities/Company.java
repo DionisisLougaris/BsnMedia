@@ -148,7 +148,7 @@ public class Company implements Serializable{
 		if(aString.equalsIgnoreCase(this.name)) {
 			
 			found = true;
-			new CompanyProfileGUI(theUser);
+			new CompanyProfileGUI(theUser,this);
 		}
 		//Search for Group
 		if (!found) {
@@ -229,6 +229,24 @@ public class Company implements Serializable{
 	
 	
 	
+	public String getInfo() {
+		return info;
+	}
+
+
+
+	public Boss getBoss() {
+		return boss;
+	}
+
+
+
+	public void setBoss(Boss boss) {
+		this.boss = boss;
+	}
+
+
+
 	public ArrayList<User> getCompanyMembers()
 	{
 		return companyMembers;
@@ -274,6 +292,30 @@ public class Company implements Serializable{
 		image = i;
 	}
 	
+	public String getTelephone() {
+		return telephone;
+	}
+
+
+
+	public String getAddress() {
+		return address;
+	}
+
+
+
+	public String getImage() {
+		return image;
+	}
+
+
+
+	public String getEmail() {
+		return email;
+	}
+
+
+
 	public void addCompanyGroups(Group g)
 	{
 		companyGroups.add(g);

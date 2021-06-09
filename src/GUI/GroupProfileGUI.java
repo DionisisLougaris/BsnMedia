@@ -79,9 +79,10 @@ public class GroupProfileGUI {
 		frame.getContentPane().add(textField);
 		textField.setColumns(10);
 		
-		JLabel lblNewLabel = new JLabel("Group Name");
+		JLabel lblNewLabel = new JLabel();
+		lblNewLabel.setText(myGroup.getName());
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 27));
-		lblNewLabel.setBounds(38, 122, 158, 54);
+		lblNewLabel.setBounds(38, 122, 274, 54);
 		frame.getContentPane().add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Project in Progress:");
@@ -114,10 +115,12 @@ public class GroupProfileGUI {
 			public void actionPerformed(ActionEvent arg0) {
 				if(myUser instanceof Boss)
 				{
-					//uparxei problhma me thn apothikeush tou value tou JSlider se int enw leei oti einai int ,prepei na elegxthei
-					int value = slider.getValue();
-					//myGroup.setRating(value);
-					System.out.println(slider.getValue());
+					int value = (int)slider.getValue();
+					myGroup.setRating(value);
+					System.out.println(myGroup.getRating());
+					String message = "You have successfully rated "+myGroup.getName()+"!";
+					JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+					        JOptionPane.INFORMATION_MESSAGE);
 				}
 				else
 				{
@@ -146,21 +149,24 @@ public class GroupProfileGUI {
 		panel_1.setBounds(322, 489, 507, 393);
 		frame.getContentPane().add(panel_1);
 		
-		JLabel lblNewLabel_7 = new JLabel("/10");
+		JLabel lblNewLabel_7 = new JLabel("/100");
 		lblNewLabel_7.setBackground(SystemColor.text);
 		lblNewLabel_7.setBounds(185, 350, 48, 16);
 		frame.getContentPane().add(lblNewLabel_7);
 		
-		JLabel lblNewLabel_8 = new JLabel("New label");
-		lblNewLabel_8.setBounds(187, 220, 56, 16);
+		JLabel lblNewLabel_8 = new JLabel();
+		lblNewLabel_8.setText(myGroup.getMyProject().getName());
+		lblNewLabel_8.setBounds(187, 220, 125, 16);
 		frame.getContentPane().add(lblNewLabel_8);
 		
-		JLabel lblNewLabel_9 = new JLabel("New label");
+		JLabel lblNewLabel_9 = new JLabel();
+		lblNewLabel_9.setText(myGroup.getMyProject().getStatus());
 		lblNewLabel_9.setBounds(185, 249, 56, 16);
 		frame.getContentPane().add(lblNewLabel_9);
 		
-		JLabel lblNewLabel_10 = new JLabel("New label");
-		lblNewLabel_10.setBounds(187, 278, 56, 16);
+		JLabel lblNewLabel_10 = new JLabel();
+		lblNewLabel_10.setText(myGroup.getMyProject().getDescription());
+		lblNewLabel_10.setBounds(187, 278, 507, 16);
 		frame.getContentPane().add(lblNewLabel_10);
 		
 		JButton btnNewButton_1_1 = new JButton("logo");
