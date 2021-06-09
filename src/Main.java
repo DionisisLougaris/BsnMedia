@@ -36,6 +36,7 @@ public class Main {
 		c.manageConnectionRequest(true);
 		c1.manageConnectionRequest(true);
 		c2.manageConnectionRequest(true);
+		first.addPost(new Post(first,"ГейЬ","public"));
 		
 		
 		
@@ -68,7 +69,7 @@ public class Main {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					new WelcomeScreen_GUI(theCompany);
+					new CreateProjectGUI(first4);
 					} catch (Exception e) {
 					e.printStackTrace();
 				}

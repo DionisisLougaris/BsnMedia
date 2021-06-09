@@ -113,7 +113,7 @@ public class CreateProjectGUI {
 		    {
 			if(pchief.getMyAccount().getMyCompany().returnEmployees().get(i).getGroups().size() <=2 && !createdGroup.isMember(pchief.getMyAccount().getMyCompany().returnEmployees().get(i)))
 			{
-				addUserGroupmodel.addElement (pchief.getMyAccount().getMyCompany().returnEmployees().get(i));
+				addUserGroupmodel.addElement (pchief.getMyAccount().getMyCompany().returnEmployees().get(i).getMyAccount().getUsername());
 			}
 			
 		   }
@@ -138,7 +138,7 @@ public class CreateProjectGUI {
 			DefaultListModel removeUserGroupmodel = new DefaultListModel();
 			for(int i=0; i<createdGroup.getGroupMembers().size(); i++)
 		   {
-				removeUserGroupmodel.addElement(createdGroup.getGroupMembers().get(i));
+				removeUserGroupmodel.addElement(createdGroup.getGroupMembers().get(i).getMyAccount().getUsername());
 		    }
 		  removeUsersGrouopList.setModel(removeUserGroupmodel);
 		}

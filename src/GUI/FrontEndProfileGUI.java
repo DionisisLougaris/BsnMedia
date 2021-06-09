@@ -25,6 +25,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
@@ -79,6 +80,7 @@ public class FrontEndProfileGUI {
 		frame.getContentPane().setLayout(null);
 		frame.setVisible(true);
 		
+		
 		Connection usersconnection = new Connection(tuser,auser);
 		
 		JPanel panel = new JPanel();
@@ -93,7 +95,7 @@ public class FrontEndProfileGUI {
 		panel_1.setLayout(null);
 		
 		ImageIcon defaultprofilephoto = new ImageIcon(auser.getImage());
-		Image imagerisize = defaultprofilephoto.getImage().getScaledInstance(70, 120, 80) ;
+		Image imagerisize = defaultprofilephoto.getImage().getScaledInstance(181, 152, 170) ;
 		ImageIcon ndefaultprofilephoto = new ImageIcon(imagerisize);
 		JLabel labeldefaulprofilephoto = new JLabel(ndefaultprofilephoto);
 		labeldefaulprofilephoto.setBounds(0, 0, 183, 152);
@@ -135,7 +137,20 @@ public class FrontEndProfileGUI {
 		panel.add(searchbutton);
 		
 		
-		JButton buttongotomyprofile = new JButton("logo");
+		BufferedImage buttonIcon = null;
+		try {
+			buttonIcon = ImageIO.read(new File("label_backgrounds/BSNlogo.jpg"));
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		ImageIcon image = new ImageIcon(buttonIcon);
+		Image imagerisizel = image.getImage().getScaledInstance(40, 70, 60) ;
+		ImageIcon imagebutton = new ImageIcon(imagerisizel);
+	    JButton buttongotomyprofile = new JButton(imagebutton);
+	    buttongotomyprofile.setBorderPainted(false);
+	    buttongotomyprofile.setFocusPainted(false);
+	    buttongotomyprofile.setContentAreaFilled(false);
 		buttongotomyprofile.setContentAreaFilled(false); 
 		buttongotomyprofile.setFocusPainted(false); 
 		buttongotomyprofile.setOpaque(false);
@@ -156,10 +171,12 @@ public class FrontEndProfileGUI {
 				}
 			}
 		});
-		buttongotomyprofile.setBounds(12, 13, 62, 53);
+		buttongotomyprofile.setBounds(12, 13, 84, 69);
 		panel.add(buttongotomyprofile);
 		
 		JTextArea ausersposts = new JTextArea();
+		ausersposts.setEditable(false);
+		ausersposts.setLineWrap(true);
 		ausersposts.setBackground(new Color(255, 250, 240));
 		ausersposts.setBounds(32, 561, 810, 336);
 	    for(Post post : auser.getListOfPosts())
@@ -174,15 +191,26 @@ public class FrontEndProfileGUI {
 		labelnamelastname.setBounds(108, 240, 202, 26);
 		panel.add(labelnamelastname);
 		
-		
-		
-		JLabel labelcompanypost = new JLabel("Currently Post:");
-		labelcompanypost.setBounds(322, 248, 89, 16);
+		String currentlypost ="";
+		if(auser instanceof Employee)
+		{
+			currentlypost = "Employee";
+		}
+		else if(auser instanceof Chief)
+		{
+			currentlypost = "Chief";
+		}
+		else if(auser instanceof Boss)
+		{
+			currentlypost = "Boss";
+		}
+		JLabel labelcompanypost = new JLabel(currentlypost);
+		labelcompanypost.setBounds(322, 250, 89, 16);
 		panel.add(labelcompanypost);
 		
 		String spacialization = auser.getCompanyPost();
 		JLabel labelspacialization = new JLabel(spacialization);
-		labelspacialization.setBounds(410, 248, 78, 16);
+		labelspacialization.setBounds(407, 250, 78, 16);
 		panel.add(labelspacialization);
 		
 		String email = auser.getMyAccount().getEmail();
@@ -231,9 +259,6 @@ public class FrontEndProfileGUI {
 	   }
 		
 	
-	     
-		
-		
 		if(!tuser.equals(auser))
 		{
 			JButton buttonchat= new JButton("Chat");
@@ -244,7 +269,8 @@ public class FrontEndProfileGUI {
 			buttonchat.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					
-					//new PrivateChatGUI();// prepei na baloume twn xhrhsrh
+					
+					new PrivateChatGUI(auser, tuser, usersconnection.getAboutThisConversation());// prepei na baloume twn xhrhsrh
 				}
 			});
 			buttonchat.setBounds(479, 313, 62, 25);
@@ -352,7 +378,7 @@ public class FrontEndProfileGUI {
 		lblNewLabel_14_3.setBounds(85, 501, 28, 25);
 		panel.add(lblNewLabel_14_3);
 		
-		
+		frame.setResizable(false);
 		frame.setTitle(auser.getMyAccount().getUsername());
 	}
 }
