@@ -455,7 +455,7 @@ public class BackendProfileChiefGUI {
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource().equals(requestsButton)) {
 				try {
-					new ConnectionRequestsGUI();
+					new ConnectionRequestsGUI(chief);
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -463,7 +463,7 @@ public class BackendProfileChiefGUI {
 			}
 			else if(e.getSource().equals(messagesButton)) {
 				try {
-					new NewMessagesGUI();
+					new NewMessagesGUI(chief);
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -471,7 +471,7 @@ public class BackendProfileChiefGUI {
 			}
 			else if(e.getSource().equals(notifsButton)) {
 				try {
-					new NotificationsGUI();
+					new NotificationsGUI(chief);
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

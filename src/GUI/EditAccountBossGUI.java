@@ -9,6 +9,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import entities.*;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -29,9 +32,11 @@ public class EditAccountBossGUI {
 	private JTextField textField_11;
 	private JTextField textField_12;
 	
+	private Boss boss;
+	
 	/**
 	 * Launch the application.
-	 */
+	 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -48,14 +53,14 @@ public class EditAccountBossGUI {
 	/**
 	 * Create the application.
 	 */
-	public EditAccountBossGUI() {
-		initialize();
+	public EditAccountBossGUI(Boss theBoss) {
+		initialize(theBoss);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(Boss theBoss) {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 574, 825);
 		frame.getContentPane().setLayout(null);
@@ -64,6 +69,8 @@ public class EditAccountBossGUI {
 		JPanel panel = new JPanel();
 		panel.setBounds(12, 13, 116, 109);
 		frame.getContentPane().add(panel);
+		
+		boss = theBoss;
 		
 		JLabel lblNewLabel = new JLabel("Public Info");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 22));

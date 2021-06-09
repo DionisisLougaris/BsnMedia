@@ -93,22 +93,6 @@ public class HelpGUI {
 		panel.setLayout(null);
 		
 		
-	   
-		BufferedImage imageicon = ImageIO.read(new File("label_backgrounds/BSNlogo.jpg"));
-	    ImageIcon image = new ImageIcon(imageicon);
-		Image imagerisize = image.getImage().getScaledInstance(30, 40, 20) ;
-		ImageIcon imagebutton = new ImageIcon(imagerisize);
-	    JButton buttonLogo = new JButton( imagebutton);
-	    buttonLogo.setBounds(824, 929, 150, 150);
-		buttonLogo.setBorderPainted(false);
-		buttonLogo.setFocusPainted(false);
-		buttonLogo.setContentAreaFilled(false);
-		panel.add(buttonLogo);
-		buttonLogo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		
 		JButton btnNewButton_1 = new JButton();
 		BufferedImage imageicon2 = ImageIO.read(new File("label_backgrounds/BSNlogo.jpg"));
 		ImageIcon image2 = new ImageIcon(imageicon2);

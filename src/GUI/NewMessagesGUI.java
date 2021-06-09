@@ -7,6 +7,9 @@ import java.io.IOException;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import entities.User;
+
 import javax.swing.JList;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
@@ -22,10 +25,11 @@ import java.awt.Cursor;
 public class NewMessagesGUI {
 
 	private JFrame frmNewMessages;
+	private User user;
 
 	/**
 	 * Launch the application.
-	 */
+	 *
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -39,19 +43,19 @@ public class NewMessagesGUI {
 		});
 	}
 
-	/**
+	/*
 	 * Create the application.
 	 * @throws IOException 
 	 */
-	public NewMessagesGUI() throws IOException {
-		initialize();
+	public NewMessagesGUI(User theUser) throws IOException {
+		initialize(theUser);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 * @throws IOException 
 	 */
-	private void initialize() throws IOException {
+	private void initialize(User theUser) throws IOException {
 		frmNewMessages = new JFrame();
 		frmNewMessages.getContentPane().setBackground(new Color(255, 153, 102));
 		frmNewMessages.setResizable(false);
@@ -59,7 +63,9 @@ public class NewMessagesGUI {
 		frmNewMessages.setBounds(1200, 88, 200, 244);
 		frmNewMessages.getContentPane().setLayout(null);
 		
-		JList list = new JList();
+		user = theUser;
+		
+		JList<String> list = new JList<String>();
 		list.setBounds(10, 11, 172, 138);
 		frmNewMessages.getContentPane().add(list);
 		

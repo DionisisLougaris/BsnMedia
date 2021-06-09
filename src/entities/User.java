@@ -33,7 +33,7 @@ abstract public class User implements Serializable{
 		this.address = address;
 		this.gender = gender;
 		this.birthday = birthday;
-		this.image = "";
+		this.image = "default photo/defaultProfilePhoto.png";
 		this.companyPost = companyPost;
 		this.myAccount = myAccount;
 	}

@@ -9,6 +9,9 @@ import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JList;
+
+import entities.User;
+
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
@@ -20,10 +23,11 @@ import java.awt.Cursor;
 public class NotificationsGUI {
 
 	private JFrame frmNotifications;
+	private User user;
 
 	/**
 	 * Launch the application.
-	 */
+	 *
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -41,15 +45,15 @@ public class NotificationsGUI {
 	 * Create the application.
 	 * @throws IOException 
 	 */
-	public NotificationsGUI() throws IOException {
-		initialize();
+	public NotificationsGUI(User theUser) throws IOException {
+		initialize(theUser);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 * @throws IOException 
 	 */
-	private void initialize() throws IOException {
+	private void initialize(User theUser) throws IOException {
 		frmNotifications = new JFrame();
 		frmNotifications.setTitle("Notifications");
 		frmNotifications.setResizable(false);
@@ -57,7 +61,9 @@ public class NotificationsGUI {
 		frmNotifications.setBounds(1325, 88, 200, 244);
 		frmNotifications.getContentPane().setLayout(null);
 		
-		JList list = new JList();
+		user = theUser;
+		
+		JList<String> list = new JList<String>();
 		list.setBounds(10, 11, 174, 134);
 		frmNotifications.getContentPane().add(list);
 		

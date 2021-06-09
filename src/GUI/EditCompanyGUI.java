@@ -7,6 +7,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JTextField;
+
+import entities.*;
+
 import javax.swing.JScrollPane;
 import javax.swing.JScrollBar;
 import javax.swing.JLabel;
@@ -28,10 +31,12 @@ public class EditCompanyGUI {
 	private JLabel lblNewLabel_4;
 	private JButton btnNewButton_1;
 	private JButton btnNewButton_2;
+	
+	private Boss boss;
 
 	/**
 	 * Launch the application.
-	 */
+	 *
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -48,14 +53,14 @@ public class EditCompanyGUI {
 	/**
 	 * Create the application.
 	 */
-	public EditCompanyGUI() {
-		initialize();
+	public EditCompanyGUI(Boss theBoss) {
+		initialize(theBoss);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(Boss theBoss) {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 792, 602);
 		frame.setLocation(870, 200);
@@ -64,6 +69,8 @@ public class EditCompanyGUI {
 		JPanel panel = new JPanel();
 		panel.setBounds(12, 13, 750, 152);
 		frame.getContentPane().add(panel);
+		
+		boss = theBoss;
 		
 		JButton btnNewButton = new JButton("Change company photo");
 		btnNewButton.setContentAreaFilled(false); 

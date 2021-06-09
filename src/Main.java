@@ -30,6 +30,10 @@ public class Main {
 		Account theAccount5 = new Account("elenikos", "elenikos01@gmail.com", theCompany, thePassword5);
 		Employee first5 = new Employee("Eleni", "Kosmidou", "6939445593", "Dervenakion", "female", "26/08/2001", "Programmer", theAccount5);
 		
+		Password thePassword6 = new Password("12345678", "stefou", "Giwrgos", "Stefou");
+		Account theAccount6 = new Account("stefou", "stefou01@gmail.com", theCompany, thePassword6);
+		Boss first6 = new Boss("Giwrgos", "Stefou", "6939445593", "Dervenakion", "male", "26/08/2001", "Programmer", theAccount6);
+		
 		Connection c = new Connection(first, first3);
 		Connection c1 = new Connection(first, first4);
 		c.manageConnectionRequest(true);
@@ -42,6 +46,7 @@ public class Main {
 		theCompany.addUser(first3);
 		theCompany.addUser(first4);
 		theCompany.addUser(first5);
+		theCompany.addUser(first6);
 		
 		
 		/*privateConversation conversation = new privateConversation(first, first2);
@@ -65,7 +70,7 @@ public class Main {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					new CreateProjectGUI(first4);
+					new WelcomeScreen_GUI(theCompany);
 					} catch (Exception e) {
 					e.printStackTrace();
 				}

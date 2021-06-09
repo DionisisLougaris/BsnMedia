@@ -9,6 +9,9 @@ import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JList;
+
+import entities.User;
+
 import java.awt.Color;
 import java.awt.Cursor;
 
@@ -21,10 +24,10 @@ import javax.swing.JButton;
 public class ConnectionRequestsGUI {
 
 	private JFrame frmConnectionRequests;
-
+	private User user;
 	/**
 	 * Launch the application.
-	 */
+	 *
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -38,19 +41,18 @@ public class ConnectionRequestsGUI {
 		});
 	}
 
-	/**
 	 * Create the application.
-	 * @throws IOException 
+	 *@throws IOException 
 	 */
-	public ConnectionRequestsGUI() throws IOException {
-		initialize();
+	public ConnectionRequestsGUI(User theUser) throws IOException {
+		initialize(theUser);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 * @throws IOException 
 	 */
-	private void initialize() throws IOException {
+	private void initialize(User theUser) throws IOException {
 		frmConnectionRequests = new JFrame();
 		frmConnectionRequests.setResizable(false);
 		frmConnectionRequests.setTitle("Connection Requests");
@@ -58,7 +60,9 @@ public class ConnectionRequestsGUI {
 		frmConnectionRequests.setBounds(1060, 88, 200, 244);
 		frmConnectionRequests.getContentPane().setLayout(null);
 		
-		JList list = new JList();
+		user = theUser;
+		
+		JList<String> list = new JList<String>();
 		list.setBounds(10, 11, 172, 145);
 		frmConnectionRequests.getContentPane().add(list);
 		
