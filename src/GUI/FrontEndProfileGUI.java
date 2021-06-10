@@ -45,40 +45,19 @@ public class FrontEndProfileGUI {
 	private static User tuser;
 	private static User auser;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					FrontEndProfileGUI window = new FrontEndProfileGUI(tuser, auser);
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 */
 	public FrontEndProfileGUI(User tUser,User aUser) {
-		tuser = tUser; //The user who is connected
-		auser = aUser; //The other User
-		initialize();
+		initialize(tUser, aUser);
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
+	private void initialize(User tUser, User aUser) {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 893, 1020);
 		frame.setLocation(500, 0);
 		frame.getContentPane().setLayout(null);
 		frame.setVisible(true);
+		
+		tuser = tUser; //The user who is connected
+		auser = aUser; //The other User
 		
 		
 		Connection usersconnection = new Connection(tuser,auser);
@@ -145,7 +124,7 @@ public class FrontEndProfileGUI {
 			e1.printStackTrace();
 		}
 		ImageIcon image = new ImageIcon(buttonIcon);
-		Image imagerisizel = image.getImage().getScaledInstance(40, 70, 60) ;
+		Image imagerisizel = image.getImage().getScaledInstance(84, 69, 60) ;
 		ImageIcon imagebutton = new ImageIcon(imagerisizel);
 	    JButton buttongotomyprofile = new JButton(imagebutton);
 	    buttongotomyprofile.setBorderPainted(false);
@@ -153,6 +132,7 @@ public class FrontEndProfileGUI {
 	    buttongotomyprofile.setContentAreaFilled(false);
 		buttongotomyprofile.setContentAreaFilled(false); 
 		buttongotomyprofile.setFocusPainted(false); 
+		buttongotomyprofile.setToolTipText("Go back to your Profile");
 		buttongotomyprofile.setOpaque(false);
 		buttongotomyprofile.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		buttongotomyprofile.addActionListener(new ActionListener() {
@@ -330,13 +310,12 @@ public class FrontEndProfileGUI {
 		lblNewLabel_13.setBounds(712, 377, 109, 16);
 		panel.add(lblNewLabel_13);
 		
-		DefaultListModel mutualmodel = new DefaultListModel();
-		JList listmutualconnections = new JList();
+		DefaultListModel<String> mutualmodel = new DefaultListModel<String>();
+		JList<String> listmutualconnections = new JList<String>();
 		listmutualconnections.setBackground(new Color(255, 250, 240));
 		listmutualconnections.setBounds(709, 409, 133, 127);
-		for(int i=0; i<usersconnection.mutualConnections().size(); i++)
-		{
-			mutualmodel.addElement(usersconnection.mutualConnections().get(i).getMyAccount().getUsername() + "\n");
+		for (User theUser: usersconnection.mutualConnections()) {
+			mutualmodel.addElement(theUser.getFirstName()+" "+theUser.getLastName());
 		}
 		listmutualconnections.setModel(mutualmodel);
 		panel.add(listmutualconnections);
@@ -357,6 +336,14 @@ public class FrontEndProfileGUI {
 		btnNewButton_1_1.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		btnNewButton_1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				try {
+					frame.setVisible(false);
+					new HelpGUI(tuser);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		btnNewButton_1_1.setBounds(824, 929, 46, 38);

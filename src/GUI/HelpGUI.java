@@ -109,15 +109,15 @@ public class HelpGUI {
 				//Returning to the right backend profile
 				if(myUser instanceof Chief)
 				{
-					BackendProfileChiefGUI myProfile = new BackendProfileChiefGUI(myUser);
+					new BackendProfileChiefGUI(myUser);
 				}
 				else if(myUser instanceof Boss)
 				{
-					BackendProfileBossGUI myProfile = new BackendProfileBossGUI(myUser);
+					new BackendProfileBossGUI(myUser);
 				}
 				else if(myUser instanceof Employee)
 				{
-					BackendProfileEmployeeGUI myProfile = new BackendProfileEmployeeGUI(myUser);
+					new BackendProfileEmployeeGUI(myUser);
 				}
 			}
 		});

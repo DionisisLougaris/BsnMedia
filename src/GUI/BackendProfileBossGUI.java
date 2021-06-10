@@ -46,7 +46,8 @@ public class BackendProfileBossGUI {
 	private User boss;
 	private TreeSet<User> suggestedListConnections;
 	private JPanel panel,picturePanel;
-	private JButton searchButton,helpButton,requestsButton,messagesButton,notifsButton,editAccountButton,postButton,checkprofileButton,sendMessageButton,sendRequestButton,disconnectButton,editCompanyInfoButton;
+	private JButton searchButton,helpButton,requestsButton,messagesButton,notifsButton,editAccountButton,
+	postButton,checkprofileButton,sendMessageButton,sendRequestButton,disconnectButton,editCompanyInfoButton;
 	
 	private ArrayList<User> listOfConnections;
 

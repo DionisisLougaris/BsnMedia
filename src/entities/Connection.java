@@ -54,7 +54,11 @@ public class Connection extends Notification{
 	//This is a method in which a connection request is sent to another user.
 	public void sendConnectionRequest()
 	{
+		//firstUser, einai aytos pou esteile to aitima
+		//secondUser einai autos pou to lamvanei
+		
 		boolean pendingConnectionRequest = false;
+		
 		if(!areConnected())
 		{
 			for(int i=0; i<firstUser.getPendingConnectionRequests().size(); i++)
@@ -68,24 +72,36 @@ public class Connection extends Notification{
 			if(!pendingConnectionRequest)
 			{
 				firstUser.addPendingConnectionRequest(secondUser);
+				Connection connectionRequest = new Connection(firstUser.firstName+"(New CR)", firstUser);
+				secondUser.listOfNotifications.add(connectionRequest);
+				
+				String message = "Successful connection request sent!";
+				JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+				        JOptionPane.INFORMATION_MESSAGE);
 			}
 			else
 			{
-				JOptionPane.showMessageDialog(null, "Failed to pending connection request because the request all ready be pended. ");
+				String message = "There is already an outstanding connection request!";
+				JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+				        JOptionPane.ERROR_MESSAGE);
 			}
 		}
 		else
 		{
-			JOptionPane.showMessageDialog(null, "Failed to pending connection request because you are all ready connected. ");
+			String message = "You are already connected to each other!";
+			JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+			        JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	
 	//This is a method in which the connection request is accepted or is canceled.
+	//firstUser, einai aytos pou esteile to aitima
+	//secondUser einai autos pou to lamvanei
 	public void manageConnectionRequest(boolean manageCR)
 	{
 		if(manageCR)
 		{
-			if(!areConnected())
+			if(!this.areConnected())
 			{
 				firstUser.getListOfConnections().add(secondUser);
 				secondUser.getListOfConnections().add(firstUser);
@@ -93,12 +109,22 @@ public class Connection extends Notification{
 				privateConversation newConversation = new privateConversation(firstUser, secondUser);
 				firstUser.addConversation(newConversation);
 				secondUser.addConversation(newConversation);
+				
+				String message = "Successful connection between you!";
+				JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+				        JOptionPane.INFORMATION_MESSAGE);
 			}
 		}
-		else
-		{
-			firstUser.getPendingConnectionRequests().remove(secondUser);
-			firstUser.getListOfNotifications(); // diagrafh toy notification
+		firstUser.getPendingConnectionRequests().remove(secondUser);
+		
+		for (Notification not: secondUser.listOfNotifications) {
+			if (not instanceof Connection) {
+				if (not.getAboutThisUser().getMyAccount().getUsername().equalsIgnoreCase(firstUser.getMyAccount().getUsername())) {
+						
+					secondUser.listOfNotifications.remove(not);
+					break;
+				}
+			}
 		}
 	}
 	

@@ -3,17 +3,26 @@ package GUI;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.imageio.ImageIO;
 import javax.swing.AbstractButton;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import java.awt.Button;
 import java.awt.Cursor;
+import java.awt.Desktop;
 
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -25,176 +34,266 @@ import entities.Employee;
 import entities.User;
 
 import java.awt.Font;
+import java.awt.Image;
+
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.Icon;
 import java.awt.Color;
+import javax.swing.border.LineBorder;
+import javax.swing.SwingConstants;
+import javax.swing.JSeparator;
 
 public class CompanyProfileGUI {
 
 	private JFrame frame;
-	private JTextField textField;
-	private static User myUser;
-	private static Company theCompany;
+	private JTextField searchField;
+	private JButton logoButton;
+	private static User theLoggedUser;
+	private static Company company;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					CompanyProfileGUI window = new CompanyProfileGUI(myUser,theCompany);
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 */
+	
+	
 	public CompanyProfileGUI(User myUser,Company theCompany) {
-		this.myUser = myUser;
-		this.theCompany = myUser.getMyAccount().getMyCompany();
-		initialize();
+		
+		initialize(myUser, theCompany);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(User myUser, Company theCompany) {
 		frame = new JFrame();
 		frame.getContentPane().setBackground(Color.WHITE);
 		frame.setBounds(100, 100, 893, 1020);
 		frame.setLocation(500, 0);
 		frame.setVisible(true);
-		
-		ImageIcon logoimage = new ImageIcon();
+		frame.setResizable(false);
 	    frame.setTitle("Company");
 	    frame.getContentPane().setLayout(null);
+		
+		theLoggedUser = myUser;
+		company = theCompany;
 	    
-	    JButton btnNewButton_1 = new JButton("logo");
-	    btnNewButton_1.setContentAreaFilled(false); 
-	    btnNewButton_1.setFocusPainted(false); 
-		btnNewButton_1.setOpaque(false);
-		btnNewButton_1.setCursor(new Cursor(Cursor.HAND_CURSOR));
-	    btnNewButton_1.addActionListener(new ActionListener() {
+		BufferedImage buttonIcon = null;
+		try {
+			buttonIcon = ImageIO.read(new File("label_backgrounds/BSNlogo.jpg"));
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		ImageIcon image = new ImageIcon(buttonIcon);
+		Image imagerisizel = image.getImage().getScaledInstance(84, 69, 60) ;
+		ImageIcon imagebutton = new ImageIcon(imagerisizel);
+		logoButton  = new JButton(imagebutton);
+		logoButton.setBorder(null);
+		logoButton.setToolTipText("Go back to your Profile");
+		logoButton.setContentAreaFilled(false); 
+		logoButton.setFocusPainted(false); 
+		logoButton.setOpaque(false);
+		logoButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		logoButton.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) {
 	    		//Closing previous GUI
 				frame.setVisible(false);
 				//Returning to the right backend profile
-				if(myUser instanceof Chief)
-				{
-					BackendProfileChiefGUI myProfile = new BackendProfileChiefGUI(myUser);
+				if(myUser instanceof Chief) {
+					new BackendProfileChiefGUI(myUser);
 				}
-				else if(myUser instanceof Boss)
-				{
-					BackendProfileBossGUI myProfile = new BackendProfileBossGUI(myUser);
+				else if(myUser instanceof Boss) {
+					new BackendProfileBossGUI(myUser);
 				}
-				else if(myUser instanceof Employee)
-				{
-					BackendProfileEmployeeGUI myProfile = new BackendProfileEmployeeGUI(myUser);
+				else if(myUser instanceof Employee) {
+					new BackendProfileEmployeeGUI(myUser);
 				}
 	    	}
 	    });
-	    btnNewButton_1.setBounds(26, 27, 62, 53);
-	    frame.getContentPane().add(btnNewButton_1);
+		logoButton.setBounds(26, 27, 84, 69);
+	    frame.getContentPane().add(logoButton);
 	    
-	    textField = new JTextField();
-	    textField.setBackground(new Color(255, 250, 240));
-	    textField.setColumns(10);
-	    textField.setBounds(367, 38, 317, 30);
-	    frame.getContentPane().add(textField);
+	    searchField = new JTextField();
+	    searchField.setBackground(new Color(255, 250, 240));
+	    searchField.setColumns(10);
+	    searchField.setBounds(367, 38, 317, 30);
+	    frame.getContentPane().add(searchField);
 	    
 	    Icon search = new ImageIcon("Buttons_backgrounds/search_30px.png");
-	    JButton btnNewButton = new JButton(search);
-	    btnNewButton.setContentAreaFilled(false); 
-	    btnNewButton.setFocusPainted(false); 
-	    btnNewButton.setOpaque(false);
-	    btnNewButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-	    btnNewButton.addActionListener(new ActionListener() {
+	    JButton searchButton = new JButton(search);
+	    searchButton.setContentAreaFilled(false); 
+	    searchButton.setFocusPainted(false); 
+	    searchButton.setOpaque(false);
+	    searchButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+	    searchButton.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) {
+	    		
+				
+				String searchedText = searchField.getText();
+				if(!searchedText.isEmpty()) {
+					boolean result = company.searchObject(searchedText, theLoggedUser);
+					
+					if (!result) {
+						ArrayList<String> suggestedOptions = new ArrayList<String>();
+						new SearchSuggestionsGUI(suggestedOptions, theLoggedUser);
+					}else {
+						frame.setVisible(false);
+					}
+				}else {
+					 String message = "Type something in the Search field";
+						JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+						        JOptionPane.INFORMATION_MESSAGE);
+				}
 	    	}
 	    });
-	    btnNewButton.setBounds(704, 36, 46, 44);
-	    frame.getContentPane().add(btnNewButton);
+	    searchButton.setBounds(704, 36, 46, 44);
+	    frame.getContentPane().add(searchButton);
 	    
 	    JPanel panel_1 = new JPanel();
 	    panel_1.setLayout(null);
 	    panel_1.setBounds(70, 140, 743, 285);
 	    frame.getContentPane().add(panel_1);
 	    
-	    JLabel lblCompanyPhoto = new JLabel("Company photo");
+	    JLabel lblCompanyPhoto = new JLabel();
+		BufferedImage imageicon;
+		try {
+			imageicon = ImageIO.read(new File("default photo/defaultCompanyPhoto.png"));
+			ImageIcon imageBackground = new ImageIcon(imageicon);
+			Image imagerisize = imageBackground.getImage().getScaledInstance(740, 280, 140) ;
+			lblCompanyPhoto.setIcon(new ImageIcon(imagerisize));
+		} catch (IOException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 	    lblCompanyPhoto.setBounds(0, 0, 743, 285);
 	    panel_1.add(lblCompanyPhoto);
 	    
-	    JLabel lblNewLabel_1 = new JLabel("Company_Name");
-	    lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 23));
-	    lblNewLabel_1.setBounds(347, 438, 226, 30);
-	    frame.getContentPane().add(lblNewLabel_1);
+	    JLabel companyName = new JLabel(company.getName());
+	    companyName.setHorizontalAlignment(SwingConstants.CENTER);
+	    companyName.setFont(new Font("Tahoma", Font.PLAIN, 24));
+	    companyName.setBounds(70, 438, 743, 30);
+	    frame.getContentPane().add(companyName);
 	    
-	    JLabel lblNewLabel_5 = new JLabel("What we are all about :");
-	    lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 15));
-	    lblNewLabel_5.setBounds(60, 487, 160, 30);
-	    frame.getContentPane().add(lblNewLabel_5);
+	    JLabel companyInfoLabel = new JLabel("What we are all about :");
+	    companyInfoLabel.setFont(new Font("Tahoma", Font.PLAIN, 17));
+	    companyInfoLabel.setBounds(60, 487, 197, 30);
+	    frame.getContentPane().add(companyInfoLabel);
 	    
-	    JLabel lblNewLabel = new JLabel();
-	    lblNewLabel.setFont(new Font("Tahoma", Font.ITALIC, 17));
-	    lblNewLabel.setText(theCompany.getInfo());
-	    lblNewLabel.setBounds(60, 530, 332, 38);
-	    frame.getContentPane().add(lblNewLabel);
+	    JLabel companyDetails = new JLabel(company.getInfo());
+	    companyDetails.setFont(new Font("Tahoma", Font.ITALIC, 14));
+	    companyDetails.setText(theCompany.getInfo());
+	    companyDetails.setBounds(60, 517, 332, 38);
+	    frame.getContentPane().add(companyDetails);
 	    
 	    
 	    
-	    JList list_1 = new JList();
-	    list_1.setBackground(new Color(255, 250, 240));
-	    list_1.setBounds(660, 609, 133, 186);
-	    frame.getContentPane().add(list_1);
+	    JList<String> allEmployeesLists = new JList<String>();
+	    DefaultListModel<String> employeesModel = new DefaultListModel<String>();
+	    for(User employee: company.returnEmployees()) {
+	    	employeesModel.addElement(employee.getFirstName()+" "+employee.getLastName());
+	    }
+	    allEmployeesLists.setModel(employeesModel);
+	    allEmployeesLists.setBorder(new LineBorder(new Color(0, 0, 0), 5));
+	    allEmployeesLists.setBackground(new Color(255, 250, 240));
+	    allEmployeesLists.setBounds(660, 609, 133, 186);
+	    frame.getContentPane().add(allEmployeesLists);
 	    
-	    JLabel lblNewLabel_2 = new JLabel("Employees (" + theCompany.returnEmployees().size() + ")");
-	    lblNewLabel_2.setBounds(660, 580, 91, 16);
-	    frame.getContentPane().add(lblNewLabel_2);
+	    JLabel EmployeesLabel = new JLabel("Employees (" + theCompany.returnEmployees().size() + ")");
+	    EmployeesLabel.setBounds(660, 580, 91, 16);
+	    frame.getContentPane().add(EmployeesLabel);
 	    
-	    JLabel lblNewLabel_2_1 = new JLabel("Chiefs (" + theCompany.returnChiefs().size() + ")");
-	    lblNewLabel_2_1.setBounds(500, 580, 91, 16);
-	    frame.getContentPane().add(lblNewLabel_2_1);
+	    JList<String> allChiefsList = new JList<String>();
+	    DefaultListModel<String> chiefsModel = new DefaultListModel<String>();
+	    for(User chief: company.returnChiefs()) {
+	    	chiefsModel.addElement(chief.getFirstName()+" "+chief.getLastName());
+	    }
+	    allChiefsList.setModel(chiefsModel);
+	    allChiefsList.setBorder(new LineBorder(new Color(0, 0, 0), 5));
+	    allChiefsList.setBackground(new Color(255, 250, 240));
+	    allChiefsList.setBounds(461, 609, 133, 186);
+	    frame.getContentPane().add(allChiefsList);
+	    
+	    JLabel chiefsLabel = new JLabel("Chiefs (" + theCompany.returnChiefs().size() + ")");
+	    chiefsLabel.setBounds(500, 580, 91, 16);
+	    frame.getContentPane().add(chiefsLabel);
 
-	    JLabel lblNewLabel_4 = new JLabel();
-	    lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 18));
-	    lblNewLabel_4.setText(theCompany.getEmail());
-	    lblNewLabel_4.setBounds(112, 704, 337, 25);
-	    frame.getContentPane().add(lblNewLabel_4);
+	    JLabel companyEmailLabel = new JLabel();
+	    companyEmailLabel.setForeground(Color.RED);
+	    companyEmailLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
+	    companyEmailLabel.setText(theCompany.getEmail());
+	    companyEmailLabel.setBounds(112, 704, 337, 25);
+	    frame.getContentPane().add(companyEmailLabel);
+	    companyEmailLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+	    companyEmailLabel.addMouseListener(new MouseAdapter() {
+	       	 
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                try {
+                    Desktop.getDesktop().browse(new URI("mailto:"+company.getEmail()));
+                } catch (IOException | URISyntaxException e1) {
+                    e1.printStackTrace();
+                }
+            }
+		});
 	    
-	    JLabel lblNewLabel_10 = new JLabel();
-	    lblNewLabel_10.setFont(new Font("Tahoma", Font.PLAIN, 18));
-	    lblNewLabel_10.setText(theCompany.getTelephone());
-	    lblNewLabel_10.setBounds(112, 742, 125, 25);
-	    frame.getContentPane().add(lblNewLabel_10);
+	    JLabel companyTelLabel = new JLabel();
+	    companyTelLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
+	    companyTelLabel.setText(theCompany.getTelephone());
+	    companyTelLabel.setBounds(112, 742, 280, 25);
+	    frame.getContentPane().add(companyTelLabel);
 	    
-	    JLabel lblNewLabel_11 = new JLabel();
-	    lblNewLabel_11.setFont(new Font("Tahoma", Font.PLAIN, 18));
-	    lblNewLabel_11.setText(theCompany.getAddress());
-	    lblNewLabel_11.setBounds(112, 780, 280, 25);
-	    frame.getContentPane().add(lblNewLabel_11);
+	    JLabel companyAddressLabel = new JLabel();
+	    companyAddressLabel.setForeground(Color.RED);
+	    companyAddressLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
+	    companyAddressLabel.setText(theCompany.getAddress());
+	    companyAddressLabel.setBounds(112, 780, 280, 25);
+	    companyAddressLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+	    companyAddressLabel.addMouseListener(new MouseAdapter() {
+	       	 
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                try {
+                    Desktop.getDesktop().browse(new URI("https://www.google.com/maps/place/"+company.getAddress()));
+                } catch (IOException | URISyntaxException e1) {
+                    e1.printStackTrace();
+                }
+            }
+            
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            	companyAddressLabel.setText("<html><a href=''>" + company.getAddress()+ "</a></html>");
+            }
+		});
+	    frame.getContentPane().add(companyAddressLabel);
 	    
-	    JLabel lblNewLabel_3 = new JLabel("Head of company :");
-	    lblNewLabel_3.setBounds(60, 610, 128, 16);
-	    frame.getContentPane().add(lblNewLabel_3);
+	    JLabel headOfCompanyLabel = new JLabel("Head of company :");
+	    headOfCompanyLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+	    headOfCompanyLabel.setBounds(70, 613, 117, 16);
+	    frame.getContentPane().add(headOfCompanyLabel);
+	    
+		JLabel ourLogo = new JLabel();
+		ourLogo.setIcon(new ImageIcon("label_backgrounds/IT_logo.png"));
+		ourLogo.setBounds(10, 917, 65, 63);
+		frame.getContentPane().add(ourLogo);
 	    
 	    Icon help = new ImageIcon("Buttons_backgrounds/customer_support_40px.png");
-		JButton btnNewButton_7 = new JButton(help);
-		btnNewButton_7.setContentAreaFilled(false); 
-		btnNewButton_7.setFocusPainted(false); 
-		btnNewButton_7.setOpaque(false);
-		btnNewButton_7.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		btnNewButton_7.addActionListener(new ActionListener() {
+		JButton customerSupportButton = new JButton(help);
+		customerSupportButton.setContentAreaFilled(false); 
+		customerSupportButton.setFocusPainted(false); 
+		customerSupportButton.setOpaque(false);
+		customerSupportButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		customerSupportButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				try {
+					frame.setVisible(false);
+					new HelpGUI(theLoggedUser);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
-	    btnNewButton_7.setBounds(817, 922, 46, 38);
-	    frame.getContentPane().add(btnNewButton_7);
+	    customerSupportButton.setBounds(817, 922, 65, 63);
+	    frame.getContentPane().add(customerSupportButton);
 	    
 	    JLabel lblNewLabel_7 = new JLabel(new ImageIcon("label_backgrounds/email_20px.png"));
 	    lblNewLabel_7.setBounds(72, 704, 28, 25);
@@ -208,27 +307,37 @@ public class CompanyProfileGUI {
 	    lblNewLabel_7_2.setBounds(70, 780, 28, 25);
 	    frame.getContentPane().add(lblNewLabel_7_2);
 	    
-	    JButton btnNewButton_2 = new JButton("Boss' Profile");
-	    btnNewButton_2.setContentAreaFilled(false); 
-	    btnNewButton_2.setFocusPainted(false); 
-	    btnNewButton_2.setOpaque(false);
-	    btnNewButton_2.setCursor(new Cursor(Cursor.HAND_CURSOR));
-	    btnNewButton_2.setBorderPainted(false);
-	    btnNewButton_2.addActionListener(new ActionListener() {
+	    JButton goToBossProfButton = new JButton("Check the Boss");
+	    goToBossProfButton.setBackground(new Color(255, 153, 102));
+	    goToBossProfButton.setBorder(new LineBorder(new Color(0, 0, 0)));
+	    goToBossProfButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+	    goToBossProfButton.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent arg0) {
 	    		//Closing previous GUI
 				frame.setVisible(false);
 				//Opening Boss' Profile
-	    		FrontEndProfileGUI bossProfile = new FrontEndProfileGUI(myUser,theCompany.getBoss());
+	    		new FrontEndProfileGUI(theLoggedUser,theCompany.getBoss());
 	    	}
 	    });
-	    btnNewButton_2.setBounds(177, 607, 106, 22);
-	    frame.getContentPane().add(btnNewButton_2);
+	    goToBossProfButton.setBounds(187, 611, 117, 22);
+	    frame.getContentPane().add(goToBossProfButton);    
 	    
-	    JList list_1_1 = new JList();
-	    list_1_1.setBackground(new Color(255, 250, 240));
-	    list_1_1.setBounds(461, 609, 133, 186);
-	    frame.getContentPane().add(list_1_1);
-	    frame.setVisible(true);
+	    JLabel lblNewLabel = new JLabel("Contact Us!");
+	    lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+	    lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 17));
+	    lblNewLabel.setBounds(70, 668, 187, 25);
+	    frame.getContentPane().add(lblNewLabel);
+	    
+	    JSeparator separator = new JSeparator();
+	    separator.setBackground(Color.RED);
+	    separator.setForeground(Color.RED);
+	    separator.setBounds(49, 691, 288, 8);
+	    frame.getContentPane().add(separator);
+	    
+	    JSeparator separator_1 = new JSeparator();
+	    separator_1.setForeground(Color.RED);
+	    separator_1.setBackground(Color.RED);
+	    separator_1.setBounds(49, 588, 288, 8);
+	    frame.getContentPane().add(separator_1);
 	}
 }

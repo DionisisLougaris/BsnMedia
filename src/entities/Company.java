@@ -232,41 +232,28 @@ public class Company implements Serializable{
 	public String getInfo() {
 		return info;
 	}
-
-
-
 	public Boss getBoss() {
 		return boss;
 	}
-
-
-
 	public void setBoss(Boss boss) {
 		this.boss = boss;
 	}
-
-
-
 	public ArrayList<User> getCompanyMembers()
 	{
 		return companyMembers;
 	}
-	
 	public String getVerificationCode() 
 	{
 		return verificationCode;
 	}
-	
 	public void setVerificationCode(String s) 
 	{
 		 verificationCode = s;
 	}
-	
 	public void setName(String n)
 	{
 		name = n;
 	}
-	
 	public void setTelephone(String t) 
 	{
 		telephone = t;
@@ -281,48 +268,39 @@ public class Company implements Serializable{
 	{
 		address = a;
 	}
-	
 	public void setInfo(String i) 
 	{
 		info = i;
 	}
-	
 	public void setImage(String i) 
 	{
 		image = i;
 	}
-	
 	public String getTelephone() {
 		return telephone;
 	}
-
-
-
 	public String getAddress() {
 		return address;
 	}
-
-
-
 	public String getImage() {
 		return image;
 	}
-
-
-
 	public String getEmail() {
 		return email;
 	}
-
-
-
 	public void addCompanyGroups(Group g)
 	{
 		companyGroups.add(g);
 	}
+	public String getName() {
+		return name;
+	}
+	public void setCompanyMembers(ArrayList<User> companyMembers) {
+		this.companyMembers = companyMembers;
+	}
+	public void setCompanyGroups(ArrayList<Group> companyGroups) {
+		this.companyGroups = companyGroups;
+	}
 
-
-
-		
-
+	
 }
