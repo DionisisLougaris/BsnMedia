@@ -40,6 +40,7 @@ import javax.swing.ImageIcon;
 
 import java.awt.Color;
 import java.awt.SystemColor;
+import javax.swing.border.LineBorder;
 
 public class HelpGUI {
 
@@ -88,7 +89,7 @@ public class HelpGUI {
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
-		panel.setBounds(0, 0, 410, 705);
+		panel.setBounds(0, 0, 410, 749);
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 		
@@ -109,15 +110,30 @@ public class HelpGUI {
 				//Returning to the right backend profile
 				if(myUser instanceof Chief)
 				{
-					new BackendProfileChiefGUI(myUser);
+					try {
+						new BackendProfileChiefGUI(myUser);
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				}
 				else if(myUser instanceof Boss)
 				{
-					new BackendProfileBossGUI(myUser);
+					try {
+						new BackendProfileBossGUI(myUser);
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				}
 				else if(myUser instanceof Employee)
 				{
-					new BackendProfileEmployeeGUI(myUser);
+					try {
+						new BackendProfileEmployeeGUI(myUser);
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				}
 			}
 		});
@@ -196,12 +212,22 @@ public class HelpGUI {
 		
 		JLabel lblNewLabel_15_1_1_1_1_1 = new JLabel("No, greek letters cannot be encrypted currently.");
 		lblNewLabel_15_1_1_1_1_1.setFont(new Font("Tahoma", Font.ITALIC, 14));
-		lblNewLabel_15_1_1_1_1_1.setBounds(44, 605, 304, 16);
+		lblNewLabel_15_1_1_1_1_1.setBounds(44, 605, 304, 20);
 		panel.add(lblNewLabel_15_1_1_1_1_1);
 		
+		JLabel lblNewLabel_14_1_1_2_1_1 = new JLabel("** You 'll have to be logged in our email in order");
+		lblNewLabel_14_1_1_2_1_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblNewLabel_14_1_1_2_1_1.setBounds(19, 670, 329, 27);
+		panel.add(lblNewLabel_14_1_1_2_1_1);
+		
+		JLabel lblNewLabel_14_1_1_2_1_1_1 = new JLabel(" to recieve authentication email for resetting password **");
+		lblNewLabel_14_1_1_2_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblNewLabel_14_1_1_2_1_1_1.setBounds(22, 692, 376, 27);
+		panel.add(lblNewLabel_14_1_1_2_1_1_1);
+		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(new Color(255, 153, 0));
-		panel_1.setBounds(410, 0, 465, 705);
+		panel_1.setBackground(Color.WHITE);
+		panel_1.setBounds(410, 0, 465, 749);
 		frame.getContentPane().add(panel_1);
 		panel_1.setLayout(null);
 		
@@ -266,6 +292,8 @@ public class HelpGUI {
 		panel_1.add(lblNewLabel_17);
 		
 		btnNewButton_2 = new JButton("Submit");
+		btnNewButton_2.setBorder(new LineBorder(new Color(255, 255, 255), 2));
+		btnNewButton_2.setForeground(Color.WHITE);
 		btnNewButton_2.setContentAreaFilled(false); 
 		btnNewButton_2.setFocusPainted(false); 
 		btnNewButton_2.setOpaque(false);
@@ -277,6 +305,14 @@ public class HelpGUI {
 		btnNewButton_2.setBounds(243, 528, 97, 25);
 		panel_1.add(btnNewButton_2);
 		
+		JLabel lblNewLabel_21 = new JLabel("");
+		BufferedImage imagebackground = ImageIO.read(new File("label_backgrounds/Background_help_page-0001.jpg"));
+		ImageIcon imageb = new ImageIcon(imagebackground);
+		Image imagerisizeb = imageb.getImage().getScaledInstance(465, 749,0) ;
+		lblNewLabel_21.setIcon(new ImageIcon(imagerisizeb));
+		lblNewLabel_21.setBounds(0, 0, 465, 749);
+		panel_1.add(lblNewLabel_21);
+		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBackground(new Color(255, 250, 240));
 		panel_2.setBounds(0, 704, 875, 269);
@@ -285,52 +321,62 @@ public class HelpGUI {
 		
 		JLabel lblNewLabel = new JLabel("Get in touch!");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 24));
-		lblNewLabel.setBounds(39, 60, 163, 27);
+		lblNewLabel.setBounds(39, 76, 163, 27);
 		panel_2.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Creators:");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.ITALIC, 15));
-		lblNewLabel_1.setBounds(349, 41, 77, 16);
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.ITALIC, 17));
+		lblNewLabel_1.setBounds(445, 79, 105, 27);
 		panel_2.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("Kosmidou Eleni");
-		lblNewLabel_2.setBounds(470, 80, 105, 16);
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblNewLabel_2.setBounds(445, 148, 117, 20);
 		panel_2.add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel("Kwnstantinidi Styliana");
-		lblNewLabel_3.setBounds(470, 120, 134, 16);
+		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblNewLabel_3.setBounds(445, 177, 163, 20);
 		panel_2.add(lblNewLabel_3);
 		
 		JLabel lblNewLabel_4 = new JLabel("Lougaris Dionisis");
-		lblNewLabel_4.setBounds(470, 160, 105, 16);
+		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblNewLabel_4.setBounds(445, 206, 117, 23);
 		panel_2.add(lblNewLabel_4);
 		
 		JLabel lblNewLabel_5 = new JLabel("Mazaraki Eleni");
-		lblNewLabel_5.setBounds(470, 200, 105, 16);
+		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblNewLabel_5.setBounds(445, 235, 105, 20);
 		panel_2.add(lblNewLabel_5);
 		
 		JLabel lblNewLabel_6 = new JLabel("Machairas Panagiotis");
-		lblNewLabel_6.setBounds(700, 40, 134, 16);
+		lblNewLabel_6.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblNewLabel_6.setBounds(687, 119, 134, 20);
 		panel_2.add(lblNewLabel_6);
 		
 		JLabel lblNewLabel_7 = new JLabel("Melissanidou Kwnstantina");
-		lblNewLabel_7.setBounds(700, 80, 146, 16);
+		lblNewLabel_7.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblNewLabel_7.setBounds(687, 148, 176, 20);
 		panel_2.add(lblNewLabel_7);
 		
 		JLabel lblNewLabel_8 = new JLabel("Mertzanhs Antwnhs");
-		lblNewLabel_8.setBounds(700, 120, 117, 16);
+		lblNewLabel_8.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblNewLabel_8.setBounds(687, 177, 147, 20);
 		panel_2.add(lblNewLabel_8);
 		
 		JLabel lblNewLabel_9 = new JLabel("Nanou Eleftheria");
-		lblNewLabel_9.setBounds(700, 160, 117, 16);
+		lblNewLabel_9.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblNewLabel_9.setBounds(687, 209, 117, 20);
 		panel_2.add(lblNewLabel_9);
 		
 		JLabel lblNewLabel_10 = new JLabel("Stefou Giwrgos-Giannis");
-		lblNewLabel_10.setBounds(700, 200, 134, 16);
+		lblNewLabel_10.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblNewLabel_10.setBounds(687, 235, 151, 20);
 		panel_2.add(lblNewLabel_10);
 		
 		JLabel lblNewLabel_11 = new JLabel("Charakopoulos Minas-Theodoros");
-		lblNewLabel_11.setBounds(470, 40, 222, 16);
+		lblNewLabel_11.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblNewLabel_11.setBounds(445, 119, 222, 20);
 		panel_2.add(lblNewLabel_11);
 		
 		JLabel lblNewLabel_12 = new JLabel("\u00A9 Bsn Media 2021");

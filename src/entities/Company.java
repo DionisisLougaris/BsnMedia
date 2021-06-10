@@ -1,5 +1,6 @@
 package entities;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -57,7 +58,7 @@ public class Company implements Serializable{
 	
 	/*This is a method that allows or does not allow the User to access in Bsn Media. If all checks are finished without 
 	any error the user's backend Profile window on  network  opens.*/ 
-	public boolean loginAttempt (String inputUsername, String inputPassword) {
+	public boolean loginAttempt (String inputUsername, String inputPassword) throws IOException {
 		
 		for (User member: companyMembers) {
 			String memberDecryptedPassword = Encryption.decryptPassword(member.getMyAccount().getMyPassword().getPassword(), 
@@ -140,7 +141,7 @@ public class Company implements Serializable{
 	
 	
 	
-	public boolean searchObject(String aString, User theUser) {
+	public boolean searchObject(String aString, User theUser) throws IOException {
 		
 		boolean found = false;
 		
@@ -170,7 +171,12 @@ public class Company implements Serializable{
 						|| this.companyMembers.get(i).getLastName().equalsIgnoreCase(aString)) {
 					
 					found = true;
-					new FrontEndProfileGUI(theUser, companyMembers.get(i));
+					try {
+						new FrontEndProfileGUI(theUser, companyMembers.get(i));
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					break;
 				}
 			}	

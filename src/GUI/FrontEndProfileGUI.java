@@ -45,11 +45,11 @@ public class FrontEndProfileGUI {
 	private static User tuser;
 	private static User auser;
 
-	public FrontEndProfileGUI(User tUser,User aUser) {
+	public FrontEndProfileGUI(User tUser,User aUser) throws IOException {
 		initialize(tUser, aUser);
 	}
 
-	private void initialize(User tUser, User aUser) {
+	private void initialize(User tUser, User aUser) throws IOException {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 893, 1020);
 		frame.setLocation(500, 0);
@@ -64,7 +64,7 @@ public class FrontEndProfileGUI {
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
-		panel.setBounds(0, 0, 875, 973);
+		panel.setBounds(0, 0, 887, 985);
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 		
@@ -97,13 +97,19 @@ public class FrontEndProfileGUI {
 				
 				String searchedText = searchtext.getText();
 				if(!searchedText.isEmpty()) {
-					boolean result = tuser.getMyAccount().getMyCompany().searchObject(searchedText, tuser);
-					
-					if (!result) {
-						ArrayList<String> suggestedOptions = new ArrayList<String>();
-						new SearchSuggestionsGUI(suggestedOptions, tuser);
-					}else {
-						frame.setVisible(false);
+					boolean result;
+					try {
+						result = tuser.getMyAccount().getMyCompany().searchObject(searchedText, tuser);
+
+						if (!result) {
+							ArrayList<String> suggestedOptions = new ArrayList<String>();
+							new SearchSuggestionsGUI(suggestedOptions, tuser);
+						}else {
+							frame.setVisible(false);
+						}
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
 					}
 				}else {
 					 String message = "Type something in the Search field";
@@ -118,13 +124,13 @@ public class FrontEndProfileGUI {
 		
 		BufferedImage buttonIcon = null;
 		try {
-			buttonIcon = ImageIO.read(new File("label_backgrounds/BSNlogo.jpg"));
+			buttonIcon = ImageIO.read(new File("Buttons_backgrounds/BSN-logo-white.png"));
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		ImageIcon image = new ImageIcon(buttonIcon);
-		Image imagerisizel = image.getImage().getScaledInstance(84, 69, 60) ;
+		Image imagerisizel = image.getImage().getScaledInstance(80, 45, 60) ;
 		ImageIcon imagebutton = new ImageIcon(imagerisizel);
 	    JButton buttongotomyprofile = new JButton(imagebutton);
 	    buttongotomyprofile.setBorderPainted(false);
@@ -141,13 +147,28 @@ public class FrontEndProfileGUI {
 				frame.setVisible(false);
 				//Returning to the right backend profile
 				if(tuser instanceof Chief){
-					new BackendProfileChiefGUI(tuser);
+					try {
+						new BackendProfileChiefGUI(tuser);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 				else if(tuser instanceof Boss){
-					new BackendProfileBossGUI(tuser);
+					try {
+						new BackendProfileBossGUI(tuser);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 				else if(tuser instanceof Employee){
-					new BackendProfileEmployeeGUI(tuser);
+					try {
+						new BackendProfileEmployeeGUI(tuser);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 			}
 		});
@@ -185,17 +206,17 @@ public class FrontEndProfileGUI {
 			currentlypost = "Boss";
 		}
 		JLabel labelcompanypost = new JLabel(currentlypost);
-		labelcompanypost.setBounds(322, 250, 89, 16);
+		labelcompanypost.setBounds(108, 266, 89, 16);
 		panel.add(labelcompanypost);
 		
 		String spacialization = auser.getCompanyPost();
 		JLabel labelspacialization = new JLabel(spacialization);
-		labelspacialization.setBounds(407, 250, 78, 16);
+		labelspacialization.setBounds(322, 248, 78, 16);
 		panel.add(labelspacialization);
 		
 		String email = auser.getMyAccount().getEmail();
 		JLabel labelemail = new JLabel(email);
-        labelemail.setBounds(130, 413, 125, 16);
+        labelemail.setBounds(130, 413, 194, 16);
 		panel.add(labelemail);
 		
 		JLabel lblNewLabel_5 = new JLabel("Currently apart of:");
@@ -291,21 +312,21 @@ public class FrontEndProfileGUI {
 		
 		String telephone = auser.getTelephone();
 		JLabel labeltelephone = new JLabel(telephone);
-		labeltelephone.setBounds(131, 442, 78, 16);
+		labeltelephone.setBounds(131, 442, 110, 16);
 		panel.add(labeltelephone);
 		
 		String address = auser.getAddress();
 		JLabel labeladdress = new JLabel(address);
-		labeladdress.setBounds(131, 476, 78, 16);
+		labeladdress.setBounds(131, 476, 110, 16);
 		panel.add(labeladdress);
 		
 		String birthday = auser.getBirthday();
 		JLabel labelbirthday = new JLabel(birthday);
-		labelbirthday.setBounds(130, 510, 79, 16);
+		labelbirthday.setBounds(130, 510, 123, 16);
 		panel.add(labelbirthday);
 		
 		JLabel lblNewLabel_13 = new JLabel("Mutual connections");
-		lblNewLabel_13.setBounds(712, 377, 109, 16);
+		lblNewLabel_13.setBounds(712, 377, 130, 16);
 		panel.add(lblNewLabel_13);
 		
 		DefaultListModel<String> mutualmodel = new DefaultListModel<String>();
@@ -362,6 +383,14 @@ public class FrontEndProfileGUI {
 		JLabel lblNewLabel_14_3 = new JLabel(new ImageIcon("label_backgrounds/birthday_cake_20px.png"));
 		lblNewLabel_14_3.setBounds(85, 501, 28, 25);
 		panel.add(lblNewLabel_14_3);
+		
+		JLabel lblNewLabel = new JLabel("");
+		BufferedImage imagebackground = ImageIO.read(new File("label_backgrounds/background.jpg"));
+		ImageIcon imageb = new ImageIcon(imagebackground);
+		Image imagerisizeb = imageb.getImage().getScaledInstance(887, 991, 140) ;
+		lblNewLabel.setIcon(new ImageIcon(imagerisizeb));
+		lblNewLabel.setBounds(0, 0, 887, 985);
+		panel.add(lblNewLabel);
 		
 		frame.setResizable(false);
 		frame.setTitle(auser.getMyAccount().getUsername());

@@ -47,22 +47,23 @@ public class BackendProfileEmployeeGUI {
 	private JTextArea writePostArea, postArea;
 	private JRadioButton connectionsRadio, PublicRadio, GroupARadio, GroupBRadio, GroupCRadio;
 	private static User employee;
-	private JLabel lblNewLabel_1;
 	TreeSet<User> suggestedListConnections = new TreeSet<>();
 	TreeSet<Post> allPosts = new TreeSet<>();
 	private JScrollPane scrollPane;
 	ButtonGroup radioGroup;
 	
 	ArrayList<User> listOfConnections;
+	private JLabel lblNewLabel_2;
 	
-	public BackendProfileEmployeeGUI(User aUser) {
+	public BackendProfileEmployeeGUI(User aUser) throws IOException {
 		initialize(aUser);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
+	 * @throws IOException 
 	 */
-	private void initialize(User aUser) {
+	private void initialize(User aUser) throws IOException {
 		frmStartingPage = new JFrame();
 		frmStartingPage.setTitle("Starting Page");
 		frmStartingPage.setBounds(100, 100, 893, 1020);
@@ -109,14 +110,21 @@ public class BackendProfileEmployeeGUI {
 				
 				String searchedText = searchField.getText();
 				if(!searchedText.isEmpty()) {
-					boolean result = employee.getMyAccount().getMyCompany().searchObject(searchedText, employee);
-					
-					if (!result) {
-						ArrayList<String> suggestedOptions = new ArrayList<String>();
-						new SearchSuggestionsGUI(suggestedOptions, employee);
-					}else {
-						frmStartingPage.setVisible(false);
+					boolean result;
+					try {
+						result = employee.getMyAccount().getMyCompany().searchObject(searchedText, employee);
+
+						if (!result) {
+							ArrayList<String> suggestedOptions = new ArrayList<String>();
+							new SearchSuggestionsGUI(suggestedOptions, employee);
+						}else {
+							frmStartingPage.setVisible(false);
+						}
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}
+					
 				}else {
 					 String message = "Type something in the Search field";
 						JOptionPane.showMessageDialog(new JFrame(), message, "Message",
@@ -251,7 +259,7 @@ public class BackendProfileEmployeeGUI {
 		editAccountButton.setFocusPainted(false); 
 		editAccountButton.setOpaque(false);
 		editAccountButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		editAccountButton.setBounds(250, 307, 126, 25);
+		editAccountButton.setBounds(250, 307, 149, 25);
 		panel.add(editAccountButton);
 		
 		connectionsList = new JList<String>();
@@ -335,6 +343,7 @@ public class BackendProfileEmployeeGUI {
 		panel.add(textField);
 		
 		checkprofileButton = new JButton("Check profile");
+		checkprofileButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		checkprofileButton.setContentAreaFilled(false); 
 		checkprofileButton.setFocusPainted(false); 
 		checkprofileButton.setOpaque(false);
@@ -343,6 +352,7 @@ public class BackendProfileEmployeeGUI {
 		panel.add(checkprofileButton);
 		
 		sendMessageButton = new JButton("Send Message");
+		sendMessageButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		sendMessageButton.setContentAreaFilled(false); 
 		sendMessageButton.setFocusPainted(false); 
 		sendMessageButton.setOpaque(false);
@@ -366,11 +376,6 @@ public class BackendProfileEmployeeGUI {
 		disconnectButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		disconnectButton.setBounds(796, 169, 55, 54);
 		panel.add(disconnectButton);
-		
-		lblNewLabel_1 = new JLabel();
-		lblNewLabel_1.setIcon(new ImageIcon("label_backgrounds/IT_logo.png"));
-		lblNewLabel_1.setBounds(10, 917, 65, 63);
-		panel.add(lblNewLabel_1);
 
 		postArea = new JTextArea();
 		postArea.setBackground(new Color(255, 250, 240));
@@ -381,6 +386,14 @@ public class BackendProfileEmployeeGUI {
 			
 		}
 		panel.add(postArea);
+		
+		JLabel lblNewLabel_2 = new JLabel("");
+		BufferedImage imagebackground = ImageIO.read(new File("label_backgrounds/background.jpg"));
+		ImageIcon imageb = new ImageIcon(imagebackground);
+		Image imagerisizeb = imageb.getImage().getScaledInstance(887, 991, 140) ;
+		lblNewLabel_2.setIcon(new ImageIcon(imagerisizeb));
+		lblNewLabel_2.setBounds(0, 0, 887, 991);
+		panel.add(lblNewLabel_2);
 		
 		ButtonListener listener = new ButtonListener();
 		requestsButton.addActionListener(listener);
@@ -458,7 +471,12 @@ public class BackendProfileEmployeeGUI {
 						JOptionPane.showMessageDialog(new JFrame(), message, "Message",
 						        JOptionPane.INFORMATION_MESSAGE);
 				}else {
-					new FrontEndProfileGUI(employee, selectedUser);
+					try {
+						new FrontEndProfileGUI(employee, selectedUser);
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					frmStartingPage.setVisible(false);
 				}
 			}

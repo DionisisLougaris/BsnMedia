@@ -14,14 +14,19 @@ import entities.User;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.Component;
 import java.awt.Cursor;
 
+import javax.imageio.ImageIO;
 import javax.swing.Box;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -56,8 +61,9 @@ public class GroupProfileGUI {
 
 	/**
 	 * Create the application.
+	 * @throws IOException 
 	 */
-	public GroupProfileGUI(User myUser,Group myGroup) {
+	public GroupProfileGUI(User myUser,Group myGroup) throws IOException {
 		this.myUser = myUser;
 		this.myGroup = myGroup;
 		initialize();
@@ -65,8 +71,9 @@ public class GroupProfileGUI {
 
 	/**
 	 * Initialize the contents of the frame.
+	 * @throws IOException 
 	 */
-	private void initialize() {
+	private void initialize() throws IOException {
 		frame = new JFrame();
 		frame.getContentPane().setBackground(Color.WHITE);
 		frame.setBounds(100, 100, 893, 1020);
@@ -181,15 +188,30 @@ public class GroupProfileGUI {
 				//Returning to the right backend profile
 				if(myUser instanceof Chief)
 				{
-					BackendProfileChiefGUI myProfile = new BackendProfileChiefGUI(myUser);
+					try {
+						BackendProfileChiefGUI myProfile = new BackendProfileChiefGUI(myUser);
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				}
 				else if(myUser instanceof Boss)
 				{
-					BackendProfileBossGUI myProfile = new BackendProfileBossGUI(myUser);
+					try {
+						BackendProfileBossGUI myProfile = new BackendProfileBossGUI(myUser);
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				}
 				else if(myUser instanceof Employee)
 				{
-					BackendProfileEmployeeGUI myProfile = new BackendProfileEmployeeGUI(myUser);
+					try {
+						BackendProfileEmployeeGUI myProfile = new BackendProfileEmployeeGUI(myUser);
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				}
 			}
 		});
@@ -221,5 +243,13 @@ public class GroupProfileGUI {
 		});
 		btnNewButton_1_1_1.setBounds(817, 922, 46, 38);
 		frame.getContentPane().add(btnNewButton_1_1_1);
+		
+		JLabel lblNewLabel_11 = new JLabel("");
+		BufferedImage imagebackground = ImageIO.read(new File("label_backgrounds/background.jpg"));
+		ImageIcon imageb = new ImageIcon(imagebackground);
+		Image imagerisizeb = imageb.getImage().getScaledInstance(887, 991, 140) ;
+		lblNewLabel_11.setIcon(new ImageIcon(imagerisizeb));
+		lblNewLabel_11.setBounds(0, 0, 875, 973);
+		frame.getContentPane().add(lblNewLabel_11);
 	}
 }

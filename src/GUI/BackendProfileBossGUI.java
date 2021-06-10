@@ -50,14 +50,15 @@ public class BackendProfileBossGUI {
 	postButton,checkprofileButton,sendMessageButton,sendRequestButton,disconnectButton,editCompanyInfoButton;
 	
 	private ArrayList<User> listOfConnections;
+	private JLabel lblNewLabel;
 
-	public BackendProfileBossGUI(User theBoss){
+	public BackendProfileBossGUI(User theBoss) throws IOException{
 		boss = theBoss;
 		initialize();
 	}
 
 
-	private void initialize(){
+	private void initialize() throws IOException{
 		frmStartingPage = new JFrame();
 		frmStartingPage.setTitle("Starting Page");
 		frmStartingPage.setBounds(100, 100, 893, 1020);
@@ -103,13 +104,19 @@ public class BackendProfileBossGUI {
 				
 				String text = textField.getText();
 				if(!text.isEmpty()) {
-					boolean result = boss.getMyAccount().getMyCompany().searchObject(text, boss);
-					
-					if (!result) {
-						ArrayList<String> suggestedOptions = new ArrayList<String>();
-						new SearchSuggestionsGUI(suggestedOptions, boss);
-					}else {
-						frmStartingPage.setVisible(false);
+					boolean result;
+					try {
+						result = boss.getMyAccount().getMyCompany().searchObject(text, boss);
+
+						if (!result) {
+							ArrayList<String> suggestedOptions = new ArrayList<String>();
+							new SearchSuggestionsGUI(suggestedOptions, boss);
+						}else {
+							frmStartingPage.setVisible(false);
+						}
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}
 				}else {
 					 String message = "Type something in the Search field";
@@ -296,6 +303,7 @@ public class BackendProfileBossGUI {
 		panel.add(postButton);
 		
 		checkprofileButton = new JButton("Check profile");
+		checkprofileButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		checkprofileButton.setContentAreaFilled(false); 
 		checkprofileButton.setFocusPainted(false); 
 		checkprofileButton.setOpaque(false);
@@ -304,6 +312,7 @@ public class BackendProfileBossGUI {
 		panel.add(checkprofileButton);
 		
 		sendMessageButton = new JButton("Send Message");
+		sendMessageButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		sendMessageButton.setContentAreaFilled(false); 
 		sendMessageButton.setFocusPainted(false); 
 		sendMessageButton.setOpaque(false);
@@ -361,10 +370,13 @@ public class BackendProfileBossGUI {
 		textField.setBounds(332, 36, 279, 30);
 		panel.add(textField);
 		
-		JLabel lblNewLabel_3 = new JLabel();
-		lblNewLabel_3.setIcon(new ImageIcon("label_backgrounds/IT_logo.png"));
-		lblNewLabel_3.setBounds(10, 917, 65, 63);
-		panel.add(lblNewLabel_3);
+		JLabel lblNewLabel = new JLabel("");
+		BufferedImage imagebackground = ImageIO.read(new File("label_backgrounds/background.jpg"));
+		ImageIcon imageb = new ImageIcon(imagebackground);
+		Image imagerisizeb = imageb.getImage().getScaledInstance(887, 991, 140) ;
+		lblNewLabel.setIcon(new ImageIcon(imagerisizeb));
+		lblNewLabel.setBounds(0, 0, 887, 991);
+		panel.add(lblNewLabel);
 		
 		ButtonListener listener = new ButtonListener();
 		checkprofileButton.addActionListener(listener);
@@ -396,7 +408,12 @@ public class BackendProfileBossGUI {
 						JOptionPane.showMessageDialog(new JFrame(), message, "Message",
 						        JOptionPane.INFORMATION_MESSAGE);
 				}else {
-					new FrontEndProfileGUI(boss, selectedUser);
+					try {
+						new FrontEndProfileGUI(boss, selectedUser);
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					frmStartingPage.setVisible(false);
 				}
 			}else if (e.getSource().equals(sendMessageButton)) {

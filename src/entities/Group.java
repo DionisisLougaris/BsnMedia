@@ -89,6 +89,7 @@ public class Group implements Serializable{
 
 	public void setRating(int rating) {
 		this.rating = rating;
+		System.out.println("ola ok");
 	}
 
 	public void setSupervisor(Chief supervisor) {

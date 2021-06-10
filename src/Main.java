@@ -43,6 +43,9 @@ public class Main {
 		
 		Project p1= new Project("project name","this is the Description","deadline");
 		Group g1= new Group("group name",p1,first4);
+		g1.addMember(first);
+		
+		theCompany.addCompanyGroups(g1);
 		
 		theCompany.addUser(first);
 		theCompany.addUser(first2);
@@ -72,7 +75,10 @@ public class Main {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					new WelcomeScreen_GUI(theCompany);
+					new GroupProfileGUI(first2,g1);
+					//new FrontEndProfileGUI(first,first);
+					//new WelcomeScreen_GUI(theCompany);
+					//new HelpGUI(first);
 					} catch (Exception e) {
 					e.printStackTrace();
 				}

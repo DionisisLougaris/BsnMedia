@@ -98,13 +98,28 @@ public class CompanyProfileGUI {
 				frame.setVisible(false);
 				//Returning to the right backend profile
 				if(myUser instanceof Chief) {
-					new BackendProfileChiefGUI(myUser);
+					try {
+						new BackendProfileChiefGUI(myUser);
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				}
 				else if(myUser instanceof Boss) {
-					new BackendProfileBossGUI(myUser);
+					try {
+						new BackendProfileBossGUI(myUser);
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				}
 				else if(myUser instanceof Employee) {
-					new BackendProfileEmployeeGUI(myUser);
+					try {
+						new BackendProfileEmployeeGUI(myUser);
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				}
 	    	}
 	    });
@@ -129,14 +144,21 @@ public class CompanyProfileGUI {
 				
 				String searchedText = searchField.getText();
 				if(!searchedText.isEmpty()) {
-					boolean result = company.searchObject(searchedText, theLoggedUser);
-					
-					if (!result) {
-						ArrayList<String> suggestedOptions = new ArrayList<String>();
-						new SearchSuggestionsGUI(suggestedOptions, theLoggedUser);
-					}else {
-						frame.setVisible(false);
+					boolean result;
+					try {
+						result = company.searchObject(searchedText, theLoggedUser);
+
+						if (!result) {
+							ArrayList<String> suggestedOptions = new ArrayList<String>();
+							new SearchSuggestionsGUI(suggestedOptions, theLoggedUser);
+						}else {
+							frame.setVisible(false);
+						}
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
 					}
+				
 				}else {
 					 String message = "Type something in the Search field";
 						JOptionPane.showMessageDialog(new JFrame(), message, "Message",
@@ -269,11 +291,6 @@ public class CompanyProfileGUI {
 	    headOfCompanyLabel.setBounds(70, 613, 117, 16);
 	    frame.getContentPane().add(headOfCompanyLabel);
 	    
-		JLabel ourLogo = new JLabel();
-		ourLogo.setIcon(new ImageIcon("label_backgrounds/IT_logo.png"));
-		ourLogo.setBounds(10, 917, 65, 63);
-		frame.getContentPane().add(ourLogo);
-	    
 	    Icon help = new ImageIcon("Buttons_backgrounds/customer_support_40px.png");
 		JButton customerSupportButton = new JButton(help);
 		customerSupportButton.setContentAreaFilled(false); 
@@ -292,7 +309,7 @@ public class CompanyProfileGUI {
 				}
 			}
 		});
-	    customerSupportButton.setBounds(817, 922, 65, 63);
+	    customerSupportButton.setBounds(810, 909, 65, 63);
 	    frame.getContentPane().add(customerSupportButton);
 	    
 	    JLabel lblNewLabel_7 = new JLabel(new ImageIcon("label_backgrounds/email_20px.png"));
@@ -316,7 +333,12 @@ public class CompanyProfileGUI {
 	    		//Closing previous GUI
 				frame.setVisible(false);
 				//Opening Boss' Profile
-	    		new FrontEndProfileGUI(theLoggedUser,theCompany.getBoss());
+	    		try {
+					new FrontEndProfileGUI(theLoggedUser,theCompany.getBoss());
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 	    	}
 	    });
 	    goToBossProfButton.setBounds(187, 611, 117, 22);

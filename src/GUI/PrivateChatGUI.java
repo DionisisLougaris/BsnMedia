@@ -20,6 +20,7 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 
 public class PrivateChatGUI {
@@ -73,7 +74,12 @@ public class PrivateChatGUI {
 		btnNewButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new FrontEndProfileGUI(sender, receiver);
+				try {
+					new FrontEndProfileGUI(sender, receiver);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				frame.setVisible(false);
 			}
 		});

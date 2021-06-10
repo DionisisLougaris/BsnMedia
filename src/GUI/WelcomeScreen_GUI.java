@@ -56,36 +56,27 @@ public class WelcomeScreen_GUI {
 		panel_1.setBounds(0, 0, 460, 557);
 		panel.add(panel_1);
 		panel_1.setLayout(null);
-		
-		JLabel lblNewLabel_2 = new JLabel("Welcome to BSN Media");
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 29));
-		lblNewLabel_2.setForeground(new Color(255, 255, 255));
-		lblNewLabel_2.setBounds(47, 68, 329, 35);
-		panel_1.add(lblNewLabel_2);
-		
-		JLabel lblNewLabel_3 = new JLabel("Keep your Network Safe!");
-		lblNewLabel_3.setFont(new Font("Tahoma", Font.ITALIC, 14));
-		lblNewLabel_3.setForeground(new Color(255, 255, 255));
-		lblNewLabel_3.setBounds(113, 114, 167, 23);
-		panel_1.add(lblNewLabel_3);
-		
-		JLabel lblNewLabel_4 = new JLabel("");
 		BufferedImage imageicon = ImageIO.read(new File("label_backgrounds/BSNlogo.jpg"));
 		ImageIcon image = new ImageIcon(imageicon);
 		Image imagerisize = image.getImage().getScaledInstance(190, 190, 140) ;
-		lblNewLabel_4.setIcon(new ImageIcon(imagerisize));
-		lblNewLabel_4.setBounds(98, 182, 229, 182);
-		panel_1.add(lblNewLabel_4);
 		
 		JLabel lblNewLabel_5 = new JLabel("\u00A9  2021 All rights reserved");
 		lblNewLabel_5.setForeground(new Color(255, 255, 255));
-		lblNewLabel_5.setBounds(133, 517, 172, 14);
+		lblNewLabel_5.setBounds(155, 517, 172, 27);
 		panel_1.add(lblNewLabel_5);
+		
+		JLabel lblNewLabel_7 = new JLabel("");
+		BufferedImage imagebackground = ImageIO.read(new File("label_backgrounds/BSN_Background_page-0001.jpg"));
+		ImageIcon imageb = new ImageIcon(imagebackground);
+		Image imagerisizeb = imageb.getImage().getScaledInstance(460, 544, 140) ;
+		lblNewLabel_7.setIcon(new ImageIcon(imagerisizeb));
+		lblNewLabel_7.setBounds(0, 0, 460, 544);
+		panel_1.add(lblNewLabel_7);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new LineBorder(new Color(255, 255, 255)));
 		panel_2.setBackground(new Color(255, 153, 102));
-		panel_2.setBounds(456, 0, 520, 557);
+		panel_2.setBounds(458, 0, 518, 557);
 		panel.add(panel_2);
 		panel_2.setLayout(null);
 		
@@ -152,6 +143,7 @@ public class WelcomeScreen_GUI {
 		btnNewButton.setForeground(new Color(255, 255, 255));
 		btnNewButton.setBackground(new Color(255, 153, 102));
 		btnNewButton.setBounds(0, 0, 85, 29);
+		btnNewButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		panel_3.add(btnNewButton);
 		
 		JPanel panel_3_1 = new JPanel();
@@ -166,6 +158,7 @@ public class WelcomeScreen_GUI {
 		btnSingUp.setBackground(new Color(255, 153, 102));
 		btnSingUp.setBorder(new LineBorder(new Color(255, 255, 255)));
 		btnSingUp.setBounds(0, 0, 85, 29);
+		btnSingUp.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		panel_3_1.add(btnSingUp);
 		
 		btnNewButton_1 = new JButton("Forgot your Password?");
@@ -176,6 +169,7 @@ public class WelcomeScreen_GUI {
 		btnNewButton_1.setBorder(null);
 		btnNewButton_1.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		btnNewButton_1.setBounds(213, 329, 124, 23);
+		btnNewButton_1.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		panel_2.add(btnNewButton_1);
 		
 		JLabel hyperLink = new JLabel("IT Intelligence");
@@ -239,12 +233,20 @@ public class WelcomeScreen_GUI {
 				char [] passwordCharArray = pwdPassword.getPassword();
 				String password = String.valueOf(passwordCharArray);
 				
-				if (theCompany.loginAttempt(username, password)) {
-					frmWelcomeToBsn.setVisible(false);
-				}else {
-					String message = "Wrong username or password!";
-					JOptionPane.showMessageDialog(new JFrame(), message, "Message",
-					        JOptionPane.ERROR_MESSAGE);
+				try {
+					if (theCompany.loginAttempt(username, password)) {
+						frmWelcomeToBsn.setVisible(false);
+					}else {
+						String message = "Wrong username or password!";
+						JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+						        JOptionPane.ERROR_MESSAGE);
+					}
+				} catch (HeadlessException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
 			}else if (e.getSource().equals(btnSingUp)) {
 				
