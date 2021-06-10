@@ -202,43 +202,41 @@ public class FrontEndProfileGUI {
 		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblNewLabel_5.setBounds(108, 287, 133, 16);
 		panel.add(lblNewLabel_5);
+		if(auser instanceof Boss) {
+			lblNewLabel_5.setVisible(false);
+		}
 		
 		ArrayList<Group> ausersgroups = auser.getGroups();
-	
-
-	   if( ausersgroups.size() ==1)
-	   {
-		 JLabel lblNewLabel_6 = new JLabel(ausersgroups.get(0).getName());
-		lblNewLabel_6.setBounds(108, 316, 56, 16);
-		panel.add(lblNewLabel_6);
-	   }
-	   else if(ausersgroups.size() == 2)
-	   {
-		   
-		   JLabel lblNewLabel_6 = new JLabel(ausersgroups.get(0).getName());
-			lblNewLabel_6.setBounds(108, 316, 56, 16);
-			panel.add(lblNewLabel_6);
-		   
-		  JLabel lblNewLabel_7 = new JLabel(ausersgroups.get(1).getName());
-		lblNewLabel_7.setBounds(185, 316, 56, 16);
-		panel.add(lblNewLabel_7);
-	   }
-	   else if(ausersgroups.size() == 3)
-	   {
-		   JLabel lblNewLabel_6 = new JLabel(ausersgroups.get(0).getName());
-			lblNewLabel_6.setBounds(108, 316, 56, 16);
-			panel.add(lblNewLabel_6);
-		   
-		   JLabel lblNewLabel_7 = new JLabel(ausersgroups.get(1).getName());
-		lblNewLabel_7.setBounds(185, 316, 56, 16);
-		panel.add(lblNewLabel_7);
-		   
-		JLabel lblNewLabel_8 = new JLabel(ausersgroups.get(2).getName());
-		lblNewLabel_8.setBounds(253, 316, 56, 16);
-		panel.add(lblNewLabel_8);
-	   }
 		
-	
+		if(ausersgroups!=null) {
+			if( ausersgroups.size() ==1) {
+				JLabel lblNewLabel_6 = new JLabel(ausersgroups.get(0).getName());
+				lblNewLabel_6.setBounds(108, 316, 56, 16);
+				panel.add(lblNewLabel_6);
+			} else if(ausersgroups.size() == 2) { 
+				JLabel lblNewLabel_6 = new JLabel(ausersgroups.get(0).getName());
+				lblNewLabel_6.setBounds(108, 316, 56, 16);
+				panel.add(lblNewLabel_6);
+				   
+				JLabel lblNewLabel_7 = new JLabel(ausersgroups.get(1).getName());
+				lblNewLabel_7.setBounds(185, 316, 56, 16);
+				panel.add(lblNewLabel_7);
+			} else if(ausersgroups.size() == 3) {
+				JLabel lblNewLabel_6 = new JLabel(ausersgroups.get(0).getName());
+				lblNewLabel_6.setBounds(108, 316, 56, 16);
+				panel.add(lblNewLabel_6);
+				   
+				JLabel lblNewLabel_7 = new JLabel(ausersgroups.get(1).getName());
+				lblNewLabel_7.setBounds(185, 316, 56, 16);
+				panel.add(lblNewLabel_7);
+				   
+				JLabel lblNewLabel_8 = new JLabel(ausersgroups.get(2).getName());
+				lblNewLabel_8.setBounds(253, 316, 56, 16);
+				panel.add(lblNewLabel_8);
+			}
+		}
+		
+		
 		if(!tuser.equals(auser))
 		{
 			JButton buttonchat= new JButton("Chat");

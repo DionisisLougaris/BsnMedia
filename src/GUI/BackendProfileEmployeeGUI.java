@@ -46,7 +46,7 @@ public class BackendProfileEmployeeGUI {
 	private JList<String> connectionsList, suggestedList, postList; 
 	private JTextArea writePostArea, postArea;
 	private JRadioButton connectionsRadio, PublicRadio, GroupARadio, GroupBRadio, GroupCRadio;
-	private static Employee employee;
+	private static User employee;
 	private JLabel lblNewLabel_1;
 	TreeSet<User> suggestedListConnections = new TreeSet<>();
 	TreeSet<Post> allPosts = new TreeSet<>();
