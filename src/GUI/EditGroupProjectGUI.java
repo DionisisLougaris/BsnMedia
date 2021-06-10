@@ -5,6 +5,10 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JTextField;
+
+import entities.Group;
+import entities.User;
+
 import javax.swing.JRadioButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -20,6 +24,8 @@ public class EditGroupProjectGUI {
 	private JTextField textField;
 	private JTextField textField_2;
 	private JTextField textField_1;
+	private static Group myGroup;
+	
 
 	/**
 	 * Launch the application.
@@ -28,7 +34,7 @@ public class EditGroupProjectGUI {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					EditGroupProjectGUI window = new EditGroupProjectGUI();
+					EditGroupProjectGUI window = new EditGroupProjectGUI(myGroup);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -40,7 +46,8 @@ public class EditGroupProjectGUI {
 	/**
 	 * Create the application.
 	 */
-	public EditGroupProjectGUI() {
+	public EditGroupProjectGUI(Group aGroup) {
+		myGroup=aGroup;
 		initialize();
 	}
 

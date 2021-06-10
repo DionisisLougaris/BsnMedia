@@ -154,7 +154,7 @@ public class BackendProfileChiefGUI {
 		lblNewLabel_5.setBounds(49, 359, 155, 16);
 		panel.add(lblNewLabel_5);
 		
-		// na balw ta buttoms//
+		
 		
 		String name;
 		if(chief.getGroups().size()>0) {
@@ -436,11 +436,16 @@ public class BackendProfileChiefGUI {
 		messagesButton.addActionListener(listener);
 		notifsButton.addActionListener(listener);
 		editAccountButton.addActionListener(listener);
+		createProjectButton.addActionListener(listener);
 		helpButton.addActionListener(listener);
 		disconnectButton.addActionListener(listener);
 		checkprofileButton.addActionListener(listener);
 		sendMessageButton.addActionListener(listener);
 		sendRequestButton.addActionListener(listener);
+		postButton.addActionListener(listener);
+		editGroupAButton.addActionListener(listener);
+		editGroupBButton.addActionListener(listener);
+		editGroupCButton.addActionListener(listener);
 	}
 	
 	public void disconnectUser() throws IOException {
@@ -481,6 +486,11 @@ public class BackendProfileChiefGUI {
 				
 				new EditAccountGUI((User)chief);
 			}
+			
+			else if(e.getSource().equals(createProjectButton)) {
+				 new CreateProjectGUI(chief);
+			}
+			
 			else if(e.getSource().equals(helpButton)) {
 				try {
 					frmStartingPage.setVisible(false);
@@ -597,6 +607,46 @@ public class BackendProfileChiefGUI {
 					
 				}
 			}
+			
+			else if(e.getSource().equals(editGroupAButton))
+			{
+				Group editAgroup =chief.getGroups().get(0);
+				if (editAgroup == null) {
+					 String message = "This group does not exist!";
+						JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+						        JOptionPane.INFORMATION_MESSAGE);
+				}
+				else {
+				      new EditGroupProjectGUI(editAgroup);
+				}
+				
+			}
+			else if(e.getSource().equals(editGroupBButton))
+			{
+				Group editAgroup =chief.getGroups().get(1);
+				if (editAgroup == null) {
+					 String message = "This group does not exist!";
+						JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+						        JOptionPane.INFORMATION_MESSAGE);
+				}
+				else {
+				      new EditGroupProjectGUI(editAgroup);
+				}
+			}
+			else if(e.getSource().equals(editGroupCButton))
+			{
+				Group editAgroup =chief.getGroups().get(2);
+				if (editAgroup == null) {
+					 String message = "This group does not exist!";
+						JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+						        JOptionPane.INFORMATION_MESSAGE);
+				}
+				else {
+				      new EditGroupProjectGUI(editAgroup);
+				}
+			}
+			
+			
 			
 		}
 	}
