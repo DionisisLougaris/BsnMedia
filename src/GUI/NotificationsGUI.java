@@ -6,14 +6,17 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.TreeSet;
 
 import javax.swing.JFrame;
 import javax.swing.JList;
 
+import entities.Notification;
 import entities.User;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
+import javax.swing.DefaultListModel;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -64,7 +67,17 @@ public class NotificationsGUI {
 		user = theUser;
 		
 		JList<String> list = new JList<String>();
-		list.setBounds(10, 11, 174, 134);
+		DefaultListModel<String> listModel = new DefaultListModel<String>();
+		TreeSet<Notification> generalNotifications = user.returnNotification();
+		if (generalNotifications.size()>0) {
+			for(Notification conReq: generalNotifications) {
+				listModel.addElement(conReq.getNotificationContent());
+			}
+		}else {
+			listModel.addElement("No Notifications..");
+		}
+		list.setModel(listModel);
+		list.setBounds(10, 11, 172, 145);
 		frmNotifications.getContentPane().add(list);
 		
 		Icon takealook = new ImageIcon("Buttons_backgrounds/takealook_32px.png");

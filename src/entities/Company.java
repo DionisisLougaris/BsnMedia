@@ -135,6 +135,7 @@ public class Company implements Serializable{
 				suggestedOptions.add(this.companyMembers.get(i).getFirstName()+ " " +  this.companyMembers.get(i).getLastName());
 					
 		}
+		aString="";
 				
 		return suggestedOptions;
 	}

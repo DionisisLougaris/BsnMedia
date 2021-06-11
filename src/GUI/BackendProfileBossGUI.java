@@ -109,7 +109,7 @@ public class BackendProfileBossGUI {
 						result = boss.getMyAccount().getMyCompany().searchObject(text, boss);
 
 						if (!result) {
-							ArrayList<String> suggestedOptions = new ArrayList<String>();
+							ArrayList<String> suggestedOptions = boss.getMyAccount().getMyCompany().suggestedSearchOption(text);
 							new SearchSuggestionsGUI(suggestedOptions, boss);
 						}else {
 							frmStartingPage.setVisible(false);
@@ -294,6 +294,14 @@ public class BackendProfileBossGUI {
 		panel.add(PublicRadio);
 		
 		postButton= new JButton("Post");
+		postButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//tha sunexistei afou ginei to button group sta radio buttons
+				String myText = writePostArea.getText();
+				Post myPost = new Post(boss,myText,"test");
+				//System.out.println("Selected Radio Button: " + buttonGroup.getSelection().getActionCommand());
+			}
+		});
 		postButton.setContentAreaFilled(false); 
 		postButton.setFocusPainted(false); 
 		postButton.setOpaque(false);
