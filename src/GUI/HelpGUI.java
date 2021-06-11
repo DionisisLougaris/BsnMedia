@@ -49,43 +49,21 @@ public class HelpGUI {
 	private JTextField txtYourEmail;
 	private JTextArea txtYourMessage;
 	private JButton btnNewButton_2;
-	private static User myUser;
+	private User myUser;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					HelpGUI window = new HelpGUI(myUser);
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
-	/**
-	 * Create the application.
-	 * @throws IOException 
-	 */
 	public HelpGUI(User myUser) throws IOException {
-		this.myUser = myUser;
-		initialize();
+		initialize(myUser);
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 * @throws IOException 
-	 */
-	private void initialize() throws IOException {
+	private void initialize(User user) throws IOException {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 893, 1020);
 		frame.setLocation(500, 0);
 		frame.getContentPane().setLayout(null);
 		frame.setVisible(true);
+		
+		myUser = user;
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
