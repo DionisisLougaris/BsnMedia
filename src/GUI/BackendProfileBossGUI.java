@@ -238,7 +238,7 @@ public class BackendProfileBossGUI {
 		editAccountButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				new EditAccountBossGUI((Boss)boss);
+				new EditAccountGUI((Boss)boss, frmStartingPage);
 			}
 		});
 		editAccountButton.setBounds(44, 332, 155, 25);

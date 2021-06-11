@@ -105,91 +105,103 @@ abstract public class User implements Serializable{
 	}
 	
 	
-	/*This is a method by which User has the ability to change the photo that appears his public Profile*/
-	public void changeUsersPhoto(String photoPath) {
-		
-	}
-	
-	
 	//This is a method that modifies the user's public information.
 	public boolean editPublicInfo(String firstName, String lastName, String email, String telephone,
 					String address, String speciality, String gender, String birthday) {
 		
+		boolean everythingChanged = true;
 		//Fields that do not require some checks will change directly
 		//Checking to see if there is a change in every single field to not overwrite the information with empty fields
 		if(!firstName.isEmpty()) {
 			this.firstName = firstName;
+		}else {
+			everythingChanged = false;
 		}
+		
 		if(!lastName.isEmpty()) {
 			this.lastName = lastName;
+		}else {
+			everythingChanged = false;
 		}
+		
 		if(!telephone.isEmpty()) {
 			this.telephone = telephone;
+		}else {
+			everythingChanged = false;
 		}
+		
 		if(!address.isEmpty()) {
 			this.address = address;
+		}else {
+			everythingChanged = false;
 		}
+		
 		if(!speciality.isEmpty()) {
 			this.companyPost = speciality;
+		}else {
+			everythingChanged = false;
 		}
+		
 		if(!gender.isEmpty()) {
 			this.gender = gender;
+		}else {
+			everythingChanged = false;
 		}
+		
 		if(!birthday.isEmpty()) {
 			this.birthday = birthday;
+		}else {
+			everythingChanged = false;
 		}
 		
 		//Field that requires control
-		if(this.myAccount.emailAvailability(email) && !email.isEmpty()) {
+		if((this.myAccount.emailAvailability(email) && !email.isEmpty()) || email.equalsIgnoreCase(this.getMyAccount().getEmail())) {
 			this.myAccount.setEmail(email); //The email is updated
-			return true; //True: It appears from Gui that all the algae were okay
+		}else {
+			everythingChanged = false;
 		}
-		else
-			return false; /*False: The new email was not available. 
-					Informs with false so that the field in Gui is empty, and blushes so that the user knows what went wrong*/
+		
+		return everythingChanged;
 	}
 	
 	
 	//This is a method that modifies the user's private information.
-	public boolean editPrivateInfo(String username, String currPassword, String newPassword, String confirmedPassword) {
+	public void editPrivateInfo(String username, String currPassword, String newPassword, String confirmedPassword) {
 		
 		boolean changeUsername = true;
 		
 		//To change Username
-		if (!username.equalsIgnoreCase(this.myAccount.getUsername())) { //Check if JTextField has been modified
+		if (!username.equals(this.myAccount.getUsername())) { //Check if JTextField has been modified
 			
-			ArrayList<User> allCompanyMembers = this.myAccount.getMyCompany().getCompanyMembers();
-			
-			for(User companyMember: allCompanyMembers) {
-				if (username.equalsIgnoreCase(companyMember.myAccount.getUsername()))
-						changeUsername = false; //The username he chose is not available
-			}
-			if (changeUsername == true) {
-				this.myAccount.setUsername(username);
-			}
+			if (!username.equals("")) {
 				
-			/*else { (Θα δουμε που βολευει να μπει η ειδοποιηση)
-				String message = "The new username he chose is not available!";
+				ArrayList<User> allCompanyMembers = this.myAccount.getMyCompany().getCompanyMembers();
+				
+				for(User companyMember: allCompanyMembers) {
+					if (username.equals(companyMember.myAccount.getUsername()))
+							changeUsername = false; //The username he chose is not available
+				}
+				if (changeUsername == true) {
+					this.myAccount.setUsername(username);
+					
+					String message = "Successful change of Username";
+					JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+					        JOptionPane.INFORMATION_MESSAGE);
+				}else { 
+					String message = "The new username he chose is not available!";
+					JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+					        JOptionPane.ERROR_MESSAGE);
+				}
+			}else {
+				String message = "You have not filled in Username";
 				JOptionPane.showMessageDialog(new JFrame(), message, "Message",
-				        JOptionPane.INFORMATION_MESSAGE);
-			}*/
-		}
-		else {
-			changeUsername = false;
+				        JOptionPane.ERROR_MESSAGE);
+			}
 		}
 		
 		//To change Password (If everything is blank, it means that the user does not want to change the password)
-		if (!currPassword.equalsIgnoreCase("") || !newPassword.equalsIgnoreCase("") || !confirmedPassword.equalsIgnoreCase("")) {
+		if (!currPassword.equals("") || !newPassword.equals("") || !confirmedPassword.equals("")) 
 			this.myAccount.getMyPassword().changePassword(currPassword, newPassword, confirmedPassword, this);
-			System.out.println(currPassword);
-		}
-		
-		/*True or false: This way we will know how to display the changes in the GUI and how to notify the user*/
-		if (changeUsername)
-			return true; //Username changed and changes accepted
-		else
-			return false; //Username was not changed or changes were accepted
-		
 		
 	}
 	

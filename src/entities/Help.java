@@ -9,6 +9,8 @@ import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 public class Help {
 	
@@ -33,24 +35,39 @@ public class Help {
 	//A method that allows users to contact the Bsn Media technical support team.
 	public void sendQuestion() {
 		
+		boolean sendToUs;
+		boolean sendToTheUser;
+		
 		String [] reciverForConfirmation = new String[1];
 		reciverForConfirmation[0] = authorEmail;
 		String subject = "Inquiry confirmation!";
 		String body = "Thank you very much for your comments "+authorName;
 		
-		Help.sendGMail(supportEmail, supportEmailPassword, reciverForConfirmation, subject, body);
+		sendToTheUser = Help.sendGMail(supportEmail, supportEmailPassword, reciverForConfirmation, subject, body);
 		
 		
 		String [] usAsRecievers = new String[1];
 		usAsRecievers[0] = supportEmail;
 		String subject2 = "Requested by user";
 		String body2 = "Question: "+this.question+"\nFrom the User: "+this.authorName+"\nEmail for Contact: "+this.authorEmail;
-		Help.sendGMail(supportEmail, supportEmailPassword, usAsRecievers, subject2, body2);
+		
+		sendToUs = Help.sendGMail(supportEmail, supportEmailPassword, usAsRecievers, subject2, body2);
+		
+		if (sendToTheUser && sendToUs) { 
+			
+			String message = "Successful Submission! Thank you very much for your comments!";
+			JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+			        JOptionPane.INFORMATION_MESSAGE);
+		}else {
+			String message = "There was a problem connecting!";
+			JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+			        JOptionPane.ERROR_MESSAGE);
+		}
 	}
 	
 	
 	//A method that sends email to someone
-	 public static void sendGMail(String from, String pass, String[] to, String subject, String body) {
+	 public static boolean sendGMail(String from, String pass, String[] to, String subject, String body) {
 	        Properties props = System.getProperties();
 	        String host = "smtp.gmail.com";
 	        props.put("mail.smtp.starttls.enable", "true");
@@ -82,12 +99,15 @@ public class Help {
 	            transport.connect(host, from, pass);
 	            transport.sendMessage(message, message.getAllRecipients());
 	            transport.close();
+	            return true;
 	        }
 	        catch (AddressException ae) {
 	            ae.printStackTrace();
+	            return false;
 	        }
 	        catch (MessagingException me) {
 	            me.printStackTrace();
+	            return false;
 	        }
 	    }
 	

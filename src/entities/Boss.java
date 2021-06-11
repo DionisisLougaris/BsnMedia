@@ -26,9 +26,17 @@ public class Boss extends User{
 	//It is a method that modifies the fields that concern the elements of the company. No check is performed for correct data entry.
 	public void changeVerificationCode (String potentialVerificationCode)
 	{
-		if(potentialVerificationCode.length()>=16 && !potentialVerificationCode.equals(myAccount.getMyCompany().getVerificationCode()))
+		if(potentialVerificationCode.length()>=8 && !potentialVerificationCode.equals(myAccount.getMyCompany().getVerificationCode()))
 		{
 			myAccount.getMyCompany().setVerificationCode(potentialVerificationCode);
+			
+			String message = "Password updated successfully!";
+			JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+			        JOptionPane.INFORMATION_MESSAGE);
+		}else {
+			String message = "The password is weak or the same as the previous one";
+			JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+			        JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	

@@ -2,6 +2,7 @@ package GUI;
 
 
 import java.awt.Cursor;
+import java.awt.Desktop;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -23,9 +24,13 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
@@ -216,7 +221,20 @@ public class FrontEndProfileGUI {
 		
 		String email = auser.getMyAccount().getEmail();
 		JLabel labelemail = new JLabel(email);
+		labelemail.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		labelemail.setForeground(new Color(255, 0, 0));
         labelemail.setBounds(130, 413, 194, 16);
+        labelemail.addMouseListener(new MouseAdapter() {
+	       	 
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                try {
+                    Desktop.getDesktop().browse(new URI("mailto:"+auser.getMyAccount().getEmail()));
+                } catch (IOException | URISyntaxException e1) {
+                    e1.printStackTrace();
+                }
+            }
+		});
 		panel.add(labelemail);
 		
 		JLabel lblNewLabel_5 = new JLabel("Currently apart of:");
@@ -317,7 +335,25 @@ public class FrontEndProfileGUI {
 		
 		String address = auser.getAddress();
 		JLabel labeladdress = new JLabel(address);
+		labeladdress.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		labeladdress.setForeground(new Color(255, 0, 0));
 		labeladdress.setBounds(131, 476, 110, 16);
+		labeladdress.addMouseListener(new MouseAdapter() {
+	       	 
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                try {
+                    Desktop.getDesktop().browse(new URI("https://www.google.com/maps/place/"+auser.getAddress()));
+                } catch (IOException | URISyntaxException e1) {
+                    e1.printStackTrace();
+                }
+            }
+            
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            	labeladdress.setText("<html><a href=''>" + auser.getAddress()+ "</a></html>");
+            }
+		});
 		panel.add(labeladdress);
 		
 		String birthday = auser.getBirthday();

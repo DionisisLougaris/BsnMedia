@@ -435,9 +435,6 @@ public class HelpGUI {
 					&& !userFullName.equalsIgnoreCase("Your full name...") && !usersEmail.equalsIgnoreCase("Your email...") && !usersMessage.equalsIgnoreCase("Your message...")) {
 					Help questionFromUser = new Help(userFullName, usersEmail, usersMessage);
 					questionFromUser.sendQuestion();
-					String message = "Successful submission! Thank you for your feedback!";
-					JOptionPane.showMessageDialog(new JFrame(), message, "Message",
-					        JOptionPane.INFORMATION_MESSAGE);
 				}else {
 					String message = "There are fields you need to fill in!";
 					JOptionPane.showMessageDialog(new JFrame(), message, "Message",

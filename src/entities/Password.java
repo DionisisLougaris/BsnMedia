@@ -37,12 +37,13 @@ public class Password implements Serializable
 		if (newPass.length()>=8 && !newPass.equalsIgnoreCase(theUser.firstName)
 								&& !newPass.equalsIgnoreCase(theUser.myAccount.getUsername())
 								&& !newPass.equalsIgnoreCase(theUser.lastName)) {
-			if (newPass.equalsIgnoreCase(confirmedPass)) {
+			if (newPass.equals(confirmedPass)) {
 				//The new password is stored encrypted
 				this.password = Encryption.encryptPassword(newPass, timestamp.getSecond());
 				String message = "The code has updated succesfully";
 				JOptionPane.showMessageDialog(new JFrame(), message, "Message",
 				        JOptionPane.INFORMATION_MESSAGE);
+				System.out.println("fdsfsd: "+newPass);
 			}
 			else {
 				String message = "The code and the confirmed code are not the same!";
@@ -61,13 +62,13 @@ public class Password implements Serializable
 	//This is a method through which the user can change his password provided he knows his current one.
 	public void changePassword(String currentPass, String newPass, String comfirmedNewPass, User theUser) {
 		
-		//Θα κληθει μεθοδος για αποκρυπτογραφιση του τωρινου κωδικου
-		if (currentPass.equalsIgnoreCase(this.password)) 
-			this.newPassword(newPass, comfirmedNewPass, theUser);
+		String decryptedStoredPassword = Encryption.decryptPassword(password, timestamp.getSecond());
+		if (currentPass.equals(decryptedStoredPassword)) 
+			theUser.getMyAccount().getMyPassword().newPassword(newPass, comfirmedNewPass, theUser);
 		else {
 			String message = "The current password you entered is incorrect!";
 			JOptionPane.showMessageDialog(new JFrame(), message, "Message",
-			        JOptionPane.INFORMATION_MESSAGE);
+			        JOptionPane.ERROR_MESSAGE);
 		}
 	}
 

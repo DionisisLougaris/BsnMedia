@@ -88,16 +88,23 @@ public class Account implements Serializable{
 	
 
 	//This is a method that deletes the user account.
-	public void deleteAccount(String inputPassword , String confirmedPassword, User deletedUser) {
+	public boolean deleteAccount(String inputPassword , String confirmedPassword, User deletedUser) {
 		
 		//The stored code must first be decrypted to verify that there is a correct match.
 		String decryptedSoredPassword = Encryption.decryptPassword(this.myPassword.getPassword(), this.myPassword.getTimestamp().getSecond());
 		if(decryptedSoredPassword.equals(inputPassword) && inputPassword.equals(confirmedPassword)) {
 			
 			myCompany.getCompanyMembers().remove(deletedUser);
+			String message = "Your login has expired!";
+			JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+			        JOptionPane.ERROR_MESSAGE);
+			return true;
 		}
 		else {
-			JOptionPane.showMessageDialog(null, "Failed to delete User",deletedUser.getLastName() , 0);
+			String message = "The data entered is incorrect";
+			JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+			        JOptionPane.ERROR_MESSAGE);
+			return false;
 		}
 	}
 
