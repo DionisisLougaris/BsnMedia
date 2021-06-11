@@ -27,6 +27,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollBar;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.WindowConstants;
 
 import GUI.BackendProfileEmployeeGUI.ButtonListener;
 import entities.*;
@@ -490,7 +491,7 @@ public class BackendProfileChiefGUI {
 			}
 			else if(e.getSource().equals(editAccountButton)) {
 				
-				new EditAccountGUI((User)chief);
+				new EditAccountGUI(chief, frmStartingPage);
 			}
 			
 			else if(e.getSource().equals(createProjectButton)) {

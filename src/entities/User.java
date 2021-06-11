@@ -116,16 +116,31 @@ abstract public class User implements Serializable{
 					String address, String speciality, String gender, String birthday) {
 		
 		//Fields that do not require some checks will change directly
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.telephone = telephone;
-		this.address = address;
-		this.companyPost = speciality;
-		this.gender = gender;
-		this.birthday = birthday;
+		//Checking to see if there is a change in every single field to not overwrite the information with empty fields
+		if(!firstName.isEmpty()) {
+			this.firstName = firstName;
+		}
+		if(!lastName.isEmpty()) {
+			this.lastName = lastName;
+		}
+		if(!telephone.isEmpty()) {
+			this.telephone = telephone;
+		}
+		if(!address.isEmpty()) {
+			this.address = address;
+		}
+		if(!speciality.isEmpty()) {
+			this.companyPost = speciality;
+		}
+		if(!gender.isEmpty()) {
+			this.gender = gender;
+		}
+		if(!birthday.isEmpty()) {
+			this.birthday = birthday;
+		}
 		
 		//Field that requires control
-		if(this.myAccount.emailAvailability(email)) {
+		if(this.myAccount.emailAvailability(email) && !email.isEmpty()) {
 			this.myAccount.setEmail(email); //The email is updated
 			return true; //True: It appears from Gui that all the algae were okay
 		}
@@ -149,8 +164,10 @@ abstract public class User implements Serializable{
 				if (username.equalsIgnoreCase(companyMember.myAccount.getUsername()))
 						changeUsername = false; //The username he chose is not available
 			}
-			if (changeUsername == true)
+			if (changeUsername == true) {
 				this.myAccount.setUsername(username);
+			}
+				
 			/*else { (Θα δουμε που βολευει να μπει η ειδοποιηση)
 				String message = "The new username he chose is not available!";
 				JOptionPane.showMessageDialog(new JFrame(), message, "Message",
@@ -164,6 +181,7 @@ abstract public class User implements Serializable{
 		//To change Password (If everything is blank, it means that the user does not want to change the password)
 		if (!currPassword.equalsIgnoreCase("") || !newPassword.equalsIgnoreCase("") || !confirmedPassword.equalsIgnoreCase("")) {
 			this.myAccount.getMyPassword().changePassword(currPassword, newPassword, confirmedPassword, this);
+			System.out.println(currPassword);
 		}
 		
 		/*True or false: This way we will know how to display the changes in the GUI and how to notify the user*/
@@ -171,6 +189,8 @@ abstract public class User implements Serializable{
 			return true; //Username changed and changes accepted
 		else
 			return false; //Username was not changed or changes were accepted
+		
+		
 	}
 	
 	

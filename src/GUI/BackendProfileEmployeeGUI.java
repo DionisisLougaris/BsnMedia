@@ -442,7 +442,7 @@ public class BackendProfileEmployeeGUI {
 			}
 			else if(e.getSource().equals(editAccountButton)) {
 				
-				new EditAccountGUI(employee);
+				new EditAccountGUI(employee, frmStartingPage);
 			}
 			else if(e.getSource().equals(disconnectButton)) {
 				try {
