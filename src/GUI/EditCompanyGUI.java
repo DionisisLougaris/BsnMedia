@@ -19,11 +19,11 @@ import java.awt.event.ActionEvent;
 public class EditCompanyGUI {
 
 	private JFrame frame;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
+	private JTextField tfCompanyName;
+	private JTextField tfCompanyTelephone;
+	private JTextField tfAddress;
+	private JTextField tfCompanyEmail;
+	private JTextField tfCompanyInfo;
 	private JLabel lblCompanyName;
 	private JLabel lblCompanyTelephone;
 	private JLabel lblAddress;
@@ -84,25 +84,25 @@ public class EditCompanyGUI {
 		btnNewButton.setBounds(584, 178, 178, 25);
 		frame.getContentPane().add(btnNewButton);
 		
-		textField = new JTextField();
-		textField.setBounds(190, 233, 116, 22);
-		frame.getContentPane().add(textField);
-		textField.setColumns(10);
+		tfCompanyName = new JTextField();
+		tfCompanyName.setBounds(190, 233, 116, 22);
+		frame.getContentPane().add(tfCompanyName);
+		tfCompanyName.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(190, 268, 116, 22);
-		frame.getContentPane().add(textField_1);
-		textField_1.setColumns(10);
+		tfCompanyTelephone = new JTextField();
+		tfCompanyTelephone.setBounds(190, 268, 116, 22);
+		frame.getContentPane().add(tfCompanyTelephone);
+		tfCompanyTelephone.setColumns(10);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(190, 303, 116, 22);
-		frame.getContentPane().add(textField_2);
-		textField_2.setColumns(10);
+		tfAddress = new JTextField();
+		tfAddress.setBounds(190, 303, 116, 22);
+		frame.getContentPane().add(tfAddress);
+		tfAddress.setColumns(10);
 		
-		textField_3 = new JTextField();
-		textField_3.setBounds(190, 338, 116, 22);
-		frame.getContentPane().add(textField_3);
-		textField_3.setColumns(10);
+		tfCompanyEmail = new JTextField();
+		tfCompanyEmail.setBounds(190, 338, 116, 22);
+		frame.getContentPane().add(tfCompanyEmail);
+		tfCompanyEmail.setColumns(10);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(190, 389, 178, 88);
@@ -113,9 +113,9 @@ public class EditCompanyGUI {
 		scrollPane.setBounds(0, 0, 178, 88);
 		panel_1.add(scrollPane);
 		
-		textField_4 = new JTextField();
-		scrollPane.setViewportView(textField_4);
-		textField_4.setColumns(10);
+		tfCompanyInfo = new JTextField();
+		scrollPane.setViewportView(tfCompanyInfo);
+		tfCompanyInfo.setColumns(10);
 		
 		JScrollBar scrollBar = new JScrollBar();
 		scrollPane.setRowHeaderView(scrollBar);
@@ -148,7 +148,10 @@ public class EditCompanyGUI {
 		btnSaveAll.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				if()
+				if(!tfCompanyName.getText().equals("") && !tfCompanyTelephone.getText().equals("") && !tfAddress.getText().equals("") && !tfCompanyEmail.getText().equals("") )
+				{
+					boss.editCompanyInfo(tfCompanyName.getText(), tfCompanyInfo.getText(), tfCompanyTelephone.getText(), tfAddress.getText(), tfCompanyEmail.getText());
+				}
 			}
 		});
 		btnSaveAll.setBounds(71, 503, 279, 25);
