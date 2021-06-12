@@ -24,12 +24,12 @@ public class EditCompanyGUI {
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField textField_4;
-	private JLabel lblNewLabel;
-	private JLabel lblNewLabel_1;
-	private JLabel lblNewLabel_2;
+	private JLabel lblCompanyName;
+	private JLabel lblCompanyTelephone;
+	private JLabel lblAddress;
 	private JLabel lblNewLabel_3;
 	private JLabel lblNewLabel_4;
-	private JButton btnNewButton_1;
+	private JButton btnSaveAll;
 	private JButton btnNewButton_2;
 	
 	private Boss boss;
@@ -120,17 +120,17 @@ public class EditCompanyGUI {
 		JScrollBar scrollBar = new JScrollBar();
 		scrollPane.setRowHeaderView(scrollBar);
 		
-		lblNewLabel = new JLabel("Company name");
-		lblNewLabel.setBounds(83, 236, 95, 16);
-		frame.getContentPane().add(lblNewLabel);
+		lblCompanyName = new JLabel("Company name");
+		lblCompanyName.setBounds(83, 236, 95, 16);
+		frame.getContentPane().add(lblCompanyName);
 		
-		lblNewLabel_1 = new JLabel("Company telephone");
-		lblNewLabel_1.setBounds(54, 271, 124, 16);
-		frame.getContentPane().add(lblNewLabel_1);
+		lblCompanyTelephone	 = new JLabel("Company telephone");
+		lblCompanyTelephone.setBounds(54, 271, 124, 16);
+		frame.getContentPane().add(lblCompanyTelephone);
 		
-		lblNewLabel_2 = new JLabel("Address");
-		lblNewLabel_2.setBounds(122, 306, 56, 16);
-		frame.getContentPane().add(lblNewLabel_2);
+		lblAddress = new JLabel("Address");
+		lblAddress.setBounds(122, 306, 56, 16);
+		frame.getContentPane().add(lblAddress);
 		
 		lblNewLabel_3 = new JLabel("Company email");
 		lblNewLabel_3.setBounds(83, 341, 95, 16);
@@ -140,17 +140,19 @@ public class EditCompanyGUI {
 		lblNewLabel_4.setBounds(92, 389, 86, 16);
 		frame.getContentPane().add(lblNewLabel_4);
 		
-		btnNewButton_1 = new JButton("Save All");
-		btnNewButton_1.setContentAreaFilled(false); 
-		btnNewButton_1.setFocusPainted(false); 
-		btnNewButton_1.setOpaque(false);
-		btnNewButton_1.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		btnNewButton_1.addActionListener(new ActionListener() {
+		btnSaveAll = new JButton("Save All");
+		btnSaveAll.setContentAreaFilled(false); 
+		btnSaveAll.setFocusPainted(false); 
+		btnSaveAll.setOpaque(false);
+		btnSaveAll.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		btnSaveAll.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				if()
 			}
 		});
-		btnNewButton_1.setBounds(71, 503, 279, 25);
-		frame.getContentPane().add(btnNewButton_1);
+		btnSaveAll.setBounds(71, 503, 279, 25);
+		frame.getContentPane().add(btnSaveAll);
 		
 		btnNewButton_2 = new JButton("View Changes");
 		btnNewButton_2.setContentAreaFilled(false); 

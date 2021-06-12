@@ -300,7 +300,7 @@ public class FrontEndProfileGUI {
 			panel.add(buttonchat);
 			
 			
-			if(!auser.getPendingConnectionRequests().contains(tuser))
+			if(!usersconnection.areConnected())
 			{
 			 JButton addConnection = new JButton("Add connection");
 			 addConnection.setContentAreaFilled(false); 
