@@ -12,6 +12,7 @@ import entities.Chief;
 import entities.Employee;
 import entities.Group;
 import entities.Project;
+import entities.User;
 
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
@@ -22,6 +23,9 @@ import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JScrollBar;
 import java.awt.event.ActionListener;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 
@@ -34,6 +38,7 @@ public class CreateProjectGUI {
 	private JTextField textDeadline;
 	private static Chief pchief;
 	private static Group createdGroup = null;
+	private ArrayList<Employee> pMembersOfGroup = new ArrayList<Employee>();
 
 	/**
 	 * Launch the application.
@@ -106,19 +111,18 @@ public class CreateProjectGUI {
 		
 		JList addUsersGroupList = new JList();
 		addUsersGroupList.setBounds(71, 399, 126, 157);
-		if(createdGroup != null)
-		{
+		
 			DefaultListModel addUserGroupmodel = new DefaultListModel();
 			for(int i=0; i<pchief.getMyAccount().getMyCompany().returnEmployees().size(); i++)
 		    {
-			if(pchief.getMyAccount().getMyCompany().returnEmployees().get(i).getGroups().size() <=2 && !createdGroup.isMember(pchief.getMyAccount().getMyCompany().returnEmployees().get(i)))
+			if(pchief.getMyAccount().getMyCompany().returnEmployees().get(i).getGroups().size() <=2 )
 			{
-				addUserGroupmodel.addElement (pchief.getMyAccount().getMyCompany().returnEmployees().get(i).getMyAccount().getUsername());
+				addUserGroupmodel.addElement (pchief.getMyAccount().getMyCompany().returnEmployees().get(i));
 			}
 			
 		   }
 		 addUsersGroupList.setModel(addUserGroupmodel);
-		}
+		
 		
 		frame.getContentPane().add(addUsersGroupList);
 		
@@ -142,6 +146,8 @@ public class CreateProjectGUI {
 		    }
 		  removeUsersGrouopList.setModel(removeUserGroupmodel);
 		}
+			
+		
 		frame.getContentPane().add(removeUsersGrouopList);
 		
 		JLabel lblNewLabel_5 = new JLabel("Members of Group :");
@@ -155,44 +161,52 @@ public class CreateProjectGUI {
 		btnaddUserGroup.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		btnaddUserGroup.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(createdGroup != null)
-				{
+				
 					if(addUsersGroupList.getSelectedValue() != null)
 					{
-						createdGroup.addMember((Employee) addUsersGroupList.getSelectedValue());
+						pMembersOfGroup.add( (Employee) addUsersGroupList.getSelectedValue());
+						DefaultListModel removeUserGroupmodel = new DefaultListModel();
+						DefaultListModel addUserGroupmodel = new DefaultListModel();
+						removeUserGroupmodel.addElement((Employee) addUsersGroupList.getSelectedValue());
+						removeUsersGrouopList.setModel(removeUserGroupmodel);
+						addUserGroupmodel.removeElement((Employee) addUsersGroupList.getSelectedValue());
+						addUsersGroupList.setModel(addUserGroupmodel);
+						
+						
 					}
 					else
 					{
-						String message = "You can not add Employee to group because you have not ckeck any Employee. You must check one first";
+						String message = "You can not add Employee to group because you have not ckeck any Empl"
+								+ "oyee. You must check one first";
 						JOptionPane.showMessageDialog(new JFrame(), message, "Message",
 						        JOptionPane.INFORMATION_MESSAGE);
 					}
 				}
-				else
-				{
-					String message = "You can not add Employee to group because the group have not created yet. You must create group first";
-					JOptionPane.showMessageDialog(new JFrame(), message, "Message",
-					        JOptionPane.INFORMATION_MESSAGE);
-					  
-				}
-			}
+			
+			
 		});
 		btnaddUserGroup.setBounds(71, 571, 126, 25);
 		frame.getContentPane().add(btnaddUserGroup);
 		
-		JButton btnNewButton_1 = new JButton("Remove");
-		btnNewButton_1.setContentAreaFilled(false); 
-		btnNewButton_1.setFocusPainted(false); 
-		btnNewButton_1.setOpaque(false);
-		btnNewButton_1.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		btnNewButton_1.addActionListener(new ActionListener() {
+		JButton btnremoveUserGroup = new JButton("Remove");
+		btnremoveUserGroup.setContentAreaFilled(false); 
+		btnremoveUserGroup.setFocusPainted(false); 
+		btnremoveUserGroup.setOpaque(false);
+		btnremoveUserGroup.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		btnremoveUserGroup.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				if(createdGroup != null)
-				{
+				
 					if(removeUsersGrouopList.getSelectedValue() != null)
 					{
-						createdGroup.getGroupMembers().remove((Employee) removeUsersGrouopList.getSelectedValue());
+						pMembersOfGroup.remove( removeUsersGrouopList.getSelectedValue());
+						DefaultListModel removeUserGroupmodel = new DefaultListModel();
+						DefaultListModel addUserGroupmodel = new DefaultListModel();
+						removeUserGroupmodel.removeElement((Employee) addUsersGroupList.getSelectedValue());
+						removeUsersGrouopList.setModel(removeUserGroupmodel);
+						addUserGroupmodel.addElement((Employee) addUsersGroupList.getSelectedValue());
+						addUsersGroupList.setModel(addUserGroupmodel);
+						
 					}
 					else
 					{
@@ -200,19 +214,13 @@ public class CreateProjectGUI {
 						JOptionPane.showMessageDialog(new JFrame(), message, "Message",
 						        JOptionPane.INFORMATION_MESSAGE);
 					}
-				}
-				else
-				{
-					String message = "You cant remove Employee from group because the group have not created yet. You must create group first";
-					JOptionPane.showMessageDialog(new JFrame(), message, "Message",
-					        JOptionPane.INFORMATION_MESSAGE);
-					  
-				}
 				
 			}
+		
+			
 		});
-		btnNewButton_1.setBounds(337, 571, 85, 25);
-		frame.getContentPane().add(btnNewButton_1);
+		btnremoveUserGroup.setBounds(337, 571, 85, 25);
+		frame.getContentPane().add(btnremoveUserGroup);
 		
 		JButton btnCreateProject = new JButton("Create");
 		btnCreateProject.setContentAreaFilled(false); 
@@ -227,6 +235,8 @@ public class CreateProjectGUI {
 				
 				if(!textProjectName.getText().equals("")  && !textProjectDescription.getText().equals("")  && !textDeadline.getText().equals("")   && !textGroupName.getText().equals("")  )
 				{
+					   
+				
 					
 					for(int i=0; i<pchief.getMyAccount().getMyCompany().getCompanyGroups().size(); i++)
 					{
@@ -246,6 +256,9 @@ public class CreateProjectGUI {
 					}
 					else
 					{
+						String message = "The group created";
+						JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+						        JOptionPane.INFORMATION_MESSAGE);
 					    createdGroup = new Group(textGroupName.getText(), null, pchief);
 						Project createdProject = new Project(textProjectName.getText(), textProjectDescription.getText(), textDeadline.getText());
 						createdGroup.setMyProject(createdProject);
@@ -254,11 +267,11 @@ public class CreateProjectGUI {
 				}
 				else
 				{
-					String message = "You can create Project or Group";
+					String message = "You can create Project and Group";
 					JOptionPane.showMessageDialog(new JFrame(), message, "Message",
 					        JOptionPane.INFORMATION_MESSAGE);
 				}
-			}
+			}	
 		});
 		frame.getContentPane().add(btnCreateProject);
 		

@@ -293,12 +293,15 @@ public class FrontEndProfileGUI {
 			buttonchat.setBounds(479, 313, 62, 25);
 			panel.add(buttonchat);
 			
-			JButton addConnection = new JButton("Add connection");
-			addConnection.setContentAreaFilled(false); 
-			addConnection.setFocusPainted(false); 
-			addConnection.setOpaque(false);
-			addConnection.setCursor(new Cursor(Cursor.HAND_CURSOR));
-			addConnection.addActionListener(new ActionListener() {
+			
+			if(!auser.getPendingConnectionRequests().contains(tuser))
+			{
+			 JButton addConnection = new JButton("Add connection");
+			 addConnection.setContentAreaFilled(false); 
+			 addConnection.setFocusPainted(false); 
+			 addConnection.setOpaque(false);
+			 addConnection.setCursor(new Cursor(Cursor.HAND_CURSOR));
+			 addConnection.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					
 					usersconnection.sendConnectionRequest();
@@ -306,6 +309,8 @@ public class FrontEndProfileGUI {
 			});
 			addConnection.setBounds(553, 313, 131, 25);
 			panel.add(addConnection);
+			}
+			
 			
 			JButton removeConnection = new JButton("Remove connection");
 			removeConnection.setContentAreaFilled(false); 
@@ -425,7 +430,7 @@ public class FrontEndProfileGUI {
 		ImageIcon imageb = new ImageIcon(imagebackground);
 		Image imagerisizeb = imageb.getImage().getScaledInstance(887, 991, 140) ;
 		lblNewLabel.setIcon(new ImageIcon(imagerisizeb));
-		lblNewLabel.setBounds(0, 0, 887, 985);
+		lblNewLabel.setBounds(12, 0, 887, 985);
 		panel.add(lblNewLabel);
 		
 		frame.setResizable(false);

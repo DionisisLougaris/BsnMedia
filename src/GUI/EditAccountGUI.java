@@ -523,6 +523,7 @@ public class EditAccountGUI {
 			    String file = dialog.getFile();
 			    user.setImage(file);
 			    
+			    
 				String message = "Your photo has been updated successfully!";
 				JOptionPane.showMessageDialog(new JFrame(), message, "Message",
 				        JOptionPane.INFORMATION_MESSAGE);

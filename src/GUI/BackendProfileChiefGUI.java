@@ -203,6 +203,10 @@ public class BackendProfileChiefGUI {
 		else {
 			name = "";
 		}
+		
+		
+		
+				
 		groupCLabel = new JLabel(name);
 		groupCLabel.setBounds(172, 386, 56, 16);
 		panel.add(groupCLabel);
@@ -330,14 +334,7 @@ public class BackendProfileChiefGUI {
 		postButton.setBounds(754, 750, 97, 25);
 		panel.add(postButton);
 		
-		// create button group for the radio button to know which one was selected
-		radioGroup = new ButtonGroup();
-		radioGroup.add(connectionsRadio);
-		radioGroup.add(PublicRadio);
-		radioGroup.add(GroupARadio);
-		radioGroup.add(GroupBRadio);
-		radioGroup.add(GroupCRadio);
-		
+	
 		textField = new JTextField();
 		textField.setBackground(new Color(255, 250, 240));
 		textField.setColumns(10);
@@ -352,6 +349,12 @@ public class BackendProfileChiefGUI {
 		checkprofileButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		checkprofileButton.setBounds(44, 648, 116, 25);
 		panel.add(checkprofileButton);
+		
+		// create button group for the radio button to know which one was selected
+		radioGroup = new ButtonGroup();
+	    radioGroup.add(connectionsRadio);
+		radioGroup.add(PublicRadio);
+		radioGroup.add(rdbtnGroup);
 		
 		sendMessageButton = new JButton("Send Message");
 		sendMessageButton.setFont(new Font("Tahoma", Font.PLAIN, 12));

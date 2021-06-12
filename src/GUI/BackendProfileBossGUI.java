@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.TreeSet;
 
 import javax.imageio.ImageIO;
+import javax.swing.ButtonGroup;
 import javax.swing.DefaultListModel;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -292,6 +293,10 @@ public class BackendProfileBossGUI {
 		PublicRadio.setBackground(Color.WHITE);
 		PublicRadio.setBounds(637, 717, 78, 25);
 		panel.add(PublicRadio);
+		
+		ButtonGroup radioGroup = new ButtonGroup();
+		radioGroup.add(connectionsRadio);
+		radioGroup.add(PublicRadio);
 		
 		postButton= new JButton("Post");
 		postButton.addActionListener(new ActionListener() {
