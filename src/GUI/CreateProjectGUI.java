@@ -89,6 +89,8 @@ public class CreateProjectGUI {
 		
 		JTextArea textProjectDescription = new JTextArea();
 		textProjectDescription.setBounds(155, 125, 284, 68);
+		textProjectDescription.setLineWrap(true);
+		textProjectDescription.setWrapStyleWord(true);
 		frame.getContentPane().add(textProjectDescription);
 		
 		JLabel lblDeadline = new JLabel("Deadline:");
@@ -125,7 +127,7 @@ public class CreateProjectGUI {
 		DefaultListModel<String> addUserGroupmodel = new DefaultListModel<String>();
 		for (Employee employee: feasibleForSelection) {
 			if (employee.getGroups().size()<=2) {
-				addUserGroupmodel.addElement(employee.getFirstName()+" "+employee.getLastName()+"|"+employee.getMyAccount().getUsername());
+				addUserGroupmodel.addElement(employee.getFirstName()+" "+employee.getLastName()+" | "+employee.getMyAccount().getUsername());
 			}
 		}
 		addUsersGroupList.setModel(addUserGroupmodel);
@@ -172,7 +174,7 @@ public class CreateProjectGUI {
 				Employee selectedEmployee = null;
 				
 				for(Employee theEmp: chief.getMyAccount().getMyCompany().returnEmployees()) {
-					String fullName = theEmp.getFirstName()+" "+theEmp.getLastName()+"|"+theEmp.getMyAccount().getUsername();
+					String fullName = theEmp.getFirstName()+" "+theEmp.getLastName()+" | "+theEmp.getMyAccount().getUsername();
 					if (fullName.equalsIgnoreCase(selectedEmployeeString)) {
 						selectedEmployee = theEmp;
 						break;
@@ -180,7 +182,7 @@ public class CreateProjectGUI {
 				}
 				if (selectedEmployee != null) {
 					selectedMembers.add(selectedEmployee);
-					removeUserGroupmodel.addElement(selectedEmployee.getFirstName()+" "+selectedEmployee.getLastName()+"|"+selectedEmployee.getMyAccount().getUsername());
+					removeUserGroupmodel.addElement(selectedEmployee.getFirstName()+" "+selectedEmployee.getLastName()+" | "+selectedEmployee.getMyAccount().getUsername());
 				    if (index != -1) {
 				    	addUserGroupmodel.remove(index);
 				    }
@@ -209,7 +211,7 @@ public class CreateProjectGUI {
 				int index = selectedEmployeesList.getSelectedIndex();
 				
 				for (Employee theEmployee: selectedMembers ) {
-					String fullName = theEmployee.getFirstName()+" "+theEmployee.getLastName()+"|"+theEmployee.getMyAccount().getUsername();
+					String fullName = theEmployee.getFirstName()+" "+theEmployee.getLastName()+" | "+theEmployee.getMyAccount().getUsername();
 					if (fullName.equalsIgnoreCase(selectedEmployeeString)) {
 						selectedEmployeeToRemove = theEmployee;
 						break;
@@ -218,7 +220,7 @@ public class CreateProjectGUI {
 				if (selectedEmployeeToRemove!=null) {
 					selectedMembers.remove(selectedEmployeeToRemove);
 					feasibleForSelection.add(selectedEmployeeToRemove);
-					addUserGroupmodel.addElement(selectedEmployeeToRemove.getFirstName()+" "+selectedEmployeeToRemove.getLastName()+"|"+selectedEmployeeToRemove.getMyAccount().getUsername());
+					addUserGroupmodel.addElement(selectedEmployeeToRemove.getFirstName()+" "+selectedEmployeeToRemove.getLastName()+" | "+selectedEmployeeToRemove.getMyAccount().getUsername());
 				    if (index != -1) {
 				    	removeUserGroupmodel.remove(index);
 				    }
@@ -249,7 +251,7 @@ public class CreateProjectGUI {
 					if (pchief.getMyAccount().getMyCompany().groupNameAvailability(textGroupName.getText())) {
 						
 						Project createdProject = new Project(textProjectName.getText(), textProjectDescription.getText(), textDeadline.getText());
-						Group createdGroup = new Group(textProjectName.getText(), createdProject, pchief);
+						Group createdGroup = new Group(textGroupName.getText(), createdProject, pchief);
 						pchief.addGroupToSupervise(createdGroup);
 						
 						for (Employee theEmp: selectedMembers) {

@@ -142,7 +142,7 @@ public class BackendProfileBossGUI {
 		{
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 	        String formatDateTime = post.getTimestamp().format(formatter);
-			textArea.append("----------------------------------------------------------------------------------------------------------"+ "\n\r");
+			textArea.append("-----------------------------------------------------------------------------------------------------"+ "\n\r");
 			textArea.append(post.getContent()+" | "+post.getCreator().getFirstName()+" | "+post.getPostScope()+" | "+formatDateTime+ "\n\r");
 		}
 		textArea.setBackground(new Color(255, 250, 240));
@@ -331,7 +331,7 @@ public class BackendProfileBossGUI {
 						{
 							DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 					        String formatDateTime = post.getTimestamp().format(formatter);
-							textArea.append("----------------------------------------------------------------------------------------------------------"+ "\n\r");
+							textArea.append("-----------------------------------------------------------------------------------------------------"+ "\n\r");
 							textArea.append(post.getContent()+" | "+post.getCreator().getFirstName()+" | "+post.getPostScope()+" | "+formatDateTime+ "\n\r");
 						}
 						textArea.setBackground(new Color(255, 250, 240));

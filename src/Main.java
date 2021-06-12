@@ -76,8 +76,7 @@ public class Main {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					 //new WelcomeScreen_GUI(theCompany);
-					new BackendProfileEmployeeGUI(first3);
+					 new WelcomeScreen_GUI(theCompany);
 					} catch (Exception e) {
 					e.printStackTrace();
 				}

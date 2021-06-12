@@ -112,6 +112,7 @@ public class GroupProfileGUI {
 		frame.getContentPane().add(lblNewLabel_4);
 		
 		JSlider slider = new JSlider();
+		slider.setOpaque(false);
 		slider.setBackground(Color.WHITE);
 		slider.setBounds(240, 350, 200, 26);
 		frame.getContentPane().add(slider);
@@ -125,12 +126,18 @@ public class GroupProfileGUI {
 			public void actionPerformed(ActionEvent arg0) {
 				if(myUser instanceof Boss)
 				{
+					if (myGroup.getMyProject().getStatus().equalsIgnoreCase("done")) {
+						
 					int value = (int)slider.getValue();
 					myGroup.setRating(value);
-					System.out.println(myGroup.getRating());
-					String message = "You have successfully rated "+myGroup.getName()+"!";
+					String message = "You have successfully rated "+myGroup.getName()+"!\n All members have been notified!";
 					JOptionPane.showMessageDialog(new JFrame(), message, "Message",
 					        JOptionPane.INFORMATION_MESSAGE);
+					}else {
+						String message = "Please come back to rate when project is finished!";
+						JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+						        JOptionPane.ERROR_MESSAGE);
+					}
 				}
 				else
 				{
@@ -165,7 +172,7 @@ public class GroupProfileGUI {
 		{
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 	        String formatDateTime = post.getTimestamp().format(formatter);
-	        textArea.append("-----------------------------------------------------------------------------------------------------------------"+ ""+ "\n\r");
+	        textArea.append("------------------------------------------------------------------------------------------------------------"+ ""+ "\n\r");
 	        textArea.append(post.getContent()+" | "+post.getCreator().getFirstName()+" | "+formatDateTime+ "\n\r");
 		}
 		textArea.setBackground(new Color(255, 250, 240));
@@ -205,7 +212,7 @@ public class GroupProfileGUI {
 				if(myUser instanceof Chief)
 				{
 					try {
-						BackendProfileChiefGUI myProfile = new BackendProfileChiefGUI(myUser);
+						new BackendProfileChiefGUI(myUser);
 					} catch (IOException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -214,7 +221,7 @@ public class GroupProfileGUI {
 				else if(myUser instanceof Boss)
 				{
 					try {
-						BackendProfileBossGUI myProfile = new BackendProfileBossGUI(myUser);
+						new BackendProfileBossGUI(myUser);
 					} catch (IOException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -223,7 +230,7 @@ public class GroupProfileGUI {
 				else if(myUser instanceof Employee)
 				{
 					try {
-						BackendProfileEmployeeGUI myProfile = new BackendProfileEmployeeGUI(myUser);
+						new BackendProfileEmployeeGUI(myUser);
 					} catch (IOException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();

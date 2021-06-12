@@ -44,13 +44,12 @@ public class BackendProfileEmployeeGUI {
 	checkprofileButton, sendMessageButton, sendRequestButton, disconnectButton;
 	private JLabel emailLabel;
 	private JLabel groupALabel, groupBLabel, groupCLabel;
-	private JList<String> connectionsList, suggestedList, postList; 
+	private JList<String> connectionsList, suggestedList; 
 	private JTextArea writePostArea;
-	private JRadioButton connectionsRadio, PublicRadio, GroupARadio, GroupBRadio, GroupCRadio;
+	private JRadioButton connectionsRadio, PublicRadio;
 	private static User employee;
 	TreeSet<User> suggestedListConnections = new TreeSet<>();
 	TreeSet<Post> allPosts = new TreeSet<>();
-	private JScrollPane scrollPane;
 	ButtonGroup radioGroup;
 	
 	ArrayList<User> listOfConnections;
@@ -259,7 +258,7 @@ public class BackendProfileEmployeeGUI {
 		{
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 	        String formatDateTime = post.getTimestamp().format(formatter);
-			textArea.append("----------------------------------------------------------------------------------------------------------"+ "\n\r");
+			textArea.append("-----------------------------------------------------------------------------------------------------"+ "\n\r");
 			textArea.append(post.getContent()+" | "+post.getCreator().getFirstName()+" | "+post.getPostScope()+" | "+formatDateTime+ "\n\r");
 		}
 		textArea.setBackground(new Color(255, 250, 240));
@@ -276,18 +275,21 @@ public class BackendProfileEmployeeGUI {
 		
 		connectionsRadio = new JRadioButton("Connections");
 		connectionsRadio.setActionCommand("Connections");
+		connectionsRadio.setOpaque(false);
 		connectionsRadio.setBackground(Color.WHITE);
 		connectionsRadio.setBounds(441, 746, 112, 25);
 		panel.add(connectionsRadio);
 		
 		PublicRadio = new JRadioButton("Public");
 		PublicRadio.setActionCommand("Public");
+		PublicRadio.setOpaque(false);
 		PublicRadio.setBackground(Color.WHITE);
 		PublicRadio.setBounds(557, 746, 78, 25);
 		panel.add(PublicRadio);
 		
 		JRadioButton rdbtnGroup = new JRadioButton("Group");
 		rdbtnGroup.setActionCommand("Group");
+		rdbtnGroup.setOpaque(false);
 		rdbtnGroup.setBackground(Color.WHITE);
 		rdbtnGroup.setBounds(639, 746, 78, 25);
 		panel.add(rdbtnGroup);
@@ -310,7 +312,7 @@ public class BackendProfileEmployeeGUI {
 							{
 								DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 						        String formatDateTime = post.getTimestamp().format(formatter);
-								textArea.append("----------------------------------------------------------------------------------------------------------"+ "\n\r");
+								textArea.append("-----------------------------------------------------------------------------------------------------"+ "\n\r");
 								textArea.append(post.getContent()+" | "+post.getCreator().getFirstName()+" | "+post.getPostScope()+" | "+formatDateTime+ "\n\r");
 							}
 							
@@ -325,7 +327,7 @@ public class BackendProfileEmployeeGUI {
 						{
 							DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 					        String formatDateTime = post.getTimestamp().format(formatter);
-							textArea.append("----------------------------------------------------------------------------------------------------------"+ "\n\r");
+							textArea.append("-----------------------------------------------------------------------------------------------------"+ "\n\r");
 							textArea.append(post.getContent()+" | "+post.getCreator().getFirstName()+" | "+post.getPostScope()+" | "+formatDateTime+ "\n\r");
 						}
 					 String groupToPost=textField.getText();
