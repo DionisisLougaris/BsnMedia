@@ -191,11 +191,11 @@ public class Company implements Serializable{
 	//This methods returns if a Group Name is taken or not
 	public boolean groupNameAvailability(String aString)
 	{
-		boolean available=true;
 		for(int i=0;i<this.companyGroups.size();i++)
-			if(this.companyGroups.get(i).getName().equalsIgnoreCase(aString))
-				available=false;
-		return available;
+			if(this.companyGroups.get(i).getName().equalsIgnoreCase(aString)) {
+				return false;
+			}
+		return true;
 	}
 	
 	//This method seperates and collects Chiefs from all Users
