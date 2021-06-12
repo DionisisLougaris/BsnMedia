@@ -10,7 +10,10 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.TreeSet;
 
 import javax.imageio.ImageIO;
@@ -26,6 +29,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -129,7 +133,18 @@ public class BackendProfileBossGUI {
 		searchButton.setBounds(623, 27, 46, 44);
 		panel.add(searchButton);
 		
+		
 		JTextArea textArea = new JTextArea();
+		textArea.setLineWrap(true);
+		textArea.setWrapStyleWord(true);
+		textArea.setText("");
+		for( Post post : boss.returnAllPosts())
+		{
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+	        String formatDateTime = post.getTimestamp().format(formatter);
+			textArea.append("----------------------------------------------------------------------------------------------------------"+ "\n\r");
+			textArea.append(post.getContent()+" | "+post.getCreator().getFirstName()+" | "+post.getPostScope()+" | "+formatDateTime+ "\n\r");
+		}
 		textArea.setBackground(new Color(255, 250, 240));
 		textArea.setBounds(427, 213, 424, 409);
 		panel.add(textArea);
@@ -275,22 +290,24 @@ public class BackendProfileBossGUI {
 		lblNewLabel_9_1.setBounds(221, 438, 150, 16);
 		panel.add(lblNewLabel_9_1);
 		
-		JScrollBar scrollBar = new JScrollBar();
-		scrollBar.setBounds(830, 213, 21, 409);
-		panel.add(scrollBar);
-		
 		JTextArea writePostArea = new JTextArea();
+		writePostArea.setLineWrap(true);
+		writePostArea.setWrapStyleWord(true);
 		writePostArea.setBackground(new Color(255, 250, 240));
 		writePostArea.setBounds(427, 651, 424, 49);
 		panel.add(writePostArea);
 		
 		connectionsRadio= new JRadioButton("Connections");
+		connectionsRadio.setActionCommand("Connections");
 		connectionsRadio.setBackground(Color.WHITE);
+		connectionsRadio.setOpaque(false);
 		connectionsRadio.setBounds(503, 717, 112, 25);
 		panel.add(connectionsRadio);
 		
 	    PublicRadio = new JRadioButton("Public");
+	    PublicRadio.setActionCommand("Public");
 		PublicRadio.setBackground(Color.WHITE);
+		PublicRadio.setOpaque(false);
 		PublicRadio.setBounds(637, 717, 78, 25);
 		panel.add(PublicRadio);
 		
@@ -301,10 +318,33 @@ public class BackendProfileBossGUI {
 		postButton= new JButton("Post");
 		postButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//tha sunexistei afou ginei to button group sta radio buttons
-				String myText = writePostArea.getText();
-				Post myPost = new Post(boss,myText,"test");
-				//System.out.println("Selected Radio Button: " + buttonGroup.getSelection().getActionCommand());
+				
+				   if(connectionsRadio.isSelected() || PublicRadio.isSelected() ){
+			        
+					//Putting post on boss' and others Users' wall
+					//Prepei na ginei elegxos , an den exei epilexthei kapoio radio button na bgazei minima lathous sto pathma tou post
+						String myText = writePostArea.getText();
+						Post myPost = new Post(boss,myText,radioGroup.getSelection().getActionCommand());
+						boss.addPost(myPost);
+						textArea.setText(""); 
+					    for( Post post : boss.returnAllPosts())
+						{
+							DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+					        String formatDateTime = post.getTimestamp().format(formatter);
+							textArea.append("----------------------------------------------------------------------------------------------------------"+ "\n\r");
+							textArea.append(post.getContent()+" | "+post.getCreator().getFirstName()+" | "+post.getPostScope()+" | "+formatDateTime+ "\n\r");
+						}
+						textArea.setBackground(new Color(255, 250, 240));
+						textArea.setBounds(427, 213, 424, 409);	
+				   }
+				   else
+				   {
+					   String message = "Select Post scope before posting!";
+						JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+						        JOptionPane.ERROR_MESSAGE);
+				   }
+
+	
 			}
 		});
 		postButton.setContentAreaFilled(false); 
@@ -383,14 +423,14 @@ public class BackendProfileBossGUI {
 		textField.setBounds(332, 36, 279, 30);
 		panel.add(textField);
 		
-		JLabel lblNewLabel = new JLabel("");
+		
+		JLabel lblNewLabel_2 = new JLabel("");
 		BufferedImage imagebackground = ImageIO.read(new File("label_backgrounds/background.jpg"));
 		ImageIcon imageb = new ImageIcon(imagebackground);
 		Image imagerisizeb = imageb.getImage().getScaledInstance(887, 991, 140) ;
-		lblNewLabel.setIcon(new ImageIcon(imagerisizeb));
-		lblNewLabel.setBounds(0, 0, 887, 991);
-		panel.add(lblNewLabel);
-		
+		lblNewLabel_2.setIcon(new ImageIcon(imagerisizeb));
+		lblNewLabel_2.setBounds(0, 0, 887, 991);
+		panel.add(lblNewLabel_2);
 		ButtonListener listener = new ButtonListener();
 		checkprofileButton.addActionListener(listener);
 		sendMessageButton.addActionListener(listener);
@@ -494,4 +534,5 @@ public class BackendProfileBossGUI {
 			}
 		}
 	}
+	
 }

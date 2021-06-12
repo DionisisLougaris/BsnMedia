@@ -43,7 +43,8 @@ public class Main {
 		
 		Project p1= new Project("project name","this is the Description","deadline");
 		Group g1= new Group("group name",p1,first4);
-		g1.addMember(first);
+		first.addGroupToEmployeesList(g1);
+		first4.addGroupToSupervise(g1);
 		
 		theCompany.addCompanyGroups(g1);
 		
@@ -76,7 +77,7 @@ public class Main {
 			public void run() {
 				try {
 					 //new WelcomeScreen_GUI(theCompany);
-					new BackendProfileBossGUI(first2);
+					new BackendProfileEmployeeGUI(first3);
 					} catch (Exception e) {
 					e.printStackTrace();
 				}

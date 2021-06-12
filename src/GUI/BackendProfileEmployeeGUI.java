@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.TreeSet;
 
@@ -44,7 +45,7 @@ public class BackendProfileEmployeeGUI {
 	private JLabel emailLabel;
 	private JLabel groupALabel, groupBLabel, groupCLabel;
 	private JList<String> connectionsList, suggestedList, postList; 
-	private JTextArea writePostArea, postArea;
+	private JTextArea writePostArea;
 	private JRadioButton connectionsRadio, PublicRadio, GroupARadio, GroupBRadio, GroupCRadio;
 	private static User employee;
 	TreeSet<User> suggestedListConnections = new TreeSet<>();
@@ -158,48 +159,6 @@ public class BackendProfileEmployeeGUI {
 		lblNewLabel_5.setBounds(49, 357, 133, 16);
 		panel.add(lblNewLabel_5);
 		
-		String name;
-		if(employee.getGroups().size()>0) {
-			name = employee.getGroups().get(0).getName();
-			
-			GroupARadio = new JRadioButton(name);
-			GroupARadio.setBounds(625, 675, 126, 25);
-			panel.add(GroupARadio);
-		}
-		else {
-			name = "";
-		}
-		groupALabel = new JLabel(name);
-		groupALabel.setBounds(49, 386, 56, 16);
-		panel.add(groupALabel);
-		
-		if(employee.getGroups().size()>1) {
-			name = employee.getGroups().get(1).getName();
-			
-			GroupBRadio = new JRadioButton(name);
-			GroupBRadio.setBounds(625, 709, 126, 25);
-			panel.add(GroupBRadio);
-		}
-		else {
-			name = "";
-		}
-		groupBLabel = new JLabel(name);
-		groupBLabel.setBounds(104, 386, 56, 16);
-		panel.add(groupBLabel);
-		
-		if(employee.getGroups().size()>2) {
-			name = employee.getGroups().get(2).getName();
-			
-			GroupCRadio = new JRadioButton(name);
-			GroupCRadio.setBounds(625, 739, 127, 25);
-			panel.add(GroupCRadio);
-		}
-		else {
-			name = "";
-		}
-		groupCLabel = new JLabel(name);
-		groupCLabel.setBounds(172, 386, 56, 16);
-		panel.add(groupCLabel);
 		
 		Icon help = new ImageIcon("Buttons_backgrounds/customer_support_40px.png");
 		helpButton = new JButton(help);
@@ -292,26 +251,43 @@ public class BackendProfileEmployeeGUI {
 		lblNewLabel_9_1.setBounds(216, 454, 139, 16);
 		panel.add(lblNewLabel_9_1);
 		
-		JScrollBar scrollBar = new JScrollBar();
-		scrollBar.setBounds(830, 254, 21, 411);
-		panel.add(scrollBar);
+		JTextArea textArea = new JTextArea();
+		textArea.setLineWrap(true);
+		textArea.setWrapStyleWord(true);
+		textArea.setText("");
+		for( Post post : employee.returnAllPosts())
+		{
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+	        String formatDateTime = post.getTimestamp().format(formatter);
+			textArea.append("----------------------------------------------------------------------------------------------------------"+ "\n\r");
+			textArea.append(post.getContent()+" | "+post.getCreator().getFirstName()+" | "+post.getPostScope()+" | "+formatDateTime+ "\n\r");
+		}
+		textArea.setBackground(new Color(255, 250, 240));
+		textArea.setBounds(427, 244, 424, 409);
+		panel.add(textArea);
+		
 		
 		writePostArea = new JTextArea();
+		writePostArea.setLineWrap(true);
+		writePostArea.setWrapStyleWord(true);
 		writePostArea.setBackground(new Color(255, 250, 240));
 		writePostArea.setBounds(427, 688, 424, 49);
 		panel.add(writePostArea);
 		
 		connectionsRadio = new JRadioButton("Connections");
+		connectionsRadio.setActionCommand("Connections");
 		connectionsRadio.setBackground(Color.WHITE);
 		connectionsRadio.setBounds(441, 746, 112, 25);
 		panel.add(connectionsRadio);
 		
 		PublicRadio = new JRadioButton("Public");
+		PublicRadio.setActionCommand("Public");
 		PublicRadio.setBackground(Color.WHITE);
 		PublicRadio.setBounds(557, 746, 78, 25);
 		panel.add(PublicRadio);
 		
 		JRadioButton rdbtnGroup = new JRadioButton("Group");
+		rdbtnGroup.setActionCommand("Group");
 		rdbtnGroup.setBackground(Color.WHITE);
 		rdbtnGroup.setBounds(639, 746, 78, 25);
 		panel.add(rdbtnGroup);
@@ -323,6 +299,63 @@ public class BackendProfileEmployeeGUI {
 		postButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		postButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				 if(connectionsRadio.isSelected() || PublicRadio.isSelected()){
+				        
+						//Putting post on boss' and others Users' wall
+							String myText = writePostArea.getText();
+							Post myPost = new Post(employee,myText,radioGroup.getSelection().getActionCommand());
+							employee.addPost(myPost);
+							textArea.setText(""); 
+						    for( Post post : employee.returnAllPosts())
+							{
+								DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+						        String formatDateTime = post.getTimestamp().format(formatter);
+								textArea.append("----------------------------------------------------------------------------------------------------------"+ "\n\r");
+								textArea.append(post.getContent()+" | "+post.getCreator().getFirstName()+" | "+post.getPostScope()+" | "+formatDateTime+ "\n\r");
+							}
+							
+					   }
+				 else if(rdbtnGroup.isSelected())
+				 {
+					 	String myText = writePostArea.getText();
+						Post myPost = new Post(employee,myText,radioGroup.getSelection().getActionCommand());
+						employee.addPost(myPost);
+						textArea.setText(""); 
+					    for( Post post : employee.returnAllPosts())
+						{
+							DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+					        String formatDateTime = post.getTimestamp().format(formatter);
+							textArea.append("----------------------------------------------------------------------------------------------------------"+ "\n\r");
+							textArea.append(post.getContent()+" | "+post.getCreator().getFirstName()+" | "+post.getPostScope()+" | "+formatDateTime+ "\n\r");
+						}
+					 String groupToPost=textField.getText();
+					 boolean found=false;
+					 for(int i=0;i<employee.getGroups().size();i++)
+					 {
+						 if(employee.getGroups().get(i).getName().equals(groupToPost))
+						 {
+							 found=true;
+							 employee.getGroups().get(i).addPostToGroupList(myPost);
+							 String message = "You successfully posted on "+employee.getGroups().get(i).getName()+"'s wall!";
+								JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+								  JOptionPane.INFORMATION_MESSAGE);
+						 }
+					 }
+					 if(found==false)
+					 {
+						 String message = "Group not found...Please check your spelling!";
+							JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+							  JOptionPane.ERROR_MESSAGE);
+					 }
+				 }
+				else
+				{
+					String message = "Select Post scope before posting!";
+					JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+					  JOptionPane.ERROR_MESSAGE);
+				}
+				 textArea.setBackground(new Color(255, 250, 240));
+				 textArea.setBounds(427, 213, 424, 409);	
 			}
 		});
 		postButton.setBounds(754, 750, 97, 25);
@@ -330,11 +363,9 @@ public class BackendProfileEmployeeGUI {
 		
 		// create button group for the radio button to know which one was selected
 		radioGroup = new ButtonGroup();
-		radioGroup.add(connectionsRadio);
+	    radioGroup.add(connectionsRadio);
 		radioGroup.add(PublicRadio);
-		radioGroup.add(GroupARadio);
-		radioGroup.add(GroupBRadio);
-		radioGroup.add(GroupCRadio);
+		radioGroup.add(rdbtnGroup);
 		
 		textField = new JTextField();
 		textField.setBackground(new Color(255, 250, 240));
@@ -377,15 +408,7 @@ public class BackendProfileEmployeeGUI {
 		disconnectButton.setBounds(796, 169, 55, 54);
 		panel.add(disconnectButton);
 
-		postArea = new JTextArea();
-		postArea.setBackground(new Color(255, 250, 240));
-		postArea.setBounds(427, 256, 424, 409);
-		allPosts = employee.returnAllPosts();
-		// not finished
-		for(int i = 0; i < allPosts.size(); i++) {
-			
-		}
-		panel.add(postArea);
+	
 		
 		JLabel lblNewLabel_2 = new JLabel("");
 		BufferedImage imagebackground = ImageIO.read(new File("label_backgrounds/background.jpg"));
@@ -544,17 +567,6 @@ public class BackendProfileEmployeeGUI {
 					possibleConnection.sendConnectionRequest();
 				}
 				
-			}
-			// not finished
-			else if(e.getSource().equals(postButton)) {
-				String postText = writePostArea.getText();
-				if(connectionsRadio.isSelected() || PublicRadio.isSelected() || GroupARadio.isSelected() || GroupBRadio.isSelected() || GroupCRadio.isSelected()) {
-					String selected = radioGroup.getSelection().toString();
-					Post newPost = new Post(employee, postText, selected);
-					employee.addPost(newPost);
-					postList.remove(postList); //den eimai sigourh an douleuei
-					
-				}	
 			}
 		}
 		

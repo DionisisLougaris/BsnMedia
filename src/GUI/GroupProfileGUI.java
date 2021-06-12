@@ -10,6 +10,7 @@ import entities.Boss;
 import entities.Chief;
 import entities.Employee;
 import entities.Group;
+import entities.Post;
 import entities.User;
 
 import javax.swing.JButton;
@@ -17,6 +18,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -35,6 +37,7 @@ import java.awt.Color;
 import java.awt.SystemColor;
 import javax.swing.JSlider;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
 public class GroupProfileGUI {
 
@@ -155,6 +158,19 @@ public class GroupProfileGUI {
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(322, 489, 507, 393);
 		frame.getContentPane().add(panel_1);
+		panel_1.setLayout(null);
+		
+		JTextArea textArea = new JTextArea();
+		for( Post post : myGroup.getGroupPosts())
+		{
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+	        String formatDateTime = post.getTimestamp().format(formatter);
+	        textArea.append("-----------------------------------------------------------------------------------------------------------------"+ ""+ "\n\r");
+	        textArea.append(post.getContent()+" | "+post.getCreator().getFirstName()+" | "+formatDateTime+ "\n\r");
+		}
+		textArea.setBackground(new Color(255, 250, 240));
+		textArea.setBounds(0, 0, 507, 393);
+		panel_1.add(textArea);
 		
 		JLabel lblNewLabel_7 = new JLabel("/100");
 		lblNewLabel_7.setBackground(SystemColor.text);
