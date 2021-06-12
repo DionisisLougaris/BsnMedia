@@ -115,13 +115,15 @@ public class Boss extends User{
 		
 		TreeSet<Post> postForBackEndProfile = new TreeSet<Post>(myPostComp); //List of Posts that will appear in the User's Back-End Profile
 		
-		for(Post hisPost: listOfPosts) 
-			postForBackEndProfile.add(hisPost); //Initially, his own are added
-		
+		for(Post hisPost: listOfPosts)
+		{
+			if(hisPost.getPostScope().equals("Connections"))
+				postForBackEndProfile.add(hisPost); //Initially, his own are added
+		}
 		for(User connectedUser: listOfConnections) {
 			TreeSet<Post> friendsPosts = connectedUser.getListOfPosts();
 			for(Post friendsPost: friendsPosts) 
-				if (friendsPost.getPostScope().equalsIgnoreCase("friends")) 
+				if (friendsPost.getPostScope().equalsIgnoreCase("Connections")) 
 					postForBackEndProfile.add(friendsPost); //The Posts of connected users with whom he has the opportunity to see
 		}
 		

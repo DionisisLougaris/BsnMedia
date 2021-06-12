@@ -12,7 +12,7 @@ public class Post implements Serializable{
 	
 	private User creator;
 	private String content;
-	private String postScope; //Scope: (public or friends or group)
+	private String postScope; //Scope: (Public or Connections or Group)
 	private LocalDateTime timestamp;
 	private int numberOfLikes;
 	private ArrayList<User> likers = new ArrayList<User>(); //All users who likes the post

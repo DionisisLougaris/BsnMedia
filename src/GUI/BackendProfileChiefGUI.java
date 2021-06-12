@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.TreeSet;
 
@@ -44,15 +45,15 @@ public class BackendProfileChiefGUI {
 	private JButton searchButton, helpButton, requestsButton, messagesButton, notifsButton, editAccountButton,createProjectButton, editGroupAButton, 
 	editGroupBButton, editGroupCButton , postButton, checkprofileButton, sendMessageButton, sendRequestButton, disconnectButton;
 	private JLabel emailLabel;
-	private JLabel groupALabel, groupBLabel, groupCLabel;
 	private JRadioButton connectionsRadio, PublicRadio, GroupARadio, GroupBRadio, GroupCRadio;
-	private JTextArea writePostArea, postArea;
+	private JTextArea writePostArea;
 	private JList<String> connectionsList, suggestedList, postList;
 	ArrayList<User> listOfConnections;
 	TreeSet<User> suggestedListConnections = new TreeSet<>();
 	ButtonGroup radioGroup;
 	TreeSet<Post> allPosts = new TreeSet<>();
 	private JLabel lblNewLabel_2;
+	private JTextArea textArea;
 	
 	
 	public BackendProfileChiefGUI(User theChief) throws IOException {
@@ -134,11 +135,6 @@ public class BackendProfileChiefGUI {
 		searchButton.setBounds(612, 38, 55, 44);
 		panel.add(searchButton);
 		
-		JTextArea textArea = new JTextArea();
-		textArea.setBackground(new Color(255, 250, 240));
-		textArea.setBounds(427, 225, 424, 409);
-		panel.add(textArea);
-		
 		JLabel nameLabel = new JLabel();
 		nameLabel.setText(chief.getFirstName()+" "+chief.getLastName());
 		nameLabel.setFont(new Font("Tahoma", Font.PLAIN, 19));
@@ -161,55 +157,6 @@ public class BackendProfileChiefGUI {
 		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblNewLabel_5.setBounds(49, 359, 155, 16);
 		panel.add(lblNewLabel_5);
-		
-		
-		
-		String name;
-		if(chief.getGroups().size()>0) {
-			name = chief.getGroups().get(0).getName();
-			
-			GroupARadio = new JRadioButton(name);
-			GroupARadio.setBounds(625, 675, 126, 25);
-			panel.add(GroupARadio);
-		}
-		else {
-			name = "";
-		}
-		groupALabel = new JLabel(name);
-		groupALabel.setBounds(49, 386, 56, 16);
-		panel.add(groupALabel);
-		
-		if(chief.getGroups().size()>1) {
-			name = chief.getGroups().get(1).getName();
-			
-			GroupBRadio = new JRadioButton(name);
-			GroupBRadio.setBounds(625, 709, 126, 25);
-			panel.add(GroupBRadio);
-		}
-		else {
-			name = "";
-		}
-		groupBLabel = new JLabel(name);
-		groupBLabel.setBounds(104, 386, 56, 16);
-		panel.add(groupBLabel);
-		
-		if(chief.getGroups().size()>2) {
-			name = chief.getGroups().get(2).getName();
-			
-			GroupCRadio = new JRadioButton(name);
-			GroupCRadio.setBounds(625, 739, 127, 25);
-			panel.add(GroupCRadio);
-		}
-		else {
-			name = "";
-		}
-		
-		
-		
-				
-		groupCLabel = new JLabel(name);
-		groupCLabel.setBounds(172, 386, 56, 16);
-		panel.add(groupCLabel);
 		
 		
 		Icon help = new ImageIcon("Buttons_backgrounds/customer_support_40px.png");
@@ -298,29 +245,51 @@ public class BackendProfileChiefGUI {
 		lblNewLabel_9_1.setBounds(216, 454, 139, 16);
 		panel.add(lblNewLabel_9_1);
 		
-		JScrollBar scrollBar = new JScrollBar();
-		scrollBar.setBounds(830, 254, 21, 411);
-		panel.add(scrollBar);
-		
 		writePostArea = new JTextArea();
+		writePostArea.setLineWrap(true);
+		writePostArea.setWrapStyleWord(true);
 		writePostArea.setBackground(new Color(255, 250, 240));
 		writePostArea.setBounds(427, 688, 424, 49);
 		panel.add(writePostArea);
 		
 		connectionsRadio = new JRadioButton("Connections");
+		connectionsRadio.setActionCommand("Connections");
 		connectionsRadio.setBackground(Color.WHITE);
 		connectionsRadio.setBounds(441, 746, 112, 25);
 		panel.add(connectionsRadio);
 		
 		PublicRadio = new JRadioButton("Public");
+		PublicRadio.setActionCommand("Public");
 		PublicRadio.setBackground(Color.WHITE);
 		PublicRadio.setBounds(557, 746, 78, 25);
 		panel.add(PublicRadio);
 		
 		JRadioButton rdbtnGroup = new JRadioButton("Group");
+		rdbtnGroup.setActionCommand("Group");
 		rdbtnGroup.setBackground(Color.WHITE);
 		rdbtnGroup.setBounds(639, 746, 78, 25);
 		panel.add(rdbtnGroup);
+		
+		textArea = new JTextArea();
+		textArea.setWrapStyleWord(true);
+		textArea.setText("");
+		textArea.setLineWrap(true);
+		for( Post post : chief.returnAllPosts())
+		{
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+	        String formatDateTime = post.getTimestamp().format(formatter);
+			textArea.append("----------------------------------------------------------------------------------------------------------"+ "\n\r");
+			textArea.append(post.getContent()+" | "+post.getCreator().getFirstName()+" | "+post.getPostScope()+" | "+formatDateTime+ "\n\r");
+		}
+		textArea.setBackground(new Color(255, 250, 240));
+		textArea.setBounds(427, 237, 424, 409);
+		panel.add(textArea);
+		
+		textField = new JTextField();
+		textField.setBackground(new Color(255, 250, 240));
+		textField.setColumns(10);
+		textField.setBounds(639, 780, 64, 25);
+		panel.add(textField);
 		
 		postButton = new JButton("Post");
 		postButton.setContentAreaFilled(false); 
@@ -329,17 +298,70 @@ public class BackendProfileChiefGUI {
 		postButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		postButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				 if(connectionsRadio.isSelected() || PublicRadio.isSelected()){
+				        
+						//Putting post on boss' and others Users' wall
+							String myText = writePostArea.getText();
+							Post myPost = new Post(chief,myText,radioGroup.getSelection().getActionCommand());
+							chief.addPost(myPost);
+							textArea.setText(""); 
+						    for( Post post : chief.returnAllPosts())
+							{
+								DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+						        String formatDateTime = post.getTimestamp().format(formatter);
+						        textArea.append("----------------------------------------------------------------------------------------------------------"+ "\n\r");
+								textArea.append(post.getContent()+" | "+post.getCreator().getFirstName()+" | "+post.getPostScope()+" | "+formatDateTime+ "\n\r");
+							}
+							
+					   }
+				 else if(rdbtnGroup.isSelected())
+				 {
+					 String myText = writePostArea.getText();
+						Post myPost = new Post(chief,myText,radioGroup.getSelection().getActionCommand());
+						chief.addPost(myPost);
+						textArea.setText(""); 
+					    for( Post post : chief.returnAllPosts())
+						{
+							DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+					        String formatDateTime = post.getTimestamp().format(formatter);
+					        textArea.append("----------------------------------------------------------------------------------------------------------"+ "\n\r");
+							textArea.append(post.getContent()+" | "+post.getCreator().getFirstName()+" | "+post.getPostScope()+" | "+formatDateTime+ "\n\r");
+						}
+					 String groupToPost=textField.getText();
+					 boolean found=false;
+					 for(int i=0;i<chief.getGroups().size();i++)
+					 {
+						 if(chief.getGroups().get(i).getName().equals(groupToPost))
+						 {
+							 found=true;
+							 chief.getGroups().get(i).addPostToGroupList(myPost);
+						 
+						 String message = "You successfully posted on "+chief.getGroups().get(i).getName()+"'s wall!";
+							JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+							  JOptionPane.INFORMATION_MESSAGE);
+						 }
+					 }
+					 if(found==false)
+					 {
+						 String message = "Group not found...Please check your spelling!";
+							JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+							  JOptionPane.ERROR_MESSAGE);
+					 }
+				 }
+				else
+				{
+					String message = "Select Post scope before posting!";
+					JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+					  JOptionPane.ERROR_MESSAGE);
+				}
+				 textArea.setBackground(new Color(255, 250, 240));
+				 textArea.setBounds(427, 213, 424, 409);	
 			}
 		});
 		postButton.setBounds(754, 750, 97, 25);
 		panel.add(postButton);
 		
-	
-		textField = new JTextField();
-		textField.setBackground(new Color(255, 250, 240));
-		textField.setColumns(10);
-		textField.setBounds(639, 780, 64, 25);
-		panel.add(textField);
 		
 		checkprofileButton = new JButton("Check profile");
 		checkprofileButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -422,16 +444,11 @@ public class BackendProfileChiefGUI {
 		editGroupCButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		editGroupCButton.setBounds(183, 409, 27, 25);
 		panel.add(editGroupCButton);
-
-		postArea = new JTextArea();
-		postArea.setBackground(new Color(255, 250, 240));
-		postArea.setBounds(427, 256, 424, 409);
 		allPosts = chief.returnAllPosts();
 		// not finished
 		for(int i = 0; i < allPosts.size(); i++) {
 			
 		}
-		panel.add(postArea);
 		
 		JLabel lblNewLabel_2 = new JLabel("");
 		BufferedImage imagebackground = ImageIO.read(new File("label_backgrounds/background.jpg"));
@@ -440,6 +457,7 @@ public class BackendProfileChiefGUI {
 		lblNewLabel_2.setIcon(new ImageIcon(imagerisizeb));
 		lblNewLabel_2.setBounds(0, 0, 887, 991);
 		panel.add(lblNewLabel_2);
+		
 		
 		ButtonListener listener = new ButtonListener();
 		requestsButton.addActionListener(listener);
@@ -610,17 +628,6 @@ public class BackendProfileChiefGUI {
 					possibleConnection.sendConnectionRequest();
 				}
 				
-			}
-			// not finished
-			else if(e.getSource().equals(postButton)) {
-				String postText = writePostArea.getText();
-				if(connectionsRadio.isSelected() || PublicRadio.isSelected() || GroupARadio.isSelected() || GroupBRadio.isSelected() || GroupCRadio.isSelected()) {
-					String selected = radioGroup.getSelection().toString();
-					Post newPost = new Post(chief, postText, selected);
-					chief.addPost(newPost);
-					postList.remove(postList); 
-					
-				}
 			}
 			
 			else if(e.getSource().equals(editGroupAButton))

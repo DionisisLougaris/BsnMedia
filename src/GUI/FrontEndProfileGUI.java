@@ -31,6 +31,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
@@ -181,14 +182,19 @@ public class FrontEndProfileGUI {
 		panel.add(buttongotomyprofile);
 		
 		JTextArea ausersposts = new JTextArea();
+		for( Post post : aUser.getListOfPosts())
+		{
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+	        String formatDateTime = post.getTimestamp().format(formatter);
+	        ausersposts.append("----------------------------------------------------------------------------------------------------------"
+	        		+ "------------------------------------------------------------------------------------------------"
+	        		+ ""+ "\n\r");
+	        ausersposts.append(post.getContent()+" | "+post.getCreator().getFirstName()+" | "+post.getPostScope()+" | "+formatDateTime+ "\n\r");
+		}
 		ausersposts.setEditable(false);
 		ausersposts.setLineWrap(true);
 		ausersposts.setBackground(new Color(255, 250, 240));
 		ausersposts.setBounds(32, 561, 810, 336);
-	    for(Post post : auser.getListOfPosts())
-		{
-			  ausersposts.append(post.getContent());
-		}
 		panel.add(ausersposts);
 		
 		String namelastname = auser.getFirstName() + " " + auser.getLastName();
@@ -384,10 +390,6 @@ public class FrontEndProfileGUI {
 		scrollBar.setBounds(821, 409, 21, 127);
 		panel.add(scrollBar);
 		
-		JScrollBar scrollBar_1 = new JScrollBar();
-		scrollBar_1.setBounds(814, 561, 28, 336);
-		panel.add(scrollBar_1);
-		
 		Icon help = new ImageIcon("Buttons_backgrounds/customer_support_40px.png");
 		JButton btnNewButton_1_1 = new JButton(help);
 		btnNewButton_1_1.setContentAreaFilled(false); 
@@ -430,7 +432,7 @@ public class FrontEndProfileGUI {
 		ImageIcon imageb = new ImageIcon(imagebackground);
 		Image imagerisizeb = imageb.getImage().getScaledInstance(887, 991, 140) ;
 		lblNewLabel.setIcon(new ImageIcon(imagerisizeb));
-		lblNewLabel.setBounds(12, 0, 887, 985);
+		lblNewLabel.setBounds(0, 0, 887, 985);
 		panel.add(lblNewLabel);
 		
 		frame.setResizable(false);
