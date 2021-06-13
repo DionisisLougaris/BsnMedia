@@ -1,32 +1,45 @@
 package GUI;
 
+import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.EventQueue;
+import java.awt.Font;
 
 import javax.swing.JFrame;
 import javax.swing.JTextField;
+import javax.swing.border.LineBorder;
 
+import entities.Employee;
 import entities.GeneralNotification;
 import entities.Group;
+import entities.Project;
 import entities.User;
 
 import javax.swing.JRadioButton;
 import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JScrollBar;
 import javax.swing.ButtonGroup;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
+import javax.swing.JSeparator;
 
 public class EditGroupProjectGUI {
 
 	private JFrame frame;
-	private JTextField textField;
-	private JTextField textField_2;
-	private JTextField textField_1;
+	private JTextField tfProjectName;
+	private JTextArea tfChangeProjectDescription;
+	private JTextField tfChangeGroupName;
 	private static Group myGroup;
+	private ArrayList<Employee> selectedMembers = new ArrayList<Employee>(); //The group Members
 	
 	
 
@@ -59,63 +72,114 @@ public class EditGroupProjectGUI {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.getContentPane().setBackground(new Color(255, 153, 102));
 		frame.setBounds(100, 100, 653, 678);
 		frame.getContentPane().setLayout(null);
 		frame.setVisible(true);
 		frame.setLocation(720, 300);
 		
-		textField = new JTextField();
-		textField.setBounds(183, 29, 116, 22);
-		frame.getContentPane().add(textField);
-		textField.setColumns(10);
+		tfProjectName= new JTextField(myGroup.getMyProject().getName());
+		tfProjectName.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		tfProjectName.setBackground(new Color(255, 153, 102));
+		tfProjectName.setForeground(new Color(255, 255, 255));
+		tfProjectName.setBorder(null);
+		tfProjectName.setBounds(194, 29, 116, 22);
+		frame.getContentPane().add(tfProjectName);
+		tfProjectName.setColumns(10);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(183, 167, 116, 22);
-		frame.getContentPane().add(textField_2);
-		textField_2.setColumns(10);
+		tfChangeGroupName = new JTextField(myGroup.getName());
+		tfChangeGroupName.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		tfChangeGroupName.setBackground(new Color(255, 153, 102));
+		tfChangeGroupName.setForeground(new Color(255, 255, 255));
+		tfChangeGroupName.setBorder(null);
+		tfChangeGroupName.setBounds(183, 167, 116, 22);
+		frame.getContentPane().add(tfChangeGroupName);
+		tfChangeGroupName.setColumns(10);
 		
-		JRadioButton rdbtnNewRadioButton = new JRadioButton("Ongoing");
-		rdbtnNewRadioButton.setActionCommand("Ongoing");
-		rdbtnNewRadioButton.setBounds(183, 198, 127, 25);
-		frame.getContentPane().add(rdbtnNewRadioButton);
 		
-		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("Done");
-		rdbtnNewRadioButton_1.setActionCommand("Done");
-		rdbtnNewRadioButton_1.setBounds(314, 198, 127, 25);
-		frame.getContentPane().add(rdbtnNewRadioButton_1);
+		JScrollPane scrollPane_2 = new JScrollPane();
+		scrollPane_2.setBounds(183, 64, 308, 90);
+		frame.getContentPane().add(scrollPane_2);
+		
+		
+		JScrollBar scrollBar_2 = new JScrollBar();
+		scrollPane_2.setRowHeaderView(scrollBar_2);
+		
+		tfChangeProjectDescription= new JTextArea(myGroup.getMyProject().getDescription());
+		tfChangeProjectDescription.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		tfChangeProjectDescription.setBackground(new Color(255, 153, 102));
+		tfChangeProjectDescription.setForeground(new Color(255, 255, 255));
+		tfChangeProjectDescription.setLineWrap(true);
+		tfChangeProjectDescription.setWrapStyleWord(true);
+		tfChangeProjectDescription.setBorder(null);
+		scrollPane_2.setViewportView(tfChangeProjectDescription);
+		tfChangeProjectDescription.setColumns(10);
+		
+		JRadioButton rdbtnOnGoing = new JRadioButton("Ongoing");
+		rdbtnOnGoing.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		rdbtnOnGoing.setForeground(new Color(255, 255, 255));
+		rdbtnOnGoing.setBorder(null);
+		rdbtnOnGoing.setBackground(new Color(255, 153, 102));
+		rdbtnOnGoing.setActionCommand("Ongoing");
+		rdbtnOnGoing.setBounds(183, 208, 127, 25);
+		frame.getContentPane().add(rdbtnOnGoing);
+		
+		JRadioButton rdbtnDone = new JRadioButton("Done");
+		rdbtnDone.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		rdbtnDone.setForeground(new Color(255, 255, 255));
+		rdbtnDone.setBorder(null);
+		rdbtnDone.setBackground(new Color(255, 153, 102));
+		rdbtnDone.setActionCommand("Done");
+		rdbtnDone.setBounds(316, 208, 127, 25);
+		frame.getContentPane().add(rdbtnDone);
 		
 		// create button group for the radio button to know which one was selected
-				ButtonGroup radioGroup = new ButtonGroup();
-			    radioGroup.add(rdbtnNewRadioButton);
-				radioGroup.add(rdbtnNewRadioButton_1);
+		ButtonGroup radioGroup = new ButtonGroup();
+		radioGroup.add(rdbtnOnGoing);
+	    radioGroup.add(rdbtnDone);
 		
-		JLabel lblNewLabel = new JLabel("Change project name");
-		lblNewLabel.setBounds(44, 32, 127, 16);
-		frame.getContentPane().add(lblNewLabel);
+		JLabel lblChangeProjecctName = new JLabel("Change project name:");
+		lblChangeProjecctName.setForeground(new Color(255, 255, 255));
+		lblChangeProjecctName.setBounds(44, 32, 146, 16);
+		frame.getContentPane().add(lblChangeProjecctName);
 		
-		JLabel lblNewLabel_1 = new JLabel("Change project description");
-		lblNewLabel_1.setBounds(12, 67, 159, 16);
-		frame.getContentPane().add(lblNewLabel_1);
+		JLabel lblChangeProjectDescription = new JLabel("Change project description:");
+		lblChangeProjectDescription.setForeground(new Color(255, 255, 255));
+		lblChangeProjectDescription.setBounds(12, 67, 159, 16);
+		frame.getContentPane().add(lblChangeProjectDescription);
 		
-		JLabel lblNewLabel_2 = new JLabel("Change group name");
-		lblNewLabel_2.setBounds(44, 170, 127, 16);
-		frame.getContentPane().add(lblNewLabel_2);
+		JLabel lblChangeGroupName = new JLabel("Change group name:");
+		lblChangeGroupName.setForeground(new Color(255, 255, 255));
+		lblChangeGroupName.setBounds(44, 170, 127, 16);
+		frame.getContentPane().add(lblChangeGroupName);
 		
-		JLabel lblNewLabel_3 = new JLabel("Current situation");
-		lblNewLabel_3.setBounds(70, 202, 101, 16);
-		frame.getContentPane().add(lblNewLabel_3);
+		JLabel lblCurrentsituation = new JLabel("Current situation:");
+		lblCurrentsituation.setForeground(new Color(255, 255, 255));
+		lblCurrentsituation.setBounds(70, 211, 101, 16);
+		frame.getContentPane().add(lblCurrentsituation);
+		JList<String> listaddUserGroup = new JList<String>();
+		listaddUserGroup.setBounds(89, 300, 101, 144);
+		frame.getContentPane().add(listaddUserGroup);
+		DefaultListModel<String> addUserGroupmodel = new DefaultListModel<String>();
+		for (Employee employee: myGroup.getSupervisor().getMyAccount().getMyCompany().returnEmployees()) {
+			if (employee.getGroups().size()<=2 && !myGroup.isMember(employee)) {
+				addUserGroupmodel.addElement(employee.getFirstName()+" "+employee.getLastName()+" | "+employee.getMyAccount().getUsername());
+			}
+		}
+		listaddUserGroup.setModel(addUserGroupmodel);
+		frame.getContentPane().add(listaddUserGroup);
 		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(70, 281, 141, 190);
-		frame.getContentPane().add(scrollPane);
 		
-		JPanel panel = new JPanel();
-		scrollPane.setViewportView(panel);
-		panel.setLayout(null);
-		
-		JScrollBar scrollBar = new JScrollBar();
-		scrollBar.setBounds(118, 0, 21, 188);
-		panel.add(scrollBar);
+		JList<String> listremoveUserGroup = new JList<String>();
+		listremoveUserGroup.setBounds(440, 300, 91, 144);
+		DefaultListModel<String> removeUserGroupmodel = new DefaultListModel<String>();
+		for (Employee employee: myGroup.getGroupMembers()) {
+			
+				addUserGroupmodel.addElement(employee.getFirstName()+" "+employee.getLastName()+" | "+employee.getMyAccount().getUsername());
+			
+		}
+	   listremoveUserGroup.setModel(removeUserGroupmodel);
+		frame.getContentPane().add(listremoveUserGroup);
 		
 		JLabel lblNewLabel_4 = new JLabel("Add more users");
 		lblNewLabel_4.setBounds(89, 264, 101, 16);
@@ -125,76 +189,165 @@ public class EditGroupProjectGUI {
 		lblNewLabel_5.setBounds(429, 264, 127, 16);
 		frame.getContentPane().add(lblNewLabel_5);
 		
-		JButton btnNewButton = new JButton("Add to group");
-		btnNewButton.setContentAreaFilled(false); 
-		btnNewButton.setFocusPainted(false); 
-		btnNewButton.setOpaque(false);
-		btnNewButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnNewButton.setBounds(70, 484, 141, 25);
-		frame.getContentPane().add(btnNewButton);
-		
-		JButton btnNewButton_1 = new JButton("Remove");
-		btnNewButton_1.setContentAreaFilled(false); 
-		btnNewButton_1.setFocusPainted(false); 
-		btnNewButton_1.setOpaque(false);
-		btnNewButton_1.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		btnNewButton_1.setBounds(414, 484, 142, 25);
-		frame.getContentPane().add(btnNewButton_1);
-		
-		JButton btnNewButton_2 = new JButton("Save all");
-		btnNewButton_2.setContentAreaFilled(false); 
-		btnNewButton_2.setFocusPainted(false); 
-		btnNewButton_2.setOpaque(false);
-		btnNewButton_2.setCursor(new Cursor(Cursor.HAND_CURSOR));		
-		btnNewButton_2.setBounds(355, 541, 116, 25);
-		frame.getContentPane().add(btnNewButton_2);
-		
-		JButton btnNewButton_3 = new JButton("View changes");
-		btnNewButton_3.setContentAreaFilled(false); 
-		btnNewButton_3.setFocusPainted(false); 
-		btnNewButton_3.setOpaque(false);
-		btnNewButton_3.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		btnNewButton_3.setBounds(494, 541, 116, 25);
-		btnNewButton_3.addActionListener(new ActionListener() {
+		JButton btnaddGroup = new JButton("Add to group");
+		btnaddGroup.setForeground(new Color(255, 255, 255));
+		btnaddGroup.setContentAreaFilled(false); 
+		btnaddGroup.setFocusPainted(false); 
+		btnaddGroup.setOpaque(false);
+		btnaddGroup.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		btnaddGroup.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				if(rdbtnNewRadioButton_1.isSelected())
+				String selectedEmployeeString = listaddUserGroup.getSelectedValue();
+				int index = listaddUserGroup.getSelectedIndex();
+
+				Employee selectedEmployee = null;
+				
+				for(Employee theEmp: myGroup.getSupervisor().getMyAccount().getMyCompany().returnEmployees()) {
+					String fullName = theEmp.getFirstName()+" "+theEmp.getLastName()+" | "+theEmp.getMyAccount().getUsername();
+					if (fullName.equalsIgnoreCase(selectedEmployeeString)) {
+						selectedEmployee = theEmp;
+						break;
+					}
+				}
+				if (selectedEmployee != null) {
+					selectedMembers.add(selectedEmployee);
+					removeUserGroupmodel.addElement(selectedEmployee.getFirstName()+" "+selectedEmployee.getLastName()+" | "+selectedEmployee.getMyAccount().getUsername());
+				    if (index != -1) {
+				    	addUserGroupmodel.remove(index);
+				    }
+				}else {
+					String message = "You have not selected any users";
+					JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+					        JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
+		btnaddGroup.setBounds(70, 484, 141, 25);
+		frame.getContentPane().add(btnaddGroup);
+		
+		JButton btnremoveUser = new JButton("Remove");
+		btnremoveUser.setForeground(new Color(255, 255, 255));
+		btnremoveUser.setContentAreaFilled(false); 
+		btnremoveUser.setFocusPainted(false); 
+		btnremoveUser.setOpaque(false);
+		btnremoveUser.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		btnremoveUser.setBounds(414, 484, 142, 25);
+		btnremoveUser.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
+				String selectedEmployeeString = listremoveUserGroup.getSelectedValue();
+				Employee selectedEmployeeToRemove = null;
+				int index = listremoveUserGroup.getSelectedIndex();
+				
+				for (Employee theEmployee: selectedMembers ) {
+					String fullName = theEmployee.getFirstName()+" "+theEmployee.getLastName()+" | "+theEmployee.getMyAccount().getUsername();
+					if (fullName.equalsIgnoreCase(selectedEmployeeString)) {
+						selectedEmployeeToRemove = theEmployee;
+						break;
+					}
+				}
+				if (selectedEmployeeToRemove!=null) {
+					selectedMembers.remove(selectedEmployeeToRemove);
+					myGroup.getSupervisor().getMyAccount().getMyCompany().returnEmployees().add(selectedEmployeeToRemove);
+					addUserGroupmodel.addElement(selectedEmployeeToRemove.getFirstName()+" "+selectedEmployeeToRemove.getLastName()+" | "+selectedEmployeeToRemove.getMyAccount().getUsername());
+				    if (index != -1) {
+				    	removeUserGroupmodel.remove(index);
+				    }
+				}else {
+					String message = "You have not selected any users";
+					JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+					        JOptionPane.ERROR_MESSAGE);
+				}
+				
+			}
+		});
+		frame.getContentPane().add(btnremoveUser);
+		
+		JButton btnSaveAll = new JButton("Save all");
+		btnSaveAll.setForeground(new Color(255, 255, 255));
+		btnSaveAll.setContentAreaFilled(false); 
+		btnSaveAll.setFocusPainted(false); 
+		btnSaveAll.setOpaque(false);
+		btnSaveAll.setCursor(new Cursor(Cursor.HAND_CURSOR));		
+		btnSaveAll.setBounds(355, 541, 116, 25);
+		btnSaveAll.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			
+				if(!tfProjectName.getText().equals("")  )
 				{
+				   myGroup.getMyProject().setName(tfProjectName.getText());
+				}
+				if(!tfChangeProjectDescription.getText().equals(""))
+				{
+					myGroup.getMyProject().setDescription(tfChangeProjectDescription.getText());
+				}
+				if(!tfChangeGroupName.getText().equals(""))
+				{
+					myGroup.setName(tfChangeGroupName.getText());
+				}
+				if(selectedMembers.size()>1)
+				{
+					for (Employee theEmp: selectedMembers) {
+						theEmp.addGroupToEmployeesList(myGroup);
+					}
+				}
+				if(rdbtnDone.isSelected())
+				{
+					myGroup.getMyProject().setStatus("Done");
 					//Creating notification for boss to rate group
 					GeneralNotification genNot = new GeneralNotification(myGroup.getMyProject().getName()+" is done,Please rate!",myGroup,"projectDone");
 					myGroup.getSupervisor().getMyAccount().getMyCompany().getBoss().getListOfNotifications().add(genNot);
 					
 				}
+				else if(rdbtnOnGoing.isSelected())
+				{
+					myGroup.getMyProject().setStatus("Ongoing");
+				}
+						
+				
+				
+				
+			}
+		});
+		frame.getContentPane().add(btnSaveAll);
+		
+		JButton btnViwChanges = new JButton("View changes");
+		btnViwChanges.setForeground(new Color(255, 255, 255));
+		btnViwChanges.setContentAreaFilled(false); 
+		btnViwChanges.setFocusPainted(false); 
+		btnViwChanges.setOpaque(false);
+		btnViwChanges.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		btnViwChanges.setBounds(494, 541, 116, 25);
+		btnViwChanges.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				try {
+					new GroupProfileGUI(myGroup.getSupervisor(), myGroup);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 			}
 				
 			});
-		frame.getContentPane().add(btnNewButton_3);
+		frame.getContentPane().add(btnViwChanges);
 		
-		JScrollPane scrollPane_2 = new JScrollPane();
-		scrollPane_2.setBounds(183, 64, 308, 90);
-		frame.getContentPane().add(scrollPane_2);
+		JSeparator separator = new JSeparator();
+		separator.setBounds(194, 51, 82, 2);
+		frame.getContentPane().add(separator);
 		
-		textField_1 = new JTextField();
-		scrollPane_2.setViewportView(textField_1);
-		textField_1.setColumns(10);
+		JSeparator separator_1 = new JSeparator();
+		separator_1.setBounds(193, 191, 93, 2);
+		frame.getContentPane().add(separator_1);
+	
 		
-		JScrollBar scrollBar_2 = new JScrollBar();
-		scrollPane_2.setRowHeaderView(scrollBar_2);
 		
-		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(414, 281, 135, 190);
-		frame.getContentPane().add(scrollPane_1);
-		
-		JPanel panel_1 = new JPanel();
-		scrollPane_1.setViewportView(panel_1);
-		panel_1.setLayout(null);
+		frame.setTitle("Edit" + myGroup.getName());
 		
 		JScrollBar scrollBar_1 = new JScrollBar();
-		scrollBar_1.setBounds(112, 0, 21, 188);
-		panel_1.add(scrollBar_1);
 	}
 }
+
