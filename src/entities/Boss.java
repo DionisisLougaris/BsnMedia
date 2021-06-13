@@ -69,45 +69,48 @@ public class Boss extends User{
 	//It is a method that modifies the fields that concern the elements of the company
 	public void editCompanyInfo(String newName, String newInfo, String newTelephone, String newAddress, String newEmail) {
 		
-		this.myAccount.getMyCompany().setName(newName);
-		this.myAccount.getMyCompany().setInfo(newInfo);
-		this.myAccount.getMyCompany().setTelephone(newTelephone);
-		this.myAccount.getMyCompany().setAddress(newAddress);
-		this.myAccount.getMyCompany().setEmail(newEmail);
-		String message = "Your business public information has been updated!";
-		JOptionPane.showMessageDialog(new JFrame(), message, "Message",
-		        JOptionPane.INFORMATION_MESSAGE);
-	}
-	
-	
-	/*This is a method by which Boss has the ability to change the photo that appears on the 
-	public profile of the Company hosted on Bsn Media*/
-	public void changeCompanyPhoto(String photoUrl) throws IOException {
+		boolean emptyFields = false;
 		
-			
-			if(photoUrl != " ")
-			{
-				
-			     BufferedImage companyimage = ImageIO.read(new File(photoUrl));
-				 int height = companyimage.getHeight();
-				 int width = companyimage.getWidth();
-				 File imageofcompany; 
-				 if(height>60 && width>80)
-				 {
-					 ImageIcon imagec = new ImageIcon(companyimage);
-					 Image imagerisize = imagec.getImage().getScaledInstance(50, 40, 70) ;
-					 
-					imagec.setImage(imagerisize);
-					 imageofcompany = new File("companyimage.png");
-	                 ImageIO.write((RenderedImage) imagerisize, "png", imageofcompany) ;
-				}
-				 myAccount.getMyCompany().setImage("companyimage.png");
-				 
-			}
-			
+		if (!newName.equalsIgnoreCase("")) {
+			this.myAccount.getMyCompany().setName(newName);
+		}else {
+			emptyFields = true;
+		}
 		
+		if (!newInfo.equals("")) {
+			this.myAccount.getMyCompany().setInfo(newInfo);
+		}else {
+			emptyFields = true;
+		}
+		
+		if (!newTelephone.equalsIgnoreCase("")) {
+			this.myAccount.getMyCompany().setTelephone(newTelephone);
+		}else {
+			emptyFields = true;
+		}
+		
+		if (!newAddress.equalsIgnoreCase("")) {
+			this.myAccount.getMyCompany().setAddress(newAddress);
+		}else {
+			emptyFields = true;
+		}
+		
+		if (!newEmail.equalsIgnoreCase("")) {
+			this.myAccount.getMyCompany().setEmail(newEmail);
+		}else {
+			emptyFields = true;
+		}
+		
+		if (!emptyFields) {
+			String message = "All your business public information has been updated!"; 
+			JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+			        JOptionPane.INFORMATION_MESSAGE);
+		}else {
+			String message = "All information that was not empty was updated"; 
+			JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+			        JOptionPane.INFORMATION_MESSAGE);
+		}
 	}
-
 	
 	@Override
 	public TreeSet<Post> returnAllPosts() {
