@@ -32,6 +32,7 @@ import javax.swing.JSeparator;
 import javax.swing.border.LineBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.JTextPane;
 
 public class EditAccountGUI {
@@ -520,13 +521,24 @@ public class EditAccountGUI {
 			    FileDialog dialog = new FileDialog((Frame)null, "Select File to Open");
 			    dialog.setMode(FileDialog.LOAD);
 			    dialog.setVisible(true);
-			    String file = dialog.getFile();
-			    user.setImage(file);
+			    String path = dialog.getDirectory() + dialog.getFile();
 			    
-			    
-				String message = "Your photo has been updated successfully!";
-				JOptionPane.showMessageDialog(new JFrame(), message, "Message",
-				        JOptionPane.INFORMATION_MESSAGE);
+			    if (dialog.getDirectory() != null && dialog.getFile() != null) {
+			    	
+			    	String extension = path.substring(path.length() - 3);
+			    	
+			    	if (extension.equalsIgnoreCase("png") || extension.equalsIgnoreCase("jpg")) {
+				    user.setImage(path);
+				    
+					String message = "Successful change! Your photo will be visible on the next login!";
+					JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+					        JOptionPane.INFORMATION_MESSAGE);
+			    	}else {
+						String message = "You can only select \".jpg or .png\" files!";
+						JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+						        JOptionPane.ERROR_MESSAGE);
+			    	}
+			    }
 			}
 			else if(e.getSource().equals(publicDoneButton)) {
 				String firstName = firstNameField.getText();
