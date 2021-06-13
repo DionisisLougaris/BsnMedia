@@ -284,20 +284,7 @@ public class FrontEndProfileGUI {
 		
 		if(!tuser.equals(auser))
 		{
-			JButton buttonchat= new JButton("Chat");
-			buttonchat.setContentAreaFilled(false); 
-			buttonchat.setFocusPainted(false); 
-			buttonchat.setOpaque(false);
-			buttonchat.setCursor(new Cursor(Cursor.HAND_CURSOR));
-			buttonchat.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					
-					
-					new PrivateChatGUI(auser, tuser, usersconnection.getAboutThisConversation());// prepei na baloume twn xhrhsrh
-				}
-			});
-			buttonchat.setBounds(479, 313, 62, 25);
-			panel.add(buttonchat);
+			
 			
 			
 			if(!usersconnection.areConnected())
@@ -316,22 +303,41 @@ public class FrontEndProfileGUI {
 			addConnection.setBounds(553, 313, 131, 25);
 			panel.add(addConnection);
 			}
+			else
+			{
+				JButton buttonchat= new JButton("Chat");
+				buttonchat.setContentAreaFilled(false); 
+				buttonchat.setFocusPainted(false); 
+				buttonchat.setOpaque(false);
+				buttonchat.setCursor(new Cursor(Cursor.HAND_CURSOR));
+				buttonchat.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						
+						
+						new PrivateChatGUI(auser, tuser, usersconnection.getAboutThisConversation());// prepei na baloume twn xhrhsrh
+					}
+				});
+				buttonchat.setBounds(479, 313, 62, 25);
+				panel.add(buttonchat);
+				
+				JButton removeConnection = new JButton("Remove connection");
+				removeConnection.setContentAreaFilled(false); 
+				removeConnection.setFocusPainted(false); 
+				removeConnection.setOpaque(false);
+				removeConnection.setCursor(new Cursor(Cursor.HAND_CURSOR));
+				removeConnection.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						
+						usersconnection.removeConnection();
+						
+					}
+				});
+				removeConnection.setBounds(694, 313, 148, 25);
+				panel.add(removeConnection);
+			}
 			
 			
-			JButton removeConnection = new JButton("Remove connection");
-			removeConnection.setContentAreaFilled(false); 
-			removeConnection.setFocusPainted(false); 
-			removeConnection.setOpaque(false);
-			removeConnection.setCursor(new Cursor(Cursor.HAND_CURSOR));
-			removeConnection.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					
-					usersconnection.removeConnection();
-					
-				}
-			});
-			removeConnection.setBounds(694, 313, 148, 25);
-			panel.add(removeConnection);
+			
 		}
 		
 		JLabel lblNewLabel_9 = new JLabel("Information:");
