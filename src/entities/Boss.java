@@ -141,29 +141,18 @@ public class Boss extends User{
 	public TreeSet<User> suggestedConnections() {
 		// TODO Auto-generated method stub
 		
-		//TreeSet<User> listWithSuggestedConnections = new TreeSet<User>(myUserComparator);
-		ArrayList<User> list = new ArrayList<User>();
+		TreeSet<User> listWithSuggestedConnections = new TreeSet<User>(myUserComparator);
+		
 		for(User connectedUser: listOfConnections) {
 			ArrayList<User> connectedUserConnections = connectedUser.getListOfConnections();
 			for(User suggestedUser: connectedUserConnections) {
 				Connection areAlreadyConnected = new Connection(this, suggestedUser);
-				if ( (areAlreadyConnected.areConnected()==false) && (suggestedUser.equals(this)==false))
-					list.add(suggestedUser);
+				if (!areAlreadyConnected.areConnected() && !suggestedUser.equals(this)) {
+					listWithSuggestedConnections.add(suggestedUser);
+				}
 			}
 		}
-
-		for(int i=0;i<list.size();i++)
-		{
-	      User aSuggestedUser=list.get(i);
-		  for(int j=i+1;j<list.size();j++)
-		  { 
-			  if(list.contains(aSuggestedUser))
-			  {
-				  list.remove(j);
-			  } 
-		  }
-		}
-		 TreeSet<User> listWithSuggestedConnections = new TreeSet<User>(list);
+		
 		return listWithSuggestedConnections;
 	}
 	

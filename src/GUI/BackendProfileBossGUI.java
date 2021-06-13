@@ -48,8 +48,8 @@ public class BackendProfileBossGUI {
 	private JRadioButton connectionsRadio,PublicRadio;
 	private JList<String> connectionsList;
 	private JList<String> suggestedList;
-	private User boss;
-	private TreeSet<User> suggestedListConnections;
+	private Boss boss;
+	private TreeSet<User> suggestedListConnections = new TreeSet<User>();
 	private JPanel panel,picturePanel;
 	private JButton searchButton,helpButton,requestsButton,messagesButton,notifsButton,editAccountButton,
 	postButton,checkprofileButton,sendMessageButton,sendRequestButton,disconnectButton,editCompanyInfoButton;
@@ -58,7 +58,7 @@ public class BackendProfileBossGUI {
 	private JLabel lblNewLabel;
 
 	public BackendProfileBossGUI(User theBoss) throws IOException{
-		boss = theBoss;
+		boss = (Boss)theBoss;
 		initialize();
 	}
 
@@ -271,9 +271,9 @@ public class BackendProfileBossGUI {
 		connectionsList.setBounds(44, 467, 116, 169);
 		panel.add(connectionsList);
 		
-		suggestedListConnections = boss.suggestedConnections(); //Get all Suggested Connections
 		suggestedList = new JList<String>();
 		DefaultListModel<String> model2 = new DefaultListModel<String>();
+		suggestedListConnections = boss.suggestedConnections(); //Get all Suggested Connections
 		for (User suggestedUser: suggestedListConnections) {
 			model2.addElement(suggestedUser.getFirstName()+" "+suggestedUser.getLastName());
 		}

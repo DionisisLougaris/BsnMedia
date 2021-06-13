@@ -97,7 +97,7 @@ public class Chief extends User{
 			ArrayList<User> connectedUserConnections = connectedUser.getListOfConnections();
 			for(User suggestedUser: connectedUserConnections) {
 				Connection areAlreadyConnected = new Connection(this, suggestedUser);
-				if (!areAlreadyConnected.areConnected())
+				if (!areAlreadyConnected.areConnected() && !suggestedUser.equals(this))
 					listWithSuggestedConnections.add(suggestedUser);
 			}
 		}
@@ -109,6 +109,13 @@ public class Chief extends User{
 				if(!areAlreadyConnected.areConnected())
 					listWithSuggestedConnections.add(otherGroupMember);
 			}
+		}
+		
+		
+		//The Boss is suggested for everyone
+		Connection connectedWithTheBoss = new Connection(this, this.getMyAccount().getMyCompany().getBoss());
+		if (!connectedWithTheBoss.areConnected()) {
+			listWithSuggestedConnections.add(this.getMyAccount().getMyCompany().getBoss()); //Adding Company Boss to the suggested list
 		}
 		
 		return listWithSuggestedConnections;

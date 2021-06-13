@@ -61,11 +61,12 @@ public class Employee extends User{
 		
 		TreeSet<User> listWithSuggestedConnections = new TreeSet<User>(myUserComparator);
 		
+		//Connections of this Connections if he isn't already connected
 		for(User connectedUser: listOfConnections) {
 			ArrayList<User> connectedUserConnections = connectedUser.getListOfConnections();
 			for(User suggestedUser: connectedUserConnections) {
 				Connection areAlreadyConnected = new Connection(this, suggestedUser);
-				if (!areAlreadyConnected.areConnected())
+				if (!areAlreadyConnected.areConnected() && !suggestedUser.equals(this))
 					listWithSuggestedConnections.add(suggestedUser);
 			}
 		}
@@ -74,12 +75,18 @@ public class Employee extends User{
 		for(Group myGroup: listOfGroups) {
 			for(Employee otherGroupMember: myGroup.getGroupMembers()) {
 				Connection areAlreadyConnected = new Connection(this, otherGroupMember);
-				if(!areAlreadyConnected.areConnected())
+				if(!areAlreadyConnected.areConnected() && !otherGroupMember.equals(this))
 					listWithSuggestedConnections.add(otherGroupMember);
 			}
 			Connection areAlreadyConnected = new Connection(this, myGroup.getSupervisor());
 			if (!areAlreadyConnected.areConnected()) 
 				listWithSuggestedConnections.add(myGroup.getSupervisor()); //Add Group chief if they are not connected already
+		}
+		
+		//The Boss is suggested for everyone
+		Connection connectedWithTheBoss = new Connection(this, this.getMyAccount().getMyCompany().getBoss());
+		if (!connectedWithTheBoss.areConnected()) {
+			listWithSuggestedConnections.add(this.getMyAccount().getMyCompany().getBoss()); //Adding Company Boss to the suggested list
 		}
 		
 		return listWithSuggestedConnections;

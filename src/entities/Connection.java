@@ -135,11 +135,9 @@ public class Connection extends Notification{
 		ArrayList<User> firstUserConnection = firstUser.getListOfConnections();
 		ArrayList<User> secondUserConnection = secondUser.getListOfConnections();
 		
-        for(int i=0; i<firstUserConnection.size(); i++)
-		{
-			if(secondUserConnection.contains(firstUserConnection.get(i)) && firstUserConnection.get(i) != secondUser )
-			{
-					listOfMutualConnections.add(firstUserConnection.get(i));
+		for (User firstConnection: firstUserConnection) {
+			if (secondUserConnection.contains(firstConnection) && !listOfMutualConnections.contains(firstConnection)) {
+				listOfMutualConnections.add(firstConnection);
 			}
 		}
 		
