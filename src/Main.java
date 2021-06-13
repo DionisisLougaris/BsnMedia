@@ -32,12 +32,12 @@ public class Main {
 		
 		theCompany.setBoss(first2);
 		
-		/*Connection c = new Connection(first, first3);
+		Connection c = new Connection(first, first3);
 		Connection c1 = new Connection(first, first4);
 		Connection c2 = new Connection(first, first2);
 		c.manageConnectionRequest(true);
 		c1.manageConnectionRequest(true);
-		c2.manageConnectionRequest(true);*/
+		c2.manageConnectionRequest(true);
 		first.addPost(new Post(first,"ГейЬ","public"));
 		
 		
@@ -76,7 +76,7 @@ public class Main {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					 new EditCompanyGUI(first2);
+					 new WelcomeScreen_GUI(theCompany);
 					} catch (Exception e) {
 					e.printStackTrace();
 				}

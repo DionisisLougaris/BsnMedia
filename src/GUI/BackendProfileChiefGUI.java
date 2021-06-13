@@ -33,6 +33,8 @@ import javax.swing.WindowConstants;
 import GUI.BackendProfileEmployeeGUI.ButtonListener;
 import entities.*;
 import java.awt.Color;
+import javax.swing.border.LineBorder;
+import javax.swing.JSeparator;
 
 public class BackendProfileChiefGUI {
 
@@ -42,18 +44,20 @@ public class BackendProfileChiefGUI {
 	private static Chief chief;
 	private JPanel panel, picturePanel;
 	private JLabel lblNewLabel;
-	private JButton searchButton, helpButton, requestsButton, messagesButton, notifsButton, editAccountButton,createProjectButton, editGroupAButton, 
-	editGroupBButton, editGroupCButton , postButton, checkprofileButton, sendMessageButton, sendRequestButton, disconnectButton;
+	private JButton searchButton, helpButton, requestsButton, messagesButton, notifsButton, editAccountButton,createProjectButton, 
+	postButton, checkprofileButton, sendMessageButton, sendRequestButton, disconnectButton;
 	private JLabel emailLabel;
-	private JRadioButton connectionsRadio, PublicRadio, GroupARadio, GroupBRadio, GroupCRadio;
+	private JRadioButton connectionsRadio, PublicRadio;
 	private JTextArea writePostArea;
-	private JList<String> connectionsList, suggestedList, postList;
+	private JList<String> connectionsList, suggestedList;
 	ArrayList<User> listOfConnections;
 	TreeSet<User> suggestedListConnections = new TreeSet<>();
 	ButtonGroup radioGroup;
 	TreeSet<Post> allPosts = new TreeSet<>();
-	private JLabel lblNewLabel_2;
+	
 	private JTextArea textArea;
+	private JButton btnNewButton_1;
+	private JSeparator separator;
 	
 	
 	public BackendProfileChiefGUI(User theChief) throws IOException {
@@ -223,7 +227,7 @@ public class BackendProfileChiefGUI {
 		}
 		connectionsList.setModel(model);
 		connectionsList.setBackground(new Color(255, 250, 240));
-		connectionsList.setBounds(44, 483, 116, 152);
+		connectionsList.setBounds(43, 594, 116, 152);
 		panel.add(connectionsList);
 		
 		suggestedListConnections = chief.suggestedConnections(); //Get all Suggested Connections
@@ -234,15 +238,15 @@ public class BackendProfileChiefGUI {
 		}
 		suggestedList.setModel(model2);
 		suggestedList.setBackground(new Color(255, 250, 240));
-		suggestedList.setBounds(221, 483, 116, 152);
+		suggestedList.setBounds(220, 594, 116, 152);
 		panel.add(suggestedList);
 		
 		JLabel lblNewLabel_9 = new JLabel("Connections (" + chief.getListOfConnections().size() + ")");
-		lblNewLabel_9.setBounds(49, 454, 99, 16);
+		lblNewLabel_9.setBounds(48, 565, 99, 16);
 		panel.add(lblNewLabel_9);
 		
 		JLabel lblNewLabel_9_1 = new JLabel("Suggested Connections");
-		lblNewLabel_9_1.setBounds(216, 454, 139, 16);
+		lblNewLabel_9_1.setBounds(215, 565, 139, 16);
 		panel.add(lblNewLabel_9_1);
 		
 		writePostArea = new JTextArea();
@@ -372,7 +376,7 @@ public class BackendProfileChiefGUI {
 		checkprofileButton.setFocusPainted(false); 
 		checkprofileButton.setOpaque(false);
 		checkprofileButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		checkprofileButton.setBounds(44, 648, 116, 25);
+		checkprofileButton.setBounds(43, 759, 116, 25);
 		panel.add(checkprofileButton);
 		
 		// create button group for the radio button to know which one was selected
@@ -387,7 +391,7 @@ public class BackendProfileChiefGUI {
 		sendMessageButton.setFocusPainted(false); 
 		sendMessageButton.setOpaque(false);
 		sendMessageButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		sendMessageButton.setBounds(44, 686, 116, 25);
+		sendMessageButton.setBounds(43, 797, 116, 25);
 		panel.add(sendMessageButton);
 		
 		sendRequestButton = new JButton("Send request");
@@ -395,7 +399,7 @@ public class BackendProfileChiefGUI {
 		sendRequestButton.setFocusPainted(false); 
 		sendRequestButton.setOpaque(false);
 		sendRequestButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		sendRequestButton.setBounds(221, 648, 116, 25);
+		sendRequestButton.setBounds(220, 759, 116, 25);
 		panel.add(sendRequestButton);
 		
 		Icon logout = new ImageIcon("Buttons_backgrounds/exit_50px.png");
@@ -415,53 +419,98 @@ public class BackendProfileChiefGUI {
 		createProjectButton.setBounds(216, 332, 155, 25);
 		panel.add(createProjectButton);
 		
-		Icon edit = new ImageIcon("Buttons_backgrounds/edit_20px.png");
-		editGroupAButton = new JButton(edit);
-		editGroupAButton.setContentAreaFilled(false); 
-		editGroupAButton.setFocusPainted(false); 
-		editGroupAButton.setOpaque(false);
-		editGroupAButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		editGroupAButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		editGroupAButton.setBounds(58, 409, 27, 25);
-		panel.add(editGroupAButton);
-		
-		editGroupBButton = new JButton(edit);
-		editGroupBButton.setContentAreaFilled(false); 
-		editGroupBButton.setFocusPainted(false); 
-		editGroupBButton.setOpaque(false);
-		editGroupBButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		editGroupBButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		editGroupBButton.setBounds(121, 409, 27, 25);
-		panel.add(editGroupBButton);
-		
-		editGroupCButton = new JButton(edit);
-		editGroupCButton.setContentAreaFilled(false); 
-		editGroupCButton.setFocusPainted(false); 
-		editGroupCButton.setOpaque(false);
-		editGroupCButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		editGroupCButton.setBounds(183, 409, 27, 25);
-		panel.add(editGroupCButton);
-		allPosts = chief.returnAllPosts();
-		// not finished
-		for(int i = 0; i < allPosts.size(); i++) {
-			
+		JList<String> list = new JList<String>();
+		DefaultListModel<String> listModelForGroups = new DefaultListModel<String>();
+		for (Group theSupervisingGroup: chief.getGroups()) {
+			listModelForGroups.addElement(theSupervisingGroup.getName());
 		}
+		list.setModel(listModelForGroups);
+		list.setBounds(49, 386, 98, 110);
+		panel.add(list);
 		
-		JLabel lblNewLabel_2 = new JLabel("");
+		Icon check = new ImageIcon("Buttons_backgrounds/takealook_32px.png");
+		JButton checkGroup = new JButton(check);
+		checkGroup.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		checkGroup.setBackground(new Color(248, 248, 255));
+		checkGroup.setBorder(null);
+		checkGroup.setOpaque(false);
+		checkGroup.setBounds(49, 495, 48, 36);
+		checkGroup.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				String selectedGroupString = list.getSelectedValue()+"";
+				Group selectedGroup = null;
+				
+				for (Group supervisingGroup: chief.getGroups()) {
+					if (selectedGroupString.equalsIgnoreCase(supervisingGroup.getName())) {
+						selectedGroup = supervisingGroup;
+						break;
+					}
+				}
+				
+				if (selectedGroup != null) {
+					try {
+						new GroupProfileGUI(chief, selectedGroup);
+						frmStartingPage.dispose();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}else {
+					String message = "You havent select any Group!";
+					JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+					  JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
+		panel.add(checkGroup);
+		
+		Icon edit = new ImageIcon("Buttons_backgrounds/edit_20px.png");
+		btnNewButton_1 = new JButton(edit);
+		btnNewButton_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnNewButton_1.setBorder(null);
+		btnNewButton_1.setOpaque(false);
+		btnNewButton_1.setBackground(new Color(248, 248, 255));
+		btnNewButton_1.setBounds(99, 495, 48, 36);
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				String selectedGroupString = list.getSelectedValue()+"";
+				Group selectedGroup = null;
+				
+				for (Group supervisingGroup: chief.getGroups()) {
+					if (selectedGroupString.equalsIgnoreCase(supervisingGroup.getName())) {
+						selectedGroup = supervisingGroup;
+						break;
+					}
+				}
+				
+				if (selectedGroup != null) {
+					new EditGroupProjectGUI(selectedGroup);
+				}else {
+					String message = "You havent select any Group!";
+					JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+					  JOptionPane.ERROR_MESSAGE);
+				}
+				
+			}
+		});
+		panel.add(btnNewButton_1);
+		
+		separator = new JSeparator();
+		separator.setForeground(new Color(255, 250, 250));
+		separator.setBounds(49, 549, 287, 5);
+		panel.add(separator);
+		
+		JLabel editGroup = new JLabel("");
 		BufferedImage imagebackground = ImageIO.read(new File("label_backgrounds/background.jpg"));
 		ImageIcon imageb = new ImageIcon(imagebackground);
 		Image imagerisizeb = imageb.getImage().getScaledInstance(887, 991, 140) ;
-		lblNewLabel_2.setIcon(new ImageIcon(imagerisizeb));
-		lblNewLabel_2.setBounds(0, 0, 887, 991);
-		panel.add(lblNewLabel_2);
+		editGroup.setIcon(new ImageIcon(imagerisizeb));
+		editGroup.setBounds(0, 0, 887, 991);
+		panel.add(editGroup);
 		
-		
+
 		ButtonListener listener = new ButtonListener();
 		requestsButton.addActionListener(listener);
 		messagesButton.addActionListener(listener);
@@ -474,9 +523,6 @@ public class BackendProfileChiefGUI {
 		sendMessageButton.addActionListener(listener);
 		sendRequestButton.addActionListener(listener);
 		postButton.addActionListener(listener);
-		editGroupAButton.addActionListener(listener);
-		editGroupBButton.addActionListener(listener);
-		editGroupCButton.addActionListener(listener);
 	}
 	
 	public void disconnectUser() throws IOException {
@@ -632,47 +678,6 @@ public class BackendProfileChiefGUI {
 				}
 				
 			}
-			
-			else if(e.getSource().equals(editGroupAButton))
-			{
-				Group editAgroup =chief.getGroups().get(0);
-				if (editAgroup == null) {
-					 String message = "This group does not exist!";
-						JOptionPane.showMessageDialog(new JFrame(), message, "Message",
-						        JOptionPane.INFORMATION_MESSAGE);
-				}
-				else {
-				      new EditGroupProjectGUI(editAgroup);
-				}
-				
-			}
-			else if(e.getSource().equals(editGroupBButton))
-			{
-				Group editAgroup =chief.getGroups().get(1);
-				if (editAgroup == null) {
-					 String message = "This group does not exist!";
-						JOptionPane.showMessageDialog(new JFrame(), message, "Message",
-						        JOptionPane.INFORMATION_MESSAGE);
-				}
-				else {
-				      new EditGroupProjectGUI(editAgroup);
-				}
-			}
-			else if(e.getSource().equals(editGroupCButton))
-			{
-				Group editAgroup =chief.getGroups().get(2);
-				if (editAgroup == null) {
-					 String message = "This group does not exist!";
-						JOptionPane.showMessageDialog(new JFrame(), message, "Message",
-						        JOptionPane.INFORMATION_MESSAGE);
-				}
-				else {
-				      new EditGroupProjectGUI(editAgroup);
-				}
-			}
-			
-			
-			
 		}
 	}
 }

@@ -43,7 +43,6 @@ public class BackendProfileEmployeeGUI {
 	private JButton searchButton, helpButton, requestsButton, messagesButton, notifsButton, editAccountButton, postButton, 
 	checkprofileButton, sendMessageButton, sendRequestButton, disconnectButton;
 	private JLabel emailLabel;
-	private JLabel groupALabel, groupBLabel, groupCLabel;
 	private JList<String> connectionsList, suggestedList; 
 	private JTextArea writePostArea;
 	private JRadioButton connectionsRadio, PublicRadio;
@@ -51,9 +50,7 @@ public class BackendProfileEmployeeGUI {
 	TreeSet<User> suggestedListConnections = new TreeSet<>();
 	TreeSet<Post> allPosts = new TreeSet<>();
 	ButtonGroup radioGroup;
-	
 	ArrayList<User> listOfConnections;
-	private JLabel lblNewLabel_2;
 	
 	public BackendProfileEmployeeGUI(User aUser) throws IOException {
 		initialize(aUser);
@@ -138,7 +135,7 @@ public class BackendProfileEmployeeGUI {
 		JLabel nameLabel = new JLabel();
 		nameLabel.setText(employee.getFirstName()+" "+employee.getLastName());
 		nameLabel.setFont(new Font("Tahoma", Font.PLAIN, 19));
-		nameLabel.setBounds(47, 244, 229, 30);
+		nameLabel.setBounds(47, 244, 321, 30);
 		panel.add(nameLabel);
 		
 		JLabel companyPostLabel = new JLabel("Employee, ");
@@ -401,6 +398,78 @@ public class BackendProfileEmployeeGUI {
 		sendRequestButton.setBounds(221, 648, 116, 25);
 		panel.add(sendRequestButton);
 		
+		JButton btnNewButton = new JButton("Group A");
+		btnNewButton.setForeground(new Color(255, 0, 0));
+		btnNewButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnNewButton.setBackground(new Color(255, 153, 102));
+		btnNewButton.setBorder(null);
+		btnNewButton.setBounds(47, 384, 80, 23);
+		if (employee.getGroups().size()>=1) {
+			
+			panel.add(btnNewButton);
+			
+			btnNewButton.addActionListener(new ActionListener() {
+				
+				public void actionPerformed(ActionEvent e) {
+					try {
+						new GroupProfileGUI(employee, employee.getGroups().get(0));
+						frmStartingPage.dispose();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+			});
+		}
+		
+		JButton btnGroupB = new JButton("Group B");
+		btnGroupB.setForeground(new Color(255, 0, 0));
+		btnGroupB.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnGroupB.setBackground(new Color(255, 153, 102));
+		btnGroupB.setBorder(null);
+		btnGroupB.setBounds(135, 384, 80, 23);
+		if (employee.getGroups().size()>=2) {
+			
+			panel.add(btnGroupB);
+			
+			btnGroupB.addActionListener(new ActionListener() {
+				
+				public void actionPerformed(ActionEvent e) {
+					try {
+						new GroupProfileGUI(employee, employee.getGroups().get(1));
+						frmStartingPage.dispose();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+			});
+		}
+		
+		JButton btnGroupC = new JButton("Group C");
+		btnGroupC.setForeground(new Color(255, 0, 0));
+		btnGroupC.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnGroupC.setBackground(new Color(255, 153, 102));
+		btnGroupC.setBorder(null);
+		btnGroupC.setBounds(223, 384, 80, 23);
+		if (employee.getGroups().size()==3) {
+			
+			panel.add(btnGroupC);
+			
+			btnGroupC.addActionListener(new ActionListener() {
+				
+				public void actionPerformed(ActionEvent e) {
+					try {
+						new GroupProfileGUI(employee, employee.getGroups().get(2));
+						frmStartingPage.dispose();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+			});
+		}
+		
 		Icon logout = new ImageIcon("Buttons_backgrounds/exit_50px.png");
 		disconnectButton = new JButton(logout);
 		disconnectButton.setContentAreaFilled(false); 
@@ -419,6 +488,7 @@ public class BackendProfileEmployeeGUI {
 		lblNewLabel_2.setIcon(new ImageIcon(imagerisizeb));
 		lblNewLabel_2.setBounds(0, 0, 887, 991);
 		panel.add(lblNewLabel_2);
+		
 		
 		ButtonListener listener = new ButtonListener();
 		requestsButton.addActionListener(listener);
@@ -571,8 +641,5 @@ public class BackendProfileEmployeeGUI {
 				
 			}
 		}
-		
-		
-		
 	}
 }
