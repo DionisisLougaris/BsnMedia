@@ -159,7 +159,6 @@ public class CreateProjectGUI {
 		frame.getContentPane().add(lblNewLabel_5);
 		
 		JButton btnaddUserGroup = new JButton("Add to Group");
-		btnaddUserGroup.setForeground(new Color(255, 255, 255));
 		btnaddUserGroup.setBackground(new Color(255, 255, 255));
 		btnaddUserGroup.setBorder(new LineBorder(new Color(255, 255, 255), 3));
 		btnaddUserGroup.setContentAreaFilled(false); 
@@ -198,7 +197,6 @@ public class CreateProjectGUI {
 		frame.getContentPane().add(btnaddUserGroup);
 		
 		JButton btnremoveUserGroup = new JButton("Remove");
-		btnremoveUserGroup.setForeground(new Color(255, 255, 255));
 		btnremoveUserGroup.setBorder(new LineBorder(new Color(255, 255, 255), 3));
 		btnremoveUserGroup.setContentAreaFilled(false); 
 		btnremoveUserGroup.setFocusPainted(false); 
@@ -335,5 +333,8 @@ public class CreateProjectGUI {
 		frame.getContentPane().add(separator_2);
 		
 		frame.setTitle("Create project");
+		
+		
+	
 	}
 }

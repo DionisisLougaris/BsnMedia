@@ -255,9 +255,28 @@ public class FrontEndProfileGUI {
 		
 		if(ausersgroups!=null) {
 			if( ausersgroups.size() ==1) {
-				JLabel lblNewLabel_6 = new JLabel(ausersgroups.get(0).getName());
-				lblNewLabel_6.setBounds(108, 316, 56, 16);
-				panel.add(lblNewLabel_6);
+				JLabel groupa = new JLabel(ausersgroups.get(0).getName());
+				groupa.setBounds(108, 316, 56, 16);
+				groupa.setForeground(Color.RED);
+				groupa.setFont(new Font("Tahoma", Font.PLAIN, 18));
+				groupa.setText(ausersgroups.get(0).getName());
+				groupa.setBounds(112, 780, 280, 25);
+				groupa.setCursor(new Cursor(Cursor.HAND_CURSOR));
+				groupa.addMouseListener(new MouseAdapter() {
+			       	 
+		            @Override
+		            public void mouseClicked(MouseEvent e) {
+		            	try {
+							new GroupProfileGUI(tuser,ausersgroups.get(0));
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+		            }
+		            
+		            
+				});
+				panel.add(groupa);
 			} else if(ausersgroups.size() == 2) { 
 				JLabel lblNewLabel_6 = new JLabel(ausersgroups.get(0).getName());
 				lblNewLabel_6.setBounds(108, 316, 56, 16);

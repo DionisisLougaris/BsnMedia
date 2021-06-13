@@ -40,7 +40,7 @@ public class EditGroupProjectGUI {
 	private JTextField tfChangeGroupName;
 	private static Group myGroup;
 	private ArrayList<Employee> selectedMembers = new ArrayList<Employee>(); //The group Members
-	
+	private ArrayList<Employee> selectedMembersRemove = new ArrayList<Employee>();
 	
 
 	/**
@@ -159,6 +159,7 @@ public class EditGroupProjectGUI {
 		frame.getContentPane().add(lblCurrentsituation);
 		JList<String> listaddUserGroup = new JList<String>();
 		listaddUserGroup.setBounds(89, 300, 101, 144);
+		listaddUserGroup.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		frame.getContentPane().add(listaddUserGroup);
 		DefaultListModel<String> addUserGroupmodel = new DefaultListModel<String>();
 		for (Employee employee: myGroup.getSupervisor().getMyAccount().getMyCompany().returnEmployees()) {
@@ -172,11 +173,12 @@ public class EditGroupProjectGUI {
 		
 		JList<String> listremoveUserGroup = new JList<String>();
 		listremoveUserGroup.setBounds(440, 300, 91, 144);
+		listremoveUserGroup.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		DefaultListModel<String> removeUserGroupmodel = new DefaultListModel<String>();
 		for (Employee employee: myGroup.getGroupMembers()) {
 			
-				addUserGroupmodel.addElement(employee.getFirstName()+" "+employee.getLastName()+" | "+employee.getMyAccount().getUsername());
-			
+			removeUserGroupmodel.addElement(employee.getFirstName()+" "+employee.getLastName()+" | "+employee.getMyAccount().getUsername());
+			selectedMembers.add(employee);
 		}
 	   listremoveUserGroup.setModel(removeUserGroupmodel);
 		frame.getContentPane().add(listremoveUserGroup);
@@ -190,7 +192,6 @@ public class EditGroupProjectGUI {
 		frame.getContentPane().add(lblNewLabel_5);
 		
 		JButton btnaddGroup = new JButton("Add to group");
-		btnaddGroup.setForeground(new Color(255, 255, 255));
 		btnaddGroup.setContentAreaFilled(false); 
 		btnaddGroup.setFocusPainted(false); 
 		btnaddGroup.setOpaque(false);
@@ -227,7 +228,6 @@ public class EditGroupProjectGUI {
 		frame.getContentPane().add(btnaddGroup);
 		
 		JButton btnremoveUser = new JButton("Remove");
-		btnremoveUser.setForeground(new Color(255, 255, 255));
 		btnremoveUser.setContentAreaFilled(false); 
 		btnremoveUser.setFocusPainted(false); 
 		btnremoveUser.setOpaque(false);
@@ -250,6 +250,7 @@ public class EditGroupProjectGUI {
 				}
 				if (selectedEmployeeToRemove!=null) {
 					selectedMembers.remove(selectedEmployeeToRemove);
+					selectedMembersRemove.add(selectedEmployeeToRemove);
 					myGroup.getSupervisor().getMyAccount().getMyCompany().returnEmployees().add(selectedEmployeeToRemove);
 					addUserGroupmodel.addElement(selectedEmployeeToRemove.getFirstName()+" "+selectedEmployeeToRemove.getLastName()+" | "+selectedEmployeeToRemove.getMyAccount().getUsername());
 				    if (index != -1) {
@@ -266,7 +267,6 @@ public class EditGroupProjectGUI {
 		frame.getContentPane().add(btnremoveUser);
 		
 		JButton btnSaveAll = new JButton("Save all");
-		btnSaveAll.setForeground(new Color(255, 255, 255));
 		btnSaveAll.setContentAreaFilled(false); 
 		btnSaveAll.setFocusPainted(false); 
 		btnSaveAll.setOpaque(false);
@@ -287,12 +287,16 @@ public class EditGroupProjectGUI {
 				{
 					myGroup.setName(tfChangeGroupName.getText());
 				}
-				if(selectedMembers.size()>1)
-				{
-					for (Employee theEmp: selectedMembers) {
+				
+				for (Employee theEmp: selectedMembers) {
 						theEmp.addGroupToEmployeesList(myGroup);
-					}
+						myGroup.addMember(theEmp);
 				}
+				for (Employee theEmp: selectedMembersRemove) {
+					theEmp.RemoveGroupFromUsersList(myGroup);
+					myGroup.removeUserFromGroup(theEmp);;
+			}	
+				
 				if(rdbtnDone.isSelected())
 				{
 					myGroup.getMyProject().setStatus("Done");
@@ -314,7 +318,6 @@ public class EditGroupProjectGUI {
 		frame.getContentPane().add(btnSaveAll);
 		
 		JButton btnViwChanges = new JButton("View changes");
-		btnViwChanges.setForeground(new Color(255, 255, 255));
 		btnViwChanges.setContentAreaFilled(false); 
 		btnViwChanges.setFocusPainted(false); 
 		btnViwChanges.setOpaque(false);
@@ -336,16 +339,18 @@ public class EditGroupProjectGUI {
 		frame.getContentPane().add(btnViwChanges);
 		
 		JSeparator separator = new JSeparator();
-		separator.setBounds(194, 51, 82, 2);
+		separator.setForeground(Color.WHITE);
+		separator.setBounds(192, 51, 107, 2);
 		frame.getContentPane().add(separator);
 		
 		JSeparator separator_1 = new JSeparator();
-		separator_1.setBounds(193, 191, 93, 2);
+		separator_1.setForeground(Color.WHITE);
+		separator_1.setBounds(183, 191, 116, 2);
 		frame.getContentPane().add(separator_1);
 	
 		
 		
-		frame.setTitle("Edit" + myGroup.getName());
+		frame.setTitle("Edit " + myGroup.getName());
 		
 		JScrollBar scrollBar_1 = new JScrollBar();
 	}

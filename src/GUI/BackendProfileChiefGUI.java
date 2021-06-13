@@ -56,7 +56,7 @@ public class BackendProfileChiefGUI {
 	TreeSet<Post> allPosts = new TreeSet<>();
 	
 	private JTextArea textArea;
-	private JButton btnNewButton_1;
+	private JButton editGroupButton;
 	private JSeparator separator;
 	
 	
@@ -430,9 +430,10 @@ public class BackendProfileChiefGUI {
 		
 		Icon check = new ImageIcon("Buttons_backgrounds/takealook_32px.png");
 		JButton checkGroup = new JButton(check);
-		checkGroup.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		checkGroup.setBackground(new Color(248, 248, 255));
-		checkGroup.setBorder(null);
+		checkGroup.setContentAreaFilled(false); 
+		checkGroup.setFocusPainted(false); 
+		checkGroup.setOpaque(false);
+		checkGroup.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		checkGroup.setOpaque(false);
 		checkGroup.setBounds(49, 495, 48, 36);
 		checkGroup.addActionListener(new ActionListener() {
@@ -466,13 +467,15 @@ public class BackendProfileChiefGUI {
 		panel.add(checkGroup);
 		
 		Icon edit = new ImageIcon("Buttons_backgrounds/edit_20px.png");
-		btnNewButton_1 = new JButton(edit);
-		btnNewButton_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnNewButton_1.setBorder(null);
-		btnNewButton_1.setOpaque(false);
-		btnNewButton_1.setBackground(new Color(248, 248, 255));
-		btnNewButton_1.setBounds(99, 495, 48, 36);
-		btnNewButton_1.addActionListener(new ActionListener() {
+		editGroupButton = new JButton(edit);
+		editGroupButton.setContentAreaFilled(false); 
+		editGroupButton.setFocusPainted(false); 
+		editGroupButton.setOpaque(false);
+		editGroupButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		editGroupButton.setOpaque(false);
+		editGroupButton.setBackground(new Color(248, 248, 255));
+		editGroupButton.setBounds(99, 495, 48, 36);
+		editGroupButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				String selectedGroupString = list.getSelectedValue()+"";
@@ -495,7 +498,7 @@ public class BackendProfileChiefGUI {
 				
 			}
 		});
-		panel.add(btnNewButton_1);
+		panel.add(editGroupButton);
 		
 		separator = new JSeparator();
 		separator.setForeground(new Color(255, 250, 250));
