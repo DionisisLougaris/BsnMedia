@@ -177,7 +177,7 @@ public class CompanyProfileGUI {
 	    JLabel lblCompanyPhoto = new JLabel();
 		BufferedImage imageicon;
 		try {
-			imageicon = ImageIO.read(new File("default photo/defaultCompanyPhoto.png"));
+			imageicon = ImageIO.read(new File(company.getImage()));
 			ImageIcon imageBackground = new ImageIcon(imageicon);
 			Image imagerisize = imageBackground.getImage().getScaledInstance(740, 280, 140) ;
 			lblCompanyPhoto.setIcon(new ImageIcon(imagerisize));

@@ -406,7 +406,7 @@ public class BackendProfileBossGUI {
 		editCompanyInfoButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				new EditCompanyGUI((Boss)boss);
+				new EditCompanyGUI(boss);
 			}
 		});
 		editCompanyInfoButton.setContentAreaFilled(false); 

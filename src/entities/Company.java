@@ -31,6 +31,7 @@ public class Company implements Serializable{
 		this.telephone = telephone;
 		this.address = address;
 		this.email = email;
+		this.image = "default photo/defaultCompanyPhoto.png";
 	}
 	
 

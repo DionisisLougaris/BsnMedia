@@ -2,7 +2,6 @@ package GUI;
 
 import java.awt.Color;
 import java.awt.Cursor;
-import java.awt.EventQueue;
 import java.awt.FileDialog;
 import java.awt.Font;
 import java.awt.Frame;
@@ -19,7 +18,6 @@ import entities.*;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.JScrollBar;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -29,6 +27,7 @@ import java.io.File;
 import java.io.IOException;
 import java.awt.event.ActionEvent;
 import javax.swing.JSeparator;
+import javax.swing.border.LineBorder;
 
 public class EditCompanyGUI {
 
@@ -47,33 +46,11 @@ public class EditCompanyGUI {
 	private JButton btnViewChanges;
 	
 	private Boss boss;
-	private JLabel lblCompanyPhoto;
-	private Employee first5;
-	
-	/*
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					
-					EditCompanyGUI window = new EditCompanyGUI();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-	*/
-
 	
 	public EditCompanyGUI(Boss theBoss) {
 		initialize(theBoss);
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
 	private void initialize(Boss theBoss) {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 792, 602);
@@ -82,31 +59,13 @@ public class EditCompanyGUI {
 		frame.setLocation(870, 200);
 		frame.getContentPane().setLayout(null);
 		frame.setVisible(true);
-		JPanel panel = new JPanel();
-		panel.setBounds(12, 13, 750, 152);
-		frame.getContentPane().add(panel);
-		panel.setLayout(null);
-		
-		lblCompanyPhoto = new JLabel("New label");
-		lblCompanyPhoto.setBounds(0, 0, 750, 152);
-		panel.add(lblCompanyPhoto);
-		
-		
-		BufferedImage imageicon;
-		try {
-			imageicon = ImageIO.read(new File(boss.getMyAccount().getMyCompany().getImage()));
-			ImageIcon imageBackground = new ImageIcon(imageicon);
-		  Image imagerisize = imageBackground.getImage().getScaledInstance(740, 280, 140) ;
-		  lblCompanyPhoto.setIcon(new ImageIcon(imagerisize));
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		
+		frame.setTitle("Edit Company");
 		
 		boss = theBoss;
 		
 		JButton btnChangeCompanyPhoto = new JButton("Change company photo");
+		btnChangeCompanyPhoto.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		btnChangeCompanyPhoto.setBorder(new LineBorder(Color.WHITE, 3));
 		btnChangeCompanyPhoto.setBackground(new Color(255, 153, 102));
 		btnChangeCompanyPhoto.setForeground(new Color(255, 255, 255));
 		btnChangeCompanyPhoto.setContentAreaFilled(false); 
@@ -116,26 +75,37 @@ public class EditCompanyGUI {
 		btnChangeCompanyPhoto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				FileDialog dialog = new FileDialog((Frame)null, "Select File to Open");
+			    FileDialog dialog = new FileDialog((Frame)null, "Select File to Open");
 			    dialog.setMode(FileDialog.LOAD);
 			    dialog.setVisible(true);
-			    String file = dialog.getFile();
-			    boss.getMyAccount().getMyCompany().setImage(file);
+			    String path = dialog.getDirectory() + dialog.getFile();
 			    
-			    
-				String message = "Your photo has been updated successfully!";
-				JOptionPane.showMessageDialog(new JFrame(), message, "Message",
-				        JOptionPane.INFORMATION_MESSAGE);
+			    if (dialog.getDirectory() != null && dialog.getFile() != null) {
+			    	
+			    	String extension = path.substring(path.length() - 3);
+			    	
+			    	if (extension.equalsIgnoreCase("png") || extension.equalsIgnoreCase("jpg")) {
+			    		boss.getMyAccount().getMyCompany().setImage(path);
+				    
+					String message = "Successful change! Go check the Changes!";
+					JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+					        JOptionPane.INFORMATION_MESSAGE);
+			    	}else {
+						String message = "You can only select \".jpg or .png\" files!";
+						JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+						        JOptionPane.ERROR_MESSAGE);
+			    	}
+			    }
 			}
 		});
-		btnChangeCompanyPhoto.setBounds(584, 178, 178, 25);
+		btnChangeCompanyPhoto.setBounds(510, 232, 131, 25);
 		frame.getContentPane().add(btnChangeCompanyPhoto);
 		
 		tfCompanyName = new JTextField(boss.getMyAccount().getMyCompany().getName());
 		tfCompanyName.setBorder(null);
 		tfCompanyName.setBackground(new Color(255, 153, 102));
 		tfCompanyName.setForeground(new Color(255, 255, 255));
-		tfCompanyName.setBounds(190, 233, 116, 22);
+		tfCompanyName.setBounds(190, 233, 178, 22);
 		frame.getContentPane().add(tfCompanyName);
 		tfCompanyName.setColumns(10);
 		
@@ -143,7 +113,7 @@ public class EditCompanyGUI {
 		tfCompanyTelephone.setBorder(null);
 		tfCompanyTelephone.setBackground(new Color(255, 153, 102));
 		tfCompanyTelephone.setForeground(new Color(255, 255, 255));
-		tfCompanyTelephone.setBounds(190, 268, 116, 22);
+		tfCompanyTelephone.setBounds(190, 268, 178, 22);
 		frame.getContentPane().add(tfCompanyTelephone);
 		tfCompanyTelephone.setColumns(10);
 		
@@ -151,7 +121,7 @@ public class EditCompanyGUI {
 		tfAddress.setBorder(null);
 		tfAddress.setBackground(new Color(255, 153, 102));
 		tfAddress.setForeground(new Color(255, 255, 255));
-		tfAddress.setBounds(190, 303, 116, 22);
+		tfAddress.setBounds(190, 303, 166, 22);
 		frame.getContentPane().add(tfAddress);
 		tfAddress.setColumns(10);
 		
@@ -159,30 +129,28 @@ public class EditCompanyGUI {
 		tfCompanyEmail.setBorder(null);
 		tfCompanyEmail.setBackground(new Color(255, 153, 102));
 		tfCompanyEmail.setForeground(new Color(255, 255, 255));
-		tfCompanyEmail.setBounds(190, 338, 116, 22);
+		tfCompanyEmail.setBounds(190, 338, 166, 22);
 		frame.getContentPane().add(tfCompanyEmail);
 		tfCompanyEmail.setColumns(10);
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(190, 389, 178, 88);
+		panel_1.setBounds(190, 389, 312, 88);
 		frame.getContentPane().add(panel_1);
 		panel_1.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(0, 0, 178, 88);
+		scrollPane.setBorder(new LineBorder(Color.WHITE, 2));
+		scrollPane.setBounds(0, 0, 312, 88);
 		panel_1.add(scrollPane);
 		
 		tfCompanyInfo = new JTextArea(boss.getMyAccount().getMyCompany().getInfo());
-		tfCompanyInfo.setBorder(null);
+		tfCompanyInfo.setBorder(new LineBorder(Color.WHITE, 2));
 		tfCompanyInfo.setBackground(new Color(255, 153, 102));
 		tfCompanyInfo.setForeground(new Color(255, 255, 255));
 		tfCompanyInfo.setLineWrap(true);
 		scrollPane.setViewportView(tfCompanyInfo);
 		 
 		tfCompanyInfo.setColumns(10);
-		
-		JScrollBar scrollBar = new JScrollBar();
-		scrollPane.setRowHeaderView(scrollBar);
 		
 		lblCompanyName = new JLabel("Company name:");
 		lblCompanyName.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -215,6 +183,7 @@ public class EditCompanyGUI {
 		frame.getContentPane().add(lblCompanyInfo);
 		
 		btnSaveAll = new JButton("Save All");
+		btnSaveAll.setBorder(new LineBorder(Color.WHITE, 3));
 		btnSaveAll.setBackground(new Color(255, 153, 102));
 		btnSaveAll.setForeground(new Color(255, 255, 255));
 		btnSaveAll.setContentAreaFilled(false); 
@@ -224,16 +193,14 @@ public class EditCompanyGUI {
 		btnSaveAll.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				
 					boss.editCompanyInfo(tfCompanyName.getText(), tfCompanyInfo.getText(), tfCompanyTelephone.getText(), tfAddress.getText(), tfCompanyEmail.getText());
-				
-			
 			}
 		});
-		btnSaveAll.setBounds(71, 503, 279, 25);
+		btnSaveAll.setBounds(216, 503, 116, 25);
 		frame.getContentPane().add(btnSaveAll);
 		
 		btnViewChanges = new JButton("View Changes");
+		btnViewChanges.setBorder(new LineBorder(Color.WHITE, 3));
 		btnViewChanges.setBackground(new Color(255, 153, 102));
 		btnViewChanges.setForeground(new Color(255, 255, 255));
 		btnViewChanges.setContentAreaFilled(false); 
@@ -248,31 +215,53 @@ public class EditCompanyGUI {
 				
 			}
 		});
-		btnViewChanges.setBounds(455, 503, 156, 25);
+		btnViewChanges.setBounds(393, 503, 124, 25);
 		frame.getContentPane().add(btnViewChanges);
 		
 		JSeparator separator = new JSeparator();
 		separator.setForeground(Color.WHITE);
 		separator.setBackground(Color.WHITE);
-		separator.setBounds(190, 257, 116, 2);
+		separator.setBounds(190, 257, 166, 2);
 		frame.getContentPane().add(separator);
 		
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setForeground(Color.WHITE);
-		separator_1.setBounds(190, 294, 116, 16);
+		separator_1.setBounds(190, 294, 166, 16);
 		frame.getContentPane().add(separator_1);
 		
 		JSeparator separator_2 = new JSeparator();
 		separator_2.setForeground(Color.WHITE);
-		separator_2.setBounds(190, 329, 116, 2);
+		separator_2.setBounds(190, 329, 166, 2);
 		frame.getContentPane().add(separator_2);
 		
 		JSeparator separator_3 = new JSeparator();
 		separator_3.setForeground(Color.WHITE);
-		separator_3.setBounds(190, 361, 116, 2);
+		separator_3.setBounds(190, 361, 166, 2);
 		frame.getContentPane().add(separator_3);
 		
-		frame.setVisible(true);
-		frame.setTitle("Edit Company");
+		JSeparator separator_4 = new JSeparator();
+		separator_4.setForeground(Color.WHITE);
+		separator_4.setBounds(0, 488, 776, 17);
+		frame.getContentPane().add(separator_4);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(31, 11, 610, 211);
+		frame.getContentPane().add(panel);
+		panel.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel();
+		BufferedImage imageicon;
+		try {
+			imageicon = ImageIO.read(new File(theBoss.getMyAccount().getMyCompany().getImage()));
+			ImageIcon imageBackground = new ImageIcon(imageicon);
+			Image imagerisize = imageBackground.getImage().getScaledInstance(610, 211, 140) ;
+			lblNewLabel.setIcon(new ImageIcon(imagerisize));
+		} catch (IOException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		lblNewLabel.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+		lblNewLabel.setBounds(0, 0, 610, 211);
+		panel.add(lblNewLabel);
 	}
 }
