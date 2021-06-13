@@ -149,14 +149,7 @@ public class EditGroupProjectGUI {
 		btnNewButton_2.setContentAreaFilled(false); 
 		btnNewButton_2.setFocusPainted(false); 
 		btnNewButton_2.setOpaque(false);
-		btnNewButton_2.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		btnNewButton_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//Creating and adding notification to added Members
-				GeneralNotification genNot = new GeneralNotification("You have been added to "+myGroup.getName(),myGroup,"addedToGroup");
-			}
-		});
-				
+		btnNewButton_2.setCursor(new Cursor(Cursor.HAND_CURSOR));		
 		btnNewButton_2.setBounds(355, 541, 116, 25);
 		frame.getContentPane().add(btnNewButton_2);
 		

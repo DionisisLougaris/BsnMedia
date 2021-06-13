@@ -255,12 +255,8 @@ public class CreateProjectGUI {
 						Group createdGroup = new Group(textGroupName.getText(), createdProject, pchief);
 						pchief.addGroupToSupervise(createdGroup);
 						
-						//Creating and sending notification to Members
-						GeneralNotification genNot = new GeneralNotification("You have been added to "+createdGroup.getName(),createdGroup,"addedToGroup");
-						
 						for (Employee theEmp: selectedMembers) {
 							theEmp.addGroupToEmployeesList(createdGroup);
-							theEmp.getListOfNotifications().add(genNot);
 						}
 						
 						pchief.getMyAccount().getMyCompany().addCompanyGroups(createdGroup);

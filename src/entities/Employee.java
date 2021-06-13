@@ -102,6 +102,9 @@ public class Employee extends User{
 			if (!theGroup.isMember(this)) {
 				listOfGroups.add(theGroup);
 				theGroup.addMember(this);
+				//Creating and sending notification to Members
+				GeneralNotification genNot = new GeneralNotification("You have been added to "+theGroup.getName(),theGroup,"addedToGroup");
+				this.listOfNotifications.add(genNot);
 			}
 			else {
 				String message = "The employee "+this.getFirstName()+" "+this.getLastName()+" is already member!";
