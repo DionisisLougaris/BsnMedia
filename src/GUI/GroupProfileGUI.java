@@ -9,6 +9,7 @@ import javax.swing.JTextField;
 import entities.Boss;
 import entities.Chief;
 import entities.Employee;
+import entities.GeneralNotification;
 import entities.Group;
 import entities.Post;
 import entities.User;
@@ -130,6 +131,13 @@ public class GroupProfileGUI {
 						
 					int value = (int)slider.getValue();
 					myGroup.setRating(value);
+					//Creating and adding notification to all Members
+					GeneralNotification genNot = new GeneralNotification("Your group has been rated!",myGroup,"groupRated");
+					myGroup.getSupervisor().getListOfNotifications().add(genNot);
+					for(int i=0;i<myGroup.getGroupMembers().size();i++)
+					{
+						myGroup.getGroupMembers().get(i).getListOfNotifications().add(genNot);
+					}
 					String message = "You have successfully rated "+myGroup.getName()+"!\n All members have been notified!";
 					JOptionPane.showMessageDialog(new JFrame(), message, "Message",
 					        JOptionPane.INFORMATION_MESSAGE);

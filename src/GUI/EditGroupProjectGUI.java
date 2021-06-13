@@ -6,6 +6,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 
+import entities.GeneralNotification;
 import entities.Group;
 import entities.User;
 
@@ -14,6 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JScrollBar;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -25,6 +27,7 @@ public class EditGroupProjectGUI {
 	private JTextField textField_2;
 	private JTextField textField_1;
 	private static Group myGroup;
+	
 	
 
 	/**
@@ -71,13 +74,20 @@ public class EditGroupProjectGUI {
 		frame.getContentPane().add(textField_2);
 		textField_2.setColumns(10);
 		
-		JRadioButton rdbtnNewRadioButton = new JRadioButton("In progress");
+		JRadioButton rdbtnNewRadioButton = new JRadioButton("Ongoing");
+		rdbtnNewRadioButton.setActionCommand("Ongoing");
 		rdbtnNewRadioButton.setBounds(183, 198, 127, 25);
 		frame.getContentPane().add(rdbtnNewRadioButton);
 		
 		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("Done");
+		rdbtnNewRadioButton_1.setActionCommand("Done");
 		rdbtnNewRadioButton_1.setBounds(314, 198, 127, 25);
 		frame.getContentPane().add(rdbtnNewRadioButton_1);
+		
+		// create button group for the radio button to know which one was selected
+				ButtonGroup radioGroup = new ButtonGroup();
+			    radioGroup.add(rdbtnNewRadioButton);
+				radioGroup.add(rdbtnNewRadioButton_1);
 		
 		JLabel lblNewLabel = new JLabel("Change project name");
 		lblNewLabel.setBounds(44, 32, 127, 16);
@@ -140,6 +150,13 @@ public class EditGroupProjectGUI {
 		btnNewButton_2.setFocusPainted(false); 
 		btnNewButton_2.setOpaque(false);
 		btnNewButton_2.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//Creating and adding notification to added Members
+				GeneralNotification genNot = new GeneralNotification("You have been added to "+myGroup.getName(),myGroup,"addedToGroup");
+			}
+		});
+				
 		btnNewButton_2.setBounds(355, 541, 116, 25);
 		frame.getContentPane().add(btnNewButton_2);
 		
@@ -149,6 +166,19 @@ public class EditGroupProjectGUI {
 		btnNewButton_3.setOpaque(false);
 		btnNewButton_3.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		btnNewButton_3.setBounds(494, 541, 116, 25);
+		btnNewButton_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				if(rdbtnNewRadioButton_1.isSelected())
+				{
+					//Creating notification for boss to rate group
+					GeneralNotification genNot = new GeneralNotification(myGroup.getMyProject().getName()+" is done,Please rate!",myGroup,"projectDone");
+					myGroup.getSupervisor().getMyAccount().getMyCompany().getBoss().getListOfNotifications().add(genNot);
+					
+				}
+			}
+				
+			});
 		frame.getContentPane().add(btnNewButton_3);
 		
 		JScrollPane scrollPane_2 = new JScrollPane();

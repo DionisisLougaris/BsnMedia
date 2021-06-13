@@ -112,10 +112,13 @@ public class ConnectionRequestsGUI {
 					
 				}else if (selectedRequest != null){
 					int indexOfSelectedValue = list.getSelectedIndex();
-					User ôheOnewehoSentTheRequest = selectedRequest.getAboutThisUser();
+					User theOnewehoSentTheRequest = selectedRequest.getAboutThisUser();
 					
-					Connection newConnection = new Connection(ôheOnewehoSentTheRequest, user);
+					Connection newConnection = new Connection(theOnewehoSentTheRequest, user);
 					newConnection.manageConnectionRequest(true);
+					//Notifing user that his request was accepted
+					GeneralNotification genNot = new GeneralNotification("You are now connected with"+user.getFirstName(),theOnewehoSentTheRequest,"acceptRequest");
+					theOnewehoSentTheRequest.getListOfNotifications().add(genNot);
 					if (indexOfSelectedValue != -1) {
 						listModel.remove(indexOfSelectedValue);
 						indexOfSelectedValue = -1;
@@ -137,9 +140,9 @@ public class ConnectionRequestsGUI {
 					
 				}else if (selectedRequest != null){
 					int indexOfSelectedValue = list.getSelectedIndex();
-					User ôheOnewehoSentTheRequest = selectedRequest.getAboutThisUser();
+					User theOnewehoSentTheRequest = selectedRequest.getAboutThisUser();
 					
-					Connection newConnection = new Connection(ôheOnewehoSentTheRequest, user);
+					Connection newConnection = new Connection(theOnewehoSentTheRequest, user);
 					newConnection.manageConnectionRequest(false);
 					if (indexOfSelectedValue != -1) {
 						listModel.remove(indexOfSelectedValue);
