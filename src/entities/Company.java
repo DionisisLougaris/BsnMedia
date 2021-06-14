@@ -11,6 +11,8 @@ import GUI.*;
 
 public class Company implements Serializable{
 	
+	private static final int limitOfDifferentChars = 2;
+	
 	private String name;
 	private String info;
 	private Boss boss;
@@ -91,44 +93,41 @@ public class Company implements Serializable{
 	{
 		ArrayList<String> suggestedOptions = new ArrayList<String>();
 		
-		char[] givenString = aString.toCharArray();
-		char[] companyName = this.name.toCharArray();
+		char[] givenString = aString.replaceAll("\\s+","").toCharArray(); //The input String without spaces
+		
+		
+		//Checking if the User tried searching for the Company Profile
+		char[] companyName = this.name.replaceAll("\\s+","").toCharArray();
 		
 		if (Company.calculateCommonCharacters(companyName, givenString)) {
 			
 			suggestedOptions.add(this.name);
 		}
 	
-		//Checking if the User tried searching for any of the active Groups
-		for(int i=0;i<this.companyGroups.size();i++)
-		{
-			int charsMatchingForGroup=0;
-			char[] groupName = this.companyGroups.get(i).getName().toCharArray();
-			for(int j=0;j<groupName.length;j++)
-				if(charactersEqualIgnoringCase(groupName[i],givenString[i]))
-					charsMatchingForGroup++;
+		//Checking if the User tried searching for any of the company Groups
+		for(int i=0;i<this.companyGroups.size();i++) {
 			
-			/*If the given String is at most 2 characters off a Group name,
-			  the group entity is added on the suggested search list */
-			if(charsMatchingForGroup>=groupName.length-2)
-				suggestedOptions.add(this.companyGroups.get(i).getName());	
+			char[] groupName = this.companyGroups.get(i).getName().replaceAll("\\s+","").toCharArray();
+			
+			if (Company.calculateCommonCharacters(groupName, givenString)) {
+				suggestedOptions.add(companyGroups.get(i).getName());
+			}	
 		}
 		
 		//Checking if the User tried searching for any of the active Users by Full name
 		for(int i=0;i<this.companyMembers.size();i++)
 		{
-			int charsMatchingForUserFullName=0;
-			//Connecting users First and Last name in one String and converting it to char array
-			char[] userFullName = (this.companyMembers.get(i).getFirstName()+ " " +  this.companyMembers.get(i).getLastName()).toCharArray();
-			for(int j=0;j<userFullName.length;j++)
-				if(charactersEqualIgnoringCase(userFullName[i],givenString[i]))
-					charsMatchingForUserFullName++;
-					
-			/*If the given String is at most 3 characters off a User's Full name,
-				 the User entity is added on the suggested search list */
-			if(charsMatchingForUserFullName>=userFullName.length-3)
-				suggestedOptions.add(this.companyMembers.get(i).getFirstName()+ " " +  this.companyMembers.get(i).getLastName());
-					
+			//Suggested Searching using user's full name, firstname, lastname or email
+			char[] userFullName = (this.companyMembers.get(i).getFirstName()+this.companyMembers.get(i).getLastName()).replace("\\s+","").toCharArray();
+			char[] firstName = (this.companyMembers.get(i).getFirstName().replaceAll("\\s+","").toCharArray());
+			char[] lastName = (this.companyMembers.get(i).getLastName().replaceAll("\\s+","").toCharArray());
+			char[] email = (this.companyMembers.get(i).getMyAccount().getEmail().replaceAll("\\s+","").toCharArray());
+			
+			if (Company.calculateCommonCharacters(userFullName, givenString) || Company.calculateCommonCharacters(firstName, givenString) 
+					|| Company.calculateCommonCharacters(lastName, givenString) ||Company.calculateCommonCharacters(email, givenString)) {
+				
+				suggestedOptions.add(this.companyMembers.get(i).getFirstName()+" "+this.companyMembers.get(i).getLastName());
+			}		
 		}
 		aString="";
 				
@@ -239,9 +238,9 @@ public class Company implements Serializable{
 				if(charactersEqualIgnoringCase(theOriginal[i],userInput[i]))
 					charsMatchingForCompany++;
 			}
-			/*If the given String is at most 2 characters off the Original,
+			/*If the given String is at most 6 characters off the Original,
 			  the String is added on the suggested search list */
-			if(charsMatchingForCompany>=theOriginal.length-2) {
+			if(charsMatchingForCompany>=theOriginal.length-limitOfDifferentChars) {
 				return true;
 			}
 		}else {
@@ -249,9 +248,9 @@ public class Company implements Serializable{
 				if(charactersEqualIgnoringCase(theOriginal[i],userInput[i]))
 					charsMatchingForCompany++;
 			}
-			/*If the given String is at most 2 characters off the Original,
+			/*If the given String is at most 6 characters off the Original,
 			  the String is added on the suggested search list */
-			if(charsMatchingForCompany>=theOriginal.length-2) {
+			if(charsMatchingForCompany>=theOriginal.length-limitOfDifferentChars) {
 				return true;
 			}
 		}
