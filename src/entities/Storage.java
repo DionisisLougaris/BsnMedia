@@ -7,7 +7,7 @@ import java.nio.file.StandardOpenOption;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-public class Storage {
+public class Storage implements Serializable{
 
 	
 	//Keeping all data by saving the company object in a binary file
@@ -32,13 +32,14 @@ public class Storage {
 	public static Company retrieveFromBinaryFile() {
 		
 		// nomizw xreiazetai giati logo twn try catch isws den parei timh to theCompany kai xtypaei error
-		Company theCompany=null;
 		try {
 			FileInputStream fileIn = new FileInputStream("bsnmedia.ser");
 			ObjectInputStream in = new ObjectInputStream(fileIn);
+			Company theCompany;
 			theCompany = (Company)in.readObject();
 			in.close();
 			fileIn.close();
+			return theCompany;
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -49,7 +50,7 @@ public class Storage {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return theCompany;
+		return null;
 	}
 	
 	public static void saveMessage(Message aMessage,Conversation aConversation) 

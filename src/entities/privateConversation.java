@@ -1,8 +1,9 @@
 package entities;
 
 import java.io.File;
+import java.io.Serializable;
 
-public class privateConversation extends Conversation{
+public class privateConversation extends Conversation implements Serializable{
 	
 	private User discussant1; //Συνομιλιτης 1
 	private User discussant2; //Συνομιλιτης 2

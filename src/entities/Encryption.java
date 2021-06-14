@@ -1,6 +1,8 @@
 package entities;
 
-public class Encryption {
+import java.io.Serializable;
+
+public class Encryption implements Serializable{
 	
 
 	//Message encryption algorithm

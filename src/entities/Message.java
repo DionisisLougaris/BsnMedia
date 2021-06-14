@@ -1,8 +1,9 @@
 package entities;
 
+import java.io.Serializable;
 import java.time.*;
 
-public class Message {
+public class Message implements Serializable{
 	
 	private String content;
 	private LocalDateTime timesent;

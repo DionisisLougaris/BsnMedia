@@ -1,10 +1,11 @@
 package entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-public class Connection extends Notification{
+public class Connection extends Notification implements Serializable{
 
 	private User firstUser;
 	private User secondUser;

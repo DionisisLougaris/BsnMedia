@@ -143,6 +143,7 @@ public class BackendProfileBossGUI {
 		
 		
 		JTextArea textPost = new JTextArea();
+		textPost.setEditable(false);
 		textPost.setLineWrap(true);
 		textPost.setWrapStyleWord(true);
 		textPost.setText("");
@@ -403,6 +404,7 @@ public class BackendProfileBossGUI {
 		disconnectButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
+				Storage.saveInBinaryFile(boss.getMyAccount().getMyCompany());
 				frmStartingPage.setVisible(false);
 				try {
 					new WelcomeScreen_GUI(boss.getMyAccount().getMyCompany());
@@ -519,7 +521,7 @@ public class BackendProfileBossGUI {
 							JOptionPane.showMessageDialog(new JFrame(), message, "Message",
 							        JOptionPane.INFORMATION_MESSAGE);
 					}else {
-						new PrivateChatGUI(boss, selectedUser, selectedUserToChat);
+						new PrivateChatGUI(selectedUser, boss, selectedUserToChat);
 					}
 				}
 			}else if (e.getSource().equals(sendRequestButton)) {

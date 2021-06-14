@@ -8,6 +8,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		
+		/*
 		Company theCompany = new Company("IT Intelligence", "A Technology Company", "25012001", "6971657008", "Thessaloniki", "itintelligenceuom@gmail.com");
 		
 		Password thePassword = new Password("12345678", "minasch", "Minas", "Charakopoulos");
@@ -70,20 +71,21 @@ public class Main {
 		Message firstMessage3 = new Message("Ola kala esy?", first2);
 		conversation.addMessage(firstMessage3);
 
+
 		
 		//Storage.saveConversation(conversation);
 		
-		System.out.println(Storage.retrieveConversation(conversation));
+		//System.out.println(Storage.retrieveConversation(conversation));
 		
 		//Πρεπει να δουμε αν θα μεινει το πεδιο ListOfConversations στον User και τι θα γινει με τι ανακτηση
 		
-
+		*/
+		Company theCompany=Storage.retrieveFromBinaryFile();
 		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					//new WelcomeScreen_GUI(theCompany);
-					new BackendProfileBossGUI(first2);
+					new WelcomeScreen_GUI(theCompany);
 					} catch (Exception e) {
 					e.printStackTrace();
 				}

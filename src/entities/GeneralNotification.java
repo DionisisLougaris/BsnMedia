@@ -1,6 +1,8 @@
 package entities;
 
-public class GeneralNotification extends Notification{
+import java.io.Serializable;
+
+public class GeneralNotification extends Notification implements Serializable{
 
 	private String typeOfNotification;//projectDone,acceptRequest,addedToGroup *Only possible values for typeOfNotification*
 	

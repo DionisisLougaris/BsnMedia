@@ -1,9 +1,10 @@
 package entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.TreeSet;
 
-public class Chief extends User{
+public class Chief extends User implements Serializable{
 	
 	private ArrayList<Group> groupsSupervising = new ArrayList<Group>();
 	

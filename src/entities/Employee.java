@@ -1,11 +1,12 @@
 package entities;
 
+import java.io.Serializable;
 import java.util.*;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-public class Employee extends User{
+public class Employee extends User implements Serializable{
 
 	private static final int limitOfGroups = 3; //The limit of Groups in which the employee can be a member at the same time.
 	
