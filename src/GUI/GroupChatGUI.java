@@ -39,7 +39,7 @@ public class GroupChatGUI {
 
 	private void initialize() {
 		frame = new JFrame();
-		frame.getContentPane().setBackground(Color.WHITE);
+		frame.getContentPane().setBackground(new Color(255, 250, 240));
 		frame.setBounds(100, 100, 686, 794);
 		frame.getContentPane().setLayout(null);
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -99,7 +99,7 @@ public class GroupChatGUI {
 		textArea_1.setBounds(0, 0, 521, 120);
 		panel_2.add(textArea_1);
 		
-		Icon send = new ImageIcon("Buttons_backgrounds/email_send_50px.png");
+		Icon send = new ImageIcon("Buttons_backgrounds/email_send_60px.png");
 		JButton btnNewButton_1_1_1 = new JButton(send);
 		btnNewButton_1_1_1.setContentAreaFilled(false); 
 		btnNewButton_1_1_1.setFocusPainted(false); 
@@ -117,7 +117,7 @@ public class GroupChatGUI {
 				textArea.append(myMessage.getContent()+" | Date:"+formatDateTime+" | "+myMessage.getSender().getMyAccount().getUsername()+" | \n");
 			}
 		});
-		btnNewButton_1_1_1.setBounds(567, 566, 52, 52);
+		btnNewButton_1_1_1.setBounds(556, 555, 62, 62);
 		panel.add(btnNewButton_1_1_1);
 		
 		Icon help = new ImageIcon("Buttons_backgrounds/customer_support_40px.png");
