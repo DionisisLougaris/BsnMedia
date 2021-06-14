@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import java.awt.Font;
+import javax.swing.border.LineBorder;
 
 public class SearchSuggestionsGUI {
 	
@@ -27,30 +28,11 @@ public class SearchSuggestionsGUI {
 	private User loggedUser;
 	private JButton btnNewButton;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					//SearchSuggestionsGUI window = new SearchSuggestionsGUI();
-					//window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-
 	public SearchSuggestionsGUI(ArrayList<String> suggested, User theUser) {
 		initialize(suggested, theUser);
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
+	
 	private void initialize(ArrayList<String> suggested, User theUser) {
 		frame = new JFrame();
 		frame.getContentPane().setBackground(Color.WHITE);
@@ -77,14 +59,12 @@ public class SearchSuggestionsGUI {
 		frame.getContentPane().add(list);
 		
 		btnNewButton = new JButton("Go to Profile");
+		btnNewButton.setBackground(new Color(255, 250, 240));
+		btnNewButton.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		btnNewButton.setContentAreaFilled(false); 
 		btnNewButton.setFocusPainted(false); 
 		btnNewButton.setOpaque(false);
 		btnNewButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
 		btnNewButton.setBounds(55, 204, 131, 25);
 		frame.getContentPane().add(btnNewButton);
 		

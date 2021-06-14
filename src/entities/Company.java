@@ -92,19 +92,13 @@ public class Company implements Serializable{
 		ArrayList<String> suggestedOptions = new ArrayList<String>();
 		
 		char[] givenString = aString.toCharArray();
-		
-		//Checking if the User tried searching the Company
-		int charsMatchingForCompany=0;
 		char[] companyName = this.name.toCharArray();
-		for(int i=0;i<companyName.length;i++) {
-			if(charactersEqualIgnoringCase(companyName[i],givenString[i]))
-				charsMatchingForCompany++;
-		}
-		/*If the given String is at most 2 characters off the company name,
-		  the company entity is added on the suggested search list */
-		if(charsMatchingForCompany>=companyName.length-2)
-			suggestedOptions.add(this.name);
+		
+		if (Company.calculateCommonCharacters(companyName, givenString)) {
 			
+			suggestedOptions.add(this.name);
+		}
+	
 		//Checking if the User tried searching for any of the active Groups
 		for(int i=0;i<this.companyGroups.size();i++)
 		{
@@ -235,6 +229,35 @@ public class Company implements Serializable{
 		  return Character.toLowerCase(u1) == Character.toLowerCase(u2);
 	}
 	
+	static boolean calculateCommonCharacters(char [] theOriginal, char [] userInput) {
+		
+		int charsMatchingForCompany = 0;
+		
+		if (theOriginal.length <= userInput.length) {
+			
+			for(int i=0;i<theOriginal.length;i++) {
+				if(charactersEqualIgnoringCase(theOriginal[i],userInput[i]))
+					charsMatchingForCompany++;
+			}
+			/*If the given String is at most 2 characters off the Original,
+			  the String is added on the suggested search list */
+			if(charsMatchingForCompany>=theOriginal.length-2) {
+				return true;
+			}
+		}else {
+			for(int i=0;i<userInput.length;i++) {
+				if(charactersEqualIgnoringCase(theOriginal[i],userInput[i]))
+					charsMatchingForCompany++;
+			}
+			/*If the given String is at most 2 characters off the Original,
+			  the String is added on the suggested search list */
+			if(charsMatchingForCompany>=theOriginal.length-2) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
 	
 	
 	public String getInfo() {

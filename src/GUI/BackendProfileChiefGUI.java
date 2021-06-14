@@ -121,6 +121,7 @@ public class BackendProfileChiefGUI {
 						
 						if (!result) {
 							ArrayList<String> suggestedOptions = new ArrayList<String>();
+							suggestedOptions = chief.getMyAccount().getMyCompany().suggestedSearchOption(searchedText);
 							new SearchSuggestionsGUI(suggestedOptions, chief);
 						}else {
 							frmStartingPage.setVisible(false);
@@ -189,10 +190,6 @@ public class BackendProfileChiefGUI {
 		
 		Icon messages = new ImageIcon("Buttons_backgrounds/Messages_30px.png");
 		messagesButton = new JButton(messages);
-		messagesButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		messagesButton.setContentAreaFilled(false); 
 		messagesButton.setFocusPainted(false); 
 		messagesButton.setOpaque(false);
@@ -425,17 +422,18 @@ public class BackendProfileChiefGUI {
 			listModelForGroups.addElement(theSupervisingGroup.getName());
 		}
 		list.setModel(listModelForGroups);
-		list.setBounds(49, 386, 98, 110);
+		list.setBounds(49, 386, 155, 110);
 		panel.add(list);
 		
 		Icon check = new ImageIcon("Buttons_backgrounds/takealook_32px.png");
 		JButton checkGroup = new JButton(check);
+		checkGroup.setBorder(null);
 		checkGroup.setContentAreaFilled(false); 
 		checkGroup.setFocusPainted(false); 
 		checkGroup.setOpaque(false);
 		checkGroup.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		checkGroup.setOpaque(false);
-		checkGroup.setBounds(49, 495, 48, 36);
+		checkGroup.setBounds(80, 495, 48, 36);
 		checkGroup.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -468,13 +466,14 @@ public class BackendProfileChiefGUI {
 		
 		Icon edit = new ImageIcon("Buttons_backgrounds/edit_20px.png");
 		editGroupButton = new JButton(edit);
+		editGroupButton.setBorder(null);
 		editGroupButton.setContentAreaFilled(false); 
 		editGroupButton.setFocusPainted(false); 
 		editGroupButton.setOpaque(false);
 		editGroupButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		editGroupButton.setOpaque(false);
 		editGroupButton.setBackground(new Color(248, 248, 255));
-		editGroupButton.setBounds(99, 495, 48, 36);
+		editGroupButton.setBounds(124, 495, 48, 36);
 		editGroupButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -489,7 +488,7 @@ public class BackendProfileChiefGUI {
 				}
 				
 				if (selectedGroup != null) {
-					new EditGroupProjectGUI(selectedGroup);
+					new EditGroupProjectGUI(selectedGroup, frmStartingPage);
 				}else {
 					String message = "You havent select any Group!";
 					JOptionPane.showMessageDialog(new JFrame(), message, "Message",

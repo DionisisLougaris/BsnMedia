@@ -150,6 +150,7 @@ public class CompanyProfileGUI {
 
 						if (!result) {
 							ArrayList<String> suggestedOptions = new ArrayList<String>();
+							suggestedOptions = theCompany.suggestedSearchOption(searchedText);
 							new SearchSuggestionsGUI(suggestedOptions, theLoggedUser);
 						}else {
 							frame.setVisible(false);

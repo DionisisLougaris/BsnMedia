@@ -263,6 +263,7 @@ public class GroupProfileGUI {
 
 						if (!result) {
 							ArrayList<String> suggestedOptions = new ArrayList<String>();
+							suggestedOptions = myUser.getMyAccount().getMyCompany().suggestedSearchOption(searchedText);
 							new SearchSuggestionsGUI(suggestedOptions, myUser);
 						}else {
 							frame.setVisible(false);
@@ -316,6 +317,31 @@ public class GroupProfileGUI {
 		membersList.setBackground(new Color(255, 250, 240));
 		membersList.setBounds(38, 474, 190, 408);
 		frame.getContentPane().add(membersList);
+		
+		JLabel lblNewLabel = new JLabel("Who supervise this Group?");
+		lblNewLabel.setBounds(38, 401, 168, 14);
+		frame.getContentPane().add(lblNewLabel);
+		
+		JButton btnNewButton = new JButton("Learn Now!");
+		btnNewButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnNewButton.setForeground(Color.RED);
+		btnNewButton.setBounds(196, 399, 114, 18);
+		btnNewButton.setOpaque(false);
+		btnNewButton.setContentAreaFilled(false);
+		btnNewButton.setBorderPainted(false);
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				try {
+					new FrontEndProfileGUI(myUser, myGroup.getSupervisor());
+					frame.dispose();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		frame.getContentPane().add(btnNewButton);
 		
 		JLabel lblNewLabel_11 = new JLabel("");
 		BufferedImage imagebackground = ImageIO.read(new File("label_backgrounds/background.jpg"));

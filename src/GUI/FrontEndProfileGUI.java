@@ -3,7 +3,6 @@ package GUI;
 
 import java.awt.Cursor;
 import java.awt.Desktop;
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -35,7 +34,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
-import javax.swing.JRadioButton;
 import java.awt.Font;
 import java.awt.Image;
 
@@ -48,8 +46,8 @@ public class FrontEndProfileGUI {
 
 	private JFrame frame;
 	private JTextField searchtext;
-	private static User tuser;
-	private static User auser;
+	private static User loggedUser;
+	private static User profileUser;
 
 	public FrontEndProfileGUI(User tUser,User aUser) throws IOException {
 		initialize(tUser, aUser);
@@ -61,12 +59,14 @@ public class FrontEndProfileGUI {
 		frame.setLocation(500, 0);
 		frame.getContentPane().setLayout(null);
 		frame.setVisible(true);
+		frame.setResizable(false);
+		frame.setTitle(aUser.getMyAccount().getUsername());
 		
-		tuser = tUser; //The user who is connected
-		auser = aUser; //The other User
+		loggedUser = tUser; //The user who is connected
+		profileUser = aUser; //The other User who, we visit his profile
 		
 		
-		Connection usersconnection = new Connection(tuser,auser);
+		Connection usersconnection = new Connection(loggedUser,profileUser);
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
@@ -79,7 +79,7 @@ public class FrontEndProfileGUI {
 		panel.add(panel_1);
 		panel_1.setLayout(null);
 		
-		ImageIcon defaultprofilephoto = new ImageIcon(auser.getImage());
+		ImageIcon defaultprofilephoto = new ImageIcon(profileUser.getImage());
 		Image imagerisize = defaultprofilephoto.getImage().getScaledInstance(181, 152, 170) ;
 		ImageIcon ndefaultprofilephoto = new ImageIcon(imagerisize);
 		JLabel labeldefaulprofilephoto = new JLabel(ndefaultprofilephoto);
@@ -105,11 +105,12 @@ public class FrontEndProfileGUI {
 				if(!searchedText.isEmpty()) {
 					boolean result;
 					try {
-						result = tuser.getMyAccount().getMyCompany().searchObject(searchedText, tuser);
+						result = loggedUser.getMyAccount().getMyCompany().searchObject(searchedText, loggedUser);
 
 						if (!result) {
 							ArrayList<String> suggestedOptions = new ArrayList<String>();
-							new SearchSuggestionsGUI(suggestedOptions, tuser);
+							suggestedOptions = loggedUser.getMyAccount().getMyCompany().suggestedSearchOption(searchedText);
+							new SearchSuggestionsGUI(suggestedOptions, loggedUser);
 						}else {
 							frame.setVisible(false);
 						}
@@ -152,25 +153,25 @@ public class FrontEndProfileGUI {
 				//Closing previous GUI
 				frame.setVisible(false);
 				//Returning to the right backend profile
-				if(tuser instanceof Chief){
+				if(loggedUser instanceof Chief){
 					try {
-						new BackendProfileChiefGUI(tuser);
+						new BackendProfileChiefGUI(loggedUser);
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
-				else if(tuser instanceof Boss){
+				else if(loggedUser instanceof Boss){
 					try {
-						new BackendProfileBossGUI(tuser);
+						new BackendProfileBossGUI(loggedUser);
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
-				else if(tuser instanceof Employee){
+				else if(loggedUser instanceof Employee){
 					try {
-						new BackendProfileEmployeeGUI(tuser);
+						new BackendProfileEmployeeGUI(loggedUser);
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -197,35 +198,30 @@ public class FrontEndProfileGUI {
 		ausersposts.setBounds(32, 561, 810, 336);
 		panel.add(ausersposts);
 		
-		String namelastname = auser.getFirstName() + " " + auser.getLastName();
+		String namelastname = profileUser.getFirstName() + " " + profileUser.getLastName();
 		JLabel labelnamelastname= new JLabel(namelastname);
 		labelnamelastname.setFont(new Font("Tahoma", Font.PLAIN, 19));
-		labelnamelastname.setBounds(108, 240, 202, 26);
+		labelnamelastname.setBounds(108, 240, 504, 26);
 		panel.add(labelnamelastname);
 		
 		String currentlypost ="";
-		if(auser instanceof Employee)
+		if(profileUser instanceof Employee)
 		{
-			currentlypost = "Employee";
+			currentlypost = "Employee ||"+profileUser.getCompanyPost();
 		}
-		else if(auser instanceof Chief)
+		else if(profileUser instanceof Chief)
 		{
-			currentlypost = "Chief";
+			currentlypost = "Chief ||"+profileUser.getCompanyPost();
 		}
-		else if(auser instanceof Boss)
+		else if(profileUser instanceof Boss)
 		{
-			currentlypost = "Boss";
+			currentlypost = "Boss ||"+profileUser.getCompanyPost();
 		}
 		JLabel labelcompanypost = new JLabel(currentlypost);
-		labelcompanypost.setBounds(108, 266, 89, 16);
+		labelcompanypost.setBounds(108, 266, 283, 16);
 		panel.add(labelcompanypost);
 		
-		String spacialization = auser.getCompanyPost();
-		JLabel labelspacialization = new JLabel(spacialization);
-		labelspacialization.setBounds(322, 248, 78, 16);
-		panel.add(labelspacialization);
-		
-		String email = auser.getMyAccount().getEmail();
+		String email = profileUser.getMyAccount().getEmail();
 		JLabel labelemail = new JLabel(email);
 		labelemail.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		labelemail.setForeground(new Color(255, 0, 0));
@@ -235,7 +231,7 @@ public class FrontEndProfileGUI {
             @Override
             public void mouseClicked(MouseEvent e) {
                 try {
-                    Desktop.getDesktop().browse(new URI("mailto:"+auser.getMyAccount().getEmail()));
+                    Desktop.getDesktop().browse(new URI("mailto:"+profileUser.getMyAccount().getEmail()));
                 } catch (IOException | URISyntaxException e1) {
                     e1.printStackTrace();
                 }
@@ -246,81 +242,105 @@ public class FrontEndProfileGUI {
 		JLabel lblNewLabel_5 = new JLabel("Currently apart of:");
 		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblNewLabel_5.setBounds(108, 287, 133, 16);
-		panel.add(lblNewLabel_5);
-		if(auser instanceof Boss) {
-			lblNewLabel_5.setVisible(false);
+		if (profileUser instanceof Employee) {
+			panel.add(lblNewLabel_5);
 		}
 		
-		ArrayList<Group> ausersgroups = auser.getGroups();
-		
-		if(ausersgroups!=null) {
-			if( ausersgroups.size() ==1) {
-				JLabel groupa = new JLabel(ausersgroups.get(0).getName());
-				groupa.setBounds(108, 316, 56, 16);
-				groupa.setForeground(Color.RED);
-				groupa.setFont(new Font("Tahoma", Font.PLAIN, 18));
-				groupa.setText(ausersgroups.get(0).getName());
-				groupa.setBounds(112, 780, 280, 25);
-				groupa.setCursor(new Cursor(Cursor.HAND_CURSOR));
-				groupa.addMouseListener(new MouseAdapter() {
-			       	 
-		            @Override
-		            public void mouseClicked(MouseEvent e) {
-		            	try {
-							new GroupProfileGUI(tuser,ausersgroups.get(0));
+		if (profileUser instanceof Employee) {
+			
+			JButton btnNewButton = new JButton("Group A");
+			btnNewButton.setOpaque(false);
+			btnNewButton.setBorder(null);
+			btnNewButton.setForeground(Color.RED);
+			btnNewButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			btnNewButton.setBackground(new Color(255, 153, 102));
+			btnNewButton.setBounds(74, 318, 68, 23);
+			if (profileUser.getGroups().size()>=1) {
+				
+				panel.add(btnNewButton);
+				
+				btnNewButton.addActionListener(new ActionListener() {
+					
+					public void actionPerformed(ActionEvent e) {
+						try {
+							new GroupProfileGUI(profileUser, profileUser.getGroups().get(0));
+							frame.dispose();
 						} catch (IOException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
-		            }
-		            
-		            
+					}
 				});
-				panel.add(groupa);
-			} else if(ausersgroups.size() == 2) { 
-				JLabel lblNewLabel_6 = new JLabel(ausersgroups.get(0).getName());
-				lblNewLabel_6.setBounds(108, 316, 56, 16);
-				panel.add(lblNewLabel_6);
-				   
-				JLabel lblNewLabel_7 = new JLabel(ausersgroups.get(1).getName());
-				lblNewLabel_7.setBounds(185, 316, 56, 16);
-				panel.add(lblNewLabel_7);
-			} else if(ausersgroups.size() == 3) {
-				JLabel lblNewLabel_6 = new JLabel(ausersgroups.get(0).getName());
-				lblNewLabel_6.setBounds(108, 316, 56, 16);
-				panel.add(lblNewLabel_6);
-				   
-				JLabel lblNewLabel_7 = new JLabel(ausersgroups.get(1).getName());
-				lblNewLabel_7.setBounds(185, 316, 56, 16);
-				panel.add(lblNewLabel_7);
-				   
-				JLabel lblNewLabel_8 = new JLabel(ausersgroups.get(2).getName());
-				lblNewLabel_8.setBounds(253, 316, 56, 16);
-				panel.add(lblNewLabel_8);
+			}
+			
+			JButton btnGroupB = new JButton("Group B");
+			btnGroupB.setOpaque(false);
+			btnGroupB.setForeground(Color.RED);
+			btnGroupB.setBorder(null);
+			btnGroupB.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			btnGroupB.setBackground(new Color(255, 153, 102));
+			btnGroupB.setBounds(152, 318, 71, 23);
+			if (profileUser.getGroups().size()>=2) {
+				
+				panel.add(btnGroupB);
+				
+				btnGroupB.addActionListener(new ActionListener() {
+					
+					public void actionPerformed(ActionEvent e) {
+						try {
+							new GroupProfileGUI(profileUser, profileUser.getGroups().get(1));
+							frame.dispose();
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+					}
+				});
+			}
+			
+			JButton btnGroupC = new JButton("Group C");
+			btnGroupC.setOpaque(false);
+			btnGroupC.setForeground(Color.RED);
+			btnGroupC.setBorder(null);
+			btnGroupC.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			btnGroupC.setBackground(new Color(255, 153, 102));
+			btnGroupC.setBounds(232, 318, 68, 23);
+			if (profileUser.getGroups().size()==3) {
+				
+				panel.add(btnGroupC);
+				
+				btnGroupC.addActionListener(new ActionListener() {
+					
+					public void actionPerformed(ActionEvent e) {
+						try {
+							new GroupProfileGUI(profileUser, profileUser.getGroups().get(2));
+							frame.dispose();
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+					}
+				});
 			}
 		}
 		
-		
-		if(!tuser.equals(auser))
+		if(!loggedUser.equals(profileUser))
 		{
-			
-			
-			
-			if(!usersconnection.areConnected())
-			{
-			 JButton addConnection = new JButton("Add connection");
-			 addConnection.setContentAreaFilled(false); 
-			 addConnection.setFocusPainted(false); 
-			 addConnection.setOpaque(false);
-			 addConnection.setCursor(new Cursor(Cursor.HAND_CURSOR));
-			 addConnection.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					
-					usersconnection.sendConnectionRequest();
-				}
-			});
-			addConnection.setBounds(553, 313, 131, 25);
-			panel.add(addConnection);
+			if(!usersconnection.areConnected()) {
+				
+				 JButton addConnection = new JButton("Add connection");
+				 addConnection.setContentAreaFilled(false); 
+				 addConnection.setFocusPainted(false); 
+				 addConnection.setOpaque(false);
+				 addConnection.setCursor(new Cursor(Cursor.HAND_CURSOR));
+				 addConnection.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						
+						usersconnection.sendConnectionRequest();
+					}
+				});
+				addConnection.setBounds(710, 313, 131, 25);
+				panel.add(addConnection);
 			}
 			else
 			{
@@ -332,11 +352,10 @@ public class FrontEndProfileGUI {
 				buttonchat.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						
-						
-						new PrivateChatGUI(auser, tuser, usersconnection.getAboutThisConversation());// prepei na baloume twn xhrhsrh
+						new PrivateChatGUI(profileUser, loggedUser, usersconnection.getAboutThisConversation());
 					}
 				});
-				buttonchat.setBounds(479, 313, 62, 25);
+				buttonchat.setBounds(620, 313, 62, 25);
 				panel.add(buttonchat);
 				
 				JButton removeConnection = new JButton("Remove connection");
@@ -354,9 +373,6 @@ public class FrontEndProfileGUI {
 				removeConnection.setBounds(694, 313, 148, 25);
 				panel.add(removeConnection);
 			}
-			
-			
-			
 		}
 		
 		JLabel lblNewLabel_9 = new JLabel("Information:");
@@ -364,12 +380,12 @@ public class FrontEndProfileGUI {
 		lblNewLabel_9.setBounds(74, 376, 84, 16);
 		panel.add(lblNewLabel_9);
 		
-		String telephone = auser.getTelephone();
+		String telephone = profileUser.getTelephone();
 		JLabel labeltelephone = new JLabel(telephone);
 		labeltelephone.setBounds(131, 442, 110, 16);
 		panel.add(labeltelephone);
 		
-		String address = auser.getAddress();
+		String address = profileUser.getAddress();
 		JLabel labeladdress = new JLabel(address);
 		labeladdress.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		labeladdress.setForeground(new Color(255, 0, 0));
@@ -379,7 +395,7 @@ public class FrontEndProfileGUI {
             @Override
             public void mouseClicked(MouseEvent e) {
                 try {
-                    Desktop.getDesktop().browse(new URI("https://www.google.com/maps/place/"+auser.getAddress()));
+                    Desktop.getDesktop().browse(new URI("https://www.google.com/maps/place/"+profileUser.getAddress()));
                 } catch (IOException | URISyntaxException e1) {
                     e1.printStackTrace();
                 }
@@ -387,54 +403,53 @@ public class FrontEndProfileGUI {
             
             @Override
             public void mouseEntered(MouseEvent e) {
-            	labeladdress.setText("<html><a href=''>" + auser.getAddress()+ "</a></html>");
+            	labeladdress.setText("<html><a href=''>" + profileUser.getAddress()+ "</a></html>");
             }
 		});
 		panel.add(labeladdress);
 		
-		String birthday = auser.getBirthday();
+		String birthday = profileUser.getBirthday();
 		JLabel labelbirthday = new JLabel(birthday);
 		labelbirthday.setBounds(130, 510, 123, 16);
 		panel.add(labelbirthday);
 		
-		JLabel lblNewLabel_13 = new JLabel("Mutual connections");
-		lblNewLabel_13.setBounds(712, 377, 130, 16);
-		panel.add(lblNewLabel_13);
-		
-		DefaultListModel<String> mutualmodel = new DefaultListModel<String>();
-		JList<String> listmutualconnections = new JList<String>();
-		listmutualconnections.setBackground(new Color(255, 250, 240));
-		listmutualconnections.setBounds(709, 409, 133, 127);
-		for (User theUser: usersconnection.mutualConnections()) {
-			mutualmodel.addElement(theUser.getFirstName()+" "+theUser.getLastName());
+		if (!loggedUser.equals(profileUser)) {
+			
+			JLabel lblNewLabel_13 = new JLabel("Mutual connections("+usersconnection.mutualConnections().size()+")");
+			lblNewLabel_13.setBounds(709, 382, 130, 16);
+			panel.add(lblNewLabel_13);
+			
+			DefaultListModel<String> mutualmodel = new DefaultListModel<String>();
+			JList<String> listmutualconnections = new JList<String>();
+			listmutualconnections.setBackground(new Color(255, 250, 240));
+			listmutualconnections.setBounds(709, 409, 133, 127);
+			for (User theUser: usersconnection.mutualConnections()) {
+				mutualmodel.addElement(theUser.getFirstName()+" "+theUser.getLastName());
+			}
+			listmutualconnections.setModel(mutualmodel);
+			panel.add(listmutualconnections);
 		}
-		listmutualconnections.setModel(mutualmodel);
-		panel.add(listmutualconnections);
-		
-		JScrollBar scrollBar = new JScrollBar();
-		scrollBar.setBounds(821, 409, 21, 127);
-		panel.add(scrollBar);
 		
 		Icon help = new ImageIcon("Buttons_backgrounds/customer_support_40px.png");
-		JButton btnNewButton_1_1 = new JButton(help);
-		btnNewButton_1_1.setContentAreaFilled(false); 
-		btnNewButton_1_1.setFocusPainted(false); 
-		btnNewButton_1_1.setOpaque(false);
-		btnNewButton_1_1.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		btnNewButton_1_1.addActionListener(new ActionListener() {
+		JButton helpButton = new JButton(help);
+		helpButton.setContentAreaFilled(false); 
+		helpButton.setFocusPainted(false); 
+		helpButton.setOpaque(false);
+		helpButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		helpButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				try {
 					frame.setVisible(false);
-					new HelpGUI(tuser);
+					new HelpGUI(loggedUser);
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
 		});
-		btnNewButton_1_1.setBounds(824, 929, 46, 38);
-		panel.add(btnNewButton_1_1);
+		helpButton.setBounds(824, 929, 46, 38);
+		panel.add(helpButton);
 		
 		JLabel lblNewLabel_14 = new JLabel(new ImageIcon("label_backgrounds/email_20px.png"));
 		lblNewLabel_14.setBounds(85, 409, 28, 25);
@@ -459,8 +474,5 @@ public class FrontEndProfileGUI {
 		lblNewLabel.setIcon(new ImageIcon(imagerisizeb));
 		lblNewLabel.setBounds(0, 0, 887, 985);
 		panel.add(lblNewLabel);
-		
-		frame.setResizable(false);
-		frame.setTitle(auser.getMyAccount().getUsername());
 	}
 }
