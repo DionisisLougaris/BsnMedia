@@ -15,4 +15,9 @@ public class groupConversation extends Conversation{
 		this.theGroup = theGroup;
 	}
 	
+	public void addMessage(Message aMessage) {
+		Storage.saveMessage(aMessage, this);
+	}
+	
+	
 }

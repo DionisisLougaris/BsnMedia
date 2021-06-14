@@ -28,10 +28,12 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JRootPane;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.WindowConstants;
 
 import entities.*;
 import java.awt.SystemColor;
@@ -71,6 +73,8 @@ public class BackendProfileBossGUI {
 		frmStartingPage.getContentPane().setLayout(null);
 		frmStartingPage.setResizable(false);
 		frmStartingPage.setVisible(true);
+		
+		frmStartingPage.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		
 	    panel = new JPanel();
 		panel.setBackground(Color.WHITE);
@@ -236,7 +240,7 @@ public class BackendProfileBossGUI {
 			public void actionPerformed(ActionEvent e) {
 				
 				try {
-					new NotificationsGUI(boss);
+					new NotificationsGUI(boss,frmStartingPage);
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

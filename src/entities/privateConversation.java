@@ -28,4 +28,11 @@ public class privateConversation extends Conversation{
 	public void setDiscussant2(User discussant2) {
 		this.discussant2 = discussant2;
 	}
+
+
+	@Override
+	public void addMessage(Message aMessage) {
+		Storage.saveMessage(aMessage, this);
+		
+	}
 }

@@ -9,10 +9,7 @@ abstract public class Conversation extends Notification{
 	
 	
 	//Add a message to the message List
-	public void addMesage(Message newMessage) {
-		
-		allMessages.add(newMessage);
-	}
+	abstract public void addMessage(Message aMessage);
 
 
 	public ArrayList<Message> getAllMessages() {

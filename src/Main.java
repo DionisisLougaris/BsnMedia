@@ -57,29 +57,33 @@ public class Main {
 		theCompany.addUser(first5);
 		
 		
-		/*privateConversation conversation = new privateConversation(first, first2);
+		
+		
+		
+		privateConversation conversation = new privateConversation(first, first2);
 		Message firstMessage = new Message("Geiaaa", first);
+		conversation.addMessage(firstMessage);
 		Message firstMessage1 = new Message("Geiaaa", first2);
+		conversation.addMessage(firstMessage1);
 		Message firstMessage2 = new Message("Ti kaneis", first);
+		conversation.addMessage(firstMessage2);
 		Message firstMessage3 = new Message("Ola kala esy?", first2);
-		conversation.addMesage(firstMessage);
-		conversation.addMesage(firstMessage1);
-		conversation.addMesage(firstMessage2);
-		conversation.addMesage(firstMessage3);
+		conversation.addMessage(firstMessage3);
+
 		
 		//Storage.saveConversation(conversation);
 		
-		Storage.retrieveConversation(conversation);
+		System.out.println(Storage.retrieveConversation(conversation));
 		
-		//Πρεπει να δουμε αν θα μεινει το πεδιο ListOfConversations στον User και τι θα γινει με τι ανακτηση*/
+		//Πρεπει να δουμε αν θα μεινει το πεδιο ListOfConversations στον User και τι θα γινει με τι ανακτηση
 		
 
 		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					new WelcomeScreen_GUI(theCompany);
-					//new BackendProfileChiefGUI(first4);
+					//new WelcomeScreen_GUI(theCompany);
+					new BackendProfileBossGUI(first2);
 					} catch (Exception e) {
 					e.printStackTrace();
 				}

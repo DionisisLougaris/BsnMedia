@@ -555,7 +555,7 @@ public class BackendProfileChiefGUI {
 			}
 			else if(e.getSource().equals(notifsButton)) {
 				try {
-					new NotificationsGUI(chief);
+					new NotificationsGUI(chief,frmStartingPage);
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

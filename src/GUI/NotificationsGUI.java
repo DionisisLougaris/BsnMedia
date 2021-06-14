@@ -10,6 +10,7 @@ import java.util.TreeSet;
 
 import javax.swing.JFrame;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 
 import entities.Notification;
 import entities.User;
@@ -27,36 +28,18 @@ public class NotificationsGUI {
 
 	private JFrame frmNotifications;
 	private User user;
+	private JFrame backendFrame;
 
-	/**
-	 * Launch the application.
-	 *
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					NotificationsGUI window = new NotificationsGUI();
-					window.frmNotifications.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 * @throws IOException 
-	 */
-	public NotificationsGUI(User theUser) throws IOException {
-		initialize(theUser);
+	
+	public NotificationsGUI(User theUser,JFrame backendFrame) throws IOException {
+		initialize(theUser, backendFrame);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 * @throws IOException 
 	 */
-	private void initialize(User theUser) throws IOException {
+	private void initialize(User theUser,JFrame mainFrame) throws IOException {
 		frmNotifications = new JFrame();
 		frmNotifications.setTitle("Notifications");
 		frmNotifications.setResizable(false);
@@ -64,6 +47,7 @@ public class NotificationsGUI {
 		frmNotifications.setBounds(1325, 88, 200, 244);
 		frmNotifications.getContentPane().setLayout(null);
 		
+		backendFrame = mainFrame;
 		user = theUser;
 		
 		JList<String> list = new JList<String>();
@@ -88,6 +72,52 @@ public class NotificationsGUI {
 		btnNewButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String selectedNotificationString = list.getSelectedValue();
+				int index = list.getSelectedIndex();
+				Notification selectedNotification = null;
+				for(int i=0;i<user.getListOfNotifications().size();i++)
+				{
+					if(selectedNotificationString.equals(user.getListOfNotifications().get(i).getNotificationContent()))
+					{
+						selectedNotification=user.getListOfNotifications().get(i);
+						break;
+					}
+				}
+				if(selectedNotification != null)
+				{
+					user.getListOfNotifications().remove(selectedNotification);
+					if (index != -1) {
+						   listModel.remove(index);
+					}
+					if(selectedNotification.getAboutThisGroup()!=null)
+					{
+						try {
+							new GroupProfileGUI(user,selectedNotification.getAboutThisGroup());
+							backendFrame.dispose();
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+					}
+					else if(selectedNotification.getAboutThisUser()!=null)
+					{
+						try {
+							new FrontEndProfileGUI(user,selectedNotification.getAboutThisUser());
+							backendFrame.dispose();
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						
+					}
+						
+				}
+				else
+				{
+					String message = "You have not selected a notification!";
+					JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+					        JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 		btnNewButton.setBounds(66, 158, 66, 38);

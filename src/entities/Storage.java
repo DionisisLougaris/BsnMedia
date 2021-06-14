@@ -1,6 +1,11 @@
 package entities;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 public class Storage {
 
@@ -47,37 +52,36 @@ public class Storage {
 		return theCompany;
 	}
 	
-	//Saving each conversation in a unique file
-	public static void saveConversation(Conversation aConversation) {
-		try {
-			File conversationName;
-			if (aConversation instanceof groupConversation) {
-				conversationName = new File("Conversations/"+((groupConversation) aConversation).getTheGroup().getName()+".txt");
-			}else {
-				conversationName = new File("Conversations/"+((privateConversation)aConversation).getDiscussant1().getMyAccount().getUsername()+
-						"_"+((privateConversation)aConversation).getDiscussant2().getMyAccount().getUsername()+".txt");
-			}
-			FileWriter writer = new FileWriter(conversationName);
-			for(int i=0;i<aConversation.allMessages.size();i++)
-			{
-				writer.write(aConversation.allMessages.get(i).getContent());
-				writer.write("|");
-				writer.write(aConversation.allMessages.get(i).getTimesent().toString());
-				writer.write("|");
-				writer.write(aConversation.allMessages.get(i).getSender().getMyAccount().getUsername());
-				writer.write("|");
-				writer.write(System.lineSeparator());
-			}
-			writer.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public static void saveMessage(Message aMessage,Conversation aConversation) 
+	{
+		
+		String conversationName;
+		if (aConversation instanceof groupConversation) {
+			conversationName = "Conversations/"+((groupConversation) aConversation).getTheGroup().getName()+".txt";
+		}else {
+			conversationName = "Conversations/"+((privateConversation)aConversation).getDiscussant1().getMyAccount().getUsername()+
+					"_"+((privateConversation)aConversation).getDiscussant2().getMyAccount().getUsername()+".txt";
 		}
+		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String formatDateTime = aMessage.getTimesent().format(formatter);
+        
+		String messageModel = aMessage.getContent()+" | Date:"+formatDateTime+" | "+aMessage.getSender().getMyAccount().getUsername()+" | ";
+		String encryptedMessaModel = Encryption.encryptMessage(messageModel, aMessage.getTimesent().getSecond());
+		try(FileWriter fw = new FileWriter(conversationName, true);
+			    BufferedWriter bw = new BufferedWriter(fw);
+			    PrintWriter out = new PrintWriter(bw))
+			{
+			    out.println(encryptedMessaModel);
+			} catch (IOException e) {
+			    //exception handling left as an exercise for the reader
+			}
 	}
 	
 	//Retrieving each conversation for a unique file
-	public static void retrieveConversation(Conversation retrievedConversation) {
+	public static ArrayList<String> retrieveConversation(Conversation retrievedConversation) {
 		
+		ArrayList<String> convInString = new ArrayList<>();
 		try {
 			File conversationName;
 			if (retrievedConversation instanceof groupConversation) {
@@ -91,7 +95,8 @@ public class Storage {
 				String line;
 				line = reader.readLine();
 				while(line!=null) {
-					System.out.println(line);
+					//String decryptedMessage = Encryption.decryptMessage(encryptedMessage, shift)
+					convInString.add(line);
 					line = reader.readLine();
 				}
 				reader.close();
@@ -103,5 +108,6 @@ public class Storage {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return convInString;
 	}
 }

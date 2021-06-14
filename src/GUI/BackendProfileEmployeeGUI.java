@@ -530,7 +530,7 @@ public class BackendProfileEmployeeGUI {
 			}
 			else if(e.getSource().equals(notifsButton)) {
 				try {
-					new NotificationsGUI(employee);
+					new NotificationsGUI(employee,frmStartingPage);
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
