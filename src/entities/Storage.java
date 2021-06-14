@@ -69,20 +69,26 @@ public class Storage implements Serializable{
         
 		String messageModel = aMessage.getContent()+" | Date:"+formatDateTime+" | "+aMessage.getSender().getMyAccount().getUsername()+" | ";
 		String encryptedMessaModel = Encryption.encryptMessage(messageModel, aMessage.getTimesent().getSecond());
-		try(FileWriter fw = new FileWriter(conversationName, true);
-			    BufferedWriter bw = new BufferedWriter(fw);
-			    PrintWriter out = new PrintWriter(bw))
-			{
-			    out.println(encryptedMessaModel);
-			} catch (IOException e) {
-			    //exception handling left as an exercise for the reader
-			}
+		encryptedMessaModel = encryptedMessaModel + "|" + aMessage.getTimesent().getSecond() + "/";
+		try {
+			FileWriter fw = new FileWriter(conversationName, true);
+			BufferedWriter bw = new BufferedWriter(fw);
+			PrintWriter out = new PrintWriter(bw);
+			out.println(encryptedMessaModel);
+			out.close();
+			bw.close();
+			fw.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
 	}
 	
 	//Retrieving each conversation for a unique file
 	public static ArrayList<String> retrieveConversation(Conversation retrievedConversation) {
 		
 		ArrayList<String> convInString = new ArrayList<>();
+		
 		try {
 			File conversationName;
 			if (retrievedConversation instanceof groupConversation) {
@@ -97,7 +103,7 @@ public class Storage implements Serializable{
 				line = reader.readLine();
 				while(line!=null) {
 					//String decryptedMessage = Encryption.decryptMessage(encryptedMessage, shift)
-					convInString.add(line);
+					//convInString.add(line);
 					line = reader.readLine();
 				}
 				reader.close();
@@ -109,6 +115,7 @@ public class Storage implements Serializable{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		return convInString;
 	}
 }
