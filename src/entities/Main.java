@@ -57,6 +57,20 @@ public class Main implements Serializable{
 		theCompany.addUser(first4);
 		theCompany.addUser(first5);
 		
+		privateConversation conversation = new privateConversation(first, first2);
+		Message firstMessage = new Message("Geiaaa", first);
+		conversation.addMessage(firstMessage);
+		Message firstMessage1 = new Message("Geiaaa", first2);
+		conversation.addMessage(firstMessage1);
+		Message firstMessage2 = new Message("Ti kaneis", first);
+		conversation.addMessage(firstMessage2);
+		Message firstMessage3 = new Message("Ola kala esy?", first2);
+		conversation.addMessage(firstMessage3);
+		
+		//ArrayList<String> messages = new ArrayList<String>();
+		
+		//messages = Storage.retrieveConversation(conversation);
+		
 
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
