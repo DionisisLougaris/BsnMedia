@@ -61,6 +61,9 @@ public class EditCompanyGUI {
 		frame.setVisible(true);
 		frame.setTitle("Edit Company");
 		
+		ImageIcon logoimage = new ImageIcon("label_backgrounds/BSNlogo.jpg");
+		frame.setIconImage(logoimage.getImage());
+		
 		boss = theBoss;
 		
 		JButton btnChangeCompanyPhoto = new JButton("Change company photo");

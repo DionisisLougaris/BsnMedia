@@ -71,6 +71,9 @@ public class CompanyProfileGUI {
 		frame.setResizable(false);
 	    frame.setTitle("Company");
 	    frame.getContentPane().setLayout(null);
+	    
+	    ImageIcon logoimage = new ImageIcon("label_backgrounds/BSNlogo.jpg");
+	    frame.setIconImage(logoimage.getImage());
 		
 		theLoggedUser = myUser;
 		company = theCompany;

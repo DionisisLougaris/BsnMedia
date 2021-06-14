@@ -69,6 +69,9 @@ public class BackendProfileEmployeeGUI {
 		frmStartingPage.setResizable(false);
 		frmStartingPage.getContentPane().setLayout(null);
 		
+		ImageIcon logoimage = new ImageIcon("label_backgrounds/BSNlogo.jpg");
+		frmStartingPage.setIconImage(logoimage.getImage());
+		
 		employee = (Employee)aUser;
 		
 		panel = new JPanel();
@@ -160,6 +163,7 @@ public class BackendProfileEmployeeGUI {
 		Icon help = new ImageIcon("Buttons_backgrounds/customer_support_40px.png");
 		helpButton = new JButton(help);
 		helpButton.setContentAreaFilled(false); 
+		helpButton.setToolTipText("Do you want help? Click me.");
 		helpButton.setFocusPainted(false); 
 		helpButton.setOpaque(false);
 		helpButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -185,6 +189,7 @@ public class BackendProfileEmployeeGUI {
 		
 		Icon friends = new ImageIcon("Buttons_backgrounds/friends_30px.png");
 		requestsButton = new JButton(friends);
+		requestsButton.setToolTipText("Watch your connection requests");
 		requestsButton.setContentAreaFilled(false); 
 		requestsButton.setFocusPainted(false); 
 		requestsButton.setOpaque(false);
@@ -194,6 +199,7 @@ public class BackendProfileEmployeeGUI {
 		
 		Icon messages = new ImageIcon("Buttons_backgrounds/Messages_30px.png");
 		messagesButton = new JButton(messages);
+		messagesButton.setToolTipText("See your new messages");
 		messagesButton.setContentAreaFilled(false); 
 		messagesButton.setFocusPainted(false); 
 		messagesButton.setOpaque(false);
@@ -203,6 +209,7 @@ public class BackendProfileEmployeeGUI {
 		
 		Icon bell = new ImageIcon("Buttons_backgrounds/bell_30px.png");
 		notifsButton = new JButton(bell);
+		notifsButton.setToolTipText("Watch your notofications");
 		notifsButton.setContentAreaFilled(false); 
 		notifsButton.setFocusPainted(false); 
 		notifsButton.setOpaque(false);

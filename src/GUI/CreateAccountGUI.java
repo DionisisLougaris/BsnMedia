@@ -78,6 +78,9 @@ public class CreateAccountGUI {
 		frmRegisterNow.setLocation(dim.width/2-frmRegisterNow.getSize().width/2, dim.height/2-frmRegisterNow.getSize().height/2);
 		frmRegisterNow.setResizable(false);
 		
+		ImageIcon logoimage = new ImageIcon("label_backgrounds/BSNlogo.jpg");
+		frmRegisterNow.setIconImage(logoimage.getImage());
+		
 		theCompany = aCompany;
 		
 		txtCompanyCode = new JTextField();

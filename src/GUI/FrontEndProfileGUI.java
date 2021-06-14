@@ -65,8 +65,8 @@ public class FrontEndProfileGUI {
 		frame.setResizable(false);
 		frame.setTitle(aUser.getMyAccount().getUsername());
 		
-		
-			    
+		ImageIcon logoimage = new ImageIcon("label_backgrounds/BSNlogo.jpg");
+		frame.setIconImage(logoimage.getImage());	    
 			
 			   
 			  
