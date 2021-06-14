@@ -37,7 +37,7 @@ public class BackendProfileEmployeeGUI {
 
 	private JFrame frmStartingPage;
 	private JTextField searchField;
-	private JTextField textField;
+	private JTextField textPostGroup;
 	private JPanel panel, picturePanel;
 	private JLabel lblNewLabel;
 	private JButton searchButton, helpButton, requestsButton, messagesButton, notifsButton, editAccountButton, postButton, 
@@ -328,7 +328,7 @@ public class BackendProfileEmployeeGUI {
 							textArea.append("-----------------------------------------------------------------------------------------------------"+ "\n\r");
 							textArea.append(post.getContent()+" | "+post.getCreator().getFirstName()+" | "+post.getPostScope()+" | "+formatDateTime+ "\n\r");
 						}
-					 String groupToPost=textField.getText();
+					 String groupToPost=textPostGroup.getText();
 					 boolean found=false;
 					 for(int i=0;i<employee.getGroups().size();i++)
 					 {
@@ -367,11 +367,12 @@ public class BackendProfileEmployeeGUI {
 		radioGroup.add(PublicRadio);
 		radioGroup.add(rdbtnGroup);
 		
-		textField = new JTextField();
-		textField.setBackground(new Color(255, 250, 240));
-		textField.setColumns(10);
-		textField.setBounds(639, 780, 64, 25);
-		panel.add(textField);
+		textPostGroup = new JTextField();
+		textPostGroup.setBackground(new Color(255, 250, 240));
+		textPostGroup.setToolTipText("Compete the name of group that you want to post");
+		textPostGroup.setColumns(10);
+		textPostGroup.setBounds(639, 780, 64, 25);
+		panel.add(textPostGroup);
 		
 		checkprofileButton = new JButton("Check profile");
 		checkprofileButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -473,7 +474,8 @@ public class BackendProfileEmployeeGUI {
 		
 		Icon logout = new ImageIcon("Buttons_backgrounds/exit_50px.png");
 		disconnectButton = new JButton(logout);
-		disconnectButton.setContentAreaFilled(false); 
+		disconnectButton.setContentAreaFilled(false);
+		disconnectButton.setToolTipText("logout");
 		disconnectButton.setFocusPainted(false); 
 		disconnectButton.setOpaque(false);
 		disconnectButton.setCursor(new Cursor(Cursor.HAND_CURSOR));

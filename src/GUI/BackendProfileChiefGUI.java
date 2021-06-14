@@ -401,7 +401,8 @@ public class BackendProfileChiefGUI {
 		
 		Icon logout = new ImageIcon("Buttons_backgrounds/exit_50px.png");
 		disconnectButton = new JButton(logout);
-		disconnectButton.setContentAreaFilled(false); 
+	    disconnectButton.setContentAreaFilled(false);
+		disconnectButton.setToolTipText("logout");
 		disconnectButton.setFocusPainted(false); 
 		disconnectButton.setOpaque(false);
 		disconnectButton.setCursor(new Cursor(Cursor.HAND_CURSOR));

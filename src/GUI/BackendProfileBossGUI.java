@@ -389,6 +389,7 @@ public class BackendProfileBossGUI {
 		disconnectButton = new JButton(logout);
 		disconnectButton.setContentAreaFilled(false); 
 		disconnectButton.setFocusPainted(false); 
+		disconnectButton.setToolTipText("logout");
 		disconnectButton.setOpaque(false);
 		disconnectButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		disconnectButton.addActionListener(new ActionListener() {

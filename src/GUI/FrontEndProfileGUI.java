@@ -36,6 +36,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.Toolkit;
 
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -55,12 +56,20 @@ public class FrontEndProfileGUI {
 
 	private void initialize(User tUser, User aUser) throws IOException {
 		frame = new JFrame();
+		ImageIcon  imagelogo = new ImageIcon("label_backgrounds/BSNlogo");    
+		frame.setIconImage(imagelogo.getImage());    
 		frame.setBounds(100, 100, 893, 1020);
 		frame.setLocation(500, 0);
 		frame.getContentPane().setLayout(null);
 		frame.setVisible(true);
 		frame.setResizable(false);
 		frame.setTitle(aUser.getMyAccount().getUsername());
+		
+		
+			    
+			
+			   
+			  
 		
 		loggedUser = tUser; //The user who is connected
 		profileUser = aUser; //The other User who, we visit his profile
@@ -140,9 +149,7 @@ public class FrontEndProfileGUI {
 		Image imagerisizel = image.getImage().getScaledInstance(80, 45, 60) ;
 		ImageIcon imagebutton = new ImageIcon(imagerisizel);
 	    JButton buttongotomyprofile = new JButton(imagebutton);
-	    buttongotomyprofile.setBorderPainted(false);
 	    buttongotomyprofile.setFocusPainted(false);
-	    buttongotomyprofile.setContentAreaFilled(false);
 		buttongotomyprofile.setContentAreaFilled(false); 
 		buttongotomyprofile.setFocusPainted(false); 
 		buttongotomyprofile.setToolTipText("Go back to your Profile");
