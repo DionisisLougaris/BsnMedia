@@ -66,10 +66,6 @@ public class BackendProfileChiefGUI {
 	}
 	
 
-	/**
-	 * Initialize the contents of the frame.
-	 * @throws IOException 
-	 */
 	private void initialize() throws IOException {
 		frmStartingPage = new JFrame();
 		frmStartingPage.setTitle("Starting Page");
@@ -79,6 +75,7 @@ public class BackendProfileChiefGUI {
 		frmStartingPage.setResizable(false);
 		frmStartingPage.getContentPane().setLayout(null);
 		frmStartingPage.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		
 		ImageIcon logoimage = new ImageIcon("label_backgrounds/BSNlogo.jpg");
 		frmStartingPage.setIconImage(logoimage.getImage());
 		
@@ -419,7 +416,7 @@ public class BackendProfileChiefGUI {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				Storage.saveInBinaryFile(chief.getMyAccount().getMyCompany());
-				frmStartingPage.setVisible(false);
+				frmStartingPage.dispose();
 				try {
 					new WelcomeScreen_GUI(chief.getMyAccount().getMyCompany());
 				} catch (IOException e) {
@@ -542,16 +539,10 @@ public class BackendProfileChiefGUI {
 		editAccountButton.addActionListener(listener);
 		createProjectButton.addActionListener(listener);
 		helpButton.addActionListener(listener);
-		disconnectButton.addActionListener(listener);
 		checkprofileButton.addActionListener(listener);
 		sendMessageButton.addActionListener(listener);
 		sendRequestButton.addActionListener(listener);
 		postButton.addActionListener(listener);
-	}
-	
-	public void disconnectUser() throws IOException {
-		frmStartingPage.setVisible(false);
-		new WelcomeScreen_GUI(chief.getMyAccount().getMyCompany());
 	}
 	
 	
@@ -633,16 +624,7 @@ public class BackendProfileChiefGUI {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-			}
-			else if(e.getSource().equals(disconnectButton)) {
-				try {
-					disconnectUser();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
-			else if(e.getSource().equals(checkprofileButton)) {
+			}else if(e.getSource().equals(checkprofileButton)) {
 				
 				String selectedUserString = connectionsList.getSelectedValue();
 				User selectedUser = null;

@@ -46,6 +46,10 @@ public class NotificationsGUI {
 		frmNotifications.getContentPane().setBackground(new Color(255, 153, 102));
 		frmNotifications.setBounds(1325, 88, 200, 244);
 		frmNotifications.getContentPane().setLayout(null);
+		frmNotifications.setVisible(true); 
+		
+		ImageIcon logoimage = new ImageIcon("label_backgrounds/BSNlogo.jpg");
+		frmNotifications.setIconImage(logoimage.getImage());
 		
 		backendFrame = mainFrame;
 		user = theUser;
@@ -109,8 +113,7 @@ public class NotificationsGUI {
 							e1.printStackTrace();
 						}
 						
-					}
-						
+					}	
 				}
 				else
 				{
@@ -122,8 +125,6 @@ public class NotificationsGUI {
 		});
 		btnNewButton.setBounds(66, 158, 66, 38);
 		frmNotifications.getContentPane().add(btnNewButton);
-		
-		frmNotifications.setVisible(true); //den anoige diaforetika
 	}
 
 }

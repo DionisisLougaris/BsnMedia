@@ -71,6 +71,10 @@ public class GroupProfileGUI {
 		searchField.setBounds(293, 40, 286, 26);
 		frame.getContentPane().add(searchField);
 		searchField.setColumns(10);
+		frame.setResizable(false);
+		
+		ImageIcon logoimage = new ImageIcon("label_backgrounds/BSNlogo.jpg");
+		frame.setIconImage(logoimage.getImage());
 		
 		myUser = user;
 		myGroup = group;

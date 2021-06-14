@@ -60,8 +60,6 @@ public class PrivateChatGUI {
 		frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
 		ImageIcon logoimage = new ImageIcon("label_backgrounds/BSNlogo.jpg");
 		frame.setIconImage(logoimage.getImage());
-		ImageIcon logoimage2 = new ImageIcon("label_backgrounds/BSNlogo.jpg");
-		frame.setIconImage(logoimage2.getImage());
 		frame.getContentPane().setLayout(null);
 		frame.setVisible(true);
 		

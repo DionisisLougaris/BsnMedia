@@ -27,34 +27,11 @@ public class NewMessagesGUI {
 	private JFrame frmNewMessages;
 	private User user;
 
-	/**
-	 * Launch the application.
-	 *
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					NewMessagesGUI window = new NewMessagesGUI();
-					window.frmNewMessages.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
-	/*
-	 * Create the application.
-	 * @throws IOException 
-	 */
 	public NewMessagesGUI(User theUser) throws IOException {
 		initialize(theUser);
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 * @throws IOException 
-	 */
 	private void initialize(User theUser) throws IOException {
 		frmNewMessages = new JFrame();
 		frmNewMessages.getContentPane().setBackground(new Color(255, 153, 102));
@@ -62,6 +39,9 @@ public class NewMessagesGUI {
 		frmNewMessages.setTitle("New Messages");
 		frmNewMessages.setBounds(1200, 88, 200, 244);
 		frmNewMessages.getContentPane().setLayout(null);
+		
+		ImageIcon logoimage = new ImageIcon("label_backgrounds/BSNlogo.jpg");
+		frmNewMessages.setIconImage(logoimage.getImage());
 		
 		user = theUser;
 		

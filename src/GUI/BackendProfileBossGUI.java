@@ -45,9 +45,6 @@ public class BackendProfileBossGUI {
 
 	private JFrame frmStartingPage;
 	private JTextField textField;
-	private JButton btnNewButton_4;
-	private JButton btnNewButton_5;
-	private JButton btnNewButton_6;
 	private JRadioButton connectionsRadio,PublicRadio;
 	private JList<String> connectionsList;
 	private JList<String> suggestedList;
@@ -58,7 +55,6 @@ public class BackendProfileBossGUI {
 	postButton,checkprofileButton,sendMessageButton,sendRequestButton,disconnectButton,editCompanyInfoButton;
 	
 	private ArrayList<User> listOfConnections;
-	private JLabel lblNewLabel;
 
 	public BackendProfileBossGUI(User theBoss) throws IOException{
 		boss = (Boss)theBoss;

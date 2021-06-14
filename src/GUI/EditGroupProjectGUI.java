@@ -25,6 +25,7 @@ import javax.swing.JTextArea;
 import javax.swing.JScrollBar;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -56,6 +57,9 @@ public class EditGroupProjectGUI {
 		frame.setLocation(720, 300);
 		frame.setResizable(false);
 		frame.setTitle("Edit Group and Project");
+		
+		ImageIcon logoimage = new ImageIcon("label_backgrounds/BSNlogo.jpg");
+		frame.setIconImage(logoimage.getImage());
 		
 		myGroup = aGroup;
 		
@@ -294,8 +298,6 @@ public class EditGroupProjectGUI {
 				for (Employee addedEmployee: newMembers) {
 					if (!myGroup.isMember(addedEmployee)) {
 						addedEmployee.addGroupToEmployeesList(myGroup);
-						GeneralNotification addedToGroupNot = new GeneralNotification("You added in "+myGroup.getName()+" group!", myGroup, "addedToGroup");
-						addedEmployee.getListOfNotifications().add(addedToGroupNot);
 					}
 				}
 				

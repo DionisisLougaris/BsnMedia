@@ -59,9 +59,6 @@ public class WelcomeScreen_GUI {
 		panel_1.setBounds(0, 0, 460, 557);
 		panel.add(panel_1);
 		panel_1.setLayout(null);
-		BufferedImage imageicon = ImageIO.read(new File("label_backgrounds/BSNlogo.jpg"));
-		ImageIcon image = new ImageIcon(imageicon);
-		Image imagerisize = image.getImage().getScaledInstance(190, 190, 140) ;
 		
 		JLabel lblNewLabel_5 = new JLabel("\u00A9  2021 All rights reserved");
 		lblNewLabel_5.setForeground(new Color(255, 255, 255));

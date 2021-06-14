@@ -74,7 +74,11 @@ public class CreateProjectGUI {
 		textProjectName.setBorder(null);
 		textProjectName.setBounds(155, 83, 236, 16);
 		frame.getContentPane().add(textProjectName);
+		frame.setVisible(false);
 		textProjectName.setColumns(10);
+		
+		ImageIcon logoimage = new ImageIcon("label_backgrounds/BSNlogo.jpg");
+		frame.setIconImage(logoimage.getImage());
 		
 		pchief = chief;
 		
@@ -141,8 +145,6 @@ public class CreateProjectGUI {
 		lblNewLabel_4.setForeground(new Color(255, 255, 255));
 		lblNewLabel_4.setBounds(71, 370, 136, 16);
 		frame.getContentPane().add(lblNewLabel_4);
-		
-		
 		
 		
 		JList<String> selectedEmployeesList = new JList<String>();
@@ -333,8 +335,5 @@ public class CreateProjectGUI {
 		frame.getContentPane().add(separator_2);
 		
 		frame.setTitle("Create project");
-		
-		
-	
 	}
 }

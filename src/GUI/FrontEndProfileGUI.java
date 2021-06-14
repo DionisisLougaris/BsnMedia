@@ -58,7 +58,6 @@ public class FrontEndProfileGUI {
 
 	private void initialize(User tUser, User aUser) throws IOException {
 		frame = new JFrame();
-		  
 		frame.setBounds(100, 100, 893, 1020);
 		frame.setLocation(500, 0);
 		frame.getContentPane().setLayout(null);
@@ -66,15 +65,12 @@ public class FrontEndProfileGUI {
 		frame.setResizable(false);
 		frame.setTitle(aUser.getMyAccount().getUsername());
 		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		
 		ImageIcon logoimage = new ImageIcon("label_backgrounds/BSNlogo.jpg");
 		frame.setIconImage(logoimage.getImage());	    
 			
-			   
-			  
-		
 		loggedUser = tUser; //The user who is connected
 		profileUser = aUser; //The other User who, we visit his profile
-		
 		
 		Connection usersconnection = new Connection(loggedUser,profileUser);
 		
@@ -137,7 +133,6 @@ public class FrontEndProfileGUI {
 		});
 		searchbutton.setBounds(766, 27, 55, 44);
 		panel.add(searchbutton);
-		
 		
 		BufferedImage buttonIcon = null;
 		try {
@@ -212,7 +207,7 @@ public class FrontEndProfileGUI {
 		labelnamelastname.setBounds(108, 240, 504, 26);
 		panel.add(labelnamelastname);
 		
-		String currentlypost ="";
+		String currentlypost = "";
 		if(profileUser instanceof Employee)
 		{
 			currentlypost = "Employee ||"+profileUser.getCompanyPost();

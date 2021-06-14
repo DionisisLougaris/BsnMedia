@@ -1,6 +1,5 @@
 package GUI;
 
-import java.awt.EventQueue;
 import java.awt.event.*;
 import java.awt.Font;
 import java.awt.Image;
@@ -15,11 +14,8 @@ import java.net.URISyntaxException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JScrollBar;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -29,7 +25,6 @@ import entities.Employee;
 import entities.Help;
 import entities.User;
 
-import java.awt.TextArea;
 import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Desktop;
@@ -39,7 +34,6 @@ import javax.swing.Box;
 import javax.swing.ImageIcon;
 
 import java.awt.Color;
-import java.awt.SystemColor;
 import javax.swing.border.LineBorder;
 
 public class HelpGUI {
@@ -63,6 +57,8 @@ public class HelpGUI {
 		frame.getContentPane().setLayout(null);
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		frame.setResizable(false);
+		
 		ImageIcon logoimage = new ImageIcon("label_backgrounds/BSNlogo.jpg");
 		frame.setIconImage(logoimage.getImage());
 		
@@ -312,53 +308,183 @@ public class HelpGUI {
 		panel_2.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("Kosmidou Eleni");
+		lblNewLabel_2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblNewLabel_2.setForeground(Color.BLUE);
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblNewLabel_2.setBounds(445, 148, 117, 20);
+		lblNewLabel_2.addMouseListener(new MouseAdapter() {
+	       	 
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                try {
+                    Desktop.getDesktop().browse(new URI("https://www.linkedin.com/in/eleni-kosmidou-8227231b9"));
+                } catch (IOException | URISyntaxException e1) {
+                    e1.printStackTrace();
+                }
+            }
+		});
 		panel_2.add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel("Kwnstantinidi Styliana");
+		lblNewLabel_3.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblNewLabel_3.setForeground(Color.BLUE);
 		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblNewLabel_3.setBounds(445, 177, 163, 20);
+		lblNewLabel_3.addMouseListener(new MouseAdapter() {
+	       	 
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                try {
+                    Desktop.getDesktop().browse(new URI("https://www.linkedin.com/in/styliana-konstantinidi-6506411b8/"));
+                } catch (IOException | URISyntaxException e1) {
+                    e1.printStackTrace();
+                }
+            }
+		});
 		panel_2.add(lblNewLabel_3);
 		
 		JLabel lblNewLabel_4 = new JLabel("Lougaris Dionisis");
+		lblNewLabel_4.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblNewLabel_4.setForeground(Color.BLUE);
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblNewLabel_4.setBounds(445, 206, 117, 23);
+		lblNewLabel_4.addMouseListener(new MouseAdapter() {
+	       	 
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                try {
+                    Desktop.getDesktop().browse(new URI("https://www.linkedin.com/in/dionisis-lougaris/"));
+                } catch (IOException | URISyntaxException e1) {
+                    e1.printStackTrace();
+                }
+            }
+		});
 		panel_2.add(lblNewLabel_4);
 		
 		JLabel lblNewLabel_5 = new JLabel("Mazaraki Eleni");
+		lblNewLabel_5.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblNewLabel_5.setForeground(Color.BLUE);
 		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblNewLabel_5.setBounds(445, 235, 105, 20);
+		lblNewLabel_5.addMouseListener(new MouseAdapter() {
+	       	 
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                try {
+                    Desktop.getDesktop().browse(new URI("https://www.linkedin.com/in/eleni-mazaraki-a820211b9/"));
+                } catch (IOException | URISyntaxException e1) {
+                    e1.printStackTrace();
+                }
+            }
+		});
 		panel_2.add(lblNewLabel_5);
 		
 		JLabel lblNewLabel_6 = new JLabel("Machairas Panagiotis");
+		lblNewLabel_6.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblNewLabel_6.setForeground(Color.BLUE);
 		lblNewLabel_6.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_6.setBounds(687, 119, 134, 20);
+		lblNewLabel_6.setBounds(687, 119, 176, 20);
+		lblNewLabel_6.addMouseListener(new MouseAdapter() {
+	       	 
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                try {
+                    Desktop.getDesktop().browse(new URI("https://www.linkedin.com/in/panagiotis-machairas-9263841b9"));
+                } catch (IOException | URISyntaxException e1) {
+                    e1.printStackTrace();
+                }
+            }
+		});
 		panel_2.add(lblNewLabel_6);
 		
 		JLabel lblNewLabel_7 = new JLabel("Melissanidou Kwnstantina");
+		lblNewLabel_7.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblNewLabel_7.setForeground(Color.BLUE);
 		lblNewLabel_7.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblNewLabel_7.setBounds(687, 148, 176, 20);
+		lblNewLabel_7.addMouseListener(new MouseAdapter() {
+	       	 
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                try {
+                    Desktop.getDesktop().browse(new URI("https://www.linkedin.com/in/konstantina-melissanidou-b6b3981b8/"));
+                } catch (IOException | URISyntaxException e1) {
+                    e1.printStackTrace();
+                }
+            }
+		});
 		panel_2.add(lblNewLabel_7);
 		
 		JLabel lblNewLabel_8 = new JLabel("Mertzanhs Antwnhs");
+		lblNewLabel_8.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblNewLabel_8.setForeground(Color.BLUE);
 		lblNewLabel_8.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblNewLabel_8.setBounds(687, 177, 147, 20);
+		lblNewLabel_8.addMouseListener(new MouseAdapter() {
+	       	 
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                try {
+                    Desktop.getDesktop().browse(new URI("https://www.linkedin.com/in/antonis-mertzanis-713a87214/"));
+                } catch (IOException | URISyntaxException e1) {
+                    e1.printStackTrace();
+                }
+            }
+		});
 		panel_2.add(lblNewLabel_8);
 		
 		JLabel lblNewLabel_9 = new JLabel("Nanou Eleftheria");
+		lblNewLabel_9.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblNewLabel_9.setForeground(Color.BLUE);
 		lblNewLabel_9.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblNewLabel_9.setBounds(687, 209, 117, 20);
+		lblNewLabel_9.addMouseListener(new MouseAdapter() {
+	       	 
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                try {
+                    Desktop.getDesktop().browse(new URI("https://www.linkedin.com/in/eleftheria-nanou"));
+                } catch (IOException | URISyntaxException e1) {
+                    e1.printStackTrace();
+                }
+            }
+		});
 		panel_2.add(lblNewLabel_9);
 		
 		JLabel lblNewLabel_10 = new JLabel("Stefou Giwrgos-Giannis");
+		lblNewLabel_10.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblNewLabel_10.setForeground(Color.BLUE);
 		lblNewLabel_10.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblNewLabel_10.setBounds(687, 235, 151, 20);
+		lblNewLabel_10.addMouseListener(new MouseAdapter() {
+	       	 
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                try {
+                    Desktop.getDesktop().browse(new URI("https://www.linkedin.com/in/george-stefou-713a9a1b8/"));
+                } catch (IOException | URISyntaxException e1) {
+                    e1.printStackTrace();
+                }
+            }
+		});
 		panel_2.add(lblNewLabel_10);
 		
 		JLabel lblNewLabel_11 = new JLabel("Charakopoulos Minas-Theodoros");
+		lblNewLabel_11.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblNewLabel_11.setForeground(Color.BLUE);
 		lblNewLabel_11.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblNewLabel_11.setBounds(445, 119, 222, 20);
+		lblNewLabel_11.addMouseListener(new MouseAdapter() {
+	       	 
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                try {
+                    Desktop.getDesktop().browse(new URI("www.linkedin.com/in/minas-theodoros-charakopoulos-59b2531b9"));
+                } catch (IOException | URISyntaxException e1) {
+                    e1.printStackTrace();
+                }
+            }
+		});
 		panel_2.add(lblNewLabel_11);
 		
 		JLabel lblNewLabel_12 = new JLabel("\u00A9 Bsn Media 2021");
@@ -422,7 +548,7 @@ public class HelpGUI {
 		ButtonListener listener = new ButtonListener();
 		btnNewButton_2.addActionListener(listener);
 		
-		frame.setTitle("Help");
+		frame.setTitle("User's Suport");
 	}
 	
 	class ButtonListener implements ActionListener {

@@ -31,18 +31,12 @@ public class GroupChatGUI {
 	private static Group myGroup;
 
 	
-	/**
-	 * Create the application.
-	 */
 	public GroupChatGUI(Group aGroup,User aUser) {
 		myUser= aUser;
 		myGroup = aGroup;
 		initialize();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
 	private void initialize() {
 		frame = new JFrame();
 		frame.getContentPane().setBackground(Color.WHITE);
@@ -51,6 +45,10 @@ public class GroupChatGUI {
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
 		frame.setVisible(true);
+		frame.setResizable(false);
+		
+		ImageIcon logoimage = new ImageIcon("label_backgrounds/BSNlogo.jpg");
+		frame.setIconImage(logoimage.getImage());
 		
 		JLabel lblNewLabel = new JLabel("Your messages are encrypted");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));

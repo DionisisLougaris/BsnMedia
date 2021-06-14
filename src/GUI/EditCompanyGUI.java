@@ -59,6 +59,7 @@ public class EditCompanyGUI {
 		frame.setLocation(870, 200);
 		frame.getContentPane().setLayout(null);
 		frame.setVisible(true);
+		frame.setResizable(false);
 		frame.setTitle("Edit Company");
 		
 		ImageIcon logoimage = new ImageIcon("label_backgrounds/BSNlogo.jpg");

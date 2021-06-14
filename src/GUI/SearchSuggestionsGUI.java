@@ -12,6 +12,7 @@ import java.awt.Cursor;
 
 import javax.swing.JList;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -40,6 +41,10 @@ public class SearchSuggestionsGUI {
 		frame.setVisible(true);
 		frame.setLocation(920, 110);
 		frame.getContentPane().setLayout(null);
+		frame.setResizable(false);
+		
+		ImageIcon logoimage = new ImageIcon("label_backgrounds/BSNlogo.jpg");
+		frame.setIconImage(logoimage.getImage());
 		
 		SuggestedOptions = suggested;
 		loggedUser = theUser;

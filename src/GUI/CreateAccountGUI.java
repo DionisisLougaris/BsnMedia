@@ -199,6 +199,13 @@ public class CreateAccountGUI {
 		loginButton.setBorder(new LineBorder(new Color(255, 255, 255)));
 		loginButton.setForeground(new Color(255, 255, 255));
 		loginButton.setBounds(412, 446, 97, 25);
+		loginButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				frmRegisterNow.setVisible(false);
+			}
+		});
 		frmRegisterNow.getContentPane().add(loginButton);
 		
 		JRadioButton rdbtnEmployee= new JRadioButton("Employee");
@@ -477,16 +484,5 @@ public class CreateAccountGUI {
 			 	
 			}
 		});
-		
-		loginButton.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				
-				frmRegisterNow.setVisible(false);
-			}
-			
-		});
-		
 	}
 }

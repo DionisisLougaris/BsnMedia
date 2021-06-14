@@ -10,8 +10,6 @@ public class Main implements Serializable{
 
 	public static void main(String[] args) {
 		
-		
-		//Company theCompany = Storage.retrieveFromBinaryFile();
 		Company theCompany = new Company("IT Intelligence", "A Technology Company", "25012001", "6971657008", "Thessaloniki", "itintelligenceuom@gmail.com");
 		
 		Password thePassword = new Password("12345678", "minasch", "Minas", "Charakopoulos");
@@ -48,7 +46,7 @@ public class Main implements Serializable{
 		
 		Project p1= new Project("project name","this is the Description","deadline");
 		Group g1= new Group("group name",p1,first4);
-		g1.addMember(first);
+		first.addGroupToEmployeesList(g1);
 		first4.addGroupToSupervise(g1);
 		
 		theCompany.addCompanyGroups(g1);
@@ -63,8 +61,7 @@ public class Main implements Serializable{
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					//new WelcomeScreen_GUI(theCompany);
-					new FrontEndProfileGUI(first,first2);
+					new WelcomeScreen_GUI(theCompany);
 					} catch (Exception e) {
 					e.printStackTrace();
 				}

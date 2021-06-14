@@ -56,10 +56,7 @@ public class BackendProfileEmployeeGUI {
 		initialize(aUser);
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 * @throws IOException 
-	 */
+	
 	private void initialize(User aUser) throws IOException {
 		frmStartingPage = new JFrame();
 		frmStartingPage.setTitle("Starting Page");
@@ -69,6 +66,7 @@ public class BackendProfileEmployeeGUI {
 		frmStartingPage.setResizable(false);
 		frmStartingPage.getContentPane().setLayout(null);
 		frmStartingPage.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		
 		ImageIcon logoimage = new ImageIcon("label_backgrounds/BSNlogo.jpg");
 		frmStartingPage.setIconImage(logoimage.getImage());
 		
@@ -492,7 +490,7 @@ public class BackendProfileEmployeeGUI {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				Storage.saveInBinaryFile(employee.getMyAccount().getMyCompany());
-				frmStartingPage.setVisible(false);
+				frmStartingPage.dispose();
 				try {
 					new WelcomeScreen_GUI(employee.getMyAccount().getMyCompany());
 				} catch (IOException e) {
@@ -526,11 +524,6 @@ public class BackendProfileEmployeeGUI {
 		postButton.addActionListener(listener);
 	}
 	
-	public void disconnectUser() throws IOException {
-		frmStartingPage.setVisible(false);
-		new WelcomeScreen_GUI(employee.getMyAccount().getMyCompany());
-	}
-	
 	class ButtonListener implements ActionListener {
 
 		@Override
@@ -562,16 +555,7 @@ public class BackendProfileEmployeeGUI {
 			else if(e.getSource().equals(editAccountButton)) {
 				
 				new EditAccountGUI(employee, frmStartingPage);
-			}
-			else if(e.getSource().equals(disconnectButton)) {
-				try {
-					disconnectUser();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
-			else if(e.getSource().equals(checkprofileButton)) {
+			}else if(e.getSource().equals(checkprofileButton)) {
 				
 				String selectedUserString = connectionsList.getSelectedValue();
 				User selectedUser = null;
