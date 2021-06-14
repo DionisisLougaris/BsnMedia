@@ -1,14 +1,17 @@
 package entities;
 import java.awt.EventQueue;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import GUI.*;
 import entities.*;
 
-public class Main {
+public class Main implements Serializable{
 
 	public static void main(String[] args) {
 		
+		
+		//Company theCompany = Storage.retrieveFromBinaryFile();
 		Company theCompany = new Company("IT Intelligence", "A Technology Company", "25012001", "6971657008", "Thessaloniki", "itintelligenceuom@gmail.com");
 		
 		Password thePassword = new Password("12345678", "minasch", "Minas", "Charakopoulos");
@@ -33,18 +36,20 @@ public class Main {
 		
 		theCompany.setBoss(first2);
 		
-		/*Connection c = new Connection(first, first3);
+		Connection c = new Connection(first, first3);
 		Connection c1 = new Connection(first, first4);
 		Connection c2 = new Connection(first, first2);
 		c.manageConnectionRequest(true);
 		c1.manageConnectionRequest(true);
-		c2.manageConnectionRequest(true);*/
+		c2.manageConnectionRequest(true);
+		
 		first.addPost(new Post(first,"Γειά","public"));
 		
 		
 		Project p1= new Project("project name","this is the Description","deadline");
 		Group g1= new Group("group name",p1,first4);
 		g1.addMember(first);
+		first4.addGroupToSupervise(g1);
 		
 		theCompany.addCompanyGroups(g1);
 		
@@ -54,30 +59,12 @@ public class Main {
 		theCompany.addUser(first4);
 		theCompany.addUser(first5);
 		
-		
-		/*privateConversation conversation = new privateConversation(first, first2);
-		Message firstMessage = new Message("Geiaaa", first);
-		Message firstMessage1 = new Message("Geiaaa", first2);
-		Message firstMessage2 = new Message("Ti kaneis", first);
-		Message firstMessage3 = new Message("Ola kala esy?", first2);
-		conversation.addMesage(firstMessage);
-		conversation.addMesage(firstMessage1);
-		conversation.addMesage(firstMessage2);
-		conversation.addMesage(firstMessage3);
-		
-		//Storage.saveConversation(conversation);
-		
-		Storage.retrieveConversation(conversation);
-		
-		//Πρεπει να δουμε αν θα μεινει το πεδιο ListOfConversations στον User και τι θα γινει με τι ανακτηση*/
-		
 
-		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					 //new WelcomeScreen_GUI(theCompany);
-					new BackendProfileBossGUI(first2);
+					//new WelcomeScreen_GUI(theCompany);
+					new FrontEndProfileGUI(first,first2);
 					} catch (Exception e) {
 					e.printStackTrace();
 				}

@@ -78,7 +78,7 @@ public class BackendProfileChiefGUI {
 		frmStartingPage.setVisible(true);
 		frmStartingPage.setResizable(false);
 		frmStartingPage.getContentPane().setLayout(null);
-		
+		frmStartingPage.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		ImageIcon logoimage = new ImageIcon("label_backgrounds/BSNlogo.jpg");
 		frmStartingPage.setIconImage(logoimage.getImage());
 		
@@ -282,6 +282,7 @@ public class BackendProfileChiefGUI {
 		panel.add(rdbtnGroup);
 		
 		textArea = new JTextArea();
+		textArea.setEditable(false);
 		textArea.setWrapStyleWord(true);
 		textArea.setText("");
 		textArea.setLineWrap(true);
@@ -413,7 +414,20 @@ public class BackendProfileChiefGUI {
 		disconnectButton.setFocusPainted(false); 
 		disconnectButton.setOpaque(false);
 		disconnectButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		disconnectButton.setBounds(796, 169, 55, 54);
+		disconnectButton.setBounds(796, 155, 55, 54);
+		disconnectButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				Storage.saveInBinaryFile(chief.getMyAccount().getMyCompany());
+				frmStartingPage.setVisible(false);
+				try {
+					new WelcomeScreen_GUI(chief.getMyAccount().getMyCompany());
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
 		panel.add(disconnectButton);
 		
 		createProjectButton = new JButton("Create Project");
@@ -553,13 +567,46 @@ public class BackendProfileChiefGUI {
 					e1.printStackTrace();
 				}
 			}
-			else if(e.getSource().equals(messagesButton)) {
-				try {
-					new NewMessagesGUI(chief);
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+			else if (e.getSource().equals(sendMessageButton)) {
+							
+							String selectedUserString = connectionsList.getSelectedValue();
+							User selectedUser = null;
+							
+							for(User theUser: listOfConnections) {
+								String userFullName = theUser.getFirstName()+" "+theUser.getLastName();
+								
+								if (userFullName.equalsIgnoreCase(selectedUserString)) {
+									selectedUser = theUser;
+									break;
+								}
+							}
+							
+							if (selectedUser == null) {
+								 String message = "You have not selected any user!";
+									JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+									        JOptionPane.INFORMATION_MESSAGE);
+							}else {
+								ArrayList<Conversation> listOfConversation = chief.getListOfConversations();
+								Conversation selectedUserToChat = null;
+								
+								for (Conversation theConversation: listOfConversation) {
+									
+									if ((((privateConversation)theConversation).getDiscussant1().equals(chief) && ((privateConversation)theConversation).getDiscussant2().equals(selectedUser)) ||
+										(((privateConversation)theConversation).getDiscussant2().equals(chief) && ((privateConversation)theConversation).getDiscussant1().equals(selectedUser))) {
+										
+										selectedUserToChat = theConversation;
+										break;
+									}
+								}
+								
+								if(selectedUserToChat == null) {
+									 String message = "Something went Wrong!";
+										JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+										        JOptionPane.INFORMATION_MESSAGE);
+								}else {
+									new PrivateChatGUI(selectedUser, chief, selectedUserToChat);
+								}
+							}
 			}
 			else if(e.getSource().equals(notifsButton)) {
 				try {

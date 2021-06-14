@@ -27,16 +27,16 @@ import entities.User;
 public class GroupChatGUI {
 
 	private JFrame frame;
-	private User myUser;
-	private Group myGroup;
+	private static User myUser;
+	private static Group myGroup;
 
 	
 	/**
 	 * Create the application.
 	 */
-	public GroupChatGUI(Group myGroup,User myUser) {
-		this.myUser= myUser;
-		this.myGroup = myGroup;
+	public GroupChatGUI(Group aGroup,User aUser) {
+		myUser= aUser;
+		myGroup = aGroup;
 		initialize();
 	}
 
@@ -51,18 +51,6 @@ public class GroupChatGUI {
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
 		frame.setVisible(true);
-		
-		JButton btnNewButton = new JButton("Go to User Profile");
-		btnNewButton.setContentAreaFilled(false); 
-		btnNewButton.setFocusPainted(false); 
-		btnNewButton.setOpaque(false);
-		btnNewButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnNewButton.setBounds(522, 14, 133, 25);
-		frame.getContentPane().add(btnNewButton);
 		
 		JLabel lblNewLabel = new JLabel("Your messages are encrypted");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -87,6 +75,7 @@ public class GroupChatGUI {
 		panel_1.setLayout(null);
 		
 		JTextArea textArea = new JTextArea();
+		textArea.setEditable(false);
 		textArea.setLineWrap(true);
 		textArea.setWrapStyleWord(true);
 		textArea.setBounds(0, 0, 619, 493);
@@ -127,7 +116,7 @@ public class GroupChatGUI {
 				textArea.setText(""); 
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 		        String formatDateTime = myMessage.getTimesent().format(formatter);
-				textArea.append(myMessage.getContent()+" | Date:"+formatDateTime+" | "+myMessage.getSender().getMyAccount().getUsername()+" | ");
+				textArea.append(myMessage.getContent()+" | Date:"+formatDateTime+" | "+myMessage.getSender().getMyAccount().getUsername()+" | \n");
 			}
 		});
 		btnNewButton_1_1_1.setBounds(567, 566, 52, 52);

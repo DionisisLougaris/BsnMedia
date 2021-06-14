@@ -1,9 +1,10 @@
 package entities;
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.*;
 
-abstract public class Conversation extends Notification{
+abstract public class Conversation extends Notification implements Serializable{
 	
 	protected ArrayList<Message> allMessages = new ArrayList<Message>();
 	

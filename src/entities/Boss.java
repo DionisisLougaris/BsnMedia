@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.*;
 
 import javax.imageio.ImageIO;
@@ -14,7 +15,7 @@ import javax.swing.JOptionPane;
 
 
 
-public class Boss extends User{
+public class Boss extends User implements Serializable{
 
 	
 	//Constructor for Boss class

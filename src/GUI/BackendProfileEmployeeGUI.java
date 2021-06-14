@@ -68,7 +68,7 @@ public class BackendProfileEmployeeGUI {
 		frmStartingPage.setVisible(true);
 		frmStartingPage.setResizable(false);
 		frmStartingPage.getContentPane().setLayout(null);
-		
+		frmStartingPage.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		ImageIcon logoimage = new ImageIcon("label_backgrounds/BSNlogo.jpg");
 		frmStartingPage.setIconImage(logoimage.getImage());
 		
@@ -256,6 +256,7 @@ public class BackendProfileEmployeeGUI {
 		panel.add(lblNewLabel_9_1);
 		
 		JTextArea textArea = new JTextArea();
+		textArea.setEditable(false);
 		textArea.setLineWrap(true);
 		textArea.setWrapStyleWord(true);
 		textArea.setText("");
@@ -487,6 +488,19 @@ public class BackendProfileEmployeeGUI {
 		disconnectButton.setOpaque(false);
 		disconnectButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		disconnectButton.setBounds(796, 169, 55, 54);
+		disconnectButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				Storage.saveInBinaryFile(employee.getMyAccount().getMyCompany());
+				frmStartingPage.setVisible(false);
+				try {
+					new WelcomeScreen_GUI(employee.getMyAccount().getMyCompany());
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
 		panel.add(disconnectButton);
 
 	
@@ -585,7 +599,7 @@ public class BackendProfileEmployeeGUI {
 					frmStartingPage.setVisible(false);
 				}
 			}
-			else if(e.getSource().equals(sendMessageButton)) {
+			else if (e.getSource().equals(sendMessageButton)) {
 				
 				String selectedUserString = connectionsList.getSelectedValue();
 				User selectedUser = null;
@@ -622,7 +636,7 @@ public class BackendProfileEmployeeGUI {
 							JOptionPane.showMessageDialog(new JFrame(), message, "Message",
 							        JOptionPane.INFORMATION_MESSAGE);
 					}else {
-						new PrivateChatGUI(employee, selectedUser, selectedUserToChat);
+						new PrivateChatGUI(selectedUser, employee, selectedUserToChat);
 					}
 				}
 			}

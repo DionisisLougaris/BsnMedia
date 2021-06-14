@@ -69,6 +69,7 @@ public class CompanyProfileGUI {
 		frame.setLocation(500, 0);
 		frame.setVisible(true);
 		frame.setResizable(false);
+		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 	    frame.setTitle("Company");
 	    frame.getContentPane().setLayout(null);
 	    

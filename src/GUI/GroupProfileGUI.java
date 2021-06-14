@@ -63,6 +63,7 @@ public class GroupProfileGUI {
 		frame.getContentPane().setBackground(Color.WHITE);
 		frame.setBounds(100, 100, 893, 1020);
 		frame.setLocation(500, 0);
+		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.setVisible(true);
 		searchField = new JTextField();

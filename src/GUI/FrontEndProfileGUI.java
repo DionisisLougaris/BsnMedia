@@ -12,10 +12,12 @@ import javax.swing.JTextField;
 import entities.Boss;
 import entities.Chief;
 import entities.Connection;
+import entities.Conversation;
 import entities.Employee;
 import entities.Group;
 import entities.Post;
 import entities.User;
+import entities.privateConversation;
 
 import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
@@ -56,15 +58,14 @@ public class FrontEndProfileGUI {
 
 	private void initialize(User tUser, User aUser) throws IOException {
 		frame = new JFrame();
-		ImageIcon  imagelogo = new ImageIcon("label_backgrounds/BSNlogo");    
-		frame.setIconImage(imagelogo.getImage());    
+		  
 		frame.setBounds(100, 100, 893, 1020);
 		frame.setLocation(500, 0);
 		frame.getContentPane().setLayout(null);
 		frame.setVisible(true);
 		frame.setResizable(false);
 		frame.setTitle(aUser.getMyAccount().getUsername());
-		
+		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		ImageIcon logoimage = new ImageIcon("label_backgrounds/BSNlogo.jpg");
 		frame.setIconImage(logoimage.getImage());	    
 			
@@ -358,9 +359,29 @@ public class FrontEndProfileGUI {
 				buttonchat.setCursor(new Cursor(Cursor.HAND_CURSOR));
 				buttonchat.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						
-						new PrivateChatGUI(profileUser, loggedUser, usersconnection.getAboutThisConversation());
-					}
+					
+								ArrayList<Conversation> listOfConversation = loggedUser.getListOfConversations();
+								Conversation selectedUserToChat = null;
+								
+								for (Conversation theConversation: listOfConversation) {
+									
+									if ((((privateConversation)theConversation).getDiscussant1().equals(loggedUser) && ((privateConversation)theConversation).getDiscussant2().equals(profileUser)) ||
+										(((privateConversation)theConversation).getDiscussant2().equals(loggedUser) && ((privateConversation)theConversation).getDiscussant1().equals(profileUser))) {
+										
+										selectedUserToChat = theConversation;
+										break;
+									}
+								}
+								
+								if(selectedUserToChat == null) {
+									 String message = "Something went Wrong!";
+										JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+										        JOptionPane.INFORMATION_MESSAGE);
+								}else {
+									new PrivateChatGUI(profileUser, loggedUser, selectedUserToChat);
+								}
+							}
+				
 				});
 				buttonchat.setBounds(620, 313, 62, 25);
 				panel.add(buttonchat);

@@ -1,8 +1,9 @@
 package entities;
 
 import java.io.File;
+import java.io.Serializable;
 
-public class groupConversation extends Conversation{
+public class groupConversation extends Conversation implements Serializable{
 
 	private Group theGroup; //The group for which the group chat corresponds
 

@@ -1,5 +1,6 @@
 package entities;
 
+import java.io.Serializable;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -12,7 +13,7 @@ import javax.mail.internet.MimeMessage;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-public class Help {
+public class Help implements Serializable{
 	
 	private String authorName;
 	private String authorEmail;

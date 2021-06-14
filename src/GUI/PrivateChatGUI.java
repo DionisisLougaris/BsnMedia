@@ -34,23 +34,9 @@ public class PrivateChatGUI {
 	private JFrame frame;
 	private static User receiver;
 	private static User sender;
-	private static Conversation convo; 
+	private static Conversation convo;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					PrivateChatGUI window = new PrivateChatGUI(receiver, sender, convo);
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
 
 	/**
 	 * Create the application.
@@ -58,6 +44,7 @@ public class PrivateChatGUI {
 	public PrivateChatGUI(User aReceiver, User aSender, Conversation aConvo) {
 		receiver = aReceiver;
 		sender = aSender;
+		convo = aConvo;
 		initialize();
 	}
 
@@ -68,29 +55,15 @@ public class PrivateChatGUI {
 		frame = new JFrame();
 		frame.getContentPane().setBackground(Color.WHITE);
 		frame.setBounds(100, 100, 686, 795);
+		frame.setResizable(false);
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
+		ImageIcon logoimage = new ImageIcon("label_backgrounds/BSNlogo.jpg");
+		frame.setIconImage(logoimage.getImage());
+		ImageIcon logoimage2 = new ImageIcon("label_backgrounds/BSNlogo.jpg");
+		frame.setIconImage(logoimage2.getImage());
 		frame.getContentPane().setLayout(null);
 		frame.setVisible(true);
-		
-		JButton btnNewButton = new JButton("Go to User Profile");
-		btnNewButton.setContentAreaFilled(false); 
-		btnNewButton.setFocusPainted(false); 
-		btnNewButton.setOpaque(false);
-		btnNewButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				try {
-					new FrontEndProfileGUI(sender, receiver);
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				frame.setVisible(false);
-			}
-		});
-		btnNewButton.setBounds(522, 14, 133, 25);
-		frame.getContentPane().add(btnNewButton);
 		
 		JLabel lblNewLabel = new JLabel("Your messages are encrypted");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -114,6 +87,7 @@ public class PrivateChatGUI {
 		panel_1.setLayout(null);
 		
 		JTextArea textArea = new JTextArea();
+		textArea.setEditable(false);
 		textArea.setLineWrap(true);
 		textArea.setWrapStyleWord(true);
 		textArea.setText("");
@@ -152,28 +126,15 @@ public class PrivateChatGUI {
 				String myText = textArea_1.getText();
 				Message myMessage = new Message(myText,sender);
 				convo.addMessage(myMessage);
-				textArea.setText(""); 
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 		        String formatDateTime = myMessage.getTimesent().format(formatter);
-				textArea.append(myMessage.getContent()+" | Date:"+formatDateTime+" | "+myMessage.getSender().getMyAccount().getUsername()+" | ");
-
+				textArea.append(myMessage.getContent()+" | Date:"+formatDateTime+" | "+myMessage.getSender().getMyAccount().getUsername()+" | \n");
 			}
 		});
 		btnNewButton_1_1_1.setBounds(567, 569, 52, 52);
 		panel.add(btnNewButton_1_1_1);
 		
 		Icon help = new ImageIcon("Buttons_backgrounds/customer_support_40px.png");
-		JButton btnNewButton_1_1 = new JButton(help);
-		btnNewButton_1_1.setContentAreaFilled(false); 
-		btnNewButton_1_1.setFocusPainted(false); 
-		btnNewButton_1_1.setOpaque(false);
-		btnNewButton_1_1.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		btnNewButton_1_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnNewButton_1_1.setBounds(609, 749, 46, 38);
-		frame.getContentPane().add(btnNewButton_1_1);
 		
 		Icon lock = new ImageIcon("label_backgrounds/lock_32px.png");
 		JLabel lblNewLabel_2 = new JLabel(lock);
