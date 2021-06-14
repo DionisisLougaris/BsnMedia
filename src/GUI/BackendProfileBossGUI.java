@@ -33,6 +33,7 @@ import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.WindowConstants;
 
 import entities.*;
@@ -73,6 +74,9 @@ public class BackendProfileBossGUI {
 		frmStartingPage.getContentPane().setLayout(null);
 		frmStartingPage.setResizable(false);
 		frmStartingPage.setVisible(true);
+		
+		ImageIcon logoimage = new ImageIcon("label_backgrounds/BSNlogo.jpg");
+		frmStartingPage.setIconImage(logoimage.getImage());
 		
 		frmStartingPage.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		
@@ -138,20 +142,20 @@ public class BackendProfileBossGUI {
 		panel.add(searchButton);
 		
 		
-		JTextArea textArea = new JTextArea();
-		textArea.setLineWrap(true);
-		textArea.setWrapStyleWord(true);
-		textArea.setText("");
+		JTextArea textPost = new JTextArea();
+		textPost.setLineWrap(true);
+		textPost.setWrapStyleWord(true);
+		textPost.setText("");
 		for( Post post : boss.returnAllPosts())
 		{
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 	        String formatDateTime = post.getTimestamp().format(formatter);
-			textArea.append("-----------------------------------------------------------------------------------------------------"+ "\n\r");
-			textArea.append(post.getContent()+" | "+post.getCreator().getFirstName()+" | "+post.getPostScope()+" | "+formatDateTime+ "\n\r");
+	        textPost.append("-----------------------------------------------------------------------------------------------------"+ "\n\r");
+	        textPost.append(post.getContent()+" | "+post.getCreator().getFirstName()+" | "+post.getPostScope()+" | "+formatDateTime+ "\n\r");
 		}
-		textArea.setBackground(new Color(255, 250, 240));
-		textArea.setBounds(427, 213, 424, 409);
-		panel.add(textArea);
+		textPost.setBackground(new Color(255, 250, 240));
+		textPost.setBounds(427, 213, 424, 409);
+		panel.add(textPost);
 		
 		JLabel nameLabel = new JLabel(boss.getFirstName()+" "+boss.getLastName());
 		nameLabel.setFont(new Font("Tahoma", Font.PLAIN, 19));
@@ -168,7 +172,8 @@ public class BackendProfileBossGUI {
 		
 		Icon help = new ImageIcon("Buttons_backgrounds/customer_support_40px.png");
 		helpButton = new JButton(help);
-		helpButton.setContentAreaFilled(false); 
+		helpButton.setContentAreaFilled(false);
+		helpButton.setToolTipText("Do you want help? Click me.");
 		helpButton.setFocusPainted(false); 
 		helpButton.setOpaque(false);
 		helpButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -189,6 +194,7 @@ public class BackendProfileBossGUI {
 
 		Icon friends = new ImageIcon("Buttons_backgrounds/friends_30px.png");
 		requestsButton = new JButton(friends);
+		requestsButton.setToolTipText("Watch your connection requests");
 		requestsButton.setContentAreaFilled(false); 
 		requestsButton.setFocusPainted(false); 
 		requestsButton.setOpaque(false);
@@ -210,6 +216,7 @@ public class BackendProfileBossGUI {
 		
 		Icon messages = new ImageIcon("Buttons_backgrounds/Messages_30px.png");
 	    messagesButton = new JButton(messages);
+	    messagesButton.setToolTipText("See your new messages");
 	    messagesButton.setContentAreaFilled(false); 
 	    messagesButton.setFocusPainted(false); 
 	    messagesButton.setOpaque(false);
@@ -231,6 +238,7 @@ public class BackendProfileBossGUI {
 		
 		Icon bell = new ImageIcon("Buttons_backgrounds/bell_30px.png");
 		notifsButton = new JButton(bell);
+		notifsButton.setToolTipText("Watch your notofications");
 		notifsButton.setContentAreaFilled(false); 
 		notifsButton.setFocusPainted(false); 
 		notifsButton.setOpaque(false);
@@ -330,16 +338,16 @@ public class BackendProfileBossGUI {
 						String myText = writePostArea.getText();
 						Post myPost = new Post(boss,myText,radioGroup.getSelection().getActionCommand());
 						boss.addPost(myPost);
-						textArea.setText(""); 
+						textPost.setText(""); 
 					    for( Post post : boss.returnAllPosts())
 						{
 							DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 					        String formatDateTime = post.getTimestamp().format(formatter);
-							textArea.append("-----------------------------------------------------------------------------------------------------"+ "\n\r");
-							textArea.append(post.getContent()+" | "+post.getCreator().getFirstName()+" | "+post.getPostScope()+" | "+formatDateTime+ "\n\r");
+					        textPost.append("-----------------------------------------------------------------------------------------------------"+ "\n\r");
+					        textPost.append(post.getContent()+" | "+post.getCreator().getFirstName()+" | "+post.getPostScope()+" | "+formatDateTime+ "\n\r");
 						}
-						textArea.setBackground(new Color(255, 250, 240));
-						textArea.setBounds(427, 213, 424, 409);	
+					    textPost.setBackground(new Color(255, 250, 240));
+					    textPost.setBounds(427, 213, 424, 409);	
 				   }
 				   else
 				   {

@@ -49,6 +49,9 @@ public class ConnectionRequestsGUI {
 		frmConnectionRequests.setBounds(1060, 88, 200, 244);
 		frmConnectionRequests.getContentPane().setLayout(null);
 		
+		ImageIcon logoimage = new ImageIcon("label_backgrounds/BSNlogo.jpg");
+		frmConnectionRequests.setIconImage(logoimage.getImage());
+		
 		user = theUser;
 		
 		list = new JList<String>();

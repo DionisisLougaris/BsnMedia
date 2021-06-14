@@ -63,6 +63,9 @@ public class HelpGUI {
 		frame.getContentPane().setLayout(null);
 		frame.setVisible(true);
 		
+		ImageIcon logoimage = new ImageIcon("label_backgrounds/BSNlogo.jpg");
+		frame.setIconImage(logoimage.getImage());
+		
 		myUser = user;
 		
 		JPanel panel = new JPanel();
@@ -72,16 +75,17 @@ public class HelpGUI {
 		panel.setLayout(null);
 		
 		
-		JButton btnNewButton_1 = new JButton();
+		JButton btnlogoback = new JButton();
 		BufferedImage imageicon2 = ImageIO.read(new File("label_backgrounds/BSNlogo.jpg"));
 		ImageIcon image2 = new ImageIcon(imageicon2);
 		Image imagerisize2 = image2.getImage().getScaledInstance(110, 110, 170) ;
-		btnNewButton_1.setIcon(new ImageIcon(imagerisize2));
-		btnNewButton_1.setContentAreaFilled(false); 
-		btnNewButton_1.setFocusPainted(false); 
-		btnNewButton_1.setOpaque(false);
-		btnNewButton_1.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		btnNewButton_1.addActionListener(new ActionListener() {
+		btnlogoback.setIcon(new ImageIcon(imagerisize2));
+		btnlogoback.setContentAreaFilled(false); 
+		btnlogoback.setToolTipText("Go back to your profile");
+		btnlogoback.setFocusPainted(false); 
+		btnlogoback.setOpaque(false);
+		btnlogoback.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		btnlogoback.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//Closing previous GUI
 				frame.setVisible(false);
@@ -115,8 +119,8 @@ public class HelpGUI {
 				}
 			}
 		});
-		btnNewButton_1.setBounds(22, 11, 127, 122);
-		panel.add(btnNewButton_1);
+		btnlogoback.setBounds(22, 11, 127, 122);
+		panel.add(btnlogoback);
 		
 		JLabel lblNewLabel_13 = new JLabel("Frequently asked questions:");
 		lblNewLabel_13.setFont(new Font("Tahoma", Font.BOLD, 22));
@@ -417,6 +421,8 @@ public class HelpGUI {
 		
 		ButtonListener listener = new ButtonListener();
 		btnNewButton_2.addActionListener(listener);
+		
+		frame.setTitle("Help");
 	}
 	
 	class ButtonListener implements ActionListener {
