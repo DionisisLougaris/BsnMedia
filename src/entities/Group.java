@@ -21,8 +21,8 @@ public class Group implements Serializable{
 		this.name = name;
 		this.myProject = myProject;
 		this.supervisor = supervisor;
-		//setting value to 0 before rating
-		this.rating=0;
+		//setting value to -1 before rating
+		this.rating = -1;
 	}
 	
 

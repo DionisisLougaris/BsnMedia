@@ -555,14 +555,6 @@ public class BackendProfileChiefGUI {
 		panel.add(editGroup);
 		
 		
-		
-		
-		
-		
-		
-		
-		
-
 		ButtonListener listener = new ButtonListener();
 		requestsButton.addActionListener(listener);
 		messagesButton.addActionListener(listener);

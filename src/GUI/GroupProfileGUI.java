@@ -118,7 +118,16 @@ public class GroupProfileGUI {
 		slider.setBounds(189, 346, 200, 26);
 		frame.getContentPane().add(slider);
 		
-		JLabel lblNewLabel_8 = new JLabel("Not rated yet!");
+		JLabel lblNewLabel_7 = new JLabel("Group rating: ");
+		lblNewLabel_7.setBounds(550, 350, 86, 16);
+		frame.getContentPane().add(lblNewLabel_7);
+		
+		JLabel lblNewLabel_8 = new JLabel();
+		if (myGroup.getRating() == -1) {
+			lblNewLabel_8.setText("Not rated yet!");
+		}else {
+			lblNewLabel_8.setText(String.valueOf(myGroup.getRating()));
+		}
 		lblNewLabel_8.setBounds(648, 350, 125, 16);
 		frame.getContentPane().add(lblNewLabel_8);
 		
@@ -145,15 +154,8 @@ public class GroupProfileGUI {
 					String message = "You have successfully rated "+myGroup.getName()+"!\n All members have been notified!";
 					JOptionPane.showMessageDialog(new JFrame(), message, "Message",
 					        JOptionPane.INFORMATION_MESSAGE);
-					if(myGroup.getRating()!=0)
-					{
-						lblNewLabel_8.setText(String.valueOf(myGroup.getRating()));
-					}
-					else
-					{
-						lblNewLabel_8.setText("Group not rated yet!");
-					}
-					
+						
+					lblNewLabel_8.setText(String.valueOf(myGroup.getRating()));					
 					}else {
 						String message = "Please come back to rate when project is finished!";
 						JOptionPane.showMessageDialog(new JFrame(), message, "Message",
@@ -361,10 +363,6 @@ public class GroupProfileGUI {
 		});
 		frame.getContentPane().add(btnNewButton);
 		
-		
-		JLabel lblNewLabel_7 = new JLabel("Group rating: ");
-		lblNewLabel_7.setBounds(550, 350, 86, 16);
-		frame.getContentPane().add(lblNewLabel_7);
 		
 		JLabel lblNewLabel_11 = new JLabel("");
 		BufferedImage imagebackground = ImageIO.read(new File("label_backgrounds/background.jpg"));
