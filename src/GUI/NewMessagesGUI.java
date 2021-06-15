@@ -56,7 +56,7 @@ public class NewMessagesGUI {
 		frmNewMessages.setBounds(1200, 88, 212, 276);
 		frmNewMessages.getContentPane().setLayout(null);
 		
-		ImageIcon logoimage = new ImageIcon("label_backgrounds/BSNlogo.jpg");
+		ImageIcon logoimage = new ImageIcon("label_backgrounds/bsn_32px.jpg");
 		frmNewMessages.setIconImage(logoimage.getImage());
 		
 		user = theUser;

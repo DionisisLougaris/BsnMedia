@@ -80,7 +80,7 @@ public class ForgotPasswordGUI {
 		frmForgotPassword.setResizable(false);
 		frmForgotPassword.getContentPane().setLayout(null);
 		
-		ImageIcon logoimage = new ImageIcon("label_backgrounds/BSNlogo.jpg");
+		ImageIcon logoimage = new ImageIcon("label_backgrounds/bsn_32px.jpg");
 		frmForgotPassword.setIconImage(logoimage.getImage());
 		
 		theCompany = aCompany;

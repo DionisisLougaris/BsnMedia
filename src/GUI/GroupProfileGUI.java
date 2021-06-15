@@ -73,7 +73,7 @@ public class GroupProfileGUI {
 		searchField.setColumns(10);
 		frame.setResizable(false);
 		
-		ImageIcon logoimage = new ImageIcon("label_backgrounds/BSNlogo.jpg");
+		ImageIcon logoimage = new ImageIcon("label_backgrounds/bsn_32px.jpg");
 		frame.setIconImage(logoimage.getImage());
 		
 		myUser = user;
@@ -118,6 +118,19 @@ public class GroupProfileGUI {
 		slider.setBounds(189, 346, 200, 26);
 		frame.getContentPane().add(slider);
 		
+		JLabel lblNewLabel_7 = new JLabel("Group rating: ");
+		lblNewLabel_7.setBounds(550, 350, 86, 16);
+		frame.getContentPane().add(lblNewLabel_7);
+		
+		JLabel lblNewLabel_8 = new JLabel();
+		if (myGroup.getRating() == -1) {
+			lblNewLabel_8.setText("Not rated yet!");
+		}else {
+			lblNewLabel_8.setText(String.valueOf(myGroup.getRating()));
+		}
+		lblNewLabel_8.setBounds(648, 350, 125, 16);
+		frame.getContentPane().add(lblNewLabel_8);
+		
 		JButton submitRatingButton = new JButton("Submit");
 		submitRatingButton.setContentAreaFilled(false); 
 		submitRatingButton.setFocusPainted(false); 
@@ -141,6 +154,8 @@ public class GroupProfileGUI {
 					String message = "You have successfully rated "+myGroup.getName()+"!\n All members have been notified!";
 					JOptionPane.showMessageDialog(new JFrame(), message, "Message",
 					        JOptionPane.INFORMATION_MESSAGE);
+						
+					lblNewLabel_8.setText(String.valueOf(myGroup.getRating()));					
 					}else {
 						String message = "Please come back to rate when project is finished!";
 						JOptionPane.showMessageDialog(new JFrame(), message, "Message",
@@ -323,14 +338,14 @@ public class GroupProfileGUI {
 		membersList.setBounds(38, 474, 190, 408);
 		frame.getContentPane().add(membersList);
 		
-		JLabel lblNewLabel = new JLabel("Who supervise this Group?");
-		lblNewLabel.setBounds(38, 401, 168, 14);
+		JLabel lblNewLabel = new JLabel("Who is the group's supervisor");
+		lblNewLabel.setBounds(38, 401, 190, 14);
 		frame.getContentPane().add(lblNewLabel);
 		
-		JButton btnNewButton = new JButton("Learn Now!");
+		JButton btnNewButton = new JButton("Check here");
 		btnNewButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnNewButton.setForeground(Color.RED);
-		btnNewButton.setBounds(196, 399, 114, 18);
+		btnNewButton.setBounds(226, 399, 114, 18);
 		btnNewButton.setOpaque(false);
 		btnNewButton.setContentAreaFilled(false);
 		btnNewButton.setBorderPainted(false);
@@ -348,12 +363,13 @@ public class GroupProfileGUI {
 		});
 		frame.getContentPane().add(btnNewButton);
 		
+		
 		JLabel lblNewLabel_11 = new JLabel("");
 		BufferedImage imagebackground = ImageIO.read(new File("label_backgrounds/background.jpg"));
 		ImageIcon imageb = new ImageIcon(imagebackground);
 		Image imagerisizeb = imageb.getImage().getScaledInstance(887, 991, 140) ;
 		lblNewLabel_11.setIcon(new ImageIcon(imagerisizeb));
-		lblNewLabel_11.setBounds(0, 0, 875, 981);
+		lblNewLabel_11.setBounds(0, 0, 887, 981);
 		frame.getContentPane().add(lblNewLabel_11);
 	}
 }

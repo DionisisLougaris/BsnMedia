@@ -75,10 +75,9 @@ public class CreateProjectGUI {
 		textProjectName.setBorder(null);
 		textProjectName.setBounds(155, 83, 236, 16);
 		frame.getContentPane().add(textProjectName);
-		frame.setVisible(false);
 		textProjectName.setColumns(10);
 		
-		ImageIcon logoimage = new ImageIcon("label_backgrounds/BSNlogo.jpg");
+		ImageIcon logoimage = new ImageIcon("label_backgrounds/bsn_32px.jpg");
 		frame.setIconImage(logoimage.getImage());
 		
 		pchief = chief;

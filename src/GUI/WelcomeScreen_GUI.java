@@ -45,7 +45,7 @@ public class WelcomeScreen_GUI {
 		frmWelcomeToBsn.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmWelcomeToBsn.getContentPane().setLayout(null);
 		
-		ImageIcon logoimage = new ImageIcon("label_backgrounds/BSNlogo.jpg");
+		ImageIcon logoimage = new ImageIcon("label_backgrounds/bsn_32px.jpg");
 		frmWelcomeToBsn.setIconImage(logoimage.getImage());
 		
 		JPanel panel = new JPanel();

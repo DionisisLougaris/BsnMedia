@@ -80,7 +80,7 @@ public class BackendProfileChiefGUI {
 		frmStartingPage.getContentPane().setLayout(null);
 		frmStartingPage.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		
-		ImageIcon logoimage = new ImageIcon("label_backgrounds/BSNlogo.jpg");
+		ImageIcon logoimage = new ImageIcon("label_backgrounds/bsn_32px.jpg");
 		frmStartingPage.setIconImage(logoimage.getImage());
 		
 	    panel = new JPanel();
@@ -556,14 +556,6 @@ public class BackendProfileChiefGUI {
 		panel.add(editGroup);
 		
 		
-		
-		
-		
-		
-		
-		
-		
-
 		ButtonListener listener = new ButtonListener();
 		requestsButton.addActionListener(listener);
 		messagesButton.addActionListener(listener);
