@@ -73,7 +73,7 @@ public class CompanyProfileGUI {
 	    frame.setTitle("Company");
 	    frame.getContentPane().setLayout(null);
 	    
-	    ImageIcon logoimage = new ImageIcon("label_backgrounds/BSNlogo.jpg");
+	    ImageIcon logoimage = new ImageIcon("label_backgrounds/bsn_32px.jpg");
 	    frame.setIconImage(logoimage.getImage());
 		
 		theLoggedUser = myUser;

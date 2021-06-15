@@ -48,7 +48,7 @@ public class NotificationsGUI {
 		frmNotifications.getContentPane().setLayout(null);
 		frmNotifications.setVisible(true); 
 		
-		ImageIcon logoimage = new ImageIcon("label_backgrounds/BSNlogo.jpg");
+		ImageIcon logoimage = new ImageIcon("label_backgrounds/bsn_32px.jpg");
 		frmNotifications.setIconImage(logoimage.getImage());
 		
 		backendFrame = mainFrame;

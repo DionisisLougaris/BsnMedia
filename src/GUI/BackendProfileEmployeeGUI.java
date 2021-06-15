@@ -71,7 +71,7 @@ public class BackendProfileEmployeeGUI {
 		frmStartingPage.getContentPane().setLayout(null);
 		frmStartingPage.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		
-		ImageIcon logoimage = new ImageIcon("label_backgrounds/BSNlogo.jpg");
+		ImageIcon logoimage = new ImageIcon("label_backgrounds/bsn_32px.jpg");
 		frmStartingPage.setIconImage(logoimage.getImage());
 		
 		employee = (Employee)aUser;

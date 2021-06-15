@@ -74,7 +74,7 @@ public class BackendProfileBossGUI {
 		frmStartingPage.setResizable(false);
 		frmStartingPage.setVisible(true);
 		
-		ImageIcon logoimage = new ImageIcon("label_backgrounds/BSNlogo.jpg");
+		ImageIcon logoimage = new ImageIcon("label_backgrounds/bsn_32px.jpg");
 		frmStartingPage.setIconImage(logoimage.getImage());
 		
 		frmStartingPage.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
