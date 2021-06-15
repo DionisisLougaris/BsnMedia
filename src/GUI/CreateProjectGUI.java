@@ -335,7 +335,7 @@ public class CreateProjectGUI {
 		frame.getContentPane().add(separator_2);
 		
 		
-
+       frame.setResizable(false);
 		
 		frame.setTitle("Create project");
 	}

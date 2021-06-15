@@ -45,7 +45,6 @@ public class Main {
 		c4.manageConnectionRequest(true, null);
 		first.addPost(new Post(first,"Γειά","public"));
 		
-		
 		Project p1= new Project("project name","this is the Description","deadline");
 		Group g1= new Group("group name",p1,first4);
 		first.addGroupToEmployeesList(g1);
@@ -60,9 +59,6 @@ public class Main {
 		theCompany.addUser(first3);
 		theCompany.addUser(first4);
 		theCompany.addUser(first5); 
-		
-		
-		
 		
 		//Εδω γίνεται η συζήτηση και η αποθήκευση της συνομιλίας (Αυτή την λογική θα κρατήσουμε)
 		//privateConversation conversation = new privateConversation(first, first2);

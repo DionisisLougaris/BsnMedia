@@ -155,11 +155,7 @@ public class BackendProfileBossGUI {
 	        textPost.append(post.getContent()+" | "+post.getCreator().getFirstName()+" | "+post.getPostScope()+" | "+formatDateTime+ "\n\r");
 		}
 		textPost.setBackground(new Color(255, 250, 240));
-		frmStartingPage.getContentPane().add(textPost);
-		JScrollPane scrollPanePost = new JScrollPane(textPost);
-		scrollPanePost.setBounds(427, 213, 424, 409);
-		scrollPanePost.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		frmStartingPage.getContentPane().add(scrollPanePost);
+		panel.add(textPost);
 		
 		JLabel nameLabel = new JLabel(boss.getFirstName()+" "+boss.getLastName());
 		nameLabel.setBounds(44, 243, 293, 30);
@@ -285,15 +281,8 @@ public class BackendProfileBossGUI {
 		}
 		connectionsList.setModel(model);
 		connectionsList.setBackground(new Color(255, 250, 240));
-		frmStartingPage.getContentPane().add(connectionsList);
-		JScrollPane scrollPaneConnections = new JScrollPane(connectionsList);
-		scrollPaneConnections.setBounds(44, 467, 116, 169);
-		scrollPaneConnections.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		frmStartingPage.getContentPane().add(scrollPaneConnections);
-		
-		
-		
-		
+		panel.add(connectionsList);
+	
 		suggestedList = new JList<String>();
 		suggestedList.setBounds(221, 467, 116, 169);
 		DefaultListModel<String> model2 = new DefaultListModel<String>();
@@ -303,13 +292,8 @@ public class BackendProfileBossGUI {
 		}
 		suggestedList.setModel(model2);
 		suggestedList.setBackground(new Color(255, 250, 240));
-		frmStartingPage.getContentPane().add(suggestedList);
-		JScrollPane scrollPaneSuggested = new JScrollPane(suggestedList);
-		scrollPaneSuggested.setBounds(221, 467, 116, 169);
-		scrollPaneSuggested.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		frmStartingPage.getContentPane().add(scrollPaneSuggested);
-		
-		
+		panel.add(suggestedList);
+	
 		JLabel lblNewLabel_9 = new JLabel("Connections: ("+boss.getListOfConnections().size()+")");
 		lblNewLabel_9.setBounds(49, 438, 99, 16);
 		panel.add(lblNewLabel_9);

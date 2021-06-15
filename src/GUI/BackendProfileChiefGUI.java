@@ -61,15 +61,11 @@ public class BackendProfileChiefGUI {
 	private JSeparator separator;
 	private JScrollPane scrollPane;
 	
-
-	
-	
 	public BackendProfileChiefGUI(User theChief) throws IOException {
 		chief = (Chief) theChief;
 		initialize();
 	}
 	
-
 	private void initialize() throws IOException {
 		frmStartingPage = new JFrame();
 		frmStartingPage.setTitle("Starting Page");
@@ -79,7 +75,6 @@ public class BackendProfileChiefGUI {
 		frmStartingPage.setResizable(false);
 		frmStartingPage.getContentPane().setLayout(null);
 		frmStartingPage.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		
 		ImageIcon logoimage = new ImageIcon("label_backgrounds/bsn_32px.jpg");
 		frmStartingPage.setIconImage(logoimage.getImage());
 		
@@ -222,8 +217,6 @@ public class BackendProfileChiefGUI {
 		editAccountButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		panel.add(editAccountButton);
 		
-		
-		
 		connectionsList = new JList<String>();
 		connectionsList.setBounds(43, 594, 116, 152);
 		DefaultListModel<String> model = new DefaultListModel<String>();
@@ -233,12 +226,8 @@ public class BackendProfileChiefGUI {
 		}
 		connectionsList.setModel(model);
 		connectionsList.setBackground(new Color(255, 250, 240));
-		frmStartingPage.getContentPane().add(connectionsList);
-		JScrollPane scrollPaneConnections = new JScrollPane(connectionsList);
-		scrollPaneConnections.setBounds(43, 594, 116, 152);
-		scrollPaneConnections.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		frmStartingPage.getContentPane().add(scrollPaneConnections);
-		
+		panel.add(connectionsList);
+	
 		
 		suggestedListConnections = chief.suggestedConnections(); //Get all Suggested Connections
 		suggestedList = new JList<String>();
@@ -249,13 +238,7 @@ public class BackendProfileChiefGUI {
 		}
 		suggestedList.setModel(model2);
 		suggestedList.setBackground(new Color(255, 250, 240));
-		frmStartingPage.getContentPane().add(suggestedList);
-		JScrollPane scrollPaneSuggestedConnections = new JScrollPane(suggestedList);
-		scrollPaneSuggestedConnections.setBounds(220, 594, 116, 152);
-		scrollPaneSuggestedConnections.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		frmStartingPage.getContentPane().add(scrollPaneSuggestedConnections);
-		
-	
+		panel.add(suggestedList);
 		
 		JLabel lblNewLabel_9 = new JLabel("Connections (" + chief.getListOfConnections().size() + ")");
 		lblNewLabel_9.setBounds(48, 565, 99, 16);
@@ -307,11 +290,7 @@ public class BackendProfileChiefGUI {
 			textArea.append(post.getContent()+" | "+post.getCreator().getFirstName()+" | "+post.getPostScope()+" | "+formatDateTime+ "\n\r");
 		}
 		textArea.setBackground(new Color(255, 250, 240));
-		frmStartingPage.getContentPane().add(textArea);
-		JScrollPane scrollPanePost = new JScrollPane(textArea);
-		scrollPanePost.setBounds(427, 237, 424, 415);
-		scrollPanePost.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		frmStartingPage.getContentPane().add(scrollPanePost);
+		panel.add(textArea);
 		
 		textField = new JTextField();
 		textField.setBounds(639, 780, 64, 25);
@@ -462,11 +441,7 @@ public class BackendProfileChiefGUI {
 			listModelForGroups.addElement(theSupervisingGroup.getName());
 		}
 		list.setModel(listModelForGroups);
-		frmStartingPage.getContentPane().add(list);
-		JScrollPane scrollPaneGroup = new JScrollPane(list);
-		scrollPaneGroup.setBounds(60, 404, 114, 92);
-		scrollPaneGroup.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		frmStartingPage.getContentPane().add(scrollPaneGroup);
+		panel.add(list);
 		
 		Icon check = new ImageIcon("Buttons_backgrounds/takealook_32px.png");
 		JButton checkGroup = new JButton(check);

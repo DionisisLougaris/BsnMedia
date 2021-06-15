@@ -161,7 +161,6 @@ public class BackendProfileEmployeeGUI {
 		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		panel.add(lblNewLabel_5);
 		
-		
 		Icon help = new ImageIcon("Buttons_backgrounds/customer_support_40px.png");
 		helpButton = new JButton(help);
 		helpButton.setBounds(814, 917, 56, 50);
@@ -236,16 +235,7 @@ public class BackendProfileEmployeeGUI {
 		}
 		connectionsList.setModel(model);
 		connectionsList.setBackground(new Color(255, 250, 240));
-		frmStartingPage.getContentPane().add(connectionsList);
-		JScrollPane scrollPaneConnections = new JScrollPane(connectionsList);
-		scrollPaneConnections.setBounds(47, 483, 113, 152);
-		scrollPaneConnections.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		frmStartingPage.getContentPane().add(scrollPaneConnections);
-		
-		
-		
-		
-		
+		panel.add(connectionsList);
 		
 		suggestedListConnections = employee.suggestedConnections(); //Get all Suggested Connections
 		suggestedList = new JList<String>();
@@ -256,16 +246,7 @@ public class BackendProfileEmployeeGUI {
 		}
 		suggestedList.setModel(model2);
 		suggestedList.setBackground(new Color(255, 250, 240));
-		frmStartingPage.getContentPane().add(suggestedList);
-		JScrollPane scrollPaneSuggestedConnections = new JScrollPane(suggestedList);
-		scrollPaneSuggestedConnections.setBounds(221, 483, 116, 152);
-		scrollPaneSuggestedConnections.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		frmStartingPage.getContentPane().add(scrollPaneSuggestedConnections);
-		
-		
-		
-		
-		
+		panel.add(suggestedList);
 		
 		JLabel lblNewLabel_9 = new JLabel("Connections (" + employee.getListOfConnections().size() + ")");
 		lblNewLabel_9.setBounds(49, 454, 99, 16);
@@ -289,15 +270,7 @@ public class BackendProfileEmployeeGUI {
 			textArea.append(post.getContent()+" | "+post.getCreator().getFirstName()+" | "+post.getPostScope()+" | "+formatDateTime+ "\n\r");
 		}
 		textArea.setBackground(new Color(255, 250, 240));
-		frmStartingPage.getContentPane().add(textArea);
-		JScrollPane scrollPanePost = new JScrollPane(textArea);
-		scrollPanePost.setBounds(429, 256, 418, 395);
-		scrollPanePost.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		frmStartingPage.getContentPane().add(scrollPanePost);
-		
-		
-		
-		
+		panel.add(textArea);
 		
 		writePostArea = new JTextArea();
 		writePostArea.setBounds(427, 688, 424, 49);
@@ -530,8 +503,6 @@ public class BackendProfileEmployeeGUI {
 		});
 		panel.add(disconnectButton);
 
-	
-		
 		JLabel lblNewLabel_2 = new JLabel("");
 		lblNewLabel_2.setBounds(0, 0, 887, 991);
 		BufferedImage imagebackground = ImageIO.read(new File("label_backgrounds/background.jpg"));
@@ -539,14 +510,6 @@ public class BackendProfileEmployeeGUI {
 		Image imagerisizeb = imageb.getImage().getScaledInstance(887, 991, 140) ;
 		lblNewLabel_2.setIcon(new ImageIcon(imagerisizeb));
 		panel.add(lblNewLabel_2);
-		
-		
-		
-		
-		
-		
-		
-		
 		
 		ButtonListener listener = new ButtonListener();
 		requestsButton.addActionListener(listener);

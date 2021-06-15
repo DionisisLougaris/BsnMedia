@@ -186,7 +186,7 @@ public class GroupProfileGUI {
 		frame.getContentPane().add(lblNewLabel_6);
 		
 		JTextArea postTextArea = new JTextArea();
-		postTextArea.setBounds(0, 0, 507, 408);
+		postTextArea.setBounds(395, 476, 434, 406);
 		for( Post post : myGroup.getGroupPosts())
 		{
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -197,6 +197,7 @@ public class GroupProfileGUI {
 		postTextArea.setBackground(new Color(255, 250, 240));
 		postTextArea.setEditable(false);
 		postTextArea.setLineWrap(true);
+		frame.getContentPane().add(postTextArea);
 		
 		JLabel projectName = new JLabel();
 		projectName.setText(myGroup.getMyProject().getName());
@@ -371,6 +372,8 @@ public class GroupProfileGUI {
 		lblNewLabel_11.setIcon(new ImageIcon(imagerisizeb));
 		lblNewLabel_11.setBounds(0, 0, 887, 981);
 		frame.getContentPane().add(lblNewLabel_11);
+		
+		
 		
 		
 	}
