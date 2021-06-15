@@ -35,6 +35,7 @@ import entities.*;
 import java.awt.Color;
 import javax.swing.border.LineBorder;
 import javax.swing.JSeparator;
+import javax.swing.JScrollPane;
 
 public class BackendProfileChiefGUI {
 
@@ -58,6 +59,9 @@ public class BackendProfileChiefGUI {
 	private JTextArea textArea;
 	private JButton editGroupButton;
 	private JSeparator separator;
+	private JScrollPane scrollPane;
+	
+
 	
 	
 	public BackendProfileChiefGUI(User theChief) throws IOException {
@@ -106,6 +110,7 @@ public class BackendProfileChiefGUI {
 		
 		Icon search = new ImageIcon("Buttons_backgrounds/search_30px.png");
 		searchButton= new JButton(search);
+		searchButton.setBounds(612, 38, 55, 44);
 		searchButton.setContentAreaFilled(false); 
 		searchButton.setFocusPainted(false); 
 		searchButton.setOpaque(false);
@@ -137,13 +142,12 @@ public class BackendProfileChiefGUI {
 				}
 			}
 		});
-		searchButton.setBounds(612, 38, 55, 44);
 		panel.add(searchButton);
 		
 		JLabel nameLabel = new JLabel();
+		nameLabel.setBounds(49, 254, 322, 30);
 		nameLabel.setText(chief.getFirstName()+" "+chief.getLastName());
 		nameLabel.setFont(new Font("Tahoma", Font.PLAIN, 19));
-		nameLabel.setBounds(49, 254, 322, 30);
 		panel.add(nameLabel);
 		
 		JLabel companyPostLabel = new JLabel("Chief, ");
@@ -159,68 +163,69 @@ public class BackendProfileChiefGUI {
 		panel.add(emailLabel);
 		
 		JLabel lblNewLabel_5 = new JLabel("Currently supervising:");
-		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblNewLabel_5.setBounds(49, 359, 155, 16);
+		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		panel.add(lblNewLabel_5);
 		
 		
 		Icon help = new ImageIcon("Buttons_backgrounds/customer_support_40px.png");
 		helpButton = new JButton(help);
+		helpButton.setBounds(814, 922, 63, 58);
 		helpButton.setContentAreaFilled(false); 
 		helpButton.setToolTipText("Do you want help? Click me.");
 		helpButton.setFocusPainted(false); 
 		helpButton.setOpaque(false);
 		helpButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		helpButton.setBounds(814, 922, 63, 58);
 		panel.add(helpButton);
 		
 		searchField = new JTextField();
+		searchField.setBounds(324, 42, 275, 30);
 		searchField.setBackground(new Color(255, 250, 240));
 		searchField.setColumns(10);
-		searchField.setBounds(324, 42, 275, 30);
 		panel.add(searchField);
 		
 		Icon friends = new ImageIcon("Buttons_backgrounds/friends_30px.png");
 		requestsButton= new JButton(friends);
+		requestsButton.setBounds(714, 27, 37, 30);
 		requestsButton.setToolTipText("Watch your connection requests");
 		requestsButton.setContentAreaFilled(false); 
 		requestsButton.setFocusPainted(false); 
 		requestsButton.setOpaque(false);
 		requestsButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		requestsButton.setBounds(714, 27, 37, 30);
 		panel.add(requestsButton);
 		
 		Icon messages = new ImageIcon("Buttons_backgrounds/Messages_30px.png");
 		messagesButton = new JButton(messages);
+		messagesButton.setBounds(763, 27, 37, 30);
 		messagesButton.setToolTipText("See your new messages");
 		messagesButton.setContentAreaFilled(false); 
 		messagesButton.setFocusPainted(false); 
 		messagesButton.setOpaque(false);
 		messagesButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		messagesButton.setBounds(763, 27, 37, 30);
 		panel.add(messagesButton);
 		
 		Icon bell = new ImageIcon("Buttons_backgrounds/bell_30px.png");
 		notifsButton = new JButton(bell);
+		notifsButton.setBounds(814, 27, 37, 30);
 		notifsButton.setToolTipText("Watch your notofications");
 		notifsButton.setContentAreaFilled(false); 
 		notifsButton.setFocusPainted(false); 
 		notifsButton.setOpaque(false);
 		notifsButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		notifsButton.setBounds(814, 27, 37, 30);
 		panel.add(notifsButton);
 		
 		editAccountButton = new JButton("Edit Account Info");
+		editAccountButton.setBounds(216, 293, 155, 25);
 		editAccountButton.setContentAreaFilled(false); 
 		editAccountButton.setFocusPainted(false); 
 		editAccountButton.setOpaque(false);
 		editAccountButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		editAccountButton.setBounds(216, 293, 155, 25);
 		panel.add(editAccountButton);
 		
 		
 		
 		connectionsList = new JList<String>();
+		connectionsList.setBounds(43, 594, 116, 152);
 		DefaultListModel<String> model = new DefaultListModel<String>();
 		listOfConnections = chief.getListOfConnections(); //Get all his Connections
 		for (User theUser: listOfConnections) {
@@ -228,19 +233,29 @@ public class BackendProfileChiefGUI {
 		}
 		connectionsList.setModel(model);
 		connectionsList.setBackground(new Color(255, 250, 240));
-		connectionsList.setBounds(43, 594, 116, 152);
-		panel.add(connectionsList);
+		frmStartingPage.getContentPane().add(connectionsList);
+		JScrollPane scrollPaneConnections = new JScrollPane(connectionsList);
+		scrollPaneConnections.setBounds(43, 594, 116, 152);
+		scrollPaneConnections.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		frmStartingPage.getContentPane().add(scrollPaneConnections);
+		
 		
 		suggestedListConnections = chief.suggestedConnections(); //Get all Suggested Connections
 		suggestedList = new JList<String>();
+		suggestedList.setBounds(220, 594, 116, 152);
 		DefaultListModel<String> model2 = new DefaultListModel<String>();
 		for (User suggestedUser: suggestedListConnections) {
 			model2.addElement(suggestedUser.getFirstName()+" "+suggestedUser.getLastName());
 		}
 		suggestedList.setModel(model2);
 		suggestedList.setBackground(new Color(255, 250, 240));
-		suggestedList.setBounds(220, 594, 116, 152);
-		panel.add(suggestedList);
+		frmStartingPage.getContentPane().add(suggestedList);
+		JScrollPane scrollPaneSuggestedConnections = new JScrollPane(suggestedList);
+		scrollPaneSuggestedConnections.setBounds(220, 594, 116, 152);
+		scrollPaneSuggestedConnections.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		frmStartingPage.getContentPane().add(scrollPaneSuggestedConnections);
+		
+	
 		
 		JLabel lblNewLabel_9 = new JLabel("Connections (" + chief.getListOfConnections().size() + ")");
 		lblNewLabel_9.setBounds(48, 565, 99, 16);
@@ -251,34 +266,35 @@ public class BackendProfileChiefGUI {
 		panel.add(lblNewLabel_9_1);
 		
 		writePostArea = new JTextArea();
+		writePostArea.setBounds(427, 688, 424, 49);
 		writePostArea.setLineWrap(true);
 		writePostArea.setWrapStyleWord(true);
 		writePostArea.setBackground(new Color(255, 250, 240));
-		writePostArea.setBounds(427, 688, 424, 49);
 		panel.add(writePostArea);
 		
 		connectionsRadio = new JRadioButton("Connections");
+		connectionsRadio.setBounds(441, 746, 112, 25);
 		connectionsRadio.setActionCommand("Connections");
 		connectionsRadio.setOpaque(false);
 		connectionsRadio.setBackground(Color.WHITE);
-		connectionsRadio.setBounds(441, 746, 112, 25);
 		panel.add(connectionsRadio);
 		
 		PublicRadio = new JRadioButton("Public");
+		PublicRadio.setBounds(557, 746, 78, 25);
 		PublicRadio.setActionCommand("Public");
 		PublicRadio.setOpaque(false);
 		PublicRadio.setBackground(Color.WHITE);
-		PublicRadio.setBounds(557, 746, 78, 25);
 		panel.add(PublicRadio);
 		
 		JRadioButton rdbtnGroup = new JRadioButton("Group");
+		rdbtnGroup.setBounds(639, 746, 78, 25);
 		rdbtnGroup.setActionCommand("Group");
 		rdbtnGroup.setOpaque(false);
 		rdbtnGroup.setBackground(Color.WHITE);
-		rdbtnGroup.setBounds(639, 746, 78, 25);
 		panel.add(rdbtnGroup);
 		
 		textArea = new JTextArea();
+		textArea.setBounds(427, 237, 424, 409);
 		textArea.setEditable(false);
 		textArea.setWrapStyleWord(true);
 		textArea.setText("");
@@ -291,16 +307,20 @@ public class BackendProfileChiefGUI {
 			textArea.append(post.getContent()+" | "+post.getCreator().getFirstName()+" | "+post.getPostScope()+" | "+formatDateTime+ "\n\r");
 		}
 		textArea.setBackground(new Color(255, 250, 240));
-		textArea.setBounds(427, 237, 424, 409);
-		panel.add(textArea);
+		frmStartingPage.getContentPane().add(textArea);
+		JScrollPane scrollPanePost = new JScrollPane(textArea);
+		scrollPanePost.setBounds(427, 237, 424, 415);
+		scrollPanePost.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		frmStartingPage.getContentPane().add(scrollPanePost);
 		
 		textField = new JTextField();
+		textField.setBounds(639, 780, 64, 25);
 		textField.setBackground(new Color(255, 250, 240));
 		textField.setColumns(10);
-		textField.setBounds(639, 780, 64, 25);
 		panel.add(textField);
 		
 		postButton = new JButton("Post");
+		postButton.setBounds(754, 750, 97, 25);
 		postButton.setContentAreaFilled(false); 
 		postButton.setFocusPainted(false); 
 		postButton.setOpaque(false);
@@ -368,17 +388,16 @@ public class BackendProfileChiefGUI {
 				 textArea.setBounds(427, 213, 424, 409);	
 			}
 		});
-		postButton.setBounds(754, 750, 97, 25);
 		panel.add(postButton);
 		
 		
 		checkprofileButton = new JButton("Check profile");
+		checkprofileButton.setBounds(43, 759, 116, 25);
 		checkprofileButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		checkprofileButton.setContentAreaFilled(false); 
 		checkprofileButton.setFocusPainted(false); 
 		checkprofileButton.setOpaque(false);
 		checkprofileButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		checkprofileButton.setBounds(43, 759, 116, 25);
 		panel.add(checkprofileButton);
 		
 		// create button group for the radio button to know which one was selected
@@ -388,30 +407,30 @@ public class BackendProfileChiefGUI {
 		radioGroup.add(rdbtnGroup);
 		
 		sendMessageButton = new JButton("Send Message");
+		sendMessageButton.setBounds(43, 797, 116, 25);
 		sendMessageButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		sendMessageButton.setContentAreaFilled(false); 
 		sendMessageButton.setFocusPainted(false); 
 		sendMessageButton.setOpaque(false);
 		sendMessageButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		sendMessageButton.setBounds(43, 797, 116, 25);
 		panel.add(sendMessageButton);
 		
 		sendRequestButton = new JButton("Send request");
+		sendRequestButton.setBounds(220, 759, 116, 25);
 		sendRequestButton.setContentAreaFilled(false); 
 		sendRequestButton.setFocusPainted(false); 
 		sendRequestButton.setOpaque(false);
 		sendRequestButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		sendRequestButton.setBounds(220, 759, 116, 25);
 		panel.add(sendRequestButton);
 		
 		Icon logout = new ImageIcon("Buttons_backgrounds/exit_50px.png");
 		disconnectButton = new JButton(logout);
+		disconnectButton.setBounds(796, 155, 55, 54);
 	    disconnectButton.setContentAreaFilled(false);
 		disconnectButton.setToolTipText("logout");
 		disconnectButton.setFocusPainted(false); 
 		disconnectButton.setOpaque(false);
 		disconnectButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		disconnectButton.setBounds(796, 155, 55, 54);
 		disconnectButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
@@ -428,31 +447,35 @@ public class BackendProfileChiefGUI {
 		panel.add(disconnectButton);
 		
 		createProjectButton = new JButton("Create Project");
+		createProjectButton.setBounds(216, 332, 155, 25);
 		createProjectButton.setContentAreaFilled(false); 
 		createProjectButton.setFocusPainted(false); 
 		createProjectButton.setOpaque(false);
 		createProjectButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		createProjectButton.setBounds(216, 332, 155, 25);
 		panel.add(createProjectButton);
 		
 		JList<String> list = new JList<String>();
+		list.setBounds(49, 386, 155, 110);
 		DefaultListModel<String> listModelForGroups = new DefaultListModel<String>();
 		for (Group theSupervisingGroup: chief.getGroups()) {
 			listModelForGroups.addElement(theSupervisingGroup.getName());
 		}
 		list.setModel(listModelForGroups);
-		list.setBounds(49, 386, 155, 110);
-		panel.add(list);
+		frmStartingPage.getContentPane().add(list);
+		JScrollPane scrollPaneGroup = new JScrollPane(list);
+		scrollPaneGroup.setBounds(60, 404, 114, 92);
+		scrollPaneGroup.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		frmStartingPage.getContentPane().add(scrollPaneGroup);
 		
 		Icon check = new ImageIcon("Buttons_backgrounds/takealook_32px.png");
 		JButton checkGroup = new JButton(check);
+		checkGroup.setBounds(80, 495, 48, 36);
 		checkGroup.setBorder(null);
 		checkGroup.setContentAreaFilled(false); 
 		checkGroup.setFocusPainted(false); 
 		checkGroup.setOpaque(false);
 		checkGroup.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		checkGroup.setOpaque(false);
-		checkGroup.setBounds(80, 495, 48, 36);
 		checkGroup.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -485,6 +508,7 @@ public class BackendProfileChiefGUI {
 		
 		Icon edit = new ImageIcon("Buttons_backgrounds/edit_20px.png");
 		editGroupButton = new JButton(edit);
+		editGroupButton.setBounds(124, 495, 48, 36);
 		editGroupButton.setBorder(null);
 		editGroupButton.setContentAreaFilled(false); 
 		editGroupButton.setFocusPainted(false); 
@@ -492,7 +516,6 @@ public class BackendProfileChiefGUI {
 		editGroupButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		editGroupButton.setOpaque(false);
 		editGroupButton.setBackground(new Color(248, 248, 255));
-		editGroupButton.setBounds(124, 495, 48, 36);
 		editGroupButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -519,17 +542,25 @@ public class BackendProfileChiefGUI {
 		panel.add(editGroupButton);
 		
 		separator = new JSeparator();
-		separator.setForeground(new Color(255, 250, 250));
 		separator.setBounds(49, 549, 287, 5);
+		separator.setForeground(new Color(255, 250, 250));
 		panel.add(separator);
 		
 		JLabel editGroup = new JLabel("");
+		editGroup.setBounds(0, 0, 887, 991);
 		BufferedImage imagebackground = ImageIO.read(new File("label_backgrounds/background.jpg"));
 		ImageIcon imageb = new ImageIcon(imagebackground);
 		Image imagerisizeb = imageb.getImage().getScaledInstance(887, 991, 140) ;
 		editGroup.setIcon(new ImageIcon(imagerisizeb));
-		editGroup.setBounds(0, 0, 887, 991);
 		panel.add(editGroup);
+		
+		
+		
+		
+		
+		
+		
+		
 		
 
 		ButtonListener listener = new ButtonListener();

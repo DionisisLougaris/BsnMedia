@@ -52,6 +52,10 @@ public class BackendProfileEmployeeGUI {
 	ButtonGroup radioGroup;
 	ArrayList<User> listOfConnections;
 	
+	
+	
+	
+	
 	public BackendProfileEmployeeGUI(User aUser) throws IOException {
 		initialize(aUser);
 	}
@@ -99,6 +103,7 @@ public class BackendProfileEmployeeGUI {
 		
 		Icon search = new ImageIcon("Buttons_backgrounds/search_30px.png");
 		searchButton = new JButton(search);
+		searchButton.setBounds(612, 47, 55, 44);
 		searchButton.setContentAreaFilled(false); 
 		searchButton.setFocusPainted(false); 
 		searchButton.setOpaque(false);
@@ -131,13 +136,12 @@ public class BackendProfileEmployeeGUI {
 				}
 			}
 		});
-		searchButton.setBounds(612, 47, 55, 44);
 		panel.add(searchButton);
 		
 		JLabel nameLabel = new JLabel();
+		nameLabel.setBounds(47, 244, 321, 30);
 		nameLabel.setText(employee.getFirstName()+" "+employee.getLastName());
 		nameLabel.setFont(new Font("Tahoma", Font.PLAIN, 19));
-		nameLabel.setBounds(47, 244, 321, 30);
 		panel.add(nameLabel);
 		
 		JLabel companyPostLabel = new JLabel("Employee, ");
@@ -153,13 +157,14 @@ public class BackendProfileEmployeeGUI {
 		panel.add(emailLabel);
 		
 		JLabel lblNewLabel_5 = new JLabel("Currently apart of:");
-		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblNewLabel_5.setBounds(49, 357, 133, 16);
+		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		panel.add(lblNewLabel_5);
 		
 		
 		Icon help = new ImageIcon("Buttons_backgrounds/customer_support_40px.png");
 		helpButton = new JButton(help);
+		helpButton.setBounds(814, 917, 56, 50);
 		helpButton.setContentAreaFilled(false); 
 		helpButton.setToolTipText("Do you want help? Click me.");
 		helpButton.setFocusPainted(false); 
@@ -176,54 +181,54 @@ public class BackendProfileEmployeeGUI {
 				}
 			}
 		});
-		helpButton.setBounds(814, 917, 56, 50);
 		panel.add(helpButton);
 		
 		searchField = new JTextField();
+		searchField.setBounds(332, 50, 268, 30);
 		searchField.setBackground(new Color(255, 250, 240));
 		searchField.setColumns(10);
-		searchField.setBounds(332, 50, 268, 30);
 		panel.add(searchField);
 		
 		Icon friends = new ImageIcon("Buttons_backgrounds/friends_30px.png");
 		requestsButton = new JButton(friends);
+		requestsButton.setBounds(714, 27, 37, 30);
 		requestsButton.setToolTipText("Watch your connection requests");
 		requestsButton.setContentAreaFilled(false); 
 		requestsButton.setFocusPainted(false); 
 		requestsButton.setOpaque(false);
 		requestsButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		requestsButton.setBounds(714, 27, 37, 30);
 		panel.add(requestsButton);
 		
 		Icon messages = new ImageIcon("Buttons_backgrounds/Messages_30px.png");
 		messagesButton = new JButton(messages);
+		messagesButton.setBounds(763, 27, 37, 30);
 		messagesButton.setToolTipText("See your new messages");
 		messagesButton.setContentAreaFilled(false); 
 		messagesButton.setFocusPainted(false); 
 		messagesButton.setOpaque(false);
 		messagesButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		messagesButton.setBounds(763, 27, 37, 30);
 		panel.add(messagesButton);
 		
 		Icon bell = new ImageIcon("Buttons_backgrounds/bell_30px.png");
 		notifsButton = new JButton(bell);
+		notifsButton.setBounds(814, 27, 37, 30);
 		notifsButton.setToolTipText("Watch your notofications");
 		notifsButton.setContentAreaFilled(false); 
 		notifsButton.setFocusPainted(false); 
 		notifsButton.setOpaque(false);
 		notifsButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		notifsButton.setBounds(814, 27, 37, 30);
 		panel.add(notifsButton);
 		
 		editAccountButton = new JButton("Edit Account Info");
+		editAccountButton.setBounds(250, 307, 149, 25);
 		editAccountButton.setContentAreaFilled(false); 
 		editAccountButton.setFocusPainted(false); 
 		editAccountButton.setOpaque(false);
 		editAccountButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		editAccountButton.setBounds(250, 307, 149, 25);
 		panel.add(editAccountButton);
 		
 		connectionsList = new JList<String>();
+		connectionsList.setBounds(44, 483, 116, 152);
 		DefaultListModel<String> model = new DefaultListModel<String>();
 		listOfConnections = employee.getListOfConnections(); //Get all his Connections
 		for (User theUser: listOfConnections) {
@@ -231,19 +236,36 @@ public class BackendProfileEmployeeGUI {
 		}
 		connectionsList.setModel(model);
 		connectionsList.setBackground(new Color(255, 250, 240));
-		connectionsList.setBounds(44, 483, 116, 152);
-		panel.add(connectionsList);
+		frmStartingPage.getContentPane().add(connectionsList);
+		JScrollPane scrollPaneConnections = new JScrollPane(connectionsList);
+		scrollPaneConnections.setBounds(47, 483, 113, 152);
+		scrollPaneConnections.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		frmStartingPage.getContentPane().add(scrollPaneConnections);
+		
+		
+		
+		
+		
 		
 		suggestedListConnections = employee.suggestedConnections(); //Get all Suggested Connections
 		suggestedList = new JList<String>();
+		suggestedList.setBounds(221, 483, 116, 152);
 		DefaultListModel<String> model2 = new DefaultListModel<String>();
 		for (User suggestedUser: suggestedListConnections) {
 			model2.addElement(suggestedUser.getFirstName()+" "+suggestedUser.getLastName());
 		}
 		suggestedList.setModel(model2);
 		suggestedList.setBackground(new Color(255, 250, 240));
-		suggestedList.setBounds(221, 483, 116, 152);
-		panel.add(suggestedList);
+		frmStartingPage.getContentPane().add(suggestedList);
+		JScrollPane scrollPaneSuggestedConnections = new JScrollPane(suggestedList);
+		scrollPaneSuggestedConnections.setBounds(221, 483, 116, 152);
+		scrollPaneSuggestedConnections.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		frmStartingPage.getContentPane().add(scrollPaneSuggestedConnections);
+		
+		
+		
+		
+		
 		
 		JLabel lblNewLabel_9 = new JLabel("Connections (" + employee.getListOfConnections().size() + ")");
 		lblNewLabel_9.setBounds(49, 454, 99, 16);
@@ -254,6 +276,7 @@ public class BackendProfileEmployeeGUI {
 		panel.add(lblNewLabel_9_1);
 		
 		JTextArea textArea = new JTextArea();
+		textArea.setBounds(427, 244, 424, 409);
 		textArea.setEditable(false);
 		textArea.setLineWrap(true);
 		textArea.setWrapStyleWord(true);
@@ -266,39 +289,46 @@ public class BackendProfileEmployeeGUI {
 			textArea.append(post.getContent()+" | "+post.getCreator().getFirstName()+" | "+post.getPostScope()+" | "+formatDateTime+ "\n\r");
 		}
 		textArea.setBackground(new Color(255, 250, 240));
-		textArea.setBounds(427, 244, 424, 409);
-		panel.add(textArea);
+		frmStartingPage.getContentPane().add(textArea);
+		JScrollPane scrollPanePost = new JScrollPane(textArea);
+		scrollPanePost.setBounds(441, 256, 379, 395);
+		scrollPanePost.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		frmStartingPage.getContentPane().add(scrollPanePost);
+		
+		
+		
 		
 		
 		writePostArea = new JTextArea();
+		writePostArea.setBounds(427, 688, 424, 49);
 		writePostArea.setLineWrap(true);
 		writePostArea.setWrapStyleWord(true);
 		writePostArea.setBackground(new Color(255, 250, 240));
-		writePostArea.setBounds(427, 688, 424, 49);
 		panel.add(writePostArea);
 		
 		connectionsRadio = new JRadioButton("Connections");
+		connectionsRadio.setBounds(441, 746, 112, 25);
 		connectionsRadio.setActionCommand("Connections");
 		connectionsRadio.setOpaque(false);
 		connectionsRadio.setBackground(Color.WHITE);
-		connectionsRadio.setBounds(441, 746, 112, 25);
 		panel.add(connectionsRadio);
 		
 		PublicRadio = new JRadioButton("Public");
+		PublicRadio.setBounds(557, 746, 78, 25);
 		PublicRadio.setActionCommand("Public");
 		PublicRadio.setOpaque(false);
 		PublicRadio.setBackground(Color.WHITE);
-		PublicRadio.setBounds(557, 746, 78, 25);
 		panel.add(PublicRadio);
 		
 		JRadioButton rdbtnGroup = new JRadioButton("Group");
+		rdbtnGroup.setBounds(639, 746, 78, 25);
 		rdbtnGroup.setActionCommand("Group");
 		rdbtnGroup.setOpaque(false);
 		rdbtnGroup.setBackground(Color.WHITE);
-		rdbtnGroup.setBounds(639, 746, 78, 25);
 		panel.add(rdbtnGroup);
 		
 		postButton = new JButton("Post");
+		postButton.setBounds(754, 750, 97, 25);
 		postButton.setContentAreaFilled(false); 
 		postButton.setFocusPainted(false); 
 		postButton.setOpaque(false);
@@ -364,7 +394,6 @@ public class BackendProfileEmployeeGUI {
 				 textArea.setBounds(427, 213, 424, 409);	
 			}
 		});
-		postButton.setBounds(754, 750, 97, 25);
 		panel.add(postButton);
 		
 		// create button group for the radio button to know which one was selected
@@ -374,36 +403,36 @@ public class BackendProfileEmployeeGUI {
 		radioGroup.add(rdbtnGroup);
 		
 		textPostGroup = new JTextField();
+		textPostGroup.setBounds(639, 780, 64, 25);
 		textPostGroup.setBackground(new Color(255, 250, 240));
 		textPostGroup.setToolTipText("Compete the name of group that you want to post");
 		textPostGroup.setColumns(10);
-		textPostGroup.setBounds(639, 780, 64, 25);
 		panel.add(textPostGroup);
 		
 		checkprofileButton = new JButton("Check profile");
+		checkprofileButton.setBounds(44, 648, 116, 25);
 		checkprofileButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		checkprofileButton.setContentAreaFilled(false); 
 		checkprofileButton.setFocusPainted(false); 
 		checkprofileButton.setOpaque(false);
 		checkprofileButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		checkprofileButton.setBounds(44, 648, 116, 25);
 		panel.add(checkprofileButton);
 		
 		sendMessageButton = new JButton("Send Message");
+		sendMessageButton.setBounds(44, 686, 116, 25);
 		sendMessageButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		sendMessageButton.setContentAreaFilled(false); 
 		sendMessageButton.setFocusPainted(false); 
 		sendMessageButton.setOpaque(false);
 		sendMessageButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		sendMessageButton.setBounds(44, 686, 116, 25);
 		panel.add(sendMessageButton);
 		
 		sendRequestButton = new JButton("Send request");
+		sendRequestButton.setBounds(221, 648, 116, 25);
 		sendRequestButton.setContentAreaFilled(false); 
 		sendRequestButton.setFocusPainted(false); 
 		sendRequestButton.setOpaque(false);
 		sendRequestButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		sendRequestButton.setBounds(221, 648, 116, 25);
 		panel.add(sendRequestButton);
 		
 		JButton btnNewButton = new JButton("Group A");
@@ -480,12 +509,12 @@ public class BackendProfileEmployeeGUI {
 		
 		Icon logout = new ImageIcon("Buttons_backgrounds/exit_50px.png");
 		disconnectButton = new JButton(logout);
+		disconnectButton.setBounds(796, 169, 55, 54);
 		disconnectButton.setContentAreaFilled(false);
 		disconnectButton.setToolTipText("logout");
 		disconnectButton.setFocusPainted(false); 
 		disconnectButton.setOpaque(false);
 		disconnectButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		disconnectButton.setBounds(796, 169, 55, 54);
 		disconnectButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
@@ -504,12 +533,19 @@ public class BackendProfileEmployeeGUI {
 	
 		
 		JLabel lblNewLabel_2 = new JLabel("");
+		lblNewLabel_2.setBounds(0, 0, 887, 991);
 		BufferedImage imagebackground = ImageIO.read(new File("label_backgrounds/background.jpg"));
 		ImageIcon imageb = new ImageIcon(imagebackground);
 		Image imagerisizeb = imageb.getImage().getScaledInstance(887, 991, 140) ;
 		lblNewLabel_2.setIcon(new ImageIcon(imagerisizeb));
-		lblNewLabel_2.setBounds(0, 0, 887, 991);
 		panel.add(lblNewLabel_2);
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		ButtonListener listener = new ButtonListener();

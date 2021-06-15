@@ -55,6 +55,9 @@ public class BackendProfileBossGUI {
 	postButton,checkprofileButton,sendMessageButton,sendRequestButton,disconnectButton,editCompanyInfoButton;
 	
 	private ArrayList<User> listOfConnections;
+	
+	
+	
 
 	public BackendProfileBossGUI(User theBoss) throws IOException{
 		boss = (Boss)theBoss;
@@ -80,10 +83,10 @@ public class BackendProfileBossGUI {
 		panel.setBackground(Color.WHITE);
 		panel.setBounds(0, 0, 887, 991);
 		frmStartingPage.getContentPane().add(panel);
-		panel.setLayout(null);
+	    panel.setLayout(null);
 		
 	    picturePanel = new JPanel();
-		picturePanel.setBounds(54, 56, 181, 152);
+	    picturePanel.setBounds(54, 56, 181, 152);
 		panel.add(picturePanel);
 		picturePanel.setLayout(null);
 		
@@ -103,6 +106,7 @@ public class BackendProfileBossGUI {
 		
 		Icon search = new ImageIcon("Buttons_backgrounds/search_30px.png");
 		searchButton = new JButton(search);
+		searchButton.setBounds(623, 27, 46, 44);
 		searchButton.setContentAreaFilled(false); 
 		searchButton.setFocusPainted(false); 
 		searchButton.setOpaque(false);
@@ -134,11 +138,11 @@ public class BackendProfileBossGUI {
 				}
 			}
 		});
-		searchButton.setBounds(623, 27, 46, 44);
 		panel.add(searchButton);
 		
 		
 		JTextArea textPost = new JTextArea();
+		textPost.setBounds(427, 213, 424, 409);
 		textPost.setEditable(false);
 		textPost.setLineWrap(true);
 		textPost.setWrapStyleWord(true);
@@ -151,12 +155,15 @@ public class BackendProfileBossGUI {
 	        textPost.append(post.getContent()+" | "+post.getCreator().getFirstName()+" | "+post.getPostScope()+" | "+formatDateTime+ "\n\r");
 		}
 		textPost.setBackground(new Color(255, 250, 240));
-		textPost.setBounds(427, 213, 424, 409);
-		panel.add(textPost);
+		frmStartingPage.getContentPane().add(textPost);
+		JScrollPane scrollPanePost = new JScrollPane(textPost);
+		scrollPanePost.setBounds(427, 213, 424, 409);
+		scrollPanePost.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		frmStartingPage.getContentPane().add(scrollPanePost);
 		
 		JLabel nameLabel = new JLabel(boss.getFirstName()+" "+boss.getLastName());
-		nameLabel.setFont(new Font("Tahoma", Font.PLAIN, 19));
 		nameLabel.setBounds(44, 243, 293, 30);
+		nameLabel.setFont(new Font("Tahoma", Font.PLAIN, 19));
 		panel.add(nameLabel);
 		
 		JLabel companyPostLabel = new JLabel(" Head of company ");
@@ -169,6 +176,7 @@ public class BackendProfileBossGUI {
 		
 		Icon help = new ImageIcon("Buttons_backgrounds/customer_support_40px.png");
 		helpButton = new JButton(help);
+		helpButton.setBounds(814, 922, 63, 58);
 		helpButton.setContentAreaFilled(false);
 		helpButton.setToolTipText("Do you want help? Click me.");
 		helpButton.setFocusPainted(false); 
@@ -186,11 +194,11 @@ public class BackendProfileBossGUI {
 				}
 			}
 		});
-		helpButton.setBounds(814, 922, 63, 58);
 		panel.add(helpButton);
 
 		Icon friends = new ImageIcon("Buttons_backgrounds/friends_30px.png");
 		requestsButton = new JButton(friends);
+		requestsButton.setBounds(714, 27, 37, 30);
 		requestsButton.setToolTipText("Watch your connection requests");
 		requestsButton.setContentAreaFilled(false); 
 		requestsButton.setFocusPainted(false); 
@@ -208,11 +216,11 @@ public class BackendProfileBossGUI {
 				}
 			}
 		});
-		requestsButton.setBounds(714, 27, 37, 30);
 		panel.add(requestsButton);
 		
 		Icon messages = new ImageIcon("Buttons_backgrounds/Messages_30px.png");
 	    messagesButton = new JButton(messages);
+	    messagesButton.setBounds(763, 27, 37, 30);
 	    messagesButton.setToolTipText("See your new messages");
 	    messagesButton.setContentAreaFilled(false); 
 	    messagesButton.setFocusPainted(false); 
@@ -230,11 +238,11 @@ public class BackendProfileBossGUI {
 				}
 			}
 		});
-	    messagesButton.setBounds(763, 27, 37, 30);
 		panel.add(messagesButton);
 		
 		Icon bell = new ImageIcon("Buttons_backgrounds/bell_30px.png");
 		notifsButton = new JButton(bell);
+		notifsButton.setBounds(814, 27, 37, 30);
 		notifsButton.setToolTipText("Watch your notofications");
 		notifsButton.setContentAreaFilled(false); 
 		notifsButton.setFocusPainted(false); 
@@ -252,10 +260,10 @@ public class BackendProfileBossGUI {
 				}
 			}
 		});
-		notifsButton.setBounds(814, 27, 37, 30);
 		panel.add(notifsButton);
 		
 		editAccountButton = new JButton("Edit Account Info");
+		editAccountButton.setBounds(44, 332, 155, 25);
 		editAccountButton.setContentAreaFilled(false); 
 		editAccountButton.setFocusPainted(false); 
 		editAccountButton.setOpaque(false);
@@ -266,10 +274,10 @@ public class BackendProfileBossGUI {
 				new EditAccountGUI((Boss)boss, frmStartingPage);
 			}
 		});
-		editAccountButton.setBounds(44, 332, 155, 25);
 		panel.add(editAccountButton);
 		
 		connectionsList = new JList<String>();
+		connectionsList.setBounds(44, 467, 116, 169);
 		DefaultListModel<String> model = new DefaultListModel<String>();
 		listOfConnections = boss.getListOfConnections(); //Get all his Connections
 		for (User theUser: listOfConnections) {
@@ -277,10 +285,17 @@ public class BackendProfileBossGUI {
 		}
 		connectionsList.setModel(model);
 		connectionsList.setBackground(new Color(255, 250, 240));
-		connectionsList.setBounds(44, 467, 116, 169);
-		panel.add(connectionsList);
+		frmStartingPage.getContentPane().add(connectionsList);
+		JScrollPane scrollPaneConnections = new JScrollPane(connectionsList);
+		scrollPaneConnections.setBounds(44, 467, 116, 169);
+		scrollPaneConnections.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		frmStartingPage.getContentPane().add(scrollPaneConnections);
+		
+		
+		
 		
 		suggestedList = new JList<String>();
+		suggestedList.setBounds(221, 467, 116, 169);
 		DefaultListModel<String> model2 = new DefaultListModel<String>();
 		suggestedListConnections = boss.suggestedConnections(); //Get all Suggested Connections
 		for (User suggestedUser: suggestedListConnections) {
@@ -288,8 +303,12 @@ public class BackendProfileBossGUI {
 		}
 		suggestedList.setModel(model2);
 		suggestedList.setBackground(new Color(255, 250, 240));
-		suggestedList.setBounds(221, 467, 116, 169);
-		panel.add(suggestedList);
+		frmStartingPage.getContentPane().add(suggestedList);
+		JScrollPane scrollPaneSuggested = new JScrollPane(suggestedList);
+		scrollPaneSuggested.setBounds(221, 467, 116, 169);
+		scrollPaneSuggested.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		frmStartingPage.getContentPane().add(scrollPaneSuggested);
+		
 		
 		JLabel lblNewLabel_9 = new JLabel("Connections: ("+boss.getListOfConnections().size()+")");
 		lblNewLabel_9.setBounds(49, 438, 99, 16);
@@ -300,24 +319,24 @@ public class BackendProfileBossGUI {
 		panel.add(lblNewLabel_9_1);
 		
 		JTextArea writePostArea = new JTextArea();
+		writePostArea.setBounds(427, 651, 424, 49);
 		writePostArea.setLineWrap(true);
 		writePostArea.setWrapStyleWord(true);
 		writePostArea.setBackground(new Color(255, 250, 240));
-		writePostArea.setBounds(427, 651, 424, 49);
 		panel.add(writePostArea);
 		
 		connectionsRadio= new JRadioButton("Connections");
+		connectionsRadio.setBounds(503, 717, 112, 25);
 		connectionsRadio.setActionCommand("Connections");
 		connectionsRadio.setBackground(Color.WHITE);
 		connectionsRadio.setOpaque(false);
-		connectionsRadio.setBounds(503, 717, 112, 25);
 		panel.add(connectionsRadio);
 		
 	    PublicRadio = new JRadioButton("Public");
+	    PublicRadio.setBounds(637, 717, 78, 25);
 	    PublicRadio.setActionCommand("Public");
 		PublicRadio.setBackground(Color.WHITE);
 		PublicRadio.setOpaque(false);
-		PublicRadio.setBounds(637, 717, 78, 25);
 		panel.add(PublicRadio);
 		
 		ButtonGroup radioGroup = new ButtonGroup();
@@ -325,6 +344,7 @@ public class BackendProfileBossGUI {
 		radioGroup.add(PublicRadio);
 		
 		postButton= new JButton("Post");
+		postButton.setBounds(752, 717, 97, 25);
 		postButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
@@ -360,38 +380,37 @@ public class BackendProfileBossGUI {
 		postButton.setFocusPainted(false); 
 		postButton.setOpaque(false);
 		postButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		
-		postButton.setBounds(752, 717, 97, 25);
 		panel.add(postButton);
 		
 		checkprofileButton = new JButton("Check profile");
+		checkprofileButton.setBounds(44, 649, 116, 25);
 		checkprofileButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		checkprofileButton.setContentAreaFilled(false); 
 		checkprofileButton.setFocusPainted(false); 
 		checkprofileButton.setOpaque(false);
 		checkprofileButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		checkprofileButton.setBounds(44, 649, 116, 25);
 		panel.add(checkprofileButton);
 		
 		sendMessageButton = new JButton("Send Message");
+		sendMessageButton.setBounds(44, 675, 116, 25);
 		sendMessageButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		sendMessageButton.setContentAreaFilled(false); 
 		sendMessageButton.setFocusPainted(false); 
 		sendMessageButton.setOpaque(false);
 		sendMessageButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		sendMessageButton.setBounds(44, 675, 116, 25);
 		panel.add(sendMessageButton);
 		
 		sendRequestButton = new JButton("Send request");
+		sendRequestButton.setBounds(221, 649, 116, 25);
 		sendRequestButton.setContentAreaFilled(false); 
 		sendRequestButton.setFocusPainted(false); 
 		sendRequestButton.setOpaque(false);
 		sendRequestButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		sendRequestButton.setBounds(221, 649, 116, 25);
 		panel.add(sendRequestButton);
 		
 		Icon logout = new ImageIcon("Buttons_backgrounds/exit_50px.png");
 		disconnectButton = new JButton(logout);
+		disconnectButton.setBounds(793, 110, 56, 56);
 		disconnectButton.setContentAreaFilled(false); 
 		disconnectButton.setFocusPainted(false); 
 		disconnectButton.setToolTipText("logout");
@@ -410,10 +429,10 @@ public class BackendProfileBossGUI {
 				}
 			}
 		});
-		disconnectButton.setBounds(793, 110, 56, 56);
 		panel.add(disconnectButton);
 		
 		editCompanyInfoButton= new JButton("Edit Company Info");
+		editCompanyInfoButton.setBounds(216, 332, 155, 25);
 		editCompanyInfoButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -424,24 +443,29 @@ public class BackendProfileBossGUI {
 		editCompanyInfoButton.setFocusPainted(false); 
 		editCompanyInfoButton.setOpaque(false);
 		editCompanyInfoButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		editCompanyInfoButton.setBounds(216, 332, 155, 25);
 		panel.add(editCompanyInfoButton);
 
 		
 		textField = new JTextField();
+		textField.setBounds(332, 36, 279, 30);
 		textField.setBackground(new Color(255, 250, 240));
 		textField.setColumns(10);
-		textField.setBounds(332, 36, 279, 30);
 		panel.add(textField);
 		
 		
 		JLabel lblNewLabel_2 = new JLabel("");
+		lblNewLabel_2.setBounds(0, 0, 887, 991);
 		BufferedImage imagebackground = ImageIO.read(new File("label_backgrounds/background.jpg"));
 		ImageIcon imageb = new ImageIcon(imagebackground);
 		Image imagerisizeb = imageb.getImage().getScaledInstance(887, 991, 140) ;
 		lblNewLabel_2.setIcon(new ImageIcon(imagerisizeb));
-		lblNewLabel_2.setBounds(0, 0, 887, 991);
 		panel.add(lblNewLabel_2);
+		
+		
+		
+		
+		
+		
 		ButtonListener listener = new ButtonListener();
 		checkprofileButton.addActionListener(listener);
 		sendMessageButton.addActionListener(listener);
