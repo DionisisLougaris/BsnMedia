@@ -102,8 +102,11 @@ public class Storage implements Serializable{
 				String line;
 				line = reader.readLine();
 				while(line!=null) {
-					//String decryptedMessage = Encryption.decryptMessage(encryptedMessage, shift)
-					//convInString.add(line);
+					int key = Storage.returnTheMessageKey(line); // We got the key for decrypt
+					
+					String decryptedMessage = Encryption.decryptMessage(line, key); //Decrypt the Message
+					String finalDecryptedString = decryptedMessage.substring(0, decryptedMessage.length()-6); //We remove the last characters that were the key to decryption
+					convInString.add(finalDecryptedString);
 					line = reader.readLine();
 				}
 				reader.close();
@@ -118,4 +121,28 @@ public class Storage implements Serializable{
 		
 		return convInString;
 	}
+	
+	
+	//This method returns the key to decrypt a stored Message
+	public static int returnTheMessageKey(String theMessage) {
+		
+		int theKey = -1;
+		String theKeyString;
+		
+		//We know that the seconds will always be between these two characters.
+		int firstCharSignPosition = theMessage.lastIndexOf("|");
+		int secondCharSignPosition = theMessage.lastIndexOf("/");
+		
+		//We take only one position for the seconds
+		if (secondCharSignPosition - firstCharSignPosition == 2) {
+			theKeyString = String.valueOf(theMessage.charAt(firstCharSignPosition+1));
+		}else {//We take two positions for the seconds
+			theKeyString = String.valueOf(theMessage.charAt(firstCharSignPosition+1)) + String.valueOf(theMessage.charAt(firstCharSignPosition+2));
+		}
+		
+		theKey = Integer.parseInt(theKeyString); //We want the key as Integer
+		
+		return theKey;
+	}
+	
 }

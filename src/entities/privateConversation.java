@@ -1,6 +1,5 @@
 package entities;
 
-import java.io.File;
 import java.io.Serializable;
 
 public class privateConversation extends Conversation implements Serializable{
