@@ -17,6 +17,7 @@ public class groupConversation extends Conversation implements Serializable{
 	}
 	
 	public void addMessage(Message aMessage) {
+		
 		Storage.saveMessage(aMessage, this);
 	}
 	

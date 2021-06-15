@@ -8,7 +8,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		/*
+		
 		Company theCompany = new Company("IT Intelligence", "A Technology Company", "25012001", "6971657008", "Thessaloniki", "itintelligenceuom@gmail.com");
 		
 		Password thePassword = new Password("12345678", "minasch", "Minas", "Charakopoulos");
@@ -55,32 +55,34 @@ public class Main {
 		theCompany.addUser(first2);
 		theCompany.addUser(first3);
 		theCompany.addUser(first4);
-		theCompany.addUser(first5);
+		theCompany.addUser(first5); 
 		
 		
 		
 		
-		
-		privateConversation conversation = new privateConversation(first, first2);
-		Message firstMessage = new Message("Geiaaa", first);
+		//Εδω γίνεται η συζήτηση και η αποθήκευση της συνομιλίας (Αυτή την λογική θα κρατήσουμε)
+		//privateConversation conversation = new privateConversation(first, first2);
+		/*Message firstMessage = new Message("Geiaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+				+ "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", first);
 		conversation.addMessage(firstMessage);
 		Message firstMessage1 = new Message("Geiaaa", first2);
 		conversation.addMessage(firstMessage1);
 		Message firstMessage2 = new Message("Ti kaneis", first);
 		conversation.addMessage(firstMessage2);
 		Message firstMessage3 = new Message("Ola kala esy?", first2);
-		conversation.addMessage(firstMessage3);
+		conversation.addMessage(firstMessage3);*/
 
 
+		//Εδώ γίνεται η ανάκτηση της συνομιλίας από το αρχείο
+		/*ArrayList<String> theConversation = new ArrayList<String>();
 		
-		//Storage.saveConversation(conversation);
+		theConversation = Storage.retrieveConversation(conversation);
+		for (String line: theConversation) {
+			System.out.println(line);
+		}*/
 		
-		//System.out.println(Storage.retrieveConversation(conversation));
 		
-		//Πρεπει να δουμε αν θα μεινει το πεδιο ListOfConversations στον User και τι θα γινει με τι ανακτηση
-		
-		*/
-		Company theCompany=Storage.retrieveFromBinaryFile();
+		//Company theCompany=Storage.retrieveFromBinaryFile();
 		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
