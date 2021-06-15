@@ -59,7 +59,7 @@ public class HelpGUI {
 		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		frame.setResizable(false);
 		
-		ImageIcon logoimage = new ImageIcon("label_backgrounds/BSNlogo.jpg");
+		ImageIcon logoimage = new ImageIcon("label_backgrounds/bsn_32px.jpg");
 		frame.setIconImage(logoimage.getImage());
 		
 		myUser = user;

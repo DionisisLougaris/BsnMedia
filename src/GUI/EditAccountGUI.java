@@ -78,7 +78,7 @@ public class EditAccountGUI {
 		frmEdiwYourAccount.getContentPane().add(panel);
 		panel.setLayout(null);
 		
-		ImageIcon logoimage = new ImageIcon("label_backgrounds/BSNlogo.jpg");
+		ImageIcon logoimage = new ImageIcon("label_backgrounds/bsn_32px.jpg");
 		frmEdiwYourAccount.setIconImage(logoimage.getImage());
 		
 		user = theUser;

@@ -47,7 +47,7 @@ public class GroupChatGUI {
 		frame.setVisible(true);
 		frame.setResizable(false);
 		
-		ImageIcon logoimage = new ImageIcon("label_backgrounds/BSNlogo.jpg");
+		ImageIcon logoimage = new ImageIcon("label_backgrounds/bsn_32px.jpg");
 		frame.setIconImage(logoimage.getImage());
 		
 		JLabel lblNewLabel = new JLabel("Your messages are encrypted");

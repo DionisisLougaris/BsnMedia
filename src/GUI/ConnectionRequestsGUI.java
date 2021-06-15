@@ -43,7 +43,7 @@ public class ConnectionRequestsGUI {
 		frmConnectionRequests.setBounds(1060, 88, 200, 244);
 		frmConnectionRequests.getContentPane().setLayout(null);
 		
-		ImageIcon logoimage = new ImageIcon("label_backgrounds/BSNlogo.jpg");
+		ImageIcon logoimage = new ImageIcon("label_backgrounds/bsn_32px.jpg");
 		frmConnectionRequests.setIconImage(logoimage.getImage());
 		
 		user = theUser;

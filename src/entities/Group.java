@@ -21,6 +21,8 @@ public class Group implements Serializable{
 		this.name = name;
 		this.myProject = myProject;
 		this.supervisor = supervisor;
+		//setting value to 0 before rating
+		this.rating=0;
 	}
 	
 
@@ -89,7 +91,6 @@ public class Group implements Serializable{
 
 	public void setRating(int rating) {
 		this.rating = rating;
-		System.out.println("ola ok");
 	}
 
 	public void setSupervisor(Chief supervisor) {

@@ -58,7 +58,7 @@ public class EditGroupProjectGUI {
 		frame.setResizable(false);
 		frame.setTitle("Edit Group and Project");
 		
-		ImageIcon logoimage = new ImageIcon("label_backgrounds/BSNlogo.jpg");
+		ImageIcon logoimage = new ImageIcon("label_backgrounds/bsn_32px.jpg");
 		frame.setIconImage(logoimage.getImage());
 		
 		myGroup = aGroup;

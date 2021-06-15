@@ -66,7 +66,7 @@ public class FrontEndProfileGUI {
 		frame.setTitle(aUser.getMyAccount().getUsername());
 		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		
-		ImageIcon logoimage = new ImageIcon("label_backgrounds/BSNlogo.jpg");
+		ImageIcon logoimage = new ImageIcon("label_backgrounds/bsn_32px.jpg");
 		frame.setIconImage(logoimage.getImage());	    
 			
 		loggedUser = tUser; //The user who is connected
