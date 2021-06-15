@@ -1,5 +1,7 @@
 package entities;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import javax.swing.JFrame;
@@ -110,6 +112,14 @@ public class Connection extends Notification implements Serializable{
 				privateConversation newConversation = new privateConversation(firstUser, secondUser);
 				firstUser.addConversation(newConversation);
 				secondUser.addConversation(newConversation);
+				//When two users log in, they need to have a chat of their own, and a file to be saved there
+				File file = new File("Conversations/"+(firstUser.getMyAccount().getUsername()+"_"+(secondUser.getMyAccount().getUsername()+".txt")));
+				try {
+					file.createNewFile();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				
 				String message = "Successful connection between you!";
 				JOptionPane.showMessageDialog(new JFrame(), message, "Message",

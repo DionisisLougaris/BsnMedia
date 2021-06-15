@@ -23,6 +23,7 @@ import entities.Group;
 import entities.Message;
 import entities.Storage;
 import entities.User;
+import javax.swing.SwingConstants;
 
 public class GroupChatGUI {
 
@@ -50,15 +51,15 @@ public class GroupChatGUI {
 		ImageIcon logoimage = new ImageIcon("label_backgrounds/bsn_32px.jpg");
 		frame.setIconImage(logoimage.getImage());
 		
-		JLabel lblNewLabel = new JLabel("Your messages are encrypted");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel.setBounds(80, 15, 215, 20);
-		frame.getContentPane().add(lblNewLabel);
+		JLabel informationLabel = new JLabel("Your messages are encrypted");
+		informationLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		informationLabel.setBounds(80, 15, 215, 20);
+		frame.getContentPane().add(informationLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("Group Conversation of \" \"");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		lblNewLabel_1.setBounds(12, 46, 593, 25);
-		frame.getContentPane().add(lblNewLabel_1);
+		JLabel convoNameLabel = new JLabel("Group Conversation of \" \"");
+		convoNameLabel.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		convoNameLabel.setBounds(12, 46, 593, 25);
+		frame.getContentPane().add(convoNameLabel);
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(60, 179, 113));
@@ -72,20 +73,20 @@ public class GroupChatGUI {
 		panel.add(panel_1);
 		panel_1.setLayout(null);
 		
-		JTextArea textArea = new JTextArea();
-		textArea.setEditable(false);
-		textArea.setLineWrap(true);
-		textArea.setWrapStyleWord(true);
-		textArea.setBounds(0, 0, 619, 493);
+		JTextArea allMessagesTextArea = new JTextArea();
+		allMessagesTextArea.setEditable(false);
+		allMessagesTextArea.setLineWrap(true);
+		allMessagesTextArea.setWrapStyleWord(true);
+		allMessagesTextArea.setBounds(0, 0, 619, 493);
 		ArrayList<String> ourMessages = new ArrayList<>();
 		ourMessages= Storage.retrieveConversation(myGroup.getMyConversation());
 
 			for(int i=0;i<ourMessages.size();i++)
 			{
-				textArea.append(ourMessages.get(i)+ "\n\r");
+				allMessagesTextArea.append(ourMessages.get(i)+ "\n\r");
 			}
 			
-		panel_1.add(textArea);
+		panel_1.add(allMessagesTextArea);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBackground(new Color(255, 250, 240));
@@ -93,49 +94,41 @@ public class GroupChatGUI {
 		panel.add(panel_2);
 		panel_2.setLayout(null);
 		
-		JTextArea textArea_1 = new JTextArea();
-		textArea_1.setLineWrap(true);
-		textArea_1.setWrapStyleWord(true);
-		textArea_1.setBounds(0, 0, 521, 120);
-		panel_2.add(textArea_1);
+		JTextArea newMessageTextArea = new JTextArea();
+		newMessageTextArea.setLineWrap(true);
+		newMessageTextArea.setWrapStyleWord(true);
+		newMessageTextArea.setBounds(0, 0, 521, 120);
+		panel_2.add(newMessageTextArea);
 		
 		Icon send = new ImageIcon("Buttons_backgrounds/email_send_60px.png");
-		JButton btnNewButton_1_1_1 = new JButton(send);
-		btnNewButton_1_1_1.setContentAreaFilled(false); 
-		btnNewButton_1_1_1.setFocusPainted(false); 
-		btnNewButton_1_1_1.setOpaque(false);
-		btnNewButton_1_1_1.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		btnNewButton_1_1_1.addActionListener(new ActionListener() {
+		JButton sendMessageButton = new JButton(send);
+		sendMessageButton.setContentAreaFilled(false); 
+		sendMessageButton.setFocusPainted(false); 
+		sendMessageButton.setOpaque(false);
+		sendMessageButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		sendMessageButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				String myText = textArea_1.getText();
+				String myText = newMessageTextArea.getText();
 				Message myMessage = new Message(myText,myUser);
 				myGroup.getMyConversation().addMessage(myMessage);
-				textArea.setText(""); 
+				allMessagesTextArea.setText(""); 
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 		        String formatDateTime = myMessage.getTimesent().format(formatter);
-				textArea.append(myMessage.getContent()+" | Date:"+formatDateTime+" | "+myMessage.getSender().getMyAccount().getUsername()+" | \n");
+				allMessagesTextArea.append(myMessage.getContent()+" | Date:"+formatDateTime+" | "+myMessage.getSender().getMyAccount().getUsername()+" | \n");
 			}
 		});
-		btnNewButton_1_1_1.setBounds(556, 555, 62, 62);
-		panel.add(btnNewButton_1_1_1);
-		
-		Icon help = new ImageIcon("Buttons_backgrounds/customer_support_40px.png");
-		JButton btnNewButton_1_1 = new JButton(help);
-		btnNewButton_1_1.setContentAreaFilled(false); 
-		btnNewButton_1_1.setFocusPainted(false); 
-		btnNewButton_1_1.setOpaque(false);
-		btnNewButton_1_1.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		btnNewButton_1_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnNewButton_1_1.setBounds(609, 742, 46, 38);
-		frame.getContentPane().add(btnNewButton_1_1);
+		sendMessageButton.setBounds(556, 555, 62, 62);
+		panel.add(sendMessageButton);
 		
 		Icon lock = new ImageIcon("label_backgrounds/lock_32px.png");
 		JLabel lblNewLabel_2 = new JLabel(lock);
 		lblNewLabel_2.setBounds(22, 14, 46, 38);
 		frame.getContentPane().add(lblNewLabel_2);
+		
+		JLabel lblNewLabel_3 = new JLabel("(Write in English characters)");
+		lblNewLabel_3.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNewLabel_3.setBounds(489, 11, 166, 14);
+		frame.getContentPane().add(lblNewLabel_3);
 	}
 }

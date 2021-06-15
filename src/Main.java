@@ -37,10 +37,12 @@ public class Main {
 		Connection c1 = new Connection(first, first4);
 		Connection c2 = new Connection(first, first2);
 		Connection c3 = new Connection(first3, first2);
+		Connection c4 = new Connection(first5, first);
 		c.manageConnectionRequest(true);
 		c1.manageConnectionRequest(true);
 		c2.manageConnectionRequest(true);
 		c3.manageConnectionRequest(true);
+		c4.manageConnectionRequest(true);
 		first.addPost(new Post(first,"ГейЬ","public"));
 		
 		
@@ -87,8 +89,7 @@ public class Main {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					//new WelcomeScreen_GUI(theCompany);
-					new GroupProfileGUI(first,g1);
+					new WelcomeScreen_GUI(theCompany);
 					} catch (Exception e) {
 					e.printStackTrace();
 				}
