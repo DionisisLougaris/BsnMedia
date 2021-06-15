@@ -36,6 +36,7 @@ import javax.swing.border.LineBorder;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JSeparator;
+import javax.swing.JScrollPane;
 
 public class NewMessagesGUI {
 
@@ -91,6 +92,11 @@ public class NewMessagesGUI {
 		listWithConversations.setModel(listModel);
 		listWithConversations.setBounds(12, 68, 172, 129);
 		frmNewMessages.getContentPane().add(listWithConversations);
+		JScrollPane scrollPaneNewMessages = new JScrollPane(listWithConversations);
+		scrollPaneNewMessages.setBounds(12, 69, 172, 128);
+		scrollPaneNewMessages.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		frmNewMessages.getContentPane().add(scrollPaneNewMessages);
+	
 
 		Icon open = new ImageIcon("Buttons_backgrounds/open_32px.png");
 		JButton goToConvo = new JButton(open);
@@ -252,6 +258,10 @@ public class NewMessagesGUI {
 		separator.setForeground(Color.WHITE);
 		separator.setBounds(0, 40, 194, 10);
 		frmNewMessages.getContentPane().add(separator);
+		
+		
+		
+		
 		frmNewMessages.setVisible(true);
 	}
 }

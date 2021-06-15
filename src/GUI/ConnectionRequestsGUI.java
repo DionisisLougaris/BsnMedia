@@ -19,6 +19,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JScrollPane;
 
 public class ConnectionRequestsGUI {
 
@@ -29,6 +30,7 @@ public class ConnectionRequestsGUI {
 	private JList<String> list;
 	private DefaultListModel<String> listModel;
 	private TreeSet<Notification> connectionRequests;
+	
 
 	public ConnectionRequestsGUI(User theUser ) throws IOException {
 		initialize(theUser);
@@ -61,6 +63,10 @@ public class ConnectionRequestsGUI {
 		list.setModel(listModel);
 		list.setBounds(10, 11, 172, 145);
 		frmConnectionRequests.getContentPane().add(list);
+		JScrollPane scrollPaneConnectionRequests = new JScrollPane(list);
+		scrollPaneConnectionRequests.setBounds(10, 11, 172, 145);
+		scrollPaneConnectionRequests.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		frmConnectionRequests.getContentPane().add(scrollPaneConnectionRequests);
 		
 		Icon accept = new ImageIcon("Buttons_backgrounds/accept_32px.png");
 		acceptButton = new JButton(accept);
@@ -79,6 +85,8 @@ public class ConnectionRequestsGUI {
 		deleteButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		deleteButton.setBounds(107, 165, 75, 36);
 		frmConnectionRequests.getContentPane().add(deleteButton);
+		
+	
 		
 		ButtonListener listener = new ButtonListener();
 		acceptButton.addActionListener(listener);

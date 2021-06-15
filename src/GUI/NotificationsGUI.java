@@ -23,6 +23,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.Cursor;
+import javax.swing.JScrollPane;
 
 public class NotificationsGUI {
 
@@ -67,6 +68,10 @@ public class NotificationsGUI {
 		list.setModel(listModel);
 		list.setBounds(10, 11, 172, 145);
 		frmNotifications.getContentPane().add(list);
+		JScrollPane scrollPaneNotifications = new JScrollPane(list);
+		scrollPaneNotifications.setBounds(10, 11, 172, 145);
+		scrollPaneNotifications.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		frmNotifications.getContentPane().add(scrollPaneNotifications);
 		
 		Icon takealook = new ImageIcon("Buttons_backgrounds/takealook_32px.png");
 		JButton btnNewButton = new JButton(takealook);
@@ -125,6 +130,8 @@ public class NotificationsGUI {
 		});
 		btnNewButton.setBounds(66, 158, 66, 38);
 		frmNotifications.getContentPane().add(btnNewButton);
+		
+	
 	}
 
 }
