@@ -315,6 +315,7 @@ public class BackendProfileChiefGUI {
 		
 		textField = new JTextField();
 		textField.setBounds(639, 780, 64, 25);
+		textField.setToolTipText("Compete the name of group that you want to post");
 		textField.setBackground(new Color(255, 250, 240));
 		textField.setColumns(10);
 		panel.add(textField);
@@ -653,6 +654,7 @@ public class BackendProfileChiefGUI {
 			}
 			
 			else if(e.getSource().equals(createProjectButton)) {
+				
 				 new CreateProjectGUI(chief);
 			}
 			

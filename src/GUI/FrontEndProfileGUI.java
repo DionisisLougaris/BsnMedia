@@ -44,6 +44,7 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollBar;
 import java.awt.Color;
+import javax.swing.JScrollPane;
 
 public class FrontEndProfileGUI {
 
@@ -93,13 +94,14 @@ public class FrontEndProfileGUI {
 		panel_1.add(labeldefaulprofilephoto);
 		
 		searchtext = new JTextField();
-		searchtext.setBackground(new Color(255, 250, 240));
 		searchtext.setBounds(437, 38, 317, 30);
+		searchtext.setBackground(new Color(255, 250, 240));
 		panel.add(searchtext);
 		searchtext.setColumns(10);
 		
 		Icon search = new ImageIcon("Buttons_backgrounds/search_30px.png");
 		JButton searchbutton = new JButton(search);
+		searchbutton.setBounds(766, 27, 55, 44);
 		searchbutton.setContentAreaFilled(false); 
 		searchbutton.setFocusPainted(false); 
 		searchbutton.setOpaque(false);
@@ -131,7 +133,6 @@ public class FrontEndProfileGUI {
 				}
 			}
 		});
-		searchbutton.setBounds(766, 27, 55, 44);
 		panel.add(searchbutton);
 		
 		BufferedImage buttonIcon = null;
@@ -145,6 +146,7 @@ public class FrontEndProfileGUI {
 		Image imagerisizel = image.getImage().getScaledInstance(80, 45, 60) ;
 		ImageIcon imagebutton = new ImageIcon(imagerisizel);
 	    JButton buttongotomyprofile = new JButton(imagebutton);
+	    buttongotomyprofile.setBounds(12, 13, 84, 69);
 	    buttongotomyprofile.setFocusPainted(false);
 		buttongotomyprofile.setContentAreaFilled(false); 
 		buttongotomyprofile.setFocusPainted(false); 
@@ -182,10 +184,10 @@ public class FrontEndProfileGUI {
 				}
 			}
 		});
-		buttongotomyprofile.setBounds(12, 13, 84, 69);
 		panel.add(buttongotomyprofile);
 		
 		JTextArea ausersposts = new JTextArea();
+		ausersposts.setBounds(32, 561, 810, 336);
 		for( Post post : aUser.getListOfPosts())
 		{
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -198,13 +200,19 @@ public class FrontEndProfileGUI {
 		ausersposts.setEditable(false);
 		ausersposts.setLineWrap(true);
 		ausersposts.setBackground(new Color(255, 250, 240));
-		ausersposts.setBounds(32, 561, 810, 336);
-		panel.add(ausersposts);
+		
+		frame.getContentPane().add(ausersposts);
+		JScrollPane scrollPanePost = new JScrollPane(ausersposts);
+		scrollPanePost.setBounds(32, 561, 810, 336);
+		scrollPanePost.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+	    frame.getContentPane().add(scrollPanePost);
+		
+		
 		
 		String namelastname = profileUser.getFirstName() + " " + profileUser.getLastName();
 		JLabel labelnamelastname= new JLabel(namelastname);
-		labelnamelastname.setFont(new Font("Tahoma", Font.PLAIN, 19));
 		labelnamelastname.setBounds(108, 240, 504, 26);
+		labelnamelastname.setFont(new Font("Tahoma", Font.PLAIN, 19));
 		panel.add(labelnamelastname);
 		
 		String currentlypost = "";
@@ -226,9 +234,9 @@ public class FrontEndProfileGUI {
 		
 		String email = profileUser.getMyAccount().getEmail();
 		JLabel labelemail = new JLabel(email);
+		labelemail.setBounds(130, 413, 194, 16);
 		labelemail.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		labelemail.setForeground(new Color(255, 0, 0));
-        labelemail.setBounds(130, 413, 194, 16);
         labelemail.addMouseListener(new MouseAdapter() {
 	       	 
             @Override
@@ -399,8 +407,8 @@ public class FrontEndProfileGUI {
 		}
 		
 		JLabel lblNewLabel_9 = new JLabel("Information:");
-		lblNewLabel_9.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblNewLabel_9.setBounds(74, 376, 84, 16);
+		lblNewLabel_9.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		panel.add(lblNewLabel_9);
 		
 		String telephone = profileUser.getTelephone();
@@ -410,9 +418,9 @@ public class FrontEndProfileGUI {
 		
 		String address = profileUser.getAddress();
 		JLabel labeladdress = new JLabel(address);
+		labeladdress.setBounds(131, 476, 110, 16);
 		labeladdress.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		labeladdress.setForeground(new Color(255, 0, 0));
-		labeladdress.setBounds(131, 476, 110, 16);
 		labeladdress.addMouseListener(new MouseAdapter() {
 	       	 
             @Override
@@ -450,11 +458,16 @@ public class FrontEndProfileGUI {
 				mutualmodel.addElement(theUser.getFirstName()+" "+theUser.getLastName());
 			}
 			listmutualconnections.setModel(mutualmodel);
-			panel.add(listmutualconnections);
+			frame.getContentPane().add(listmutualconnections);
+			JScrollPane scrollPaneMutualConnections = new JScrollPane(listmutualconnections);
+			scrollPaneMutualConnections.setBounds(709, 413, 130, 123);
+			scrollPaneMutualConnections.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+			frame.getContentPane().add(scrollPaneMutualConnections);
 		}
 		
 		Icon help = new ImageIcon("Buttons_backgrounds/customer_support_40px.png");
 		JButton helpButton = new JButton(help);
+		helpButton.setBounds(824, 929, 46, 38);
 		helpButton.setContentAreaFilled(false); 
 		helpButton.setFocusPainted(false); 
 		helpButton.setOpaque(false);
@@ -471,7 +484,6 @@ public class FrontEndProfileGUI {
 				}
 			}
 		});
-		helpButton.setBounds(824, 929, 46, 38);
 		panel.add(helpButton);
 		
 		JLabel lblNewLabel_14 = new JLabel(new ImageIcon("label_backgrounds/email_20px.png"));
@@ -491,11 +503,13 @@ public class FrontEndProfileGUI {
 		panel.add(lblNewLabel_14_3);
 		
 		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setBounds(0, 0, 887, 985);
 		BufferedImage imagebackground = ImageIO.read(new File("label_backgrounds/background.jpg"));
 		ImageIcon imageb = new ImageIcon(imagebackground);
 		Image imagerisizeb = imageb.getImage().getScaledInstance(887, 991, 140) ;
 		lblNewLabel.setIcon(new ImageIcon(imagerisizeb));
-		lblNewLabel.setBounds(0, 0, 887, 985);
 		panel.add(lblNewLabel);
+		
+	
 	}
 }
