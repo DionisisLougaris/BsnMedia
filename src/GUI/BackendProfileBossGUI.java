@@ -123,7 +123,7 @@ public class BackendProfileBossGUI {
 
 						if (!result) {
 							ArrayList<String> suggestedOptions = boss.getMyAccount().getMyCompany().suggestedSearchOption(text);
-							new SearchSuggestionsGUI(suggestedOptions, boss);
+							new SearchSuggestionsGUI(suggestedOptions, boss, frmStartingPage);
 						}else {
 							frmStartingPage.setVisible(false);
 						}

@@ -127,7 +127,7 @@ public class BackendProfileChiefGUI {
 						if (!result) {
 							ArrayList<String> suggestedOptions = new ArrayList<String>();
 							suggestedOptions = chief.getMyAccount().getMyCompany().suggestedSearchOption(searchedText);
-							new SearchSuggestionsGUI(suggestedOptions, chief);
+							new SearchSuggestionsGUI(suggestedOptions, chief, frmStartingPage);
 						}else {
 							frmStartingPage.setVisible(false);
 						}
@@ -581,6 +581,7 @@ public class BackendProfileChiefGUI {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			
 			if(e.getSource().equals(requestsButton)) {
 				try {
 					new ConnectionRequestsGUI(chief);
@@ -589,7 +590,15 @@ public class BackendProfileChiefGUI {
 					e1.printStackTrace();
 				}
 			}
-			else if (e.getSource().equals(sendMessageButton)) {
+			else if (e.getSource().equals(messagesButton)) {
+				
+				try {
+					new NewMessagesGUI(chief);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}else if (e.getSource().equals(sendMessageButton)) {
 							
 							String selectedUserString = connectionsList.getSelectedValue();
 							User selectedUser = null;

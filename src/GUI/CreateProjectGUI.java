@@ -18,6 +18,7 @@ import entities.Group;
 import entities.Password;
 import entities.Project;
 import entities.User;
+import entities.groupConversation;
 
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
@@ -254,6 +255,8 @@ public class CreateProjectGUI {
 						Project createdProject = new Project(textProjectName.getText(), textProjectDescription.getText(), textDeadline.getText());
 						Group createdGroup = new Group(textGroupName.getText(), createdProject, pchief);
 						pchief.addGroupToSupervise(createdGroup);
+						groupConversation conversation = new groupConversation(createdGroup);
+						createdGroup.setMyConversation(conversation);
 						
 						for (Employee theEmp: selectedMembers) {
 							theEmp.addGroupToEmployeesList(createdGroup);

@@ -9,6 +9,11 @@ public class groupConversation extends Conversation implements Serializable{
 
 	
 	
+	public groupConversation(Group theGroup) {
+		super();
+		this.theGroup = theGroup;
+	}
+	
 	public Group getTheGroup() {
 		return theGroup;
 	}

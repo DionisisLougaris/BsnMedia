@@ -120,7 +120,7 @@ public class BackendProfileEmployeeGUI {
 						if (!result) {
 							ArrayList<String> suggestedOptions = new ArrayList<String>();
 							suggestedOptions = employee.getMyAccount().getMyCompany().suggestedSearchOption(searchedText);
-							new SearchSuggestionsGUI(suggestedOptions, employee);
+							new SearchSuggestionsGUI(suggestedOptions, employee, frmStartingPage);
 						}else {
 							frmStartingPage.setVisible(false);
 						}

@@ -1,9 +1,6 @@
 package GUI;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 import entities.User;
 
@@ -11,10 +8,12 @@ import java.awt.Color;
 import java.awt.Cursor;
 
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
@@ -27,14 +26,16 @@ public class SearchSuggestionsGUI {
 
 	private JFrame frame;
 	private User loggedUser;
-	private JButton btnNewButton;
+	private JButton searchButton;
+	private JList<String> list; 
+	private JFrame frameBefore;
 
-	public SearchSuggestionsGUI(ArrayList<String> suggested, User theUser) {
-		initialize(suggested, theUser);
+	public SearchSuggestionsGUI(ArrayList<String> suggested, User theUser, JFrame theFrame) {
+		initialize(suggested, theUser, theFrame);
 	}
 
 	
-	private void initialize(ArrayList<String> suggested, User theUser) {
+	private void initialize(ArrayList<String> suggested, User theUser, JFrame theFrame) {
 		frame = new JFrame();
 		frame.getContentPane().setBackground(Color.WHITE);
 		frame.setBounds(100, 100, 260, 299);
@@ -48,8 +49,9 @@ public class SearchSuggestionsGUI {
 		
 		SuggestedOptions = suggested;
 		loggedUser = theUser;
+		frameBefore = theFrame;
 		
-		JList<String> list = new JList<String>();
+		list = new JList<String>();
 		DefaultListModel<String> model = new DefaultListModel<String>();
 		if(SuggestedOptions.size()>0) {
 			for(String name: SuggestedOptions) {
@@ -63,15 +65,15 @@ public class SearchSuggestionsGUI {
 		list.setBounds(12, 40, 221, 151);
 		frame.getContentPane().add(list);
 		
-		btnNewButton = new JButton("Go to Profile");
-		btnNewButton.setBackground(new Color(255, 250, 240));
-		btnNewButton.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-		btnNewButton.setContentAreaFilled(false); 
-		btnNewButton.setFocusPainted(false); 
-		btnNewButton.setOpaque(false);
-		btnNewButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		btnNewButton.setBounds(55, 204, 131, 25);
-		frame.getContentPane().add(btnNewButton);
+		searchButton = new JButton("Go to Profile");
+		searchButton.setBackground(new Color(255, 250, 240));
+		searchButton.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+		searchButton.setContentAreaFilled(false); 
+		searchButton.setFocusPainted(false); 
+		searchButton.setOpaque(false);
+		searchButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		searchButton.setBounds(55, 204, 131, 25);
+		frame.getContentPane().add(searchButton);
 		
 		JLabel lblNewLabel = new JLabel("Do you mean...");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 17));
@@ -79,7 +81,7 @@ public class SearchSuggestionsGUI {
 		frame.getContentPane().add(lblNewLabel);
 		
 		ButtonListener listener = new ButtonListener();
-		btnNewButton.addActionListener(listener);
+		searchButton.addActionListener(listener);
 	}
 	
 	
@@ -88,8 +90,27 @@ public class SearchSuggestionsGUI {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			
-			if (e.getSource().equals(btnNewButton)) {
+			if (e.getSource().equals(searchButton)) {
 				
+				String selectedSuggestedSearch = list.getSelectedValue();
+				
+				if(selectedSuggestedSearch != null) {
+					
+					try {
+						if (loggedUser.getMyAccount().getMyCompany().searchObject(selectedSuggestedSearch, loggedUser)) {
+							frame.dispose();
+							frameBefore.dispose();
+						}
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
+				}else {
+					 String message = "Please select one of the suggested searches!";
+						JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+						        JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		}
 	}

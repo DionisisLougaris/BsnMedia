@@ -269,7 +269,7 @@ public class GroupProfileGUI {
 						if (!result) {
 							ArrayList<String> suggestedOptions = new ArrayList<String>();
 							suggestedOptions = myUser.getMyAccount().getMyCompany().suggestedSearchOption(searchedText);
-							new SearchSuggestionsGUI(suggestedOptions, myUser);
+							new SearchSuggestionsGUI(suggestedOptions, myUser, frame);
 						}else {
 							frame.setVisible(false);
 						}

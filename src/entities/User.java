@@ -390,7 +390,7 @@ abstract public class User implements Serializable{
 		return listOfPosts;
 	}
 	
-	abstract public ArrayList<Group> getGroups();
+	abstract public ArrayList<Group> getGroups(); 
 		
 }
 

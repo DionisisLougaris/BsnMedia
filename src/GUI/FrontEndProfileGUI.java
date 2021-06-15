@@ -116,7 +116,7 @@ public class FrontEndProfileGUI {
 						if (!result) {
 							ArrayList<String> suggestedOptions = new ArrayList<String>();
 							suggestedOptions = loggedUser.getMyAccount().getMyCompany().suggestedSearchOption(searchedText);
-							new SearchSuggestionsGUI(suggestedOptions, loggedUser);
+							new SearchSuggestionsGUI(suggestedOptions, loggedUser, frame);
 						}else {
 							frame.setVisible(false);
 						}

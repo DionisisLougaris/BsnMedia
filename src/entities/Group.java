@@ -103,6 +103,10 @@ public class Group implements Serializable{
 	public void setGroupMembers(ArrayList<Employee> groupMembers) {
 		this.groupMembers = groupMembers;
 	}
+
+	public void setMyConversation(groupConversation myConversation) {
+		this.myConversation = myConversation;
+	}
 	
 }
 

@@ -10,11 +10,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import entities.Boss;
 import entities.Connection;
 import entities.Conversation;
 import entities.Group;
 import entities.Notification;
-import entities.User;
+import entities.*;
 import entities.privateConversation;
 
 import javax.swing.JList;
@@ -31,12 +32,16 @@ import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.Cursor;
 import javax.swing.JTextField;
+import javax.swing.border.LineBorder;
+import java.awt.Font;
+import javax.swing.SwingConstants;
+import javax.swing.JSeparator;
 
 public class NewMessagesGUI {
 
 	private JFrame frmNewMessages;
 	private User user;
-	private JTextField textField;
+	private JTextField searchConvoField;
 
 
 	public NewMessagesGUI(User theUser) throws IOException {
@@ -48,7 +53,7 @@ public class NewMessagesGUI {
 		frmNewMessages.getContentPane().setBackground(new Color(255, 153, 102));
 		frmNewMessages.setResizable(false);
 		frmNewMessages.setTitle("New Messages");
-		frmNewMessages.setBounds(1200, 88, 200, 468);
+		frmNewMessages.setBounds(1200, 88, 212, 276);
 		frmNewMessages.getContentPane().setLayout(null);
 		
 		ImageIcon logoimage = new ImageIcon("label_backgrounds/BSNlogo.jpg");
@@ -56,61 +61,64 @@ public class NewMessagesGUI {
 		
 		user = theUser;
 		
-		JList<String> list = new JList<String>();
+		JList<String> listWithConversations = new JList<String>();
+		listWithConversations.setBorder(new LineBorder(new Color(0, 0, 0)));
 		DefaultListModel<String> listModel = new DefaultListModel<String>();
 		ArrayList<User> activeConversations = user.getListOfConnections();
-		if (activeConversations.size()>0) {
-			for(User allConvos: activeConversations) {
-				listModel.addElement(allConvos.getFirstName());
+		if (user instanceof Boss) {
+			
+			if (activeConversations.size()>0) {
+				for(User allConvos: activeConversations) {
+					listModel.addElement(allConvos.getFirstName()+" "+allConvos.getLastName());
+				}
+			}else {
+				listModel.addElement("No Conversations..");
 			}
 		}else {
-			listModel.addElement("No Conversations..");
-		}
-		list.setModel(listModel);
-		list.setBounds(12, 68, 172, 129);
-		frmNewMessages.getContentPane().add(list);
-		
-		JList<String> list2 = new JList<String>();
-		DefaultListModel<String> listModel2 = new DefaultListModel<String>();
-		ArrayList<Group> activeGroupConversations = user.getGroups();
-		if (activeGroupConversations.size()>0) {
-			for(Group allGroupConvos: activeGroupConversations) {
-				listModel2.addElement(allGroupConvos.getName());
+			if (activeConversations.size()>0 || user.getGroups().size()>0) {
+				
+				for(User allConvos: activeConversations) {
+					listModel.addElement(allConvos.getFirstName()+" "+allConvos.getLastName());
+				}
+				
+				for (Group myGroup: user.getGroups()) {
+					listModel.addElement(myGroup.getName());
+				}
+			}else {
+				listModel.addElement("No Conversations..");
 			}
-		}else {
-			listModel2.addElement("No Conversations..");
 		}
-		list2.setModel(listModel2);
-		list2.setBounds(12, 287, 172, 84);
-		frmNewMessages.getContentPane().add(list2);
-		
-		
+		listWithConversations.setModel(listModel);
+		listWithConversations.setBounds(12, 68, 172, 129);
+		frmNewMessages.getContentPane().add(listWithConversations);
+
 		Icon open = new ImageIcon("Buttons_backgrounds/open_32px.png");
-		JButton btnNewButton = new JButton(open);
-		btnNewButton.setContentAreaFilled(false); 
-		btnNewButton.setFocusPainted(false); 
-		btnNewButton.setOpaque(false);
-		btnNewButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton goToConvo = new JButton(open);
+		goToConvo.setBorder(null);
+		goToConvo.setContentAreaFilled(false); 
+		goToConvo.setFocusPainted(false); 
+		goToConvo.setOpaque(false);
+		goToConvo.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		goToConvo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//Going to private Conversation
-				String selectedUserString = list.getSelectedValue();
+				String selectedString = listWithConversations.getSelectedValue();
+				boolean found = false;
+				
 				User selectedUser = null;
 				
 				for(User user: user.getListOfConnections()) {
-					String userName = user.getFirstName();
+					String fullName = user.getFirstName()+" "+user.getLastName();
 					
-					if (userName.equalsIgnoreCase(selectedUserString)) {
+					if (fullName.equalsIgnoreCase(selectedString)) {
 						selectedUser = user;
+						found = true;
 						break;
 					}
 				}
 				
-				if (selectedUser == null) {
-					 String message = "You have not selected any user!";
-						JOptionPane.showMessageDialog(new JFrame(), message, "Message",
-						        JOptionPane.INFORMATION_MESSAGE);
-				}else {
+				if (selectedUser != null ) {
+					
 					ArrayList<Conversation> listOfConversation = user.getListOfConversations();
 					Conversation selectedUserToChat = null;
 					
@@ -125,125 +133,125 @@ public class NewMessagesGUI {
 					}
 					
 					if(selectedUserToChat == null) {
+						
 						 String message = "Something went Wrong!";
 							JOptionPane.showMessageDialog(new JFrame(), message, "Message",
 							        JOptionPane.INFORMATION_MESSAGE);
 					}else {
+						
 						new PrivateChatGUI(selectedUser, theUser, selectedUserToChat);
 					}
+				}else {
+					
+					for(Group myGroup: user.getGroups()) {
+						if (myGroup.getName().equalsIgnoreCase(selectedString)) {
+							new GroupChatGUI(myGroup, user);
+							found = true; 
+							break;
+						}
+					}
+				}
+				if (!found) {
+					 String message = "You haven't select any Conversation";
+						JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+						        JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
-		btnNewButton.setBounds(144, 210, 40, 35);
-		frmNewMessages.getContentPane().add(btnNewButton);
+		goToConvo.setBounds(144, 201, 40, 35);
+		frmNewMessages.getContentPane().add(goToConvo);
 		
-		JLabel lblNewLabel = new JLabel("Private conversations:");
-		lblNewLabel.setBounds(22, 48, 129, 16);
+		JLabel lblNewLabel = new JLabel("All Conversations:");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblNewLabel.setForeground(Color.WHITE);
+		lblNewLabel.setBounds(22, 48, 162, 16);
 		frmNewMessages.getContentPane().add(lblNewLabel);
 		
 		
-		textField = new JTextField();
-		textField.setBounds(12, 13, 129, 22);
-		frmNewMessages.getContentPane().add(textField);
-		textField.setColumns(10);
+		searchConvoField = new JTextField();
+		searchConvoField.setBorder(null);
+		searchConvoField.setBounds(12, 13, 129, 22);
+		frmNewMessages.getContentPane().add(searchConvoField);
+		searchConvoField.setColumns(10);
 		
 		
 		Icon search = new ImageIcon("Buttons_backgrounds/search_30px.png");
-		JButton btnNewButton_1 = new JButton(search);
-		btnNewButton_1.setContentAreaFilled(false); 
-		btnNewButton_1.setFocusPainted(false); 
-		btnNewButton_1.setOpaque(false);
-		btnNewButton_1.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		btnNewButton_1.setBounds(149, 12, 33, 33);
-		btnNewButton_1.addActionListener(new ActionListener() {
+		JButton searchButton = new JButton(search);
+		searchButton.setBorder(null);
+		searchButton.setContentAreaFilled(false); 
+		searchButton.setFocusPainted(false); 
+		searchButton.setOpaque(false);
+		searchButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		searchButton.setBounds(149, 12, 33, 29);
+		searchButton.addActionListener(new ActionListener() {
+			
+			//The Search works only to search conversations with other users and no for GroupConversations
 			public void actionPerformed(ActionEvent arg0) {
 				
-				String text = textField.getText();
-				Conversation selectedUserToChat = null;
+				String text = searchConvoField.getText();
+				Conversation selectedConversation = null;
+				boolean found = false;
+				
 				if(!text.isEmpty()) {
-					User selectedUser= null;
+					
+					User selectedUser = null;
+					
 					for(User user: user.getListOfConnections()) {
-						String userName = user.getFirstName();
+						String fullName = user.getFirstName()+" "+user.getLastName();
 						
-						if (userName.equalsIgnoreCase(text)) {
+						if (fullName.equalsIgnoreCase(text) || user.getFirstName().equalsIgnoreCase(text) || user.getLastName().equalsIgnoreCase(text)) {
 							selectedUser = user;
+							found = true;
 							break;
 						}
-							ArrayList<Conversation> listOfConversation = user.getListOfConversations();
+					}
+					
+					if (selectedUser != null) {
+						
+						ArrayList<Conversation> listOfConversation = user.getListOfConversations();
+						
+						for (Conversation theConversation: listOfConversation) {
 							
-							for (Conversation theConversation: listOfConversation) {
+							if ((((privateConversation)theConversation).getDiscussant1().equals(user) && ((privateConversation)theConversation).getDiscussant2().equals(selectedUser)) ||
+								(((privateConversation)theConversation).getDiscussant2().equals(user) && ((privateConversation)theConversation).getDiscussant1().equals(selectedUser))) {
 								
-								if ((((privateConversation)theConversation).getDiscussant1().equals(user) && ((privateConversation)theConversation).getDiscussant2().equals(selectedUser)) ||
-									(((privateConversation)theConversation).getDiscussant2().equals(user) && ((privateConversation)theConversation).getDiscussant1().equals(selectedUser))) {
-									
-									selectedUserToChat = theConversation;
-									break;
-								}
-							}
-							if(selectedUserToChat == null) {
-								 String message = "Something went Wrong!";
-									JOptionPane.showMessageDialog(new JFrame(), message, "Message",
-									        JOptionPane.INFORMATION_MESSAGE);
-							}else {
-								new PrivateChatGUI(selectedUser, user, selectedUserToChat);
+								selectedConversation = theConversation;
+								break;
 							}
 						}
+						
+						if(selectedConversation == null) {
+							 String message = "Something went Wrong!";
+								JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+								        JOptionPane.INFORMATION_MESSAGE);
+						}else {
+							
+							new PrivateChatGUI(selectedUser, user, selectedConversation);
+						}
 					}
+					
+					if (!found) {
+						
+						 String message = "The search was not successful";
+							JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+							        JOptionPane.ERROR_MESSAGE);
+					}
+				}
 				else {
+					
 					 String message = "Type something in the Search field";
 						JOptionPane.showMessageDialog(new JFrame(), message, "Message",
 						        JOptionPane.INFORMATION_MESSAGE);
 				}
 			}
 		});
-		frmNewMessages.getContentPane().add(btnNewButton_1);
+		frmNewMessages.getContentPane().add(searchButton);
 		
-		JLabel lblGroupConversations = new JLabel("Group conversations:");
-		lblGroupConversations.setBounds(12, 258, 129, 16);
-		frmNewMessages.getContentPane().add(lblGroupConversations);
-		
-		JButton btnNewButton_2 = new JButton(open);
-		btnNewButton_2.setContentAreaFilled(false); 
-		btnNewButton_2.setFocusPainted(false); 
-		btnNewButton_2.setOpaque(false);
-		btnNewButton_2.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		btnNewButton_2.setBounds(144, 384, 40, 35);
-		btnNewButton_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-					//Going to group Conversation
-					String selectedGroupString = list2.getSelectedValue();
-					Group selectedGroup = null;
-					Conversation selectedGroupToChat=null;
-					for(Group aGroup: user.getGroups()) {
-						String GroupName = aGroup.getName();
-						
-						if (GroupName.equalsIgnoreCase(selectedGroupString)) {
-							selectedGroup = aGroup;
-							break;
-						}
-					}
-	
-					if (selectedGroup == null) {
-						 String message = "You have not selected any group!";
-							JOptionPane.showMessageDialog(new JFrame(), message, "Message",
-							        JOptionPane.INFORMATION_MESSAGE);
-					}
-					else {
-							selectedGroupToChat = selectedGroup.getMyConversation();
-							}
-	
-						
-						if(selectedGroupToChat == null) {
-							 String message = "Something went Wrong!";
-								JOptionPane.showMessageDialog(new JFrame(), message, "Message",
-								        JOptionPane.INFORMATION_MESSAGE);
-						}else {
-							new GroupChatGUI(selectedGroup, theUser);
-						}
-			}
-		
-			});
-		frmNewMessages.getContentPane().add(btnNewButton_2);
+		JSeparator separator = new JSeparator();
+		separator.setForeground(Color.WHITE);
+		separator.setBounds(0, 40, 194, 10);
+		frmNewMessages.getContentPane().add(separator);
 		frmNewMessages.setVisible(true);
 	}
 }
