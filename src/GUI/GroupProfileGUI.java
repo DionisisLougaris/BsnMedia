@@ -45,6 +45,8 @@ import javax.swing.SwingConstants;
 import javax.swing.JSeparator;
 import javax.swing.JList;
 import javax.swing.border.LineBorder;
+import javax.swing.JScrollPane;
+import java.awt.Rectangle;
 
 public class GroupProfileGUI {
 
@@ -115,7 +117,7 @@ public class GroupProfileGUI {
 		slider.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		slider.setOpaque(false);
 		slider.setBackground(Color.WHITE);
-		slider.setBounds(189, 346, 200, 26);
+		slider.setBounds(199, 340, 200, 26);
 		frame.getContentPane().add(slider);
 		
 		JLabel lblNewLabel_7 = new JLabel("Group rating: ");
@@ -183,12 +185,8 @@ public class GroupProfileGUI {
 		lblNewLabel_6.setBounds(323, 447, 506, 16);
 		frame.getContentPane().add(lblNewLabel_6);
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(323, 474, 506, 408);
-		frame.getContentPane().add(panel_1);
-		panel_1.setLayout(null);
-		
 		JTextArea postTextArea = new JTextArea();
+		postTextArea.setBounds(0, 0, 507, 408);
 		for( Post post : myGroup.getGroupPosts())
 		{
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -199,8 +197,6 @@ public class GroupProfileGUI {
 		postTextArea.setBackground(new Color(255, 250, 240));
 		postTextArea.setEditable(false);
 		postTextArea.setLineWrap(true);
-		postTextArea.setBounds(0, 0, 507, 408);
-		panel_1.add(postTextArea);
 		
 		JLabel projectName = new JLabel();
 		projectName.setText(myGroup.getMyProject().getName());
@@ -337,6 +333,10 @@ public class GroupProfileGUI {
 		membersList.setBackground(new Color(255, 250, 240));
 		membersList.setBounds(38, 474, 190, 408);
 		frame.getContentPane().add(membersList);
+		JScrollPane scrollPaneMembers = new JScrollPane(membersList);
+		scrollPaneMembers.setBounds(38, 476, 190, 406);
+		scrollPaneMembers.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		frame.getContentPane().add(scrollPaneMembers);
 		
 		JLabel lblNewLabel = new JLabel("Who is the group's supervisor");
 		lblNewLabel.setBounds(38, 401, 190, 14);
@@ -371,5 +371,7 @@ public class GroupProfileGUI {
 		lblNewLabel_11.setIcon(new ImageIcon(imagerisizeb));
 		lblNewLabel_11.setBounds(0, 0, 887, 981);
 		frame.getContentPane().add(lblNewLabel_11);
+		
+		
 	}
 }

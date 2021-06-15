@@ -291,7 +291,7 @@ public class BackendProfileEmployeeGUI {
 		textArea.setBackground(new Color(255, 250, 240));
 		frmStartingPage.getContentPane().add(textArea);
 		JScrollPane scrollPanePost = new JScrollPane(textArea);
-		scrollPanePost.setBounds(441, 256, 379, 395);
+		scrollPanePost.setBounds(429, 256, 418, 395);
 		scrollPanePost.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		frmStartingPage.getContentPane().add(scrollPanePost);
 		

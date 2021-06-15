@@ -137,6 +137,11 @@ public class CreateProjectGUI {
 		}
 		addUsersGroupList.setModel(addUserGroupmodel);
 		frame.getContentPane().add(addUsersGroupList);
+		JScrollPane scrollPaneaddUser = new JScrollPane(addUsersGroupList);
+		scrollPaneaddUser.setBounds(48, 403, 174, 153);
+		scrollPaneaddUser.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		frame.getContentPane().add(scrollPaneaddUser);
+		
 		
 		
 		
@@ -153,6 +158,12 @@ public class CreateProjectGUI {
 		selectedEmployeesList.setBounds(298, 399, 174, 157);
 		selectedEmployeesList.setModel(removeUserGroupmodel);
 		frame.getContentPane().add(selectedEmployeesList);
+		JScrollPane scrollPaneremoveUser = new JScrollPane(selectedEmployeesList);
+		scrollPaneremoveUser.setBounds(298, 403, 174, 153);
+		scrollPaneremoveUser.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		frame.getContentPane().add(scrollPaneremoveUser);
+		
+		
 		
 		JLabel lblNewLabel_5 = new JLabel("Members of Group :");
 		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -335,6 +346,9 @@ public class CreateProjectGUI {
 		separator_2.setForeground(new Color(255, 255, 255));
 		separator_2.setBounds(0, 614, 519, 13);
 		frame.getContentPane().add(separator_2);
+		
+		
+
 		
 		frame.setTitle("Create project");
 	}
