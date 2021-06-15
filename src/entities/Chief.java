@@ -20,38 +20,7 @@ public class Chief extends User implements Serializable{
 	{
 		groupsSupervising.add( addingGroup);
 	}
-	
-	/*This is a method that modifies the data for the Project and Group 
-	entities.  Any input can be considered as valid, except  Group name if used by someone else.*/ 
-	public boolean editProjectAndGroupInfo(String ProjectName,String ProjectDescription,String ProjectDeadLine,String groupName, Group editableeGroup)
-	{
-		boolean findgroup = false ;
-		for(int i=0; i<myAccount.getMyCompany().getCompanyGroups().size(); i++)
-		{
-			if(myAccount.getMyCompany().getCompanyGroups().get(i).getName().contentEquals(groupName))
-			{
-				findgroup = true;
-				break;
-			}
-		}
-		if(findgroup)
-		{
-			editableeGroup.getMyProject().setName(ProjectName);
-			editableeGroup.getMyProject().setDescription(ProjectDescription);
-			editableeGroup.getMyProject().setDeadline(ProjectDeadLine);
-			return false;
-		}
-		else 
-		{
-			editableeGroup.getMyProject().setName(ProjectName);
-			editableeGroup.getMyProject().setDescription(ProjectDescription);
-			editableeGroup.getMyProject().setDeadline(ProjectDeadLine);
-			editableeGroup.setName(groupName);
-			return true;
-		}
-	}
 
-	
 	@Override
 	public TreeSet<Post> returnAllPosts() {
 		// TODO Auto-generated method stub
@@ -87,7 +56,7 @@ public class Chief extends User implements Serializable{
 		
 		return postForBackEndProfile;
 	}
-
+	
 	@Override //Users that are in the same Group with him and Friends of Friends
 	public TreeSet<User> suggestedConnections() {
 		// TODO Auto-generated method stub

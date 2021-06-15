@@ -46,11 +46,15 @@ public class Connection extends Notification implements Serializable{
 		{
 			firstUser.getListOfConnections().remove(secondUser);
 			secondUser.getListOfConnections().remove(firstUser);
+			
+			String message = "You are no longer connected!";
+			JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+			        JOptionPane.INFORMATION_MESSAGE);
 		}
 		else {
 			String message = "You are not connected to each other!";
 			JOptionPane.showMessageDialog(new JFrame(), message, "Message",
-			        JOptionPane.INFORMATION_MESSAGE);
+			        JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	
@@ -75,7 +79,7 @@ public class Connection extends Notification implements Serializable{
 			if(!pendingConnectionRequest)
 			{
 				secondUser.addPendingConnectionRequest(firstUser);
-				Connection connectionRequest = new Connection(firstUser.firstName+"(New CR)", firstUser);
+				Connection connectionRequest = new Connection(firstUser.firstName+"(New Connection Request)", firstUser);
 				secondUser.listOfNotifications.add(connectionRequest);
 				
 				String message = "Successful connection request sent!";
@@ -100,7 +104,7 @@ public class Connection extends Notification implements Serializable{
 	//This is a method in which the connection request is accepted or is canceled.
 	//firstUser, einai aytos pou esteile to aitima
 	//secondUser einai autos pou to lamvanei
-	public void manageConnectionRequest(boolean manageCR)
+	public void manageConnectionRequest(boolean manageCR, Notification theRequestNotification)
 	{
 		if(manageCR)
 		{
@@ -127,16 +131,7 @@ public class Connection extends Notification implements Serializable{
 			}
 		}
 		firstUser.getPendingConnectionRequests().remove(secondUser);
-		
-		for (Notification not: secondUser.listOfNotifications) {
-			if (not instanceof Connection) {
-				if (not.getAboutThisUser().getMyAccount().getUsername().equalsIgnoreCase(firstUser.getMyAccount().getUsername())) {
-						
-					secondUser.listOfNotifications.remove(not);
-					break;
-				}
-			}
-		}
+		secondUser.listOfNotifications.remove(theRequestNotification);
 	}
 	
 	//This method returns the mutual connections between two users.

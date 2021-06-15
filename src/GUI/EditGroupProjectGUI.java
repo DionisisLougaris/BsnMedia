@@ -73,6 +73,7 @@ public class EditGroupProjectGUI {
 		tfProjectName.setColumns(10);
 		
 		tfChangeGroupName = new JTextField(myGroup.getName());
+		tfChangeGroupName.setEditable(false);
 		tfChangeGroupName.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		tfChangeGroupName.setBackground(new Color(255, 153, 102));
 		tfChangeGroupName.setForeground(new Color(255, 255, 255));
@@ -131,14 +132,14 @@ public class EditGroupProjectGUI {
 		lblChangeProjectDescription.setBounds(12, 67, 159, 16);
 		frame.getContentPane().add(lblChangeProjectDescription);
 		
-		JLabel lblChangeGroupName = new JLabel("Change group name:");
+		JLabel lblChangeGroupName = new JLabel("Group name:");
 		lblChangeGroupName.setForeground(new Color(255, 255, 255));
-		lblChangeGroupName.setBounds(44, 170, 127, 16);
+		lblChangeGroupName.setBounds(80, 171, 86, 16);
 		frame.getContentPane().add(lblChangeGroupName);
 		
-		JLabel lblCurrentsituation = new JLabel("Current situation:");
+		JLabel lblCurrentsituation = new JLabel("Change Current situation:");
 		lblCurrentsituation.setForeground(new Color(255, 255, 255));
-		lblCurrentsituation.setBounds(58, 212, 101, 16);
+		lblCurrentsituation.setBounds(18, 212, 147, 16);
 		frame.getContentPane().add(lblCurrentsituation);
 		
 		
@@ -277,10 +278,6 @@ public class EditGroupProjectGUI {
 				if(!tfChangeProjectDescription.getText().equals(""))
 				{
 					myGroup.getMyProject().setDescription(tfChangeProjectDescription.getText());
-				}
-				if(!tfChangeGroupName.getText().equals(""))
-				{
-					myGroup.setName(tfChangeGroupName.getText());
 				}	
 				
 				if(rdbtnDone.isSelected())

@@ -38,11 +38,11 @@ public class Main {
 		Connection c2 = new Connection(first, first2);
 		Connection c3 = new Connection(first3, first2);
 		Connection c4 = new Connection(first5, first);
-		c.manageConnectionRequest(true);
-		c1.manageConnectionRequest(true);
-		c2.manageConnectionRequest(true);
-		c3.manageConnectionRequest(true);
-		c4.manageConnectionRequest(true);
+		c.manageConnectionRequest(true, null);
+		c1.manageConnectionRequest(true, null);
+		c2.manageConnectionRequest(true, null);
+		c3.manageConnectionRequest(true, null);
+		c4.manageConnectionRequest(true, null);
 		first.addPost(new Post(first,"ГейЬ","public"));
 		
 		
@@ -50,6 +50,8 @@ public class Main {
 		Group g1= new Group("group name",p1,first4);
 		first.addGroupToEmployeesList(g1);
 		first4.addGroupToSupervise(g1);
+		groupConversation groupConversation = new groupConversation(g1);
+		g1.setMyConversation(groupConversation);
 		
 		theCompany.addCompanyGroups(g1);
 		

@@ -1,6 +1,5 @@
 package GUI;
 
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Toolkit;
 
@@ -56,7 +55,7 @@ public class GroupChatGUI {
 		informationLabel.setBounds(80, 15, 215, 20);
 		frame.getContentPane().add(informationLabel);
 		
-		JLabel convoNameLabel = new JLabel("Group Conversation of \" \"");
+		JLabel convoNameLabel = new JLabel("Group Conversation of '"+myGroup.getName()+"'");
 		convoNameLabel.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		convoNameLabel.setBounds(12, 46, 593, 25);
 		frame.getContentPane().add(convoNameLabel);
@@ -112,7 +111,7 @@ public class GroupChatGUI {
 				String myText = newMessageTextArea.getText();
 				Message myMessage = new Message(myText,myUser);
 				myGroup.getMyConversation().addMessage(myMessage);
-				allMessagesTextArea.setText(""); 
+				newMessageTextArea.setText(""); 
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 		        String formatDateTime = myMessage.getTimesent().format(formatter);
 				allMessagesTextArea.append(myMessage.getContent()+" | Date:"+formatDateTime+" | "+myMessage.getSender().getMyAccount().getUsername()+" | \n");

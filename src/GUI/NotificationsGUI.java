@@ -81,9 +81,11 @@ public class NotificationsGUI {
 		btnNewButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String selectedNotificationString = list.getSelectedValue();
+				
+				String selectedNotificationString = list.getSelectedValue()+"";
 				int index = list.getSelectedIndex();
 				Notification selectedNotification = null;
+				
 				for(int i=0;i<user.getListOfNotifications().size();i++)
 				{
 					if(selectedNotificationString.equals(user.getListOfNotifications().get(i).getNotificationContent()))
@@ -130,8 +132,6 @@ public class NotificationsGUI {
 		});
 		btnNewButton.setBounds(66, 158, 66, 38);
 		frmNotifications.getContentPane().add(btnNewButton);
-		
-	
 	}
 
 }

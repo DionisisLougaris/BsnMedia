@@ -1,5 +1,7 @@
 package entities;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
 
@@ -23,6 +25,14 @@ public class Group implements Serializable{
 		this.supervisor = supervisor;
 		//setting value to -1 before rating
 		this.rating = -1;
+		
+		File file = new File("Conversations/"+name+".txt");
+		try {
+			file.createNewFile();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 	}
 	
 

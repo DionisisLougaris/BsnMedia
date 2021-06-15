@@ -236,6 +236,7 @@ public class EditAccountGUI {
 		frmEdiwYourAccount.getContentPane().add(lblNewLabel_9);
 		
 		usernameField = new JTextField(user.getMyAccount().getUsername());
+		usernameField.setEditable(false);
 		usernameField.setForeground(new Color(255, 255, 255));
 		usernameField.setBackground(new Color(255, 153, 102));
 		usernameField.setBorder(null);
@@ -590,7 +591,6 @@ public class EditAccountGUI {
 				frmEdiwYourAccount.dispose();
 			}
 			else if(e.getSource().equals(privateDoneButton)) {
-				String username = usernameField.getText();
 				
 				char [] passwordCharArray = currentPassField.getPassword();
 				String currPassword = String.valueOf(passwordCharArray);
@@ -601,7 +601,7 @@ public class EditAccountGUI {
 				char [] passwordCharArray3 = confirmPassField.getPassword();
 				String confirmedPassword = String.valueOf(passwordCharArray3);
 				
-				user.editPrivateInfo(username, currPassword, newPassword, confirmedPassword);	
+				user.editPrivateInfo(currPassword, newPassword, confirmedPassword);	
 			}
 			else if(e.getSource().equals(deactivateButton)) {
 				

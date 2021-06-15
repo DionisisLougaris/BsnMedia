@@ -23,7 +23,7 @@ import javax.swing.JScrollPane;
 
 public class ConnectionRequestsGUI {
 
-	private JFrame frmConnectionRequests;
+	private  JFrame frmConnectionRequests;
 	private User user;
 	private JButton acceptButton;
 	private JButton deleteButton;
@@ -102,9 +102,10 @@ public class ConnectionRequestsGUI {
 			Notification selectedRequest = null;
 			
 			for(Notification notification: connectionRequests) {
-				if (notification.getNotificationContent().equalsIgnoreCase(selectedRequestString));
-				selectedRequest = notification;
-				break;
+				if (notification.getNotificationContent().equalsIgnoreCase(selectedRequestString)) {
+					selectedRequest = notification;
+					break;
+				}
 			}
 			
 			if (e.getSource().equals(acceptButton)) {
@@ -120,15 +121,14 @@ public class ConnectionRequestsGUI {
 					User theOnewehoSentTheRequest = selectedRequest.getAboutThisUser();
 					
 					Connection newConnection = new Connection(theOnewehoSentTheRequest, user);
-					newConnection.manageConnectionRequest(true);
+					newConnection.manageConnectionRequest(true, selectedRequest);
 					//Notifing user that his request was accepted
-					GeneralNotification genNot = new GeneralNotification("You are now connected with"+user.getFirstName(),theOnewehoSentTheRequest,"acceptRequest");
+					GeneralNotification genNot = new GeneralNotification("You are now connected with "+user.getFirstName(),user,"acceptRequest");
 					theOnewehoSentTheRequest.getListOfNotifications().add(genNot);
 					if (indexOfSelectedValue != -1) {
 						listModel.remove(indexOfSelectedValue);
 						indexOfSelectedValue = -1;
 					}
-					
 				}else {
 					String message = "You have not selected any requests to Accept!";
 					JOptionPane.showMessageDialog(new JFrame(), message, "Message",
@@ -144,16 +144,16 @@ public class ConnectionRequestsGUI {
 					        JOptionPane.ERROR_MESSAGE);
 					
 				}else if (selectedRequest != null){
+					
 					int indexOfSelectedValue = list.getSelectedIndex();
 					User theOnewehoSentTheRequest = selectedRequest.getAboutThisUser();
 					
 					Connection newConnection = new Connection(theOnewehoSentTheRequest, user);
-					newConnection.manageConnectionRequest(false);
+					newConnection.manageConnectionRequest(false, selectedRequest);
 					if (indexOfSelectedValue != -1) {
 						listModel.remove(indexOfSelectedValue);
 						indexOfSelectedValue = -1;
 					}
-					
 				}else {
 					String message = "You have not selected any requests to delete!";
 					JOptionPane.showMessageDialog(new JFrame(), message, "Message",

@@ -166,42 +166,16 @@ abstract public class User implements Serializable{
 	
 	
 	//This is a method that modifies the user's private information.
-	public void editPrivateInfo(String username, String currPassword, String newPassword, String confirmedPassword) {
-		
-		boolean changeUsername = true;
-		
-		//To change Username
-		if (!username.equals(this.myAccount.getUsername())) { //Check if JTextField has been modified
-			
-			if (!username.equals("")) {
-				
-				ArrayList<User> allCompanyMembers = this.myAccount.getMyCompany().getCompanyMembers();
-				
-				for(User companyMember: allCompanyMembers) {
-					if (username.equals(companyMember.myAccount.getUsername()))
-							changeUsername = false; //The username he chose is not available
-				}
-				if (changeUsername == true) {
-					this.myAccount.setUsername(username);
-					
-					String message = "Successful change of Username";
-					JOptionPane.showMessageDialog(new JFrame(), message, "Message",
-					        JOptionPane.INFORMATION_MESSAGE);
-				}else { 
-					String message = "The new username he chose is not available!";
-					JOptionPane.showMessageDialog(new JFrame(), message, "Message",
-					        JOptionPane.ERROR_MESSAGE);
-				}
-			}else {
-				String message = "You have not filled in Username";
-				JOptionPane.showMessageDialog(new JFrame(), message, "Message",
-				        JOptionPane.ERROR_MESSAGE);
-			}
-		}
+	public void editPrivateInfo(String currPassword, String newPassword, String confirmedPassword) {
 		
 		//To change Password (If everything is blank, it means that the user does not want to change the password)
 		if (!currPassword.equals("") || !newPassword.equals("") || !confirmedPassword.equals("")) 
 			this.myAccount.getMyPassword().changePassword(currPassword, newPassword, confirmedPassword, this);
+		else {
+			String message = "You must fill in the fields for the codes!";
+			JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+			        JOptionPane.ERROR_MESSAGE);
+		}
 		
 	}
 	
