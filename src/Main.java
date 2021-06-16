@@ -8,7 +8,6 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		
 		Company theCompany = new Company("IT Intelligence", "A Technology Company", "25012001", "6971657008", "Thessaloniki", "itintelligenceuom@gmail.com");
 		
 		Password thePassword = new Password("12345678", "minasch", "Minas", "Charakopoulos");
