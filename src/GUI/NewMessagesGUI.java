@@ -1,33 +1,21 @@
 package GUI;
 
-import java.awt.EventQueue;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.TreeSet;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-
 import entities.Boss;
-import entities.Connection;
 import entities.Conversation;
 import entities.Group;
-import entities.Notification;
 import entities.*;
 import entities.privateConversation;
-
 import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.imageio.ImageIO;
-import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -53,6 +41,7 @@ public class NewMessagesGUI {
 		frmNewMessages = new JFrame();
 		frmNewMessages.getContentPane().setBackground(new Color(255, 153, 102));
 		frmNewMessages.setResizable(false);
+		frmNewMessages.setVisible(true);
 		frmNewMessages.setTitle("New Messages");
 		frmNewMessages.setBounds(1200, 88, 212, 276);
 		frmNewMessages.getContentPane().setLayout(null);
@@ -97,7 +86,6 @@ public class NewMessagesGUI {
 		scrollPaneNewMessages.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		frmNewMessages.getContentPane().add(scrollPaneNewMessages);
 	
-
 		Icon open = new ImageIcon("Buttons_backgrounds/open_32px.png");
 		JButton goToConvo = new JButton(open);
 		goToConvo.setBorder(null);
@@ -106,6 +94,7 @@ public class NewMessagesGUI {
 		goToConvo.setOpaque(false);
 		goToConvo.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		goToConvo.addActionListener(new ActionListener() {
+			
 			public void actionPerformed(ActionEvent e) {
 				//Going to private Conversation
 				String selectedString = listWithConversations.getSelectedValue();
@@ -258,11 +247,6 @@ public class NewMessagesGUI {
 		separator.setForeground(Color.WHITE);
 		separator.setBounds(0, 40, 194, 10);
 		frmNewMessages.getContentPane().add(separator);
-		
-		
-		
-		
-		frmNewMessages.setVisible(true);
 	}
 }
 

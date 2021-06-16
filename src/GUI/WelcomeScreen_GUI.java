@@ -24,9 +24,9 @@ public class WelcomeScreen_GUI {
 	private JPasswordField pwdPassword;
 	private Company theCompany;
 	
-	private JButton btnNewButton;
+	private JButton logInButton;
 	private JButton btnSingUp;
-	private JButton btnNewButton_1;
+	private JButton forgotPasswordButton;
 	
 	public WelcomeScreen_GUI(Company aCompany) throws IOException {
 		theCompany = aCompany;
@@ -60,18 +60,18 @@ public class WelcomeScreen_GUI {
 		panel.add(panel_1);
 		panel_1.setLayout(null);
 		
-		JLabel lblNewLabel_5 = new JLabel("\u00A9  2021 All rights reserved");
-		lblNewLabel_5.setForeground(new Color(255, 255, 255));
-		lblNewLabel_5.setBounds(155, 517, 172, 27);
-		panel_1.add(lblNewLabel_5);
+		JLabel copyRightsLabel = new JLabel("\u00A9  2021 All rights reserved");
+		copyRightsLabel.setForeground(new Color(255, 255, 255));
+		copyRightsLabel.setBounds(155, 517, 172, 27);
+		panel_1.add(copyRightsLabel);
 		
-		JLabel lblNewLabel_7 = new JLabel("");
+		JLabel labelForBackGround = new JLabel("");
 		BufferedImage imagebackground = ImageIO.read(new File("label_backgrounds/BSN_Background_page-0001.jpg"));
 		ImageIcon imageb = new ImageIcon(imagebackground);
 		Image imagerisizeb = imageb.getImage().getScaledInstance(460, 544, 140) ;
-		lblNewLabel_7.setIcon(new ImageIcon(imagerisizeb));
-		lblNewLabel_7.setBounds(0, 0, 460, 544);
-		panel_1.add(lblNewLabel_7);
+		labelForBackGround.setIcon(new ImageIcon(imagerisizeb));
+		labelForBackGround.setBounds(0, 0, 460, 544);
+		panel_1.add(labelForBackGround);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new LineBorder(new Color(255, 255, 255)));
@@ -121,15 +121,15 @@ public class WelcomeScreen_GUI {
 		separator_1.setBounds(188, 281, 180, 18);
 		panel_2.add(separator_1);
 		
-		JLabel lblNewLabel = new JLabel();
-		lblNewLabel.setIcon(new ImageIcon("label_backgrounds/user_32px.png"));
-		lblNewLabel.setBounds(147, 199, 29, 29);
-		panel_2.add(lblNewLabel);
+		JLabel usernameIcon = new JLabel();
+		usernameIcon.setIcon(new ImageIcon("label_backgrounds/user_32px.png"));
+		usernameIcon.setBounds(147, 199, 29, 29);
+		panel_2.add(usernameIcon);
 		
-		JLabel lblNewLabel_1 = new JLabel();
-		lblNewLabel_1.setIcon(new ImageIcon("label_backgrounds/lock_32px.png"));
-		lblNewLabel_1.setBounds(149, 248, 29, 29);
-		panel_2.add(lblNewLabel_1);
+		JLabel passwordIcon = new JLabel();
+		passwordIcon.setIcon(new ImageIcon("label_backgrounds/lock_32px.png"));
+		passwordIcon.setBounds(149, 248, 29, 29);
+		panel_2.add(passwordIcon);
 		
 		JPanel panel_3 = new JPanel();
 		panel_3.setBorder(new LineBorder(new Color(255, 255, 255)));
@@ -138,13 +138,13 @@ public class WelcomeScreen_GUI {
 		panel_2.add(panel_3);
 		panel_3.setLayout(null);
 		
-		btnNewButton = new JButton("Log In");
-		btnNewButton.setBorder(new LineBorder(new Color(255, 255, 255)));
-		btnNewButton.setForeground(new Color(255, 255, 255));
-		btnNewButton.setBackground(new Color(255, 153, 102));
-		btnNewButton.setBounds(0, 0, 85, 29);
-		btnNewButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		panel_3.add(btnNewButton);
+		logInButton = new JButton("Log In");
+		logInButton.setBorder(new LineBorder(new Color(255, 255, 255)));
+		logInButton.setForeground(new Color(255, 255, 255));
+		logInButton.setBackground(new Color(255, 153, 102));
+		logInButton.setBounds(0, 0, 85, 29);
+		logInButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		panel_3.add(logInButton);
 		
 		JPanel panel_3_1 = new JPanel();
 		panel_3_1.setBackground(new Color(255, 153, 102));
@@ -161,18 +161,19 @@ public class WelcomeScreen_GUI {
 		btnSingUp.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		panel_3_1.add(btnSingUp);
 		
-		btnNewButton_1 = new JButton("Forgot your Password?");
-		btnNewButton_1.setForeground(new Color(255, 255, 255));
-		btnNewButton_1.setOpaque(false);
-		btnNewButton_1.setContentAreaFilled(false);
-		btnNewButton_1.setBorderPainted(false);
-		btnNewButton_1.setBorder(null);
-		btnNewButton_1.setFont(new Font("Tahoma", Font.ITALIC, 11));
-		btnNewButton_1.setBounds(213, 329, 124, 23);
-		btnNewButton_1.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		panel_2.add(btnNewButton_1);
+		forgotPasswordButton = new JButton("Forgot your Password?");
+		forgotPasswordButton.setForeground(new Color(255, 255, 255));
+		forgotPasswordButton.setOpaque(false);
+		forgotPasswordButton.setContentAreaFilled(false);
+		forgotPasswordButton.setBorderPainted(false);
+		forgotPasswordButton.setBorder(null);
+		forgotPasswordButton.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		forgotPasswordButton.setBounds(213, 329, 124, 23);
+		forgotPasswordButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		panel_2.add(forgotPasswordButton);
 		
 		JLabel hyperLink = new JLabel("IT Intelligence");
+		hyperLink.setToolTipText("Check our GitHub!");
 		hyperLink.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		hyperLink.setForeground(new Color(255, 255, 255));
 		hyperLink.setBounds(423, 495, 95, 18);
@@ -201,25 +202,26 @@ public class WelcomeScreen_GUI {
         });
 		panel_2.add(hyperLink);
 		
-		JLabel lblNewLabel_6 = new JLabel("Since 2021");
-		lblNewLabel_6.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		lblNewLabel_6.setForeground(new Color(255, 255, 255));
-		lblNewLabel_6.setBounds(433, 512, 53, 14);
-		panel_2.add(lblNewLabel_6);
+		JLabel dateLabel = new JLabel("Since 2021");
+		dateLabel.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		dateLabel.setForeground(new Color(255, 255, 255));
+		dateLabel.setBounds(433, 512, 53, 14);
+		panel_2.add(dateLabel);
 		
-		JLabel lblITLogo = new JLabel();
+		JLabel ourLogoLabel = new JLabel();
 		BufferedImage imageicon2 = ImageIO.read(new File("label_backgrounds/IT_logo.png"));
 		ImageIcon image2 = new ImageIcon(imageicon2);
 		Image imagerisize2 = image2.getImage().getScaledInstance(40, 35, 140) ;
-		lblITLogo.setIcon(new ImageIcon(imagerisize2));
-		lblITLogo.setBounds(376, 495, 40, 35);
-		panel_2.add(lblITLogo);
+		ourLogoLabel.setIcon(new ImageIcon(imagerisize2));
+		ourLogoLabel.setBounds(376, 495, 40, 35);
+		panel_2.add(ourLogoLabel);
 		
 		ButtonListener listener = new ButtonListener();
-		btnNewButton.addActionListener(listener);
+		logInButton.addActionListener(listener);
 		btnSingUp.addActionListener(listener);
-		btnNewButton_1.addActionListener(listener);
+		forgotPasswordButton.addActionListener(listener);
 	}
+	
 	
 	class ButtonListener implements ActionListener {
 		
@@ -227,7 +229,7 @@ public class WelcomeScreen_GUI {
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			
-			if (e.getSource().equals(btnNewButton)) {
+			if (e.getSource().equals(logInButton)) {
 				
 				String username = txtUsername.getText();
 				char [] passwordCharArray = pwdPassword.getPassword();

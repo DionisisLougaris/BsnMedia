@@ -14,16 +14,14 @@ public class GeneralNotification extends Notification implements Serializable{
 	public GeneralNotification(String notificationContent, User aboutThisUser, String typeOfNotification) {
 		super(notificationContent, aboutThisUser);
 		this.typeOfNotification = typeOfNotification;
-		// TODO Auto-generated constructor stub
 	}
 
 
-
+	//*************************************Getters and Setters*************************************
 
 	public String getTypeOfNotification() {
 		return typeOfNotification;
 	}
-
 	public void setTypeOfNotification(String typeOfNotification) {
 		this.typeOfNotification = typeOfNotification;
 	}

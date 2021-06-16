@@ -1,45 +1,34 @@
 package GUI;
 
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
 import javax.swing.JFrame;
 import javax.swing.JTextField;
-
 import entities.Account;
 import entities.Chief;
 import entities.Company;
 import entities.Employee;
 import entities.Password;
-import entities.User;
-
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
-
 import javax.imageio.ImageIO;
-import javax.swing.Box;
 import javax.swing.ButtonGroup;
-import javax.swing.ButtonModel;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
-import javax.swing.JCheckBox;
 import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
-
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JSeparator;
 import javax.swing.border.LineBorder;
-import javax.swing.SwingConstants;
+import java.awt.Cursor;
 
 public class CreateAccountGUI {
 
@@ -65,6 +54,7 @@ public class CreateAccountGUI {
 		initialize(aCompany);
 	}
 
+	
 	private void initialize(Company aCompany) {
 		frmRegisterNow = new JFrame();
 		frmRegisterNow.setTitle("Register Now!");
@@ -90,8 +80,6 @@ public class CreateAccountGUI {
 		txtCompanyCode.setBounds(117, 140, 101, 16);
 		frmRegisterNow.getContentPane().add(txtCompanyCode);
 		txtCompanyCode.setColumns(10);
-		
-		
 		
 		txtUsername = new JTextField();
 		txtUsername.setBorder(null);
@@ -174,6 +162,7 @@ public class CreateAccountGUI {
 		txtBirthday.setColumns(10);
 		
 		txtSpeciality = new JTextField();
+		txtSpeciality.setToolTipText("e.g. Programmer");
 		txtSpeciality.setBorder(null);
 		txtSpeciality.setBackground(new Color(255, 153, 102));
 		txtSpeciality.setForeground(new Color(255, 255, 255));
@@ -181,20 +170,22 @@ public class CreateAccountGUI {
 		frmRegisterNow.getContentPane().add(txtSpeciality);
 		txtSpeciality.setColumns(10);
 		
-		JLabel lblNewLabel = new JLabel("Company Post:");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblNewLabel.setForeground(new Color(255, 255, 255));
-		lblNewLabel.setBounds(268, 380, 88, 16);
-		frmRegisterNow.getContentPane().add(lblNewLabel);
+		JLabel labelForRadioButtons = new JLabel("Company Post:");
+		labelForRadioButtons.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		labelForRadioButtons.setForeground(new Color(255, 255, 255));
+		labelForRadioButtons.setBounds(268, 380, 88, 16);
+		frmRegisterNow.getContentPane().add(labelForRadioButtons);
 		
 		createAccountButton = new JButton("Create New Account");
+		createAccountButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		createAccountButton.setBackground(new Color(255, 153, 102));
 		createAccountButton.setBorder(new LineBorder(new Color(255, 255, 255)));
 		createAccountButton.setForeground(new Color(255, 255, 255));
 		createAccountButton.setBounds(187, 446, 169, 25);
 		frmRegisterNow.getContentPane().add(createAccountButton);
 		
-		loginButton = new JButton("Log In");
+		loginButton = new JButton("Go to Log In");
+		loginButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		loginButton.setBackground(new Color(255, 153, 102));
 		loginButton.setBorder(new LineBorder(new Color(255, 255, 255)));
 		loginButton.setForeground(new Color(255, 255, 255));
@@ -228,77 +219,77 @@ public class CreateAccountGUI {
 		radioGroup.add(rdbtnEmployee);
 		radioGroup.add(rdbtnChief);
 		
-		JLabel lblNewLabel_1 = new JLabel("Company Code:");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblNewLabel_1.setForeground(new Color(255, 255, 255));
-		lblNewLabel_1.setBounds(23, 140, 88, 16);
-		frmRegisterNow.getContentPane().add(lblNewLabel_1);
+		JLabel companyCodeLabel = new JLabel("Company Code:");
+		companyCodeLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		companyCodeLabel.setForeground(new Color(255, 255, 255));
+		companyCodeLabel.setBounds(23, 140, 88, 16);
+		frmRegisterNow.getContentPane().add(companyCodeLabel);
 		
-		JLabel lblNewLabel_2 = new JLabel("Username:");
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblNewLabel_2.setForeground(new Color(255, 255, 255));
-		lblNewLabel_2.setBounds(23, 180, 56, 16);
-		frmRegisterNow.getContentPane().add(lblNewLabel_2);
+		JLabel usernameLabel = new JLabel("Username:");
+		usernameLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		usernameLabel.setForeground(new Color(255, 255, 255));
+		usernameLabel.setBounds(23, 180, 56, 16);
+		frmRegisterNow.getContentPane().add(usernameLabel);
 		
-		JLabel lblNewLabel_3 = new JLabel("Password:");
-		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblNewLabel_3.setForeground(new Color(255, 255, 255));
-		lblNewLabel_3.setBounds(23, 220, 56, 16);
-		frmRegisterNow.getContentPane().add(lblNewLabel_3);
+		JLabel PasswordLabel = new JLabel("Password:");
+		PasswordLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		PasswordLabel.setForeground(new Color(255, 255, 255));
+		PasswordLabel.setBounds(23, 220, 56, 16);
+		frmRegisterNow.getContentPane().add(PasswordLabel);
 		
-		JLabel lblNewLabel_4 = new JLabel("Confirm Pass:");
-		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblNewLabel_4.setForeground(new Color(255, 255, 255));
-		lblNewLabel_4.setBounds(23, 260, 73, 16);
-		frmRegisterNow.getContentPane().add(lblNewLabel_4);
+		JLabel confPasswordLabel = new JLabel("Confirm Pass:");
+		confPasswordLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		confPasswordLabel.setForeground(new Color(255, 255, 255));
+		confPasswordLabel.setBounds(23, 260, 73, 16);
+		frmRegisterNow.getContentPane().add(confPasswordLabel);
 		
-		JLabel lblNewLabel_5 = new JLabel("Email:");
-		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblNewLabel_5.setForeground(new Color(255, 255, 255));
-		lblNewLabel_5.setBounds(23, 300, 33, 16);
-		frmRegisterNow.getContentPane().add(lblNewLabel_5);
+		JLabel emailLabel = new JLabel("Email:");
+		emailLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		emailLabel.setForeground(new Color(255, 255, 255));
+		emailLabel.setBounds(23, 300, 33, 16);
+		frmRegisterNow.getContentPane().add(emailLabel);
 		
-		JLabel lblNewLabel_6 = new JLabel("Telephone:");
-		lblNewLabel_6.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblNewLabel_6.setForeground(new Color(255, 255, 255));
-		lblNewLabel_6.setBounds(23, 340, 64, 16);
-		frmRegisterNow.getContentPane().add(lblNewLabel_6);
+		JLabel telephoneLabel = new JLabel("Telephone:");
+		telephoneLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		telephoneLabel.setForeground(new Color(255, 255, 255));
+		telephoneLabel.setBounds(23, 340, 64, 16);
+		frmRegisterNow.getContentPane().add(telephoneLabel);
 		
-		JLabel lblNewLabel_7 = new JLabel("First Name:");
-		lblNewLabel_7.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblNewLabel_7.setForeground(new Color(255, 255, 255));
-		lblNewLabel_7.setBounds(268, 180, 73, 16);
-		frmRegisterNow.getContentPane().add(lblNewLabel_7);
+		JLabel nameLabel = new JLabel("First Name:");
+		nameLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		nameLabel.setForeground(new Color(255, 255, 255));
+		nameLabel.setBounds(268, 180, 73, 16);
+		frmRegisterNow.getContentPane().add(nameLabel);
 		
-		JLabel lblNewLabel_8 = new JLabel("Last Name:");
-		lblNewLabel_8.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblNewLabel_8.setForeground(new Color(255, 255, 255));
-		lblNewLabel_8.setBounds(268, 220, 64, 16);
-		frmRegisterNow.getContentPane().add(lblNewLabel_8);
+		JLabel surnameLabel = new JLabel("Last Name:");
+		surnameLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		surnameLabel.setForeground(new Color(255, 255, 255));
+		surnameLabel.setBounds(268, 220, 64, 16);
+		frmRegisterNow.getContentPane().add(surnameLabel);
 		
-		JLabel lblNewLabel_9 = new JLabel("Address:");
-		lblNewLabel_9.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblNewLabel_9.setForeground(new Color(255, 255, 255));
-		lblNewLabel_9.setBounds(23, 380, 46, 16);
-		frmRegisterNow.getContentPane().add(lblNewLabel_9);
+		JLabel addressLabel = new JLabel("Address:");
+		addressLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		addressLabel.setForeground(new Color(255, 255, 255));
+		addressLabel.setBounds(23, 380, 46, 16);
+		frmRegisterNow.getContentPane().add(addressLabel);
 		
-		JLabel lblNewLabel_10 = new JLabel("Gender:");
-		lblNewLabel_10.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblNewLabel_10.setForeground(new Color(255, 255, 255));
-		lblNewLabel_10.setBounds(268, 260, 46, 16);
-		frmRegisterNow.getContentPane().add(lblNewLabel_10);
+		JLabel genderLabel = new JLabel("Gender:");
+		genderLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		genderLabel.setForeground(new Color(255, 255, 255));
+		genderLabel.setBounds(268, 260, 46, 16);
+		frmRegisterNow.getContentPane().add(genderLabel);
 		
-		JLabel lblNewLabel_11 = new JLabel("Birthday:");
-		lblNewLabel_11.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblNewLabel_11.setForeground(new Color(255, 255, 255));
-		lblNewLabel_11.setBounds(268, 300, 56, 16);
-		frmRegisterNow.getContentPane().add(lblNewLabel_11);
+		JLabel birthLabel = new JLabel("Birthday:");
+		birthLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		birthLabel.setForeground(new Color(255, 255, 255));
+		birthLabel.setBounds(268, 300, 56, 16);
+		frmRegisterNow.getContentPane().add(birthLabel);
 		
-		JLabel lblNewLabel_12 = new JLabel("Spaciality:");
-		lblNewLabel_12.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblNewLabel_12.setForeground(new Color(255, 255, 255));
-		lblNewLabel_12.setBounds(268, 340, 56, 16);
-		frmRegisterNow.getContentPane().add(lblNewLabel_12);
+		JLabel specialityLabel = new JLabel("Spaciality:");
+		specialityLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		specialityLabel.setForeground(new Color(255, 255, 255));
+		specialityLabel.setBounds(268, 340, 56, 16);
+		frmRegisterNow.getContentPane().add(specialityLabel);
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(255, 255, 255));
@@ -306,29 +297,29 @@ public class CreateAccountGUI {
 		frmRegisterNow.getContentPane().add(panel);
 		panel.setLayout(null);
 		
-		JLabel lblNewLabel_13 = new JLabel("");
+		JLabel logoLabel = new JLabel("");
 		BufferedImage imageicon;
 		try {
 			imageicon = ImageIO.read(new File("label_backgrounds/BSNlogo.jpg"));
 			ImageIcon image = new ImageIcon(imageicon);
 			Image imagerisize = image.getImage().getScaledInstance(100, 100, 80) ;
-			lblNewLabel_13.setIcon(new ImageIcon(imagerisize));
+			logoLabel.setIcon(new ImageIcon(imagerisize));
 		} catch (IOException e2) {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
-		lblNewLabel_13.setBounds(41, 11, 115, 97);
-		panel.add(lblNewLabel_13);
+		logoLabel.setBounds(41, 11, 115, 97);
+		panel.add(logoLabel);
 		
-		JLabel lblNewLabel_14 = new JLabel("Create an account now!");
-		lblNewLabel_14.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 16));
-		lblNewLabel_14.setBounds(234, 57, 211, 29);
-		panel.add(lblNewLabel_14);
+		JLabel title2Label = new JLabel("Create an account now!");
+		title2Label.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 16));
+		title2Label.setBounds(234, 57, 211, 29);
+		panel.add(title2Label);
 		
-		JLabel lblNewLabel_14_1 = new JLabel("Want to be apart of BSN Media?");
-		lblNewLabel_14_1.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 16));
-		lblNewLabel_14_1.setBounds(234, 15, 217, 29);
-		panel.add(lblNewLabel_14_1);
+		JLabel title1Label = new JLabel("Want to be apart of BSN Media?");
+		title1Label.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 16));
+		title1Label.setBounds(234, 15, 217, 29);
+		panel.add(title1Label);
 		
 		JSeparator separator = new JSeparator();
 		separator.setForeground(new Color(255, 255, 255));
@@ -395,11 +386,11 @@ public class CreateAccountGUI {
 		separator_1_1_1_1_2.setBounds(333, 356, 101, 2);
 		frmRegisterNow.getContentPane().add(separator_1_1_1_1_2);
 		
-		JLabel lblNewLabel_15 = new JLabel("(Given from your Company)");
-		lblNewLabel_15.setForeground(Color.WHITE);
-		lblNewLabel_15.setFont(new Font("Tahoma", Font.ITALIC, 10));
-		lblNewLabel_15.setBounds(221, 141, 196, 14);
-		frmRegisterNow.getContentPane().add(lblNewLabel_15);
+		JLabel infoForCompanyCodeLabel = new JLabel("(Given from your Company)");
+		infoForCompanyCodeLabel.setForeground(Color.WHITE);
+		infoForCompanyCodeLabel.setFont(new Font("Tahoma", Font.ITALIC, 10));
+		infoForCompanyCodeLabel.setBounds(221, 141, 196, 14);
+		frmRegisterNow.getContentPane().add(infoForCompanyCodeLabel);
 		
 		createAccountButton.addActionListener(new ActionListener() {
 

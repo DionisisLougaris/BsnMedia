@@ -10,19 +10,15 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.sql.Savepoint;
-
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-
 import entities.Boss;
 import entities.Chief;
 import entities.Employee;
@@ -30,10 +26,6 @@ import entities.User;
 import java.awt.Color;
 import javax.swing.JSeparator;
 import javax.swing.border.LineBorder;
-import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
-import javax.swing.JTextPane;
 
 public class EditAccountGUI {
 
@@ -73,6 +65,7 @@ public class EditAccountGUI {
 		frmEdiwYourAccount.setVisible(true);
 		frmEdiwYourAccount.setResizable(false);
 		frmEdiwYourAccount.setLocation(870, 200);
+		
 		JPanel panel = new JPanel();
 		panel.setBounds(12, 13, 116, 109);
 		frmEdiwYourAccount.getContentPane().add(panel);

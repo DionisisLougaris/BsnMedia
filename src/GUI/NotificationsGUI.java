@@ -1,22 +1,14 @@
 package GUI;
 
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.util.TreeSet;
-
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
-
 import entities.Notification;
 import entities.User;
-
-import javax.imageio.ImageIO;
-import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -36,10 +28,6 @@ public class NotificationsGUI {
 		initialize(theUser, backendFrame);
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 * @throws IOException 
-	 */
 	private void initialize(User theUser,JFrame mainFrame) throws IOException {
 		frmNotifications = new JFrame();
 		frmNotifications.setTitle("Notifications");
@@ -74,12 +62,12 @@ public class NotificationsGUI {
 		frmNotifications.getContentPane().add(scrollPaneNotifications);
 		
 		Icon takealook = new ImageIcon("Buttons_backgrounds/takealook_32px.png");
-		JButton btnNewButton = new JButton(takealook);
-		btnNewButton.setContentAreaFilled(false); 
-		btnNewButton.setFocusPainted(false); 
-		btnNewButton.setOpaque(false);
-		btnNewButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton checkButton = new JButton(takealook);
+		checkButton.setContentAreaFilled(false); 
+		checkButton.setFocusPainted(false); 
+		checkButton.setOpaque(false);
+		checkButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		checkButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				String selectedNotificationString = list.getSelectedValue()+"";
@@ -130,8 +118,8 @@ public class NotificationsGUI {
 				}
 			}
 		});
-		btnNewButton.setBounds(66, 158, 66, 38);
-		frmNotifications.getContentPane().add(btnNewButton);
+		checkButton.setBounds(66, 158, 66, 38);
+		frmNotifications.getContentPane().add(checkButton);
 	}
 
 }

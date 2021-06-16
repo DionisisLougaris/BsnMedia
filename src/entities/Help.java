@@ -40,20 +40,21 @@ public class Help implements Serializable{
 		boolean sendToTheUser;
 		
 		String [] reciverForConfirmation = new String[1];
-		reciverForConfirmation[0] = authorEmail;
+		reciverForConfirmation[0] = authorEmail; //The recipient is the email stated by the person who wrote the uphill
 		String subject = "Inquiry confirmation!";
 		String body = "Thank you very much for your comments "+authorName;
-		
+		//An Email is sent to his email that we received his report (True if sent successfully / False if there was an error sending)
 		sendToTheUser = Help.sendGMail(supportEmail, supportEmailPassword, reciverForConfirmation, subject, body);
 		
 		
 		String [] usAsRecievers = new String[1];
-		usAsRecievers[0] = supportEmail;
+		usAsRecievers[0] = supportEmail; //Recipients are the Bsn Media team who are informed about the user report
 		String subject2 = "Requested by user";
 		String body2 = "Question: "+this.question+"\nFrom the User: "+this.authorName+"\nEmail for Contact: "+this.authorEmail;
-		
+		//(True if sent successfully / False if there was an error sending)
 		sendToUs = Help.sendGMail(supportEmail, supportEmailPassword, usAsRecievers, subject2, body2);
 		
+		//If both emails were sent successfully, then an appropriate notification is displayed
 		if (sendToTheUser && sendToUs) { 
 			
 			String message = "Successful Submission! Thank you very much for your comments!";
@@ -66,7 +67,9 @@ public class Help implements Serializable{
 		}
 	}
 	
-	
+	/*In order for the email to be sent, the sender's email must be connected to the 
+	 * computer browser, otherwise there may be a connection error and sending may not be possible!
+	 */
 	//A method that sends email to someone
 	 public static boolean sendGMail(String from, String pass, String[] to, String subject, String body) {
 	        Properties props = System.getProperties();
@@ -100,15 +103,15 @@ public class Help implements Serializable{
 	            transport.connect(host, from, pass);
 	            transport.sendMessage(message, message.getAllRecipients());
 	            transport.close();
-	            return true;
+	            return true; //The mail was sent successfully
 	        }
 	        catch (AddressException ae) {
-	            ae.printStackTrace();
-	            return false;
+	            //ae.printStackTrace();
+	            return false; //There was an error
 	        }
 	        catch (MessagingException me) {
-	            me.printStackTrace();
-	            return false;
+	            //me.printStackTrace();
+	            return false; //There was an error
 	        }
 	    }
 	
