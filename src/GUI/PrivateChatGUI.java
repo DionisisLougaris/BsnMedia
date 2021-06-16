@@ -24,6 +24,8 @@ import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
+import javax.swing.JScrollPane;
 
 public class PrivateChatGUI {
 
@@ -96,6 +98,13 @@ public class PrivateChatGUI {
 		allMessagesTextArea.setBackground(Color.WHITE);
 		allMessagesTextArea.setBounds(0, 0, 619, 493);
 		panel_1.add(allMessagesTextArea);
+		JScrollPane scrollPaneMessages = new JScrollPane(allMessagesTextArea);
+		scrollPaneMessages.setBounds(0, 0, 619, 493);
+		scrollPaneMessages.setBorder(new LineBorder(Color.WHITE, 2));
+		panel_1.add(scrollPaneMessages);
+		
+		
+		
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBounds(12, 519, 521, 120);

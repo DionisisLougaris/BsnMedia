@@ -23,6 +23,8 @@ import entities.Message;
 import entities.Storage;
 import entities.User;
 import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
+import javax.swing.JScrollPane;
 
 public class GroupChatGUI {
 
@@ -92,6 +94,10 @@ public class GroupChatGUI {
 			}
 			
 		panel_1.add(allMessagesTextArea);
+		JScrollPane scrollPaneMessages = new JScrollPane(allMessagesTextArea);
+		scrollPaneMessages.setBounds(0, 0, 619, 493);
+		scrollPaneMessages.setBorder(new LineBorder(Color.WHITE, 2));
+		panel_1.add(scrollPaneMessages);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBackground(new Color(255, 250, 240));

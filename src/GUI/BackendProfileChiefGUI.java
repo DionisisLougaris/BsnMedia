@@ -54,12 +54,10 @@ public class BackendProfileChiefGUI {
 	private ArrayList<User> listOfConnections;
 	private TreeSet<User> suggestedListConnections = new TreeSet<>();
 	private ButtonGroup radioGroup;
-	private TreeSet<Post> allPosts = new TreeSet<>();
-	private JTextArea textArea;
+	private JTextArea textAreaPost;
 	private JButton editGroupButton;
 	private JSeparator separator;
-	private JScrollPane scrollPane;
-	
+
 	//This method is the constructor of class  BackendProfileChiefGUI.
 	public BackendProfileChiefGUI(User theChief) throws IOException {
 		chief = (Chief) theChief;
@@ -158,11 +156,10 @@ public class BackendProfileChiefGUI {
 		emailLabel.setBounds(49, 324, 125, 16);
 		panel.add(emailLabel);
 		
-		JLabel lblNewLabel_5 = new JLabel("Currently supervising:");
-		lblNewLabel_5.setBounds(49, 359, 155, 16);
-		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		panel.add(lblNewLabel_5);
-		
+		JLabel lblCurrentlySupervising = new JLabel("Currently supervising:");
+		lblCurrentlySupervising.setBounds(49, 359, 155, 16);
+		lblCurrentlySupervising.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		panel.add(lblCurrentlySupervising);
 		
 		Icon help = new ImageIcon("Buttons_backgrounds/customer_support_40px.png");
 		helpButton = new JButton(help);
@@ -251,9 +248,12 @@ public class BackendProfileChiefGUI {
 		connectionsList.setModel(model);
 		connectionsList.setBackground(new Color(255, 250, 240));
 		panel.add(connectionsList);
-	
+		JScrollPane scrollPaneConnections = new JScrollPane(connectionsList);
+		scrollPaneConnections.setBounds(43, 594, 116, 152);
+		scrollPaneConnections.setBorder(new LineBorder(Color.WHITE, 2));
+		panel.add(scrollPaneConnections);
 		
-		suggestedListConnections = chief.suggestedConnections(); //Get all Suggested Connections
+	    suggestedListConnections = chief.suggestedConnections(); //Get all Suggested Connections
 		suggestedList = new JList<String>();
 		suggestedList.setBounds(220, 594, 116, 152);
 		DefaultListModel<String> model2 = new DefaultListModel<String>();
@@ -263,6 +263,11 @@ public class BackendProfileChiefGUI {
 		suggestedList.setModel(model2);
 		suggestedList.setBackground(new Color(255, 250, 240));
 		panel.add(suggestedList);
+		JScrollPane scrollPaneSuggestedConnections = new JScrollPane(suggestedList);
+		scrollPaneSuggestedConnections.setBounds(225, 594, 111, 152);
+		scrollPaneSuggestedConnections.setBorder(new LineBorder(Color.WHITE, 2));
+		panel.add(scrollPaneSuggestedConnections);
+		
 		
 		JLabel lblNewLabel_9 = new JLabel("Connections (" + chief.getListOfConnections().size() + ")");
 		lblNewLabel_9.setBounds(48, 565, 99, 16);
@@ -300,21 +305,25 @@ public class BackendProfileChiefGUI {
 		rdbtnGroup.setBackground(Color.WHITE);
 		panel.add(rdbtnGroup);
 		
-		textArea = new JTextArea();
-		textArea.setBounds(427, 237, 424, 409);
-		textArea.setEditable(false);
-		textArea.setWrapStyleWord(true);
-		textArea.setText("");
-		textArea.setLineWrap(true);
+		textAreaPost = new JTextArea();
+		textAreaPost.setBounds(427, 237, 424, 409);
+		textAreaPost.setEditable(false);
+		textAreaPost.setWrapStyleWord(true);
+		textAreaPost.setText("");
+		textAreaPost.setLineWrap(true);
 		for( Post post : chief.returnAllPosts())
 		{
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 	        String formatDateTime = post.getTimestamp().format(formatter);
-			textArea.append("-----------------------------------------------------------------------------------------------------"+ "\n\r");
-			textArea.append(post.getContent()+" | "+post.getCreator().getFirstName()+" | "+post.getPostScope()+" | "+formatDateTime+ "\n\r");
+			textAreaPost.append("-----------------------------------------------------------------------------------------------------"+ "\n\r");
+			textAreaPost.append(post.getContent()+" | "+post.getCreator().getFirstName()+" | "+post.getPostScope()+" | "+formatDateTime+ "\n\r");
 		}
-		textArea.setBackground(new Color(255, 250, 240));
-		panel.add(textArea);
+		textAreaPost.setBackground(new Color(255, 250, 240));
+		panel.add(textAreaPost);
+		JScrollPane scrollPanePost = new JScrollPane(textAreaPost);
+		scrollPanePost.setBounds(427, 237, 424, 409);
+		scrollPanePost.setBorder(new LineBorder(Color.WHITE, 2));
+		panel.add(scrollPanePost);
 		
 		textField = new JTextField();
 		textField.setBounds(639, 780, 64, 25);
@@ -338,13 +347,13 @@ public class BackendProfileChiefGUI {
 							String myText = writePostArea.getText();
 							Post myPost = new Post(chief,myText,radioGroup.getSelection().getActionCommand());
 							chief.addPost(myPost);
-							textArea.setText(""); 
+							textAreaPost.setText(""); 
 						    for( Post post : chief.returnAllPosts())
 							{
 								DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 						        String formatDateTime = post.getTimestamp().format(formatter);
-						        textArea.append("-----------------------------------------------------------------------------------------------------"+ "\n\r");
-								textArea.append(post.getContent()+" | "+post.getCreator().getFirstName()+" | "+post.getPostScope()+" | "+formatDateTime+ "\n\r");
+						        textAreaPost.append("-----------------------------------------------------------------------------------------------------"+ "\n\r");
+								textAreaPost.append(post.getContent()+" | "+post.getCreator().getFirstName()+" | "+post.getPostScope()+" | "+formatDateTime+ "\n\r");
 							}
 							
 					   }
@@ -353,13 +362,13 @@ public class BackendProfileChiefGUI {
 					    String myText = writePostArea.getText();
 						Post myPost = new Post(chief,myText,radioGroup.getSelection().getActionCommand());
 						chief.addPost(myPost);
-						textArea.setText(""); 
+						textAreaPost.setText(""); 
 					    for( Post post : chief.returnAllPosts())
 						{
 							DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 					        String formatDateTime = post.getTimestamp().format(formatter);
-					        textArea.append("-----------------------------------------------------------------------------------------------------"+ "\n\r");
-							textArea.append(post.getContent()+" | "+post.getCreator().getFirstName()+" | "+post.getPostScope()+" | "+formatDateTime+ "\n\r");
+					        textAreaPost.append("-----------------------------------------------------------------------------------------------------"+ "\n\r");
+							textAreaPost.append(post.getContent()+" | "+post.getCreator().getFirstName()+" | "+post.getPostScope()+" | "+formatDateTime+ "\n\r");
 						}
 					 String groupToPost=textField.getText();
 					 boolean found=false;
@@ -391,7 +400,6 @@ public class BackendProfileChiefGUI {
 			}
 		});
 		panel.add(postButton);
-		
 		
 		checkprofileButton = new JButton("Check profile");
 		checkprofileButton.setBounds(43, 759, 116, 25);
@@ -462,8 +470,25 @@ public class BackendProfileChiefGUI {
 		for (Group theSupervisingGroup: chief.getGroups()) {
 			listModelForGroups.addElement(theSupervisingGroup.getName());
 		}
+		listModelForGroups.addElement("weuq9wsiqqwwedqe");
+		listModelForGroups.addElement("weuq9wsiqqwwedqe");
+		listModelForGroups.addElement("weuq9wsiqqwwedqe");
+		listModelForGroups.addElement("weuq9wsiqqwwedqe");
+		listModelForGroups.addElement("weuq9wsiqqwwedqe");
+		listModelForGroups.addElement("weuq9wsiqqwwedqe");
+		listModelForGroups.addElement("weuq9wsiqqwwedqe");
+		listModelForGroups.addElement("weuq9wsiqqwwedqe");
+		listModelForGroups.addElement("weuq9wsiqqwwedqe");
+		listModelForGroups.addElement("weuq9wsiqqwwedqe");
+		listModelForGroups.addElement("weuq9wsiqqwwedqe");
+		listModelForGroups.addElement("weuq9wsiqqwwedqe");
+		listModelForGroups.addElement("weuq9wsiqqwwedqe");
 		list.setModel(listModelForGroups);
 		panel.add(list);
+		JScrollPane scrollPaneGroups = new JScrollPane(list);
+		scrollPaneGroups.setBounds(49, 388, 139, 108);
+		scrollPaneGroups.setBorder(new LineBorder(Color.WHITE, 2));
+		panel.add(scrollPaneGroups);
 		
 		Icon check = new ImageIcon("Buttons_backgrounds/takealook_32px.png");
 		JButton checkGroup = new JButton(check);
@@ -551,7 +576,6 @@ public class BackendProfileChiefGUI {
 		Image imagerisizeb = imageb.getImage().getScaledInstance(887, 991, 140) ;
 		editGroup.setIcon(new ImageIcon(imagerisizeb));
 		panel.add(editGroup);
-		
 		
 		ButtonListener listener = new ButtonListener();
 		requestsButton.addActionListener(listener);
