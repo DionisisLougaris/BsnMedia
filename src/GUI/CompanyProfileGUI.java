@@ -38,6 +38,7 @@ import java.awt.Color;
 import javax.swing.border.LineBorder;
 import javax.swing.SwingConstants;
 import javax.swing.JSeparator;
+import javax.swing.JScrollPane;
 
 public class CompanyProfileGUI {
 
@@ -216,14 +217,18 @@ public class CompanyProfileGUI {
 	    	employeesModel.addElement(employee.getFirstName()+" "+employee.getLastName());
 	    }
 	    allEmployeesLists.setModel(employeesModel);
-	    allEmployeesLists.setBorder(new LineBorder(new Color(0, 0, 0), 5));
+	    allEmployeesLists.setBorder(null);
 	    allEmployeesLists.setBackground(new Color(255, 250, 240));
 	    allEmployeesLists.setBounds(660, 609, 133, 186);
-	    frame.getContentPane().add(allEmployeesLists);
+	    JScrollPane scrollPaneEmployee = new JScrollPane(allEmployeesLists);
+	    scrollPaneEmployee.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+	    scrollPaneEmployee.setBounds(461, 609, 133, 186);
+	    frame.getContentPane().add(scrollPaneEmployee);
 	    
-	    JLabel EmployeesLabel = new JLabel("Employees (" + theCompany.returnEmployees().size() + ")");
-	    EmployeesLabel.setBounds(660, 580, 91, 16);
-	    frame.getContentPane().add(EmployeesLabel);
+	    JLabel chiefsLabel = new JLabel("Employees("+company.returnEmployees().size()+")");
+	    chiefsLabel.setHorizontalAlignment(SwingConstants.CENTER);
+	    chiefsLabel.setBounds(461, 580, 130, 16);
+	    frame.getContentPane().add(chiefsLabel);
 	    
 	    //Adding chiefs to list on company's profile
 	    JList<String> allChiefsList = new JList<String>();
@@ -232,14 +237,18 @@ public class CompanyProfileGUI {
 	    	chiefsModel.addElement(chief.getFirstName()+" "+chief.getLastName());
 	    }
 	    allChiefsList.setModel(chiefsModel);
-	    allChiefsList.setBorder(new LineBorder(new Color(0, 0, 0), 5));
+	    allChiefsList.setBorder(null);
 	    allChiefsList.setBackground(new Color(255, 250, 240));
-	    allChiefsList.setBounds(461, 609, 133, 186);
-	    frame.getContentPane().add(allChiefsList);
+	    allChiefsList.setBounds(660, 612, 133, 186);
+	    JScrollPane scrollPaneChief = new JScrollPane(allChiefsList);
+	    scrollPaneChief.setBorder(new LineBorder(Color.BLACK, 2));
+	    scrollPaneChief.setBounds(660, 612, 133, 183);
+	    frame.getContentPane().add(scrollPaneChief);
 	    
-	    JLabel chiefsLabel = new JLabel("Chiefs (" + theCompany.returnChiefs().size() + ")");
-	    chiefsLabel.setBounds(500, 580, 91, 16);
-	    frame.getContentPane().add(chiefsLabel);
+	    JLabel EmployeesLabel = new JLabel("Chiefs ("+company.returnChiefs().size()+")");
+	    EmployeesLabel.setHorizontalAlignment(SwingConstants.CENTER);
+	    EmployeesLabel.setBounds(660, 580, 133, 16);
+	    frame.getContentPane().add(EmployeesLabel);
 
 	    JLabel companyEmailLabel = new JLabel();
 	    companyEmailLabel.setForeground(Color.RED);

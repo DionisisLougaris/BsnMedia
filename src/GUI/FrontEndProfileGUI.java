@@ -42,6 +42,7 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import java.awt.Color;
 import javax.swing.JScrollPane;
+import javax.swing.border.LineBorder;
 
 public class FrontEndProfileGUI {
 
@@ -202,8 +203,10 @@ public class FrontEndProfileGUI {
 		ausersposts.setEditable(false);
 		ausersposts.setLineWrap(true);
 		ausersposts.setBackground(new Color(255, 250, 240));
-		
-		panel.add(ausersposts);
+		JScrollPane scrollPanePost = new JScrollPane(ausersposts);
+		scrollPanePost.setBorder(new LineBorder(Color.BLACK, 2));
+		scrollPanePost.setBounds(32, 561, 810, 336);
+		panel.add(scrollPanePost);
 
 		String namelastname = profileUser.getFirstName() + " " + profileUser.getLastName();
 		JLabel labelnamelastname= new JLabel(namelastname);
@@ -461,8 +464,10 @@ public class FrontEndProfileGUI {
 				mutualmodel.addElement(theUser.getFirstName()+" "+theUser.getLastName());
 			}
 			listmutualconnections.setModel(mutualmodel);
-			panel.add(listmutualconnections);
-			
+			JScrollPane scrollPaneMutuals = new JScrollPane(listmutualconnections);
+			scrollPaneMutuals.setBorder(new LineBorder(Color.BLACK, 2));
+			scrollPaneMutuals.setBounds(709, 409, 133, 127);
+			panel.add(scrollPaneMutuals);
 		}
 		
 		//Button that leads to BSN Support Page
@@ -510,7 +515,5 @@ public class FrontEndProfileGUI {
 		Image imagerisizeb = imageb.getImage().getScaledInstance(887, 991, 140) ;
 		lblNewLabel.setIcon(new ImageIcon(imagerisizeb));
 		panel.add(lblNewLabel);
-		
-	
 	}
 }

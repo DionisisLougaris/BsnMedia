@@ -40,6 +40,7 @@ import entities.*;
 import java.awt.SystemColor;
 import java.awt.Toolkit;
 import java.awt.Color;
+import javax.swing.border.LineBorder;
 
 public class BackendProfileBossGUI {
 
@@ -54,6 +55,7 @@ public class BackendProfileBossGUI {
 	private JButton searchButton,helpButton,requestsButton,messagesButton,notifsButton,editAccountButton,
 	postButton,checkprofileButton,sendMessageButton,sendRequestButton,disconnectButton,editCompanyInfoButton;
 	private ArrayList<User> listOfConnections;
+	private JScrollPane scrollPanePost;
 	
 	//This method is the constructor of class  BackendProfileBossfGUI.
 	public BackendProfileBossGUI(User theBoss) throws IOException{
@@ -148,7 +150,10 @@ public class BackendProfileBossGUI {
 	        textPost.append(post.getContent()+" | "+post.getCreator().getFirstName()+" | "+post.getPostScope()+" | "+formatDateTime+ "\n\r");
 		}
 		textPost.setBackground(new Color(255, 250, 240));
-		panel.add(textPost);
+		scrollPanePost = new JScrollPane(textPost);
+		scrollPanePost.setBorder(new LineBorder(Color.WHITE, 2));
+		scrollPanePost.setBounds(427, 213, 424, 409);
+		panel.add(scrollPanePost);
 		
 		JLabel nameLabel = new JLabel(boss.getFirstName()+" "+boss.getLastName());
 		nameLabel.setBounds(44, 243, 293, 30);
@@ -293,7 +298,10 @@ public class BackendProfileBossGUI {
 		}
 		connectionsList.setModel(model);
 		connectionsList.setBackground(new Color(255, 250, 240));
-		panel.add(connectionsList);
+		JScrollPane scrollPaneConnections = new JScrollPane(connectionsList);
+		scrollPaneConnections.setBorder(new LineBorder(Color.WHITE, 2));
+		scrollPaneConnections.setBounds(44, 467, 116, 169);
+		panel.add(scrollPaneConnections);
 	
 		suggestedList = new JList<String>();
 		suggestedList.setBounds(221, 467, 116, 169);
@@ -304,7 +312,10 @@ public class BackendProfileBossGUI {
 		}
 		suggestedList.setModel(model2);
 		suggestedList.setBackground(new Color(255, 250, 240));
-		panel.add(suggestedList);
+		JScrollPane scrollPaneSuggestions = new JScrollPane(suggestedList);
+		scrollPaneSuggestions.setBorder(new LineBorder(Color.WHITE, 2));
+		scrollPaneSuggestions.setBounds(221, 467, 116, 169);
+		panel.add(scrollPaneSuggestions);
 	
 		JLabel lblConnections = new JLabel("Connections: ("+boss.getListOfConnections().size()+")");
 		lblConnections.setBounds(49, 438, 99, 16);
