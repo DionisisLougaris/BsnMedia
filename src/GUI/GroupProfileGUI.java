@@ -64,7 +64,9 @@ public class GroupProfileGUI {
 		frame = new JFrame();
 		frame.getContentPane().setBackground(Color.WHITE);
 		frame.setBounds(100, 100, 893, 1020);
+		//Setting exact position of frame 
 		frame.setLocation(500, 0);
+		//This is needed so the main frames cannot close from the x and only for the login screen so everything is saved!
 		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.setVisible(true);
@@ -75,6 +77,7 @@ public class GroupProfileGUI {
 		searchField.setColumns(10);
 		frame.setResizable(false);
 		
+		//Adding logo to every frame
 		ImageIcon logoimage = new ImageIcon("label_backgrounds/bsn_32px.jpg");
 		frame.setIconImage(logoimage.getImage());
 		
@@ -140,6 +143,7 @@ public class GroupProfileGUI {
 		submitRatingButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		submitRatingButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				//Boss rates groups performance (through jslider) after project is done. Group rating is visible on group's profile
 				if(myUser instanceof Boss)
 				{
 					if (myGroup.getMyProject().getStatus().equalsIgnoreCase("done")) {
@@ -187,6 +191,7 @@ public class GroupProfileGUI {
 		
 		JTextArea postTextArea = new JTextArea();
 		postTextArea.setBounds(395, 476, 434, 406);
+		//Adding posts of group members scoped to group to the textarea
 		for( Post post : myGroup.getGroupPosts())
 		{
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -271,6 +276,7 @@ public class GroupProfileGUI {
 		searchButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		searchButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				//Search bar on groups profile
 				
 				String searchedText = searchField.getText();
 				if(!searchedText.isEmpty()) {
@@ -307,7 +313,7 @@ public class GroupProfileGUI {
 		helpButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		helpButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				//Button that leads to the help page
 				try {
 					frame.setVisible(false);
 					new HelpGUI(myUser);
@@ -325,6 +331,7 @@ public class GroupProfileGUI {
 		separator.setBounds(0, 174, 877, 16);
 		frame.getContentPane().add(separator);
 		
+		//Adding group members to groups profile on jlist
 		JList<String> membersList = new JList<String>();
 		DefaultListModel<String> listModel = new DefaultListModel<String>();
 		for (Employee theMember: myGroup.getGroupMembers()) {
@@ -354,6 +361,7 @@ public class GroupProfileGUI {
 			public void actionPerformed(ActionEvent e) {
 				
 				try {
+					//visiting supervisor's profile
 					new FrontEndProfileGUI(myUser, myGroup.getSupervisor());
 					frame.dispose();
 				} catch (IOException e1) {
@@ -364,7 +372,7 @@ public class GroupProfileGUI {
 		});
 		frame.getContentPane().add(btnNewButton);
 		
-		
+		//adding label which acts like background for the frame
 		JLabel lblNewLabel_11 = new JLabel("");
 		BufferedImage imagebackground = ImageIO.read(new File("label_backgrounds/background.jpg"));
 		ImageIcon imageb = new ImageIcon(imagebackground);

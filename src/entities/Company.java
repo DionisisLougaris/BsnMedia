@@ -11,12 +11,16 @@ import GUI.*;
 
 public class Company implements Serializable{
 	
+	//This constant shows how many characters off are allowed for suggested search option to find results
 	private static final int limitOfDifferentChars = 2;
 	
 	private String name;
 	private String info;
 	private Boss boss;
+	//Company image will and can only be set by the boss
 	private String image;
+	/*The verification code is another way of securing the BSN network. It is only known by the boss.
+	  Members willing to join the company's network shall ask the boss about the verificatio code in order to sign up */
 	private String verificationCode;
 	private String telephone;
 	private String address;
@@ -68,6 +72,7 @@ public class Company implements Serializable{
 														member.getMyAccount().getMyPassword().getTimestamp().getSecond());
 			if (member.getMyAccount().getUsername().equals(inputUsername) && memberDecryptedPassword.equals(inputPassword)) {
 				
+				//Opening user's backend profile depending on company post
 				if (member instanceof Employee) {
 					new BackendProfileEmployeeGUI(member);
 					return true;
@@ -88,7 +93,7 @@ public class Company implements Serializable{
 		return companyGroups; 
 	}
 	
-	
+	//This method returns suggested search option for user's input at the search bar
 	public ArrayList<String> suggestedSearchOption(String aString)
 	{
 		ArrayList<String> suggestedOptions = new ArrayList<String>();
@@ -144,6 +149,7 @@ public class Company implements Serializable{
 		if(aString.equalsIgnoreCase(this.name)) {
 			
 			found = true;
+			//Opening company profile when found
 			new CompanyProfileGUI(theUser,this);
 		}
 		//Search for Group
@@ -161,12 +167,14 @@ public class Company implements Serializable{
 			
 			for(int i=0;i<this.companyMembers.size();i++)
 			{
+				//checking if given String is off by maximum of limitOfDifferentChars(2) for a users Full name or email or first name or last name
 				if((this.companyMembers.get(i).getFirstName()+ " " + this.companyMembers.get(i).getLastName()).equalsIgnoreCase(aString)
 						||this.companyMembers.get(i).myAccount.getEmail().equals(aString) || this.companyMembers.get(i).getFirstName().equalsIgnoreCase(aString)
 						|| this.companyMembers.get(i).getLastName().equalsIgnoreCase(aString)) {
 					
 					found = true;
 					try {
+						//Opening users profile if found!
 						new FrontEndProfileGUI(theUser, companyMembers.get(i));
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
@@ -258,6 +266,7 @@ public class Company implements Serializable{
 		return false;
 	}
 	
+//*************** Getters and Setters ***************
 	
 	public String getInfo() {
 		return info;

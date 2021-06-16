@@ -66,13 +66,16 @@ public class CompanyProfileGUI {
 		frame = new JFrame();
 		frame.getContentPane().setBackground(Color.WHITE);
 		frame.setBounds(100, 100, 893, 1020);
+		//Setting exact position of frame 
 		frame.setLocation(500, 0);
 		frame.setVisible(true);
 		frame.setResizable(false);
+		//This is needed so the main frames cannot close from the x and only for the login screen so everything is saved!
 		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 	    frame.setTitle("Company");
 	    frame.getContentPane().setLayout(null);
 	    
+	  //Adding logo to every frame
 	    ImageIcon logoimage = new ImageIcon("label_backgrounds/bsn_32px.jpg");
 	    frame.setIconImage(logoimage.getImage());
 		
@@ -144,8 +147,7 @@ public class CompanyProfileGUI {
 	    searchButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 	    searchButton.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) {
-	    		
-				
+	    		//Search bar on company's profile
 				String searchedText = searchField.getText();
 				if(!searchedText.isEmpty()) {
 					boolean result;
@@ -179,6 +181,7 @@ public class CompanyProfileGUI {
 	    panel_1.setBounds(70, 140, 743, 285);
 	    frame.getContentPane().add(panel_1);
 	    
+	    //Company's wall photo
 	    JLabel lblCompanyPhoto = new JLabel();
 		BufferedImage imageicon;
 		try {
@@ -210,8 +213,7 @@ public class CompanyProfileGUI {
 	    companyDetails.setBounds(60, 517, 332, 38);
 	    frame.getContentPane().add(companyDetails);
 	    
-	    
-	    
+	    //Adding employees to list on company's profile
 	    JList<String> allEmployeesLists = new JList<String>();
 	    DefaultListModel<String> employeesModel = new DefaultListModel<String>();
 	    for(User employee: company.returnEmployees()) {
@@ -227,6 +229,7 @@ public class CompanyProfileGUI {
 	    EmployeesLabel.setBounds(660, 580, 91, 16);
 	    frame.getContentPane().add(EmployeesLabel);
 	    
+	    //Adding chiefs to list on company's profile
 	    JList<String> allChiefsList = new JList<String>();
 	    DefaultListModel<String> chiefsModel = new DefaultListModel<String>();
 	    for(User chief: company.returnChiefs()) {
@@ -254,6 +257,7 @@ public class CompanyProfileGUI {
             @Override
             public void mouseClicked(MouseEvent e) {
                 try {
+                	//Opening default email application 
                     Desktop.getDesktop().browse(new URI("mailto:"+company.getEmail()));
                 } catch (IOException | URISyntaxException e1) {
                     e1.printStackTrace();
@@ -278,6 +282,7 @@ public class CompanyProfileGUI {
             @Override
             public void mouseClicked(MouseEvent e) {
                 try {
+                	//Sending user on company's location through google maps
                     Desktop.getDesktop().browse(new URI("https://www.google.com/maps/place/"+company.getAddress()));
                 } catch (IOException | URISyntaxException e1) {
                     e1.printStackTrace();
@@ -304,7 +309,7 @@ public class CompanyProfileGUI {
 		customerSupportButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		customerSupportButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				//Sending user to help page
 				try {
 					frame.setVisible(false);
 					new HelpGUI(theLoggedUser);

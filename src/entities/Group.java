@@ -13,9 +13,9 @@ public class Group implements Serializable{
 	private Chief supervisor;
 	private ArrayList<Employee> groupMembers = new ArrayList<Employee>();
 	postComparator myPostComparator = new postComparator();
-	private TreeSet<Post> groupPosts = new TreeSet<Post>(myPostComparator); //Posts that have for scope this Group
+	private TreeSet<Post> groupPosts = new TreeSet<Post>(myPostComparator); //Posts with scope Group
 	
-	private groupConversation myConversation; //field for chatting between group members
+	private groupConversation myConversation; //field for group between group members
 	
 	
 	//Constructor for class "Group". The field "rating", will be updated via set only.
@@ -25,7 +25,7 @@ public class Group implements Serializable{
 		this.supervisor = supervisor;
 		//setting value to -1 before rating
 		this.rating = -1;
-		
+		//Creating file that will stores the Group's conversation
 		File file = new File("Conversations/"+name+".txt");
 		try {
 			file.createNewFile();
@@ -67,6 +67,7 @@ public class Group implements Serializable{
 	}
 
 	
+//*************** Getters and Setters ***************	
 	public String getName() {
 		return name;
 	}
