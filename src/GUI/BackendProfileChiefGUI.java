@@ -470,19 +470,6 @@ public class BackendProfileChiefGUI {
 		for (Group theSupervisingGroup: chief.getGroups()) {
 			listModelForGroups.addElement(theSupervisingGroup.getName());
 		}
-		listModelForGroups.addElement("weuq9wsiqqwwedqe");
-		listModelForGroups.addElement("weuq9wsiqqwwedqe");
-		listModelForGroups.addElement("weuq9wsiqqwwedqe");
-		listModelForGroups.addElement("weuq9wsiqqwwedqe");
-		listModelForGroups.addElement("weuq9wsiqqwwedqe");
-		listModelForGroups.addElement("weuq9wsiqqwwedqe");
-		listModelForGroups.addElement("weuq9wsiqqwwedqe");
-		listModelForGroups.addElement("weuq9wsiqqwwedqe");
-		listModelForGroups.addElement("weuq9wsiqqwwedqe");
-		listModelForGroups.addElement("weuq9wsiqqwwedqe");
-		listModelForGroups.addElement("weuq9wsiqqwwedqe");
-		listModelForGroups.addElement("weuq9wsiqqwwedqe");
-		listModelForGroups.addElement("weuq9wsiqqwwedqe");
 		list.setModel(listModelForGroups);
 		panel.add(list);
 		JScrollPane scrollPaneGroups = new JScrollPane(list);
