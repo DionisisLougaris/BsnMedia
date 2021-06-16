@@ -28,6 +28,7 @@ import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.border.LineBorder;
 
 import entities.*;
 import java.awt.Color;
@@ -48,10 +49,9 @@ public class BackendProfileEmployeeGUI {
 	private JRadioButton connectionsRadio, PublicRadio;
 	private static User employee;
 	private TreeSet<User> suggestedListConnections = new TreeSet<>();
-	private TreeSet<Post> allPosts = new TreeSet<>();
 	private ButtonGroup radioGroup;
 	private ArrayList<User> listOfConnections;
-	
+
 	//This method is the constructor of class  BackendProfileEmployeeGUI.
 	public BackendProfileEmployeeGUI(User aUser) throws IOException {
 		initialize(aUser);
@@ -249,11 +249,15 @@ public class BackendProfileEmployeeGUI {
 		DefaultListModel<String> model = new DefaultListModel<String>();
 		listOfConnections = employee.getListOfConnections(); //Get all his Connections
 		for (User theUser: listOfConnections) {
-			model.addElement(theUser.getFirstName()+" "+theUser.getLastName()); 
+			model.addElement(theUser.getFirstName()+" "+theUser.getLastName());
 		}
 		connectionsList.setModel(model);
 		connectionsList.setBackground(new Color(255, 250, 240));
 		panel.add(connectionsList);
+		JScrollPane scrollPaneConnections = new JScrollPane(connectionsList);
+		scrollPaneConnections.setBounds(47, 483, 113, 152);
+		scrollPaneConnections.setBorder(new LineBorder(Color.WHITE, 2));
+		panel.add(scrollPaneConnections);
 		
 		suggestedListConnections = employee.suggestedConnections(); //Get all Suggested Connections
 		suggestedList = new JList<String>();
@@ -265,6 +269,10 @@ public class BackendProfileEmployeeGUI {
 		suggestedList.setModel(model2);
 		suggestedList.setBackground(new Color(255, 250, 240));
 		panel.add(suggestedList);
+		JScrollPane scrollPaneSuggestedRequest = new JScrollPane(suggestedList);
+		scrollPaneSuggestedRequest.setBounds(221, 483, 116, 152);
+		scrollPaneSuggestedRequest.setBorder(new LineBorder(Color.WHITE, 2));
+		panel.add(scrollPaneSuggestedRequest);
 		
 		JLabel lblConnections = new JLabel("Connections (" + employee.getListOfConnections().size() + ")");
 		lblConnections.setBounds(49, 454, 99, 16);
@@ -275,7 +283,7 @@ public class BackendProfileEmployeeGUI {
 		panel.add(lblSuggestedConnections);
 		
 		JTextArea textAreaPost = new JTextArea();
-		textAreaPost.setBounds(427, 244, 424, 409);
+		textAreaPost.setBounds(427, 256, 424, 409);
 		textAreaPost.setEditable(false);
 		textAreaPost.setLineWrap(true);
 		textAreaPost.setWrapStyleWord(true);
@@ -289,6 +297,10 @@ public class BackendProfileEmployeeGUI {
 		}
 		textAreaPost.setBackground(new Color(255, 250, 240));
 		panel.add(textAreaPost);
+		JScrollPane scrollPanePost = new JScrollPane(textAreaPost);
+		scrollPanePost.setBounds(427, 256, 424, 409);
+		scrollPanePost.setBorder(new LineBorder(Color.WHITE, 2));
+		panel.add(scrollPanePost);
 		
 		writePostArea = new JTextArea();
 		writePostArea.setBounds(427, 688, 424, 49);

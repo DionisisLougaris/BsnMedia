@@ -196,6 +196,10 @@ public class GroupProfileGUI {
 		postTextArea.setEditable(false);
 		postTextArea.setLineWrap(true);
 		frame.getContentPane().add(postTextArea);
+		JScrollPane scrollPanePost = new JScrollPane(postTextArea);
+		scrollPanePost.setBounds(401, 476, 428, 406);
+		scrollPanePost.setBorder(new LineBorder(Color.WHITE, 2));
+		frame.getContentPane().add(scrollPanePost);
 		
 		JLabel projectName = new JLabel();
 		projectName.setText(myGroup.getMyProject().getName());
@@ -337,7 +341,6 @@ public class GroupProfileGUI {
 		frame.getContentPane().add(membersList);
 		JScrollPane scrollPaneMembers = new JScrollPane(membersList);
 		scrollPaneMembers.setBounds(38, 476, 190, 406);
-		scrollPaneMembers.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		frame.getContentPane().add(scrollPaneMembers);
 		
 		JLabel lblNewLabel = new JLabel("Who is the group's supervisor");
@@ -374,9 +377,6 @@ public class GroupProfileGUI {
 		lblNewLabel_11.setIcon(new ImageIcon(imagerisizeb));
 		lblNewLabel_11.setBounds(0, 0, 887, 981);
 		frame.getContentPane().add(lblNewLabel_11);
-		
-		
-		
-		
+			
 	}
 }

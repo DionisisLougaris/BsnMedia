@@ -103,9 +103,6 @@ public class PrivateChatGUI {
 		scrollPaneMessages.setBorder(new LineBorder(Color.WHITE, 2));
 		panel_1.add(scrollPaneMessages);
 		
-		
-		
-		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBounds(12, 519, 521, 120);
 		panel.add(panel_2);
