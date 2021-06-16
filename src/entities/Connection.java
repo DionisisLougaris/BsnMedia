@@ -122,6 +122,7 @@ public class Connection extends Notification implements Serializable{
 				secondUser.addConversation(newConversation);
 				//When two users connected, they need to have a chat of their own, and a file to be saved there
 				File file = new File("Conversations/"+(firstUser.getMyAccount().getUsername()+"_"+(secondUser.getMyAccount().getUsername()+".txt")));
+				//String file = "Conversations/"+(firstUser.getMyAccount().getUsername()+"_"+(secondUser.getMyAccount().getUsername()+".txt"));
 				try {
 					file.createNewFile();
 				} catch (IOException e) {
