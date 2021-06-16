@@ -1,9 +1,6 @@
 package entities;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
@@ -16,7 +13,7 @@ public class Storage implements Serializable{
 		try {
 			FileOutputStream fileOut = new FileOutputStream("bsnmedia.ser");
 			ObjectOutputStream out = new ObjectOutputStream(fileOut);
-			out.writeObject(theCompany);
+			out.writeObject(theCompany); //Saves the Company object because all other entities are included in it
 			out.close();
 			fileOut.close();
 		} catch (FileNotFoundException e) {
@@ -31,7 +28,6 @@ public class Storage implements Serializable{
 	//Getting all data by retrieving the company object from the binary file
 	public static Company retrieveFromBinaryFile() {
 		
-		// nomizw xreiazetai giati logo twn try catch isws den parei timh to theCompany kai xtypaei error
 		try {
 			FileInputStream fileIn = new FileInputStream("bsnmedia.ser");
 			ObjectInputStream in = new ObjectInputStream(fileIn);
@@ -39,7 +35,7 @@ public class Storage implements Serializable{
 			theCompany = (Company)in.readObject();
 			in.close();
 			fileIn.close();
-			return theCompany;
+			return theCompany; //The Company object retrieved from the binary file is returned
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -53,13 +49,20 @@ public class Storage implements Serializable{
 		return null;
 	}
 	
+	/*This is a static method which is called every time a message is sent. Its responsibility is to save the 
+	 * message in the appropriate file, so that it is not lost, and can be retrieved by users associated with the conversation.
+	 */
 	public static void saveMessage(Message aMessage,Conversation aConversation) 
 	{
 		
 		String conversationName;
 		if (aConversation instanceof groupConversation) {
+			//The name of a group chat is the Group name, and the conversation is stored in a text file with the corresponding name. The group name is unique, and cannot be changed.
 			conversationName = "Conversations/"+((groupConversation) aConversation).getTheGroup().getName()+".txt";
 		}else {
+			/*The name of a personal conversation is the username of the first interlocutor + the Username of the second. A file with this name is created 
+			 * during the first connection of two users if it does not already exist (They could stop being friends and then become again, so the old messages are not lost)
+			 */
 			conversationName = "Conversations/"+((privateConversation)aConversation).getDiscussant1().getMyAccount().getUsername()+
 					"_"+((privateConversation)aConversation).getDiscussant2().getMyAccount().getUsername()+".txt";
 		}
@@ -67,14 +70,16 @@ public class Storage implements Serializable{
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String formatDateTime = aMessage.getTimesent().format(formatter);
         
-		String messageModel = aMessage.getContent()+" | Date:"+formatDateTime+" | "+aMessage.getSender().getMyAccount().getUsername()+" | ";
-		String encryptedMessaModel = Encryption.encryptMessage(messageModel, aMessage.getTimesent().getSecond());
+		String messageModel = aMessage.getContent()+" | Date:"+formatDateTime+" | "+aMessage.getSender().getMyAccount().getUsername()+" | "; //The message as we get it
+		String encryptedMessaModel = Encryption.encryptMessage(messageModel, aMessage.getTimesent().getSecond()); //The encrypted message
+		
+		//What we finally save. (In the encrypted message we add in normal form the seconds that are the key, so that the decryption can be done)
 		encryptedMessaModel = encryptedMessaModel + "|" + aMessage.getTimesent().getSecond() + "/";
 		try {
 			FileWriter fw = new FileWriter(conversationName, true);
 			BufferedWriter bw = new BufferedWriter(fw);
 			PrintWriter out = new PrintWriter(bw);
-			out.println(encryptedMessaModel);
+			out.println(encryptedMessaModel); //Save the message in encrypted form
 			out.close();
 			bw.close();
 			fw.close();
@@ -119,7 +124,7 @@ public class Storage implements Serializable{
 			e.printStackTrace();
 		}
 		
-		return convInString;
+		return convInString; //We return what was read from the file, decrypted
 	}
 	
 	
@@ -129,14 +134,14 @@ public class Storage implements Serializable{
 		int theKey = -1;
 		String theKeyString;
 		
-		//We know that the seconds will always be between these two characters.
+		//We know that the seconds will always be between these two characters. So we take their posstion
 		int firstCharSignPosition = theMessage.lastIndexOf("|");
 		int secondCharSignPosition = theMessage.lastIndexOf("/");
 		
 		//We take only one position for the seconds
-		if (secondCharSignPosition - firstCharSignPosition == 2) {
+		if (secondCharSignPosition - firstCharSignPosition == 2) { //It means that there is only one character between them
 			theKeyString = String.valueOf(theMessage.charAt(firstCharSignPosition+1));
-		}else {//We take two positions for the seconds
+		}else {//We take two positions for the seconds because two characters mediate between them
 			theKeyString = String.valueOf(theMessage.charAt(firstCharSignPosition+1)) + String.valueOf(theMessage.charAt(firstCharSignPosition+2));
 		}
 		

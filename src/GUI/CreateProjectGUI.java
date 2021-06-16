@@ -62,7 +62,8 @@ public class CreateProjectGUI {
 		textProjectName.setBorder(null);
 		textProjectName.setBounds(155, 83, 236, 16);
 		frame.getContentPane().add(textProjectName);
-		textProjectName.setColumns(10);
+		frame.setResizable(false);
+		frame.setTitle("Create project");
 		
 		ImageIcon logoimage = new ImageIcon("label_backgrounds/bsn_32px.jpg");
 		frame.setIconImage(logoimage.getImage());
@@ -97,7 +98,6 @@ public class CreateProjectGUI {
 		textDeadline.setForeground(new Color(255, 255, 255));
 		textDeadline.setBounds(155, 205, 236, 16);
 		frame.getContentPane().add(textDeadline);
-		textDeadline.setColumns(10);
 		
 		textGroupName = new JTextField();
 		textGroupName.setForeground(new Color(255, 255, 255));
@@ -105,7 +105,6 @@ public class CreateProjectGUI {
 		textGroupName.setBorder(null);
 		textGroupName.setBounds(155, 284, 236, 16);
 		frame.getContentPane().add(textGroupName);
-		textGroupName.setColumns(10);
 		
 		JLabel lblGroupName = new JLabel("Group name :");
 		lblGroupName.setForeground(new Color(255, 255, 255));
@@ -129,9 +128,6 @@ public class CreateProjectGUI {
 		scrollPaneaddUser.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		frame.getContentPane().add(scrollPaneaddUser);
 		
-		
-		
-		
 		JLabel lblNewLabel_4 = new JLabel("Select employees:");
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		lblNewLabel_4.setForeground(new Color(255, 255, 255));
@@ -151,12 +147,11 @@ public class CreateProjectGUI {
 		frame.getContentPane().add(scrollPaneremoveUser);
 		
 		
-		
-		JLabel lblNewLabel_5 = new JLabel("Members of Group :");
-		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblNewLabel_5.setForeground(new Color(255, 255, 255));
-		lblNewLabel_5.setBounds(327, 370, 126, 16);
-		frame.getContentPane().add(lblNewLabel_5);
+		JLabel membersLabel = new JLabel("Members of Group :");
+		membersLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		membersLabel.setForeground(new Color(255, 255, 255));
+		membersLabel.setBounds(327, 370, 126, 16);
+		frame.getContentPane().add(membersLabel);
 		
 		JButton btnaddUserGroup = new JButton("Add to Group");
 		btnaddUserGroup.setBackground(new Color(255, 255, 255));
@@ -169,7 +164,7 @@ public class CreateProjectGUI {
 			public void actionPerformed(ActionEvent e) {
 				
 				String selectedEmployeeString = addUsersGroupList.getSelectedValue();
-				int index = addUsersGroupList.getSelectedIndex();
+				int index = addUsersGroupList.getSelectedIndex(); //We hold the position of the one chosen
 
 				Employee selectedEmployee = null;
 				
@@ -181,7 +176,7 @@ public class CreateProjectGUI {
 					}
 				}
 				if (selectedEmployee != null) {
-					selectedMembers.add(selectedEmployee);
+					selectedMembers.add(selectedEmployee); //We add him to the list of potential members
 					removeUserGroupmodel.addElement(selectedEmployee.getFirstName()+" "+selectedEmployee.getLastName()+" | "+selectedEmployee.getMyAccount().getUsername());
 				    if (index != -1) {
 				    	addUserGroupmodel.remove(index);
@@ -217,8 +212,8 @@ public class CreateProjectGUI {
 					}
 				}
 				if (selectedEmployeeToRemove!=null) {
-					selectedMembers.remove(selectedEmployeeToRemove);
-					feasibleForSelection.add(selectedEmployeeToRemove);
+					selectedMembers.remove(selectedEmployeeToRemove); //We remove him from the list of potential members
+					feasibleForSelection.add(selectedEmployeeToRemove); //We add him again as available to become a member
 					addUserGroupmodel.addElement(selectedEmployeeToRemove.getFirstName()+" "+selectedEmployeeToRemove.getLastName()+" | "+selectedEmployeeToRemove.getMyAccount().getUsername());
 				    if (index != -1) {
 				    	removeUserGroupmodel.remove(index);
@@ -243,7 +238,8 @@ public class CreateProjectGUI {
 		btnCreateProject.setBounds(222, 632, 77, 22);
 		btnCreateProject.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-					
+				
+				//All fields must be completed and there must be at least one member in the group
 				if(!textProjectName.getText().equals("") && !textProjectDescription.getText().equals("") && !textDeadline.getText().equals("") && !textGroupName.getText().equals("")
 						&& selectedMembers.size()>=1) {
 				   
@@ -252,12 +248,12 @@ public class CreateProjectGUI {
 						Project createdProject = new Project(textProjectName.getText(), textProjectDescription.getText(), textDeadline.getText());
 						Group createdGroup = new Group(textGroupName.getText(), createdProject, pchief);
 						pchief.addGroupToSupervise(createdGroup);
-						groupConversation conversation = new groupConversation(createdGroup);
+						groupConversation conversation = new groupConversation(createdGroup); //A chat is also created which will be available whenever users chat with each other
 						createdGroup.setMyConversation(conversation);
 						pchief.addConversation(conversation);
 						
 						for (Employee theEmp: selectedMembers) {
-							theEmp.addGroupToEmployeesList(createdGroup);
+							theEmp.addGroupToEmployeesList(createdGroup); //The selected members are added to the Group
 							theEmp.addConversation(conversation);
 						}
 						
@@ -286,7 +282,7 @@ public class CreateProjectGUI {
 		frame.getContentPane().add(separator);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 0, 519, 72);
+		panel.setBounds(0, 0, 529, 72);
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 		
@@ -335,10 +331,5 @@ public class CreateProjectGUI {
 		separator_2.setForeground(new Color(255, 255, 255));
 		separator_2.setBounds(0, 614, 519, 13);
 		frame.getContentPane().add(separator_2);
-		
-		
-       frame.setResizable(false);
-		
-		frame.setTitle("Create project");
 	}
 }

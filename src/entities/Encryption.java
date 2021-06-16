@@ -22,17 +22,20 @@ public class Encryption implements Serializable{
 			}
 			encrypted += (char) c;
 		}
-		return encrypted;
+		return encrypted; //The message is returned encrypted
 	}
 
 	 
-	//Method of decrypting an encrypted message
+	//Method of decrypting an encrypted message (It basically encrypts the encrypted message and thus the original message emerges)
 	public static String decryptMessage(String encryptedMessage, int shift) {
 		   
 		return encryptMessage(encryptedMessage, -shift);  //The method of encryption is called with the parameter of the encrypted message and the reverse of the key used for encryption
 	}
 	   
 	      
+	/*Exactly the same logic is used for password encryption / decryption. 
+	Different methods were created in case we want the code to be encrypted in a different, more powerful way.*/
+	
 	//Password encryption algorithm
 	public static String encryptPassword(String originalPassword, int key) {
 		

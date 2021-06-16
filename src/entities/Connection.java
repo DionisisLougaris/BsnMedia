@@ -19,6 +19,7 @@ public class Connection extends Notification implements Serializable{
 		this.secondUser = secondUser;
 	}
 	
+	
 	//Constructor for Connection as Notification
 	public Connection(String notificationContent, User aboutThisUser) {
 		super(notificationContent, aboutThisUser);
@@ -26,7 +27,8 @@ public class Connection extends Notification implements Serializable{
 	
 	
 	//This is a method that checks if two users are connected to each other.
-	public boolean areConnected() {
+	public boolean areConnected() 
+	{
 		
 		if(firstUser.getListOfConnections().contains(secondUser) || secondUser.getListOfConnections().contains(firstUser))
 		{
@@ -36,8 +38,8 @@ public class Connection extends Notification implements Serializable{
 		{
 			return false;
 		}
-		
 	}
+	
 	
 	//This is a method of deleting a connection between two users.
 	public void removeConnection()
@@ -57,6 +59,7 @@ public class Connection extends Notification implements Serializable{
 			        JOptionPane.ERROR_MESSAGE);
 		}
 	}
+	
 	
 	//This is a method in which a connection request is sent to another user.
 	public void sendConnectionRequest()
@@ -101,22 +104,23 @@ public class Connection extends Notification implements Serializable{
 		}
 	}
 	
+	
 	//This is a method in which the connection request is accepted or is canceled.
 	//firstUser, einai aytos pou esteile to aitima
 	//secondUser einai autos pou to lamvanei
-	public void manageConnectionRequest(boolean manageCR, Notification theRequestNotification)
-	{
-		if(manageCR)
-		{
-			if(!this.areConnected())
-			{
+	public void manageConnectionRequest(boolean manageCR, Notification theRequestNotification) {
+		
+		//True -> Means that the request has been accepted
+		if(manageCR) {
+			
+			if(!this.areConnected()) {
 				firstUser.getListOfConnections().add(secondUser);
 				secondUser.getListOfConnections().add(firstUser);
 				
 				privateConversation newConversation = new privateConversation(firstUser, secondUser);
 				firstUser.addConversation(newConversation);
 				secondUser.addConversation(newConversation);
-				//When two users log in, they need to have a chat of their own, and a file to be saved there
+				//When two users connected, they need to have a chat of their own, and a file to be saved there
 				File file = new File("Conversations/"+(firstUser.getMyAccount().getUsername()+"_"+(secondUser.getMyAccount().getUsername()+".txt")));
 				try {
 					file.createNewFile();
@@ -130,9 +134,12 @@ public class Connection extends Notification implements Serializable{
 				        JOptionPane.INFORMATION_MESSAGE);
 			}
 		}
+		
+		//Whenever this method is called, either to accept or to delete a request, the corresponding notifications are removed
 		firstUser.getPendingConnectionRequests().remove(secondUser);
 		secondUser.listOfNotifications.remove(theRequestNotification);
 	}
+	
 	
 	//This method returns the mutual connections between two users.
 	public ArrayList<User>  mutualConnections ()
@@ -147,10 +154,11 @@ public class Connection extends Notification implements Serializable{
 			}
 		}
 		
-	 return listOfMutualConnections;
+		return listOfMutualConnections;
 	}
 	
 	
+	//*************************************Getters and Setters*************************************
 	
 	public User getFirstUser() {
 		return firstUser;
