@@ -1,6 +1,5 @@
 package entities;
 
-import java.io.File;
 import java.io.Serializable;
 
 public class groupConversation extends Conversation implements Serializable{
@@ -9,6 +8,14 @@ public class groupConversation extends Conversation implements Serializable{
 
 	
 	
+	//This method with the help of the Storage class ,adds a messages to the unique group convo file
+	public void addMessage(Message aMessage) {
+			
+			Storage.saveMessage(aMessage, this);
+		}
+	
+	
+	//*************** Getters and Setters *************
 	public groupConversation(Group theGroup) {
 		super();
 		this.theGroup = theGroup;
@@ -21,10 +28,6 @@ public class groupConversation extends Conversation implements Serializable{
 		this.theGroup = theGroup;
 	}
 	
-	public void addMessage(Message aMessage) {
-		
-		Storage.saveMessage(aMessage, this);
-	}
-	
+
 	
 }

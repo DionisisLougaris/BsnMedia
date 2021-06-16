@@ -52,13 +52,17 @@ public class HelpGUI {
 
 	private void initialize(User user) throws IOException {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 893, 1020);
+		frame.setTitle("BSN Support");
+		frame.setBounds(100, 100, 883, 1009);
+		//Setting exact position of frame 
 		frame.setLocation(500, 0);
 		frame.getContentPane().setLayout(null);
 		frame.setVisible(true);
+		//This is needed so the main frames cannot close from the x and only for the login screen so everything is saved!
 		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		frame.setResizable(false);
 		
+		//Adding logo to frame
 		ImageIcon logoimage = new ImageIcon("label_backgrounds/bsn_32px.jpg");
 		frame.setIconImage(logoimage.getImage());
 		
@@ -74,13 +78,15 @@ public class HelpGUI {
 		JButton btnlogoback = new JButton();
 		BufferedImage imageicon2 = ImageIO.read(new File("label_backgrounds/BSNlogo.jpg"));
 		ImageIcon image2 = new ImageIcon(imageicon2);
-		Image imagerisize2 = image2.getImage().getScaledInstance(110, 110, 170) ;
+		Image imagerisize2 = image2.getImage().getScaledInstance(110, 110, 150) ;
 		btnlogoback.setIcon(new ImageIcon(imagerisize2));
 		btnlogoback.setContentAreaFilled(false); 
 		btnlogoback.setToolTipText("Go back to your profile");
 		btnlogoback.setFocusPainted(false); 
 		btnlogoback.setOpaque(false);
 		btnlogoback.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		btnlogoback.setBounds(22, 11, 127, 122);
+		btnlogoback.setBorderPainted(false);
 		btnlogoback.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//Closing previous GUI
@@ -115,9 +121,10 @@ public class HelpGUI {
 				}
 			}
 		});
-		btnlogoback.setBounds(22, 11, 127, 122);
 		panel.add(btnlogoback);
 		
+		
+		//FAQs and answers
 		JLabel lblNewLabel_13 = new JLabel("Frequently asked questions:");
 		lblNewLabel_13.setFont(new Font("Tahoma", Font.BOLD, 22));
 		lblNewLabel_13.setBounds(34, 144, 314, 27);
@@ -209,6 +216,7 @@ public class HelpGUI {
 		frame.getContentPane().add(panel_1);
 		panel_1.setLayout(null);
 		
+		//Contact form
 		JLabel lblNewLabel_13_1 = new JLabel("Send us a message!");
 		lblNewLabel_13_1.setFont(new Font("Tahoma", Font.BOLD, 22));
 		lblNewLabel_13_1.setBounds(41, 143, 314, 27);
@@ -276,11 +284,11 @@ public class HelpGUI {
 		btnNewButton_2.setFocusPainted(false); 
 		btnNewButton_2.setOpaque(false);
 		btnNewButton_2.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		btnNewButton_2.setBounds(243, 528, 97, 25);
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNewButton_2.setBounds(243, 528, 97, 25);
 		panel_1.add(btnNewButton_2);
 		
 		JLabel lblNewLabel_21 = new JLabel("");
@@ -302,6 +310,7 @@ public class HelpGUI {
 		lblNewLabel.setBounds(39, 76, 163, 27);
 		panel_2.add(lblNewLabel);
 		
+		//Hyperlinking creators' linkedin profiles
 		JLabel lblNewLabel_1 = new JLabel("Creators:");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.ITALIC, 17));
 		lblNewLabel_1.setBounds(445, 79, 105, 27);
@@ -487,6 +496,7 @@ public class HelpGUI {
 		});
 		panel_2.add(lblNewLabel_11);
 		
+		//Hyperlinking communication methods with It intelligence and presenting github repository
 		JLabel lblNewLabel_12 = new JLabel("\u00A9 Bsn Media 2021");
 		lblNewLabel_12.setBounds(12, 240, 117, 16);
 		panel_2.add(lblNewLabel_12);
@@ -548,14 +558,14 @@ public class HelpGUI {
 		ButtonListener listener = new ButtonListener();
 		btnNewButton_2.addActionListener(listener);
 		
-		frame.setTitle("User's Suport");
 	}
 	
+	//Button listener for the form's submit button
 	class ButtonListener implements ActionListener {
 		
-		@Override
+		
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
+			// Checking if form fields were filled correctly
 			
 			if (e.getSource().equals(btnNewButton_2)) {
 				

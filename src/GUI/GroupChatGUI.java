@@ -39,14 +39,18 @@ public class GroupChatGUI {
 
 	private void initialize() {
 		frame = new JFrame();
+		frame.setTitle("Group Chat");
 		frame.getContentPane().setBackground(new Color(255, 250, 240));
 		frame.setBounds(100, 100, 686, 794);
 		frame.getContentPane().setLayout(null);
+		
+		//Chat always appears in the middle of the screen
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
 		frame.setVisible(true);
 		frame.setResizable(false);
 		
+		//Putting the BSN logo on the frame
 		ImageIcon logoimage = new ImageIcon("label_backgrounds/bsn_32px.jpg");
 		frame.setIconImage(logoimage.getImage());
 		
@@ -77,6 +81,8 @@ public class GroupChatGUI {
 		allMessagesTextArea.setLineWrap(true);
 		allMessagesTextArea.setWrapStyleWord(true);
 		allMessagesTextArea.setBounds(0, 0, 619, 493);
+		
+		//Presenting all the messages the Group has exchanged
 		ArrayList<String> ourMessages = new ArrayList<>();
 		ourMessages= Storage.retrieveConversation(myGroup.getMyConversation());
 
@@ -104,10 +110,13 @@ public class GroupChatGUI {
 		sendMessageButton.setContentAreaFilled(false); 
 		sendMessageButton.setFocusPainted(false); 
 		sendMessageButton.setOpaque(false);
+		sendMessageButton.setBounds(556, 555, 62, 62);
+		sendMessageButton.setBorderPainted(false);
+		sendMessageButton.setToolTipText("Send");
 		sendMessageButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		sendMessageButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				//Sending and creating a message written by the User
 				String myText = newMessageTextArea.getText();
 				Message myMessage = new Message(myText,myUser);
 				myGroup.getMyConversation().addMessage(myMessage);
@@ -117,17 +126,16 @@ public class GroupChatGUI {
 				allMessagesTextArea.append(myMessage.getContent()+" | Date:"+formatDateTime+" | "+myMessage.getSender().getMyAccount().getUsername()+" | \n");
 			}
 		});
-		sendMessageButton.setBounds(556, 555, 62, 62);
 		panel.add(sendMessageButton);
 		
 		Icon lock = new ImageIcon("label_backgrounds/lock_32px.png");
 		JLabel lblNewLabel_2 = new JLabel(lock);
-		lblNewLabel_2.setBounds(22, 14, 46, 38);
+		lblNewLabel_2.setBounds(22, 11, 46, 38);
 		frame.getContentPane().add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel("(Write in English characters)");
 		lblNewLabel_3.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel_3.setBounds(489, 11, 166, 14);
+		lblNewLabel_3.setBounds(489, 11, 166, 24);
 		frame.getContentPane().add(lblNewLabel_3);
 	}
 }

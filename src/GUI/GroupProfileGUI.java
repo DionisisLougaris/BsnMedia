@@ -1,9 +1,6 @@
 package GUI;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
-import java.awt.Dimension;
 import javax.swing.JTextField;
 
 import entities.Boss;
@@ -27,26 +24,21 @@ import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import java.awt.Image;
-import java.awt.Component;
 import java.awt.Cursor;
 
 import javax.imageio.ImageIO;
-import javax.swing.Box;
 import javax.swing.DefaultListModel;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
 import java.awt.Color;
-import java.awt.SystemColor;
 import javax.swing.JSlider;
-import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import javax.swing.JSeparator;
 import javax.swing.JList;
 import javax.swing.border.LineBorder;
 import javax.swing.JScrollPane;
-import java.awt.Rectangle;
 
 public class GroupProfileGUI {
 
@@ -62,6 +54,7 @@ public class GroupProfileGUI {
 
 	private void initialize(User user, Group group) throws IOException {
 		frame = new JFrame();
+		frame.setTitle("Group Profile");
 		frame.getContentPane().setBackground(Color.WHITE);
 		frame.setBounds(100, 100, 893, 1020);
 		//Setting exact position of frame 
@@ -77,7 +70,7 @@ public class GroupProfileGUI {
 		searchField.setColumns(10);
 		frame.setResizable(false);
 		
-		//Adding logo to every frame
+		//Adding logo to frame
 		ImageIcon logoimage = new ImageIcon("label_backgrounds/bsn_32px.jpg");
 		frame.setIconImage(logoimage.getImage());
 		
@@ -311,6 +304,7 @@ public class GroupProfileGUI {
 		helpButton.setFocusPainted(false); 
 		helpButton.setOpaque(false);
 		helpButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		helpButton.setToolTipText("BSN Support");
 		helpButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//Button that leads to the help page

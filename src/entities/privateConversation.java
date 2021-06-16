@@ -15,6 +15,14 @@ public class privateConversation extends Conversation implements Serializable{
 		this.discussant2 = discussant2;
 	}
 	
+	//This method with the help of the Storage class ,adds a messages to the unique private convo file
+	public void addMessage(Message aMessage) {
+		Storage.saveMessage(aMessage, this);
+		
+	}
+	
+	
+	//*************** Getters and Setters *************
 	
 	public User getDiscussant1() {
 		return discussant1;
@@ -30,9 +38,5 @@ public class privateConversation extends Conversation implements Serializable{
 	}
 
 
-	@Override
-	public void addMessage(Message aMessage) {
-		Storage.saveMessage(aMessage, this);
-		
-	}
+	
 }

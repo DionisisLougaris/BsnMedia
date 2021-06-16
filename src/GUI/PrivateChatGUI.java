@@ -1,13 +1,9 @@
 package GUI;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
-import javax.swing.JTextField;
 
 import entities.Conversation;
 import entities.Message;
-import entities.Post;
 import entities.Storage;
 import entities.User;
 
@@ -23,7 +19,6 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
@@ -39,9 +34,6 @@ public class PrivateChatGUI {
 
 	
 
-	/**
-	 * Create the application.
-	 */
 	public PrivateChatGUI(User aReceiver, User aSender, Conversation aConvo) {
 		receiver = aReceiver;
 		sender = aSender;
@@ -49,16 +41,18 @@ public class PrivateChatGUI {
 		initialize();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setTitle("Private Chat");
 		frame.getContentPane().setBackground(new Color(255, 250, 240));
 		frame.setBounds(100, 100, 686, 795);
 		frame.setResizable(false);
+		
+		//Chat always appears in the middle of the screen
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		frame.setLocation(dim.width/2-frame.getSize().width/2, dim.height/2-frame.getSize().height/2);
+		
+		//Putting the BSN logo on the frame
 		ImageIcon logoimage = new ImageIcon("label_backgrounds/bsn_32px.jpg");
 		frame.setIconImage(logoimage.getImage());
 		frame.getContentPane().setLayout(null);
@@ -66,12 +60,12 @@ public class PrivateChatGUI {
 		
 		JLabel informationLabel = new JLabel("Your messages are encrypted");
 		informationLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		informationLabel.setBounds(70, 23, 215, 20);
+		informationLabel.setBounds(76, 14, 215, 29);
 		frame.getContentPane().add(informationLabel);
 		
 		JLabel chatWithLabel = new JLabel("Private Conversation with "+receiver.getFirstName());
 		chatWithLabel.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		chatWithLabel.setBounds(12, 56, 593, 25);
+		chatWithLabel.setBounds(12, 46, 593, 25);
 		frame.getContentPane().add(chatWithLabel);
 		
 		JPanel panel = new JPanel();
@@ -85,12 +79,14 @@ public class PrivateChatGUI {
 		panel.add(panel_1);
 		panel_1.setLayout(null);
 		
+		
 		JTextArea allMessagesTextArea = new JTextArea();
 		allMessagesTextArea.setEditable(false);
 		allMessagesTextArea.setLineWrap(true);
 		allMessagesTextArea.setWrapStyleWord(true);
 		allMessagesTextArea.setText("");
 		
+		//Presenting all the messages the two users have exchanged
 		ArrayList<String> ourMessages = new ArrayList<>();
 		ourMessages= Storage.retrieveConversation(convo);
 		for(int i=0;i<ourMessages.size();i++)
@@ -117,8 +113,12 @@ public class PrivateChatGUI {
 		sendMessageButton.setContentAreaFilled(false); 
 		sendMessageButton.setFocusPainted(false); 
 		sendMessageButton.setOpaque(false);
+		sendMessageButton.setBounds(556, 555, 62, 62);
+		sendMessageButton.setBorderPainted(false);
+		sendMessageButton.setToolTipText("Send");
 		sendMessageButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		sendMessageButton.addActionListener(new ActionListener() {
+			//Sending and creating a message written by the User
 			public void actionPerformed(ActionEvent e) {
 				String myText = newMessageTextArea.getText();
 				Message myMessage = new Message(myText,sender);
@@ -129,17 +129,16 @@ public class PrivateChatGUI {
 				newMessageTextArea.setText("");
 			}
 		});
-		sendMessageButton.setBounds(556, 555, 62, 62);
 		panel.add(sendMessageButton);
 		
 		Icon lock = new ImageIcon("label_backgrounds/lock_32px.png");
 		JLabel lblNewLabel_2 = new JLabel(lock);
-		lblNewLabel_2.setBounds(12, 14, 46, 38);
+		lblNewLabel_2.setBounds(18, 13, 46, 38);
 		frame.getContentPane().add(lblNewLabel_2);
 		
 		JLabel lblNewLabel = new JLabel("(Write in English characters)");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel.setBounds(462, 11, 193, 14);
+		lblNewLabel.setBounds(480, 11, 175, 32);
 		frame.getContentPane().add(lblNewLabel);
 	}
 }
