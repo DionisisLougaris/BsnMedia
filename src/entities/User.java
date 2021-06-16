@@ -17,20 +17,15 @@ abstract public class User implements Serializable{
 	protected String image;
 	protected Account myAccount;
 	protected ArrayList<User> listOfConnections = new ArrayList<User>();
-	
-	postComparator myPostComp = new postComparator();
+    protected postComparator myPostComp = new postComparator();
 	protected TreeSet<Post> listOfPosts = new TreeSet<Post>(myPostComp); //Only his Posts
-	
-	NotificationsComparator myNotificationComp = new NotificationsComparator();
-	
-	UserComparator myUserComparator = new UserComparator();
-	
+	protected NotificationsComparator myNotificationComp = new NotificationsComparator();
+	protected UserComparator myUserComparator = new UserComparator();
 	protected ArrayList<Notification> listOfNotifications = new ArrayList<Notification>();
 	protected ArrayList<User> pendingConnectionRequests = new ArrayList<User>(); //The pending requests he has sent to others
 	protected ArrayList<Conversation> listOfConversations = new ArrayList<Conversation>();
 	
-	
-	//Initial constructor for user
+	//Initial constructor for user.
 	public User(String firstName, String lastName, String telephone, String address, String gender, String birthday,
 			String companyPost, Account myAccount) {
 		
@@ -45,12 +40,11 @@ abstract public class User implements Serializable{
 		this.myAccount = myAccount;
 	}
 	
-	
 	/*Returns to the user who is logged in to his account all the posts 
-	 * of another user whose public profile has been visited*/
+	 * of another user whose public profile has been visited.*/
 	public TreeSet<Post> returnVisiblePosts(User visitedUser) {
 		
-		TreeSet<Post> visitedUserAllPosts = visitedUser.getListOfPosts(); //List of Posts of the user who visited his public profile
+		TreeSet<Post> visitedUserAllPosts = visitedUser.getListOfPosts(); //List of Posts of the user who visited his public profile.
 		TreeSet<Post> visiblePostsToBeReturned = new TreeSet<Post>(myPostComp);
 		
 		for (Post visitedUserPost: visitedUserAllPosts) {
@@ -62,15 +56,14 @@ abstract public class User implements Serializable{
 					visiblePostsToBeReturned.add(visitedUserPost);
 			}
 		}
+		
 		return visiblePostsToBeReturned;
 	}
-	
 	
 	/*This is a method that returns a TreeSet with all the posts that are visible to the logged in user. 
 	 * Such posts are his own, his friends', from users who have set universal visibility in a Post, 
 	 * as well as posts addressed to the Groups he is a member of.*/
 	abstract public TreeSet<Post> returnAllPosts(); 
-	
 	
 	/*Return notifications regarding the acceptance of a connection request from another user, 
 	 * joining a group, a project that has been completed, as well as a Project that has been evaluated.*/
@@ -88,7 +81,6 @@ abstract public class User implements Serializable{
 		
 		return generalNotifications;
 	}
-	
 	
 	//This is a method that returns a TreeSet with all connection requests to the user.
 	public TreeSet<Notification> returnConnectionsRequest() {
@@ -176,13 +168,10 @@ abstract public class User implements Serializable{
 			JOptionPane.showMessageDialog(new JFrame(), message, "Message",
 			        JOptionPane.ERROR_MESSAGE);
 		}
-		
 	}
-	
 	
 	//This is a method that calculates and returns a list of suggested connections for a user.
 	abstract public TreeSet<User> suggestedConnections();
-	
 	
 	//This is a method that removes a User item from the list of requests sent by the logged in user.
 	public void cancelPendingRequest(User requestToThisUser) {
@@ -234,7 +223,6 @@ abstract public class User implements Serializable{
 		return correctConversation;	//If it returns null, then the appropriate notification will appear from Gui.
 	}
 	
-	
 	/*This is a method that adds a post to the list of user-maintained posts.*/
 	public void addPost(Post thePost) {
 		listOfPosts.add(thePost);
@@ -244,9 +232,8 @@ abstract public class User implements Serializable{
 		listOfConversations.add(theConvo);
 	}
 
-	
-	
 	//*********************************************************************************************************************
+	
 	//Getters and Setters
 	public String getFirstName() {
 		return firstName;
@@ -367,8 +354,6 @@ abstract public class User implements Serializable{
 	abstract public ArrayList<Group> getGroups(); 
 		
 }
-
-
 class NotificationsComparator implements Comparator<Notification>, Serializable {
 
 	@Override
@@ -378,10 +363,8 @@ class NotificationsComparator implements Comparator<Notification>, Serializable 
 			return 1;
 		else 
 			return -1;
-	}
-	
+	 }
 }
-
 
 class UserComparator implements Comparator<User>, Serializable {
 
@@ -390,7 +373,4 @@ class UserComparator implements Comparator<User>, Serializable {
 		
 		return o1.getFirstName().compareTo(o2.getFirstName());
 	}
-	
 }
-
-

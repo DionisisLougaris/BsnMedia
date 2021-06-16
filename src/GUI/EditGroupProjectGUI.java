@@ -57,7 +57,6 @@ public class EditGroupProjectGUI {
 		frame.setLocation(720, 300);
 		frame.setResizable(false);
 		frame.setTitle("Edit Group and Project");
-		
 		ImageIcon logoimage = new ImageIcon("label_backgrounds/bsn_32px.jpg");
 		frame.setIconImage(logoimage.getImage());
 		
@@ -83,20 +82,19 @@ public class EditGroupProjectGUI {
 		tfChangeGroupName.setColumns(10);
 		
 		
-		JScrollPane scrollPane_2 = new JScrollPane();
-		scrollPane_2.setBorder(new LineBorder(Color.WHITE, 2));
-		scrollPane_2.setBounds(183, 64, 308, 90);
-		frame.getContentPane().add(scrollPane_2);
+		JScrollPane scrollPaneDescription = new JScrollPane();
+		scrollPaneDescription.setBorder(new LineBorder(Color.WHITE, 2));
+		scrollPaneDescription.setBounds(183, 64, 308, 90);
+		frame.getContentPane().add(scrollPaneDescription);
 		
 		tfChangeProjectDescription= new JTextArea(myGroup.getMyProject().getDescription());
-		tfChangeProjectDescription.setEditable(false);
 		tfChangeProjectDescription.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		tfChangeProjectDescription.setBackground(new Color(255, 153, 102));
 		tfChangeProjectDescription.setForeground(new Color(255, 255, 255));
 		tfChangeProjectDescription.setLineWrap(true);
 		tfChangeProjectDescription.setWrapStyleWord(true);
 		tfChangeProjectDescription.setBorder(new LineBorder(Color.WHITE, 2));
-		scrollPane_2.setViewportView(tfChangeProjectDescription);
+		scrollPaneDescription.setViewportView(tfChangeProjectDescription);
 		tfChangeProjectDescription.setColumns(10);
 		
 		JRadioButton rdbtnOnGoing = new JRadioButton("Ongoing");
@@ -142,7 +140,6 @@ public class EditGroupProjectGUI {
 		lblCurrentsituation.setBounds(18, 212, 147, 16);
 		frame.getContentPane().add(lblCurrentsituation);
 		
-		
 		JList<String> EmployeesToAdd = new JList<String>();
 		EmployeesToAdd.setBounds(58, 280, 153, 164);
 		EmployeesToAdd.setBorder(new LineBorder(new Color(0, 0, 0), 2));
@@ -155,7 +152,6 @@ public class EditGroupProjectGUI {
 		EmployeesToAdd.setModel(addUserGroupmodel);
 		frame.getContentPane().add(EmployeesToAdd);
 		
-		
 		JList<String> groupMembersList = new JList<String>();
 		groupMembersList.setBounds(390, 280, 153, 164);
 		groupMembersList.setBorder(new LineBorder(new Color(0, 0, 0), 2));
@@ -165,19 +161,19 @@ public class EditGroupProjectGUI {
 		groupMembersList.setModel(removeUserGroupmodel);
 		frame.getContentPane().add(groupMembersList);
 		
-		JLabel lblNewLabel_4 = new JLabel("Add more users:");
-		lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_4.setFont(new Font("Dialog", Font.PLAIN, 12));
-		lblNewLabel_4.setForeground(Color.WHITE);
-		lblNewLabel_4.setBounds(58, 264, 153, 16);
-		frame.getContentPane().add(lblNewLabel_4);
+		JLabel lblAddUsers = new JLabel("Add more users:");
+		lblAddUsers.setHorizontalAlignment(SwingConstants.CENTER);
+		lblAddUsers.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lblAddUsers.setForeground(Color.WHITE);
+		lblAddUsers.setBounds(58, 264, 153, 16);
+		frame.getContentPane().add(lblAddUsers);
 		
-		JLabel lblNewLabel_5 = new JLabel("Users in the group:");
-		lblNewLabel_5.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_5.setFont(new Font("Dialog", Font.PLAIN, 12));
-		lblNewLabel_5.setForeground(Color.WHITE);
-		lblNewLabel_5.setBounds(390, 264, 153, 16);
-		frame.getContentPane().add(lblNewLabel_5);
+		JLabel lblUsersInGroup = new JLabel("Users in the group:");
+		lblUsersInGroup.setHorizontalAlignment(SwingConstants.CENTER);
+		lblUsersInGroup.setFont(new Font("Dialog", Font.PLAIN, 12));
+		lblUsersInGroup.setForeground(Color.WHITE);
+		lblUsersInGroup.setBounds(390, 264, 153, 16);
+		frame.getContentPane().add(lblUsersInGroup);
 		
 		JButton btnaddGroup = new JButton("Add to group");
 		btnaddGroup.setForeground(Color.WHITE);
@@ -334,20 +330,20 @@ public class EditGroupProjectGUI {
 		});
 		frame.getContentPane().add(btnViwChanges);
 		
-		JSeparator separator = new JSeparator();
-		separator.setForeground(Color.WHITE);
-		separator.setBounds(183, 51, 174, 2);
-		frame.getContentPane().add(separator);
+		JSeparator separatorProjectName = new JSeparator();
+		separatorProjectName.setForeground(Color.WHITE);
+		separatorProjectName.setBounds(183, 51, 174, 2);
+		frame.getContentPane().add(separatorProjectName);
 		
-		JSeparator separator_1 = new JSeparator();
-		separator_1.setForeground(Color.WHITE);
-		separator_1.setBounds(183, 191, 174, 2);
-		frame.getContentPane().add(separator_1);
+		JSeparator separatorGroupName = new JSeparator();
+		separatorGroupName.setForeground(Color.WHITE);
+		separatorGroupName.setBounds(183, 191, 174, 2);
+		frame.getContentPane().add(separatorGroupName);
 		
-		JSeparator separator_2 = new JSeparator();
-		separator_2.setForeground(Color.WHITE);
-		separator_2.setBounds(0, 503, 647, 16);
-		frame.getContentPane().add(separator_2);
+		JSeparator separatorEditButtons = new JSeparator();
+		separatorEditButtons.setForeground(Color.WHITE);
+		separatorEditButtons.setBounds(0, 503, 647, 16);
+		frame.getContentPane().add(separatorEditButtons);
 	}
 }
 
