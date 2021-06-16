@@ -50,6 +50,8 @@ public class Main {
 		first.addGroupToEmployeesList(g1);
 		first4.addGroupToSupervise(g1);
 		groupConversation groupConversation = new groupConversation(g1);
+		first.addConversation(groupConversation);
+		first4.addConversation(groupConversation);
 		g1.setMyConversation(groupConversation);
 		
 		theCompany.addCompanyGroups(g1);

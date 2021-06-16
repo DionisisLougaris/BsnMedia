@@ -68,9 +68,9 @@ public class Connection extends Notification implements Serializable{
 		
 		if(!areConnected())
 		{
-			for(int i=0; i<secondUser.getPendingConnectionRequests().size(); i++)
+			for(int i=0; i<firstUser.getPendingConnectionRequests().size(); i++)
 			{
-				if(firstUser == secondUser.getPendingConnectionRequests().get(i))
+				if(secondUser == firstUser.getPendingConnectionRequests().get(i))
 				{
 					pendingConnectionRequest = true;
 					break;
@@ -78,7 +78,7 @@ public class Connection extends Notification implements Serializable{
 			}
 			if(!pendingConnectionRequest)
 			{
-				secondUser.addPendingConnectionRequest(firstUser);
+				firstUser.addPendingConnectionRequest(secondUser);
 				Connection connectionRequest = new Connection(firstUser.firstName+"(New Connection Request)", firstUser);
 				secondUser.listOfNotifications.add(connectionRequest);
 				

@@ -254,9 +254,11 @@ public class CreateProjectGUI {
 						pchief.addGroupToSupervise(createdGroup);
 						groupConversation conversation = new groupConversation(createdGroup);
 						createdGroup.setMyConversation(conversation);
+						pchief.addConversation(conversation);
 						
 						for (Employee theEmp: selectedMembers) {
 							theEmp.addGroupToEmployeesList(createdGroup);
+							theEmp.addConversation(conversation);
 						}
 						
 						pchief.getMyAccount().getMyCompany().addCompanyGroups(createdGroup);

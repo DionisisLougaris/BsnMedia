@@ -57,8 +57,6 @@ public class BackendProfileBossGUI {
 	private ArrayList<User> listOfConnections;
 	
 	
-	
-
 	public BackendProfileBossGUI(User theBoss) throws IOException{
 		boss = (Boss)theBoss;
 		initialize();
@@ -258,6 +256,29 @@ public class BackendProfileBossGUI {
 		});
 		panel.add(notifsButton);
 		
+		JLabel numberOfConnectionsReq = new JLabel(boss.returnConnectionsRequest().size()+"");
+		numberOfConnectionsReq.setForeground(Color.RED);
+		numberOfConnectionsReq.setFont(new Font("Tahoma", Font.BOLD, 20));
+		numberOfConnectionsReq.setBounds(711, 11, 17, 25);
+		panel.add(numberOfConnectionsReq);
+		
+		JLabel numberOfMessages = new JLabel(boss.getListOfConversations().size()+"");
+		numberOfMessages.setForeground(Color.RED);
+		numberOfMessages.setFont(new Font("Tahoma", Font.BOLD, 20));
+		numberOfMessages.setBounds(760, 11, 17, 25);
+		panel.add(numberOfMessages);
+		
+		int number = 0;
+		for (Notification theNotif: boss.returnNotification()) {
+			if (theNotif instanceof GeneralNotification)
+				number++;
+		}
+		JLabel numberOfGeneralNot = new JLabel(number+"");
+		numberOfGeneralNot.setForeground(Color.RED);
+		numberOfGeneralNot.setFont(new Font("Tahoma", Font.BOLD, 20));
+		numberOfGeneralNot.setBounds(812, 11, 17, 25);
+		panel.add(numberOfGeneralNot);
+		
 		editAccountButton = new JButton("Edit Account Info");
 		editAccountButton.setBounds(44, 332, 155, 25);
 		editAccountButton.setContentAreaFilled(false); 
@@ -445,11 +466,6 @@ public class BackendProfileBossGUI {
 		lblNewLabel_2.setIcon(new ImageIcon(imagerisizeb));
 		panel.add(lblNewLabel_2);
 		
-		
-		
-		
-		
-		
 		ButtonListener listener = new ButtonListener();
 		checkprofileButton.addActionListener(listener);
 		sendMessageButton.addActionListener(listener);
@@ -553,5 +569,4 @@ public class BackendProfileBossGUI {
 			}
 		}
 	}
-	
 }
