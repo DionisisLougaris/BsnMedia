@@ -14,7 +14,6 @@ import entities.Chief;
 import entities.Connection;
 import entities.Conversation;
 import entities.Employee;
-import entities.Group;
 import entities.Post;
 import entities.User;
 import entities.privateConversation;
@@ -38,11 +37,9 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
 import java.awt.Font;
 import java.awt.Image;
-import java.awt.Toolkit;
 
 import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.JScrollBar;
 import java.awt.Color;
 import javax.swing.JScrollPane;
 
@@ -59,14 +56,18 @@ public class FrontEndProfileGUI {
 
 	private void initialize(User tUser, User aUser) throws IOException {
 		frame = new JFrame();
+		frame.setTitle("User's Profile");
 		frame.setBounds(100, 100, 893, 1020);
+		//Setting exact position of frame 
 		frame.setLocation(500, 0);
 		frame.getContentPane().setLayout(null);
 		frame.setVisible(true);
 		frame.setResizable(false);
 		frame.setTitle(aUser.getMyAccount().getUsername());
+		//This is needed so the main frames cannot close from the x and only for the login screen so everything is saved!
 		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		
+		//Adding logo to frame
 		ImageIcon logoimage = new ImageIcon("label_backgrounds/bsn_32px.jpg");
 		frame.setIconImage(logoimage.getImage());	    
 			
@@ -108,7 +109,7 @@ public class FrontEndProfileGUI {
 		searchbutton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		searchbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				//Search bar on the Frontend Profile
 				String searchedText = searchtext.getText();
 				if(!searchedText.isEmpty()) {
 					boolean result;
@@ -188,6 +189,7 @@ public class FrontEndProfileGUI {
 		
 		JTextArea ausersposts = new JTextArea();
 		ausersposts.setBounds(32, 561, 810, 336);
+		//adding user's posts to his wall
 		for( Post post : aUser.getListOfPosts())
 		{
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -201,14 +203,8 @@ public class FrontEndProfileGUI {
 		ausersposts.setLineWrap(true);
 		ausersposts.setBackground(new Color(255, 250, 240));
 		
-		frame.getContentPane().add(ausersposts);
-		JScrollPane scrollPanePost = new JScrollPane(ausersposts);
-		scrollPanePost.setBounds(32, 561, 810, 336);
-		scrollPanePost.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-	    frame.getContentPane().add(scrollPanePost);
-		
-		
-		
+		panel.add(ausersposts);
+
 		String namelastname = profileUser.getFirstName() + " " + profileUser.getLastName();
 		JLabel labelnamelastname= new JLabel(namelastname);
 		labelnamelastname.setBounds(108, 240, 504, 26);
@@ -250,6 +246,8 @@ public class FrontEndProfileGUI {
 		});
 		panel.add(labelemail);
 		
+		
+		//adding section if user is of type employee
 		JLabel lblNewLabel_5 = new JLabel("Currently apart of:");
 		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblNewLabel_5.setBounds(108, 287, 133, 16);
@@ -335,8 +333,10 @@ public class FrontEndProfileGUI {
 			}
 		}
 		
+		//Showing addConnection and buttonchat buttons if User is not visiting his own frontend profile
 		if(!loggedUser.equals(profileUser))
 		{
+			//Showing addConnection button if User is not already connected with the user whose profile he visited
 			if(!usersconnection.areConnected()) {
 				
 				 JButton addConnection = new JButton("Add connection");
@@ -355,6 +355,7 @@ public class FrontEndProfileGUI {
 			}
 			else
 			{
+				//Showing buttonchat button if User is already connected with the user whose profile he visited
 				JButton buttonchat= new JButton("Chat");
 				buttonchat.setContentAreaFilled(false); 
 				buttonchat.setFocusPainted(false); 
@@ -363,6 +364,7 @@ public class FrontEndProfileGUI {
 				buttonchat.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 					
+								//Finding correct conversation between two users and opening their chat
 								ArrayList<Conversation> listOfConversation = loggedUser.getListOfConversations();
 								Conversation selectedUserToChat = null;
 								
@@ -450,6 +452,7 @@ public class FrontEndProfileGUI {
 			lblNewLabel_13.setBounds(709, 382, 130, 16);
 			panel.add(lblNewLabel_13);
 			
+			//Adding mutual their connections to list
 			DefaultListModel<String> mutualmodel = new DefaultListModel<String>();
 			JList<String> listmutualconnections = new JList<String>();
 			listmutualconnections.setBackground(new Color(255, 250, 240));
@@ -458,13 +461,11 @@ public class FrontEndProfileGUI {
 				mutualmodel.addElement(theUser.getFirstName()+" "+theUser.getLastName());
 			}
 			listmutualconnections.setModel(mutualmodel);
-			frame.getContentPane().add(listmutualconnections);
-			JScrollPane scrollPaneMutualConnections = new JScrollPane(listmutualconnections);
-			scrollPaneMutualConnections.setBounds(709, 413, 130, 123);
-			scrollPaneMutualConnections.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-			frame.getContentPane().add(scrollPaneMutualConnections);
+			panel.add(listmutualconnections);
+			
 		}
 		
+		//Button that leads to BSN Support Page
 		Icon help = new ImageIcon("Buttons_backgrounds/customer_support_40px.png");
 		JButton helpButton = new JButton(help);
 		helpButton.setBounds(824, 929, 46, 38);

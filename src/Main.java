@@ -63,8 +63,8 @@ public class Main {
 		theCompany.addUser(first5); 
 		
 		//Εδω γίνεται η συζήτηση και η αποθήκευση της συνομιλίας (Αυτή την λογική θα κρατήσουμε)
-		//privateConversation conversation = new privateConversation(first, first2);
-		/*Message firstMessage = new Message("Geiaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+		privateConversation conversation = new privateConversation(first, first2);
+		Message firstMessage = new Message("Geiaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
 				+ "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", first);
 		conversation.addMessage(firstMessage);
 		Message firstMessage1 = new Message("Geiaaa", first2);
@@ -72,7 +72,7 @@ public class Main {
 		Message firstMessage2 = new Message("Ti kaneis", first);
 		conversation.addMessage(firstMessage2);
 		Message firstMessage3 = new Message("Ola kala esy?", first2);
-		conversation.addMessage(firstMessage3);*/
+		conversation.addMessage(firstMessage3);
 
 
 		//Εδώ γίνεται η ανάκτηση της συνομιλίας από το αρχείο
@@ -89,7 +89,8 @@ public class Main {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					new WelcomeScreen_GUI(theCompany);
+					//new WelcomeScreen_GUI(theCompany);
+					new PrivateChatGUI(first,first2,conversation);
 					} catch (Exception e) {
 					e.printStackTrace();
 				}

@@ -1,11 +1,7 @@
 package GUI;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.imageio.ImageIO;
-import javax.swing.AbstractButton;
-import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -20,7 +16,6 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
-import java.awt.Button;
 import java.awt.Cursor;
 import java.awt.Desktop;
 
@@ -64,6 +59,7 @@ public class CompanyProfileGUI {
 	 */
 	private void initialize(User myUser, Company theCompany) {
 		frame = new JFrame();
+		frame.setTitle("Company Profile");
 		frame.getContentPane().setBackground(Color.WHITE);
 		frame.setBounds(100, 100, 893, 1020);
 		//Setting exact position of frame 
@@ -75,7 +71,7 @@ public class CompanyProfileGUI {
 	    frame.setTitle("Company");
 	    frame.getContentPane().setLayout(null);
 	    
-	  //Adding logo to every frame
+	  //Adding logo to frame
 	    ImageIcon logoimage = new ImageIcon("label_backgrounds/bsn_32px.jpg");
 	    frame.setIconImage(logoimage.getImage());
 		

@@ -8,12 +8,12 @@ import javax.swing.JOptionPane;
 
 public class Password implements Serializable
 {
-	
 	private String password; //The password stored encrypted
 	private LocalDateTime timestamp;
 	
 	//Constructor for Password
 	public Password(String password, String username, String firstName, String lastName) {
+		
 		//The fields username, firstName and lastName are usefull for the password strength
 		//check if the code is accepted
 		if (password.length()>=8 && !password.equalsIgnoreCase(username) 
@@ -29,7 +29,6 @@ public class Password implements Serializable
 			        JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
-	
 	
 	//This is a method that allows the user to save the saved password
 	public void newPassword(String newPass, String confirmedPass, User theUser) {
@@ -58,7 +57,6 @@ public class Password implements Serializable
 		}
 	}
 	
-	
 	//This is a method through which the user can change his password provided he knows his current one.
 	public void changePassword(String currentPass, String newPass, String comfirmedNewPass, User theUser) {
 		
@@ -73,19 +71,23 @@ public class Password implements Serializable
 	}
 
 	
-	
+	//These methods are setters and getters.
 	public String getPassword() {
 		return password;
 	}
+	
 	public LocalDateTime getAccountCreationTime() {
 		return timestamp;
 	}
+	
 	public LocalDateTime getTimestamp() {
 		return timestamp;
 	}
+	
 	public void setTimestamp(LocalDateTime timestamp) {
 		this.timestamp = timestamp;
 	}
+	
 	public void setPassword(String password) {
 		this.password = password;
 	}

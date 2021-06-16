@@ -44,28 +44,29 @@ public class BackendProfileChiefGUI {
 	private JTextField searchField;
 	private static Chief chief;
 	private JPanel panel, picturePanel;
-	private JLabel lblNewLabel;
+	private JLabel lblPhotoProfile;
 	private JButton searchButton, helpButton, requestsButton, messagesButton, notifsButton, editAccountButton,createProjectButton, 
 	postButton, checkprofileButton, sendMessageButton, sendRequestButton, disconnectButton;
 	private JLabel emailLabel;
 	private JRadioButton connectionsRadio, PublicRadio;
 	private JTextArea writePostArea;
 	private JList<String> connectionsList, suggestedList;
-	ArrayList<User> listOfConnections;
-	TreeSet<User> suggestedListConnections = new TreeSet<>();
-	ButtonGroup radioGroup;
-	TreeSet<Post> allPosts = new TreeSet<>();
-	
+	private ArrayList<User> listOfConnections;
+	private TreeSet<User> suggestedListConnections = new TreeSet<>();
+	private ButtonGroup radioGroup;
+	private TreeSet<Post> allPosts = new TreeSet<>();
 	private JTextArea textArea;
 	private JButton editGroupButton;
 	private JSeparator separator;
 	private JScrollPane scrollPane;
 	
+	//This method is the constructor of class  BackendProfileChiefGUI.
 	public BackendProfileChiefGUI(User theChief) throws IOException {
 		chief = (Chief) theChief;
 		initialize();
 	}
 	
+	//This method initialize the properties of this gui.
 	private void initialize() throws IOException {
 		frmStartingPage = new JFrame();
 		frmStartingPage.setTitle("Starting Page");
@@ -80,7 +81,7 @@ public class BackendProfileChiefGUI {
 		
 	    panel = new JPanel();
 		panel.setBackground(Color.WHITE);
-		panel.setBounds(0, 0, 887, 985);
+		panel.setBounds(0, 0, 893, 1020);
 		frmStartingPage.getContentPane().add(panel);
 		panel.setLayout(null);
 		
@@ -89,19 +90,19 @@ public class BackendProfileChiefGUI {
 		panel.add(picturePanel);
 		picturePanel.setLayout(null);
 		
-	    lblNewLabel = new JLabel();
+	    lblPhotoProfile = new JLabel();
 		BufferedImage imageicon;
 		try {
 			imageicon = ImageIO.read(new File(chief.getImage()));
 			ImageIcon image = new ImageIcon(imageicon);
 			Image imagerisize = image.getImage().getScaledInstance(181, 152, 170);
-			lblNewLabel.setIcon(new ImageIcon(imagerisize));
+			lblPhotoProfile.setIcon(new ImageIcon(imagerisize));
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		lblNewLabel.setBounds(0, 0, 181, 152);
-		picturePanel.add(lblNewLabel);
+		lblPhotoProfile.setBounds(0, 0, 181, 152);
+		picturePanel.add(lblPhotoProfile);
 		
 		Icon search = new ImageIcon("Buttons_backgrounds/search_30px.png");
 		searchButton= new JButton(search);
@@ -317,7 +318,7 @@ public class BackendProfileChiefGUI {
 		
 		textField = new JTextField();
 		textField.setBounds(639, 780, 64, 25);
-		textField.setToolTipText("Compete the name of group that you want to post");
+		textField.setToolTipText("Complete the groups name");
 		textField.setBackground(new Color(255, 250, 240));
 		textField.setColumns(10);
 		panel.add(textField);
@@ -349,7 +350,7 @@ public class BackendProfileChiefGUI {
 					   }
 				 else if(rdbtnGroup.isSelected())
 				 {
-					 String myText = writePostArea.getText();
+					    String myText = writePostArea.getText();
 						Post myPost = new Post(chief,myText,radioGroup.getSelection().getActionCommand());
 						chief.addPost(myPost);
 						textArea.setText(""); 
@@ -386,9 +387,7 @@ public class BackendProfileChiefGUI {
 					String message = "Select Post scope before posting!";
 					JOptionPane.showMessageDialog(new JFrame(), message, "Message",
 					  JOptionPane.ERROR_MESSAGE);
-				}
-				 textArea.setBackground(new Color(255, 250, 240));
-				 textArea.setBounds(427, 213, 424, 409);	
+				}	
 			}
 		});
 		panel.add(postButton);

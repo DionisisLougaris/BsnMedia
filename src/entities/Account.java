@@ -12,13 +12,13 @@ public class Account implements Serializable{
 	private Password myPassword;
 	private Company myCompany; 
 	
-	
 	//Constructor for Account
 	public Account(String username, String email, Company myCompany, Password myPassword) {
+		
 		/*A prerequisite for the creation of the object is the email and the Username that 
 		 * will be given not to be used already, for this reason the following checks also occur.*/
 		this.myCompany = myCompany;
-		if(this.emailAvailability(email)){//Check if email is used
+		if(this.emailAvailability(email)){ //Check if email is used
 			if (myCompany.isCompanyMember(username)==null) { //Check if username is used
 				this.username = username;
 				this.email = email;
@@ -36,7 +36,6 @@ public class Account implements Serializable{
 			        JOptionPane.ERROR_MESSAGE);
 		}
 	}
-	
 	
 	//Constructor for Account Recovery
 	public Account(String username, String Email, Company myCompany) {
@@ -57,6 +56,7 @@ public class Account implements Serializable{
 			if (companyMember.myAccount.getEmail().equalsIgnoreCase(desiredEmail))
 				return false;
 		}
+		
 		return true;
 	}
 	
@@ -69,25 +69,25 @@ public class Account implements Serializable{
 	  recievers[0] = inputEmail;
 	  
 	  if( this.myCompany.isCompanyMember(inputUsername) != null)
+	  {
+		if(!emailAvailability(inputEmail))
 		{
-			if(!emailAvailability(inputEmail))
+			for(int i=0; i<myCompany.getCompanyMembers().size(); i++)
 			{
-				for(int i=0; i<myCompany.getCompanyMembers().size(); i++)
+				if(inputEmail.equalsIgnoreCase(myCompany.getCompanyMembers().get(i).getMyAccount().getEmail()))
 				{
-						if(inputEmail.equalsIgnoreCase(myCompany.getCompanyMembers().get(i).getMyAccount().getEmail()))
-						{
-							User user = myCompany.getCompanyMembers().get(i);
-							Help.sendGMail("itintelligenceuom@gmail.com", "ITintelligence2001", recievers, "Account Recovery", textForEmailBody);
-							return user;
-						}
+					User user = myCompany.getCompanyMembers().get(i);
+					Help.sendGMail("itintelligenceuom@gmail.com", "ITintelligence2001", recievers, "Account Recovery", textForEmailBody);
+					return user;
 				}
 			}
 		}
-		return null;
+	  }
+	  
+	  return null;
 	}
 	
-
-	//This is a method that deletes the user account.
+    //This is a method that deletes the user account.
 	public boolean deleteAccount(String inputPassword , String confirmedPassword, User deletedUser) {
 		
 		//The stored code must first be decrypted to verify that there is a correct match.
@@ -109,7 +109,7 @@ public class Account implements Serializable{
 	}
 
 
-
+    //These methods are getters and setters.
 	public String getUsername() {
 		return username;
 	}
@@ -139,10 +139,8 @@ public class Account implements Serializable{
 		return myCompany;
 	}
 
-
-	public void setMyCompany(Company myCompany) {
+    public void setMyCompany(Company myCompany) {
 		this.myCompany = myCompany;
 	}
-	
 	
 }

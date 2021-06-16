@@ -6,7 +6,7 @@ import java.time.*;
 public class Message implements Serializable{
 	
 	private String content;
-	private LocalDateTime timesent;
+	private LocalDateTime timesent; //Holds the exact time message was sent
 	private User sender;
 	
 	
@@ -16,7 +16,7 @@ public class Message implements Serializable{
 		this.sender = sender;
 	}
 
-
+	//*************** Getters and Setters *************
 	public String getContent() {
 		return content;
 	}

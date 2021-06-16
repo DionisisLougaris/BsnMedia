@@ -7,7 +7,7 @@ public class Project implements Serializable{
 	private String name;
 	private String description;
 	private String deadline;
-	private String status; //only values "ongoing" or "done"
+	private String status; //Only values "ongoing" or "done" (can be changed by the group's supervisor)
 	
 	
 	//Constructor for Project class
@@ -18,7 +18,7 @@ public class Project implements Serializable{
 		this.status = "ongoing";
 	}
 	
-	//Getters and Setters
+	//*************** Getters and Setters *************
 	public String getName() {
 		return name;
 	}

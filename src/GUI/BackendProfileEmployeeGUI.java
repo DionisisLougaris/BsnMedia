@@ -39,7 +39,7 @@ public class BackendProfileEmployeeGUI {
 	private JTextField searchField;
 	private JTextField textPostGroup;
 	private JPanel panel, picturePanel;
-	private JLabel lblNewLabel;
+	private JLabel lblPhotoProfile;
 	private JButton searchButton, helpButton, requestsButton, messagesButton, notifsButton, editAccountButton, postButton, 
 	checkprofileButton, sendMessageButton, sendRequestButton, disconnectButton;
 	private JLabel emailLabel;
@@ -47,17 +47,17 @@ public class BackendProfileEmployeeGUI {
 	private JTextArea writePostArea;
 	private JRadioButton connectionsRadio, PublicRadio;
 	private static User employee;
-	TreeSet<User> suggestedListConnections = new TreeSet<>();
-	TreeSet<Post> allPosts = new TreeSet<>();
-	ButtonGroup radioGroup;
-	ArrayList<User> listOfConnections;
+	private TreeSet<User> suggestedListConnections = new TreeSet<>();
+	private TreeSet<Post> allPosts = new TreeSet<>();
+	private ButtonGroup radioGroup;
+	private ArrayList<User> listOfConnections;
 	
-	
+	//This method is the constructor of class  BackendProfileEmployeeGUI.
 	public BackendProfileEmployeeGUI(User aUser) throws IOException {
 		initialize(aUser);
 	}
 
-	
+	//This method initialize the properties of this gui.
 	private void initialize(User aUser) throws IOException {
 		frmStartingPage = new JFrame();
 		frmStartingPage.setTitle("Starting Page");
@@ -67,7 +67,6 @@ public class BackendProfileEmployeeGUI {
 		frmStartingPage.setResizable(false);
 		frmStartingPage.getContentPane().setLayout(null);
 		frmStartingPage.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		
 		ImageIcon logoimage = new ImageIcon("label_backgrounds/bsn_32px.jpg");
 		frmStartingPage.setIconImage(logoimage.getImage());
 		
@@ -84,19 +83,19 @@ public class BackendProfileEmployeeGUI {
 		panel.add(picturePanel);
 		picturePanel.setLayout(null);
 		
-		lblNewLabel = new JLabel();
+		lblPhotoProfile = new JLabel();
 		BufferedImage imageicon;
 		try {
 			imageicon = ImageIO.read(new File(employee.getImage()));
 			ImageIcon image = new ImageIcon(imageicon);
 			Image imagerisize = image.getImage().getScaledInstance(181, 152, 170);
-			lblNewLabel.setIcon(new ImageIcon(imagerisize));
+			lblPhotoProfile.setIcon(new ImageIcon(imagerisize));
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		lblNewLabel.setBounds(0, 0, 181, 152);
-		picturePanel.add(lblNewLabel);
+		lblPhotoProfile.setBounds(0, 0, 181, 152);
+		picturePanel.add(lblPhotoProfile);
 		
 		Icon search = new ImageIcon("Buttons_backgrounds/search_30px.png");
 		searchButton = new JButton(search);
@@ -125,7 +124,6 @@ public class BackendProfileEmployeeGUI {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					
 				}else {
 					 String message = "Type something in the Search field";
 						JOptionPane.showMessageDialog(new JFrame(), message, "Message",
@@ -153,10 +151,10 @@ public class BackendProfileEmployeeGUI {
 		emailLabel.setBounds(47, 311, 204, 16);
 		panel.add(emailLabel);
 		
-		JLabel lblNewLabel_5 = new JLabel("Currently apart of:");
-		lblNewLabel_5.setBounds(49, 357, 133, 16);
-		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		panel.add(lblNewLabel_5);
+		JLabel lblCurrentlyApart = new JLabel("Currently apart of:");
+		lblCurrentlyApart.setBounds(49, 357, 133, 16);
+		lblCurrentlyApart.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		panel.add(lblCurrentlyApart);
 		
 		Icon help = new ImageIcon("Buttons_backgrounds/customer_support_40px.png");
 		helpButton = new JButton(help);
@@ -268,29 +266,29 @@ public class BackendProfileEmployeeGUI {
 		suggestedList.setBackground(new Color(255, 250, 240));
 		panel.add(suggestedList);
 		
-		JLabel lblNewLabel_9 = new JLabel("Connections (" + employee.getListOfConnections().size() + ")");
-		lblNewLabel_9.setBounds(49, 454, 99, 16);
-		panel.add(lblNewLabel_9);
+		JLabel lblConnections = new JLabel("Connections (" + employee.getListOfConnections().size() + ")");
+		lblConnections.setBounds(49, 454, 99, 16);
+		panel.add(lblConnections);
 		
-		JLabel lblNewLabel_9_1 = new JLabel("Suggested Connections");
-		lblNewLabel_9_1.setBounds(216, 454, 139, 16);
-		panel.add(lblNewLabel_9_1);
+		JLabel lblSuggestedConnections = new JLabel("Suggested Connections");
+		lblSuggestedConnections.setBounds(216, 454, 139, 16);
+		panel.add(lblSuggestedConnections);
 		
-		JTextArea textArea = new JTextArea();
-		textArea.setBounds(427, 244, 424, 409);
-		textArea.setEditable(false);
-		textArea.setLineWrap(true);
-		textArea.setWrapStyleWord(true);
-		textArea.setText("");
+		JTextArea textAreaPost = new JTextArea();
+		textAreaPost.setBounds(427, 244, 424, 409);
+		textAreaPost.setEditable(false);
+		textAreaPost.setLineWrap(true);
+		textAreaPost.setWrapStyleWord(true);
+		textAreaPost.setText("");
 		for( Post post : employee.returnAllPosts())
 		{
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 	        String formatDateTime = post.getTimestamp().format(formatter);
-			textArea.append("-----------------------------------------------------------------------------------------------------"+ "\n\r");
-			textArea.append(post.getContent()+" | "+post.getCreator().getFirstName()+" | "+post.getPostScope()+" | "+formatDateTime+ "\n\r");
+			textAreaPost.append("-----------------------------------------------------------------------------------------------------"+ "\n\r");
+			textAreaPost.append(post.getContent()+" | "+post.getCreator().getFirstName()+" | "+post.getPostScope()+" | "+formatDateTime+ "\n\r");
 		}
-		textArea.setBackground(new Color(255, 250, 240));
-		panel.add(textArea);
+		textAreaPost.setBackground(new Color(255, 250, 240));
+		panel.add(textAreaPost);
 		
 		writePostArea = new JTextArea();
 		writePostArea.setBounds(427, 688, 424, 49);
@@ -328,35 +326,35 @@ public class BackendProfileEmployeeGUI {
 		postButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		postButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				 if(connectionsRadio.isSelected() || PublicRadio.isSelected()){
+				 if(connectionsRadio.isSelected() || PublicRadio.isSelected())
+				 {
 				        
-						//Putting post on boss' and others Users' wall
-							String myText = writePostArea.getText();
-							Post myPost = new Post(employee,myText,radioGroup.getSelection().getActionCommand());
-							employee.addPost(myPost);
-							textArea.setText(""); 
-						    for( Post post : employee.returnAllPosts())
-							{
-								DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-						        String formatDateTime = post.getTimestamp().format(formatter);
-								textArea.append("-----------------------------------------------------------------------------------------------------"+ "\n\r");
-								textArea.append(post.getContent()+" | "+post.getCreator().getFirstName()+" | "+post.getPostScope()+" | "+formatDateTime+ "\n\r");
-							}
-							
-					   }
+				    //Putting post on boss' and others Users' wall
+					String myText = writePostArea.getText();
+					Post myPost = new Post(employee,myText,radioGroup.getSelection().getActionCommand());
+					employee.addPost(myPost);
+					textAreaPost.setText(""); 
+				    for( Post post : employee.returnAllPosts())
+					{
+						DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+				        String formatDateTime = post.getTimestamp().format(formatter);
+						textAreaPost.append("-----------------------------------------------------------------------------------------------------"+ "\n\r");
+						textAreaPost.append(post.getContent()+" | "+post.getCreator().getFirstName()+" | "+post.getPostScope()+" | "+formatDateTime+ "\n\r");
+					}
+				 }
 				 else if(rdbtnGroup.isSelected())
 				 {
-					 	String myText = writePostArea.getText();
-						Post myPost = new Post(employee,myText,radioGroup.getSelection().getActionCommand());
-						employee.addPost(myPost);
-						textArea.setText(""); 
-					    for( Post post : employee.returnAllPosts())
-						{
-							DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-					        String formatDateTime = post.getTimestamp().format(formatter);
-							textArea.append("-----------------------------------------------------------------------------------------------------"+ "\n\r");
-							textArea.append(post.getContent()+" | "+post.getCreator().getFirstName()+" | "+post.getPostScope()+" | "+formatDateTime+ "\n\r");
-						}
+				 	String myText = writePostArea.getText();
+					Post myPost = new Post(employee,myText,radioGroup.getSelection().getActionCommand());
+					employee.addPost(myPost);
+					textAreaPost.setText(""); 
+				    for( Post post : employee.returnAllPosts())
+					{
+						DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+				        String formatDateTime = post.getTimestamp().format(formatter);
+						textAreaPost.append("-----------------------------------------------------------------------------------------------------"+ "\n\r");
+						textAreaPost.append(post.getContent()+" | "+post.getCreator().getFirstName()+" | "+post.getPostScope()+" | "+formatDateTime+ "\n\r");
+					}
 					 String groupToPost=textPostGroup.getText();
 					 boolean found=false;
 					 for(int i=0;i<employee.getGroups().size();i++)
@@ -383,8 +381,7 @@ public class BackendProfileEmployeeGUI {
 					JOptionPane.showMessageDialog(new JFrame(), message, "Message",
 					  JOptionPane.ERROR_MESSAGE);
 				}
-				 textArea.setBackground(new Color(255, 250, 240));
-				 textArea.setBounds(427, 213, 424, 409);	
+					
 			}
 		});
 		panel.add(postButton);
@@ -398,7 +395,7 @@ public class BackendProfileEmployeeGUI {
 		textPostGroup = new JTextField();
 		textPostGroup.setBounds(639, 780, 64, 25);
 		textPostGroup.setBackground(new Color(255, 250, 240));
-		textPostGroup.setToolTipText("Compete the name of group that you want to post");
+		textPostGroup.setToolTipText("Complete the groups name");
 		textPostGroup.setColumns(10);
 		panel.add(textPostGroup);
 		
@@ -502,7 +499,7 @@ public class BackendProfileEmployeeGUI {
 		
 		Icon logout = new ImageIcon("Buttons_backgrounds/exit_50px.png");
 		disconnectButton = new JButton(logout);
-		disconnectButton.setBounds(796, 169, 55, 54);
+		disconnectButton.setBounds(796, 155, 55, 54);
 		disconnectButton.setContentAreaFilled(false);
 		disconnectButton.setToolTipText("logout");
 		disconnectButton.setFocusPainted(false); 
@@ -523,13 +520,13 @@ public class BackendProfileEmployeeGUI {
 		});
 		panel.add(disconnectButton);
 
-		JLabel lblNewLabel_2 = new JLabel("");
-		lblNewLabel_2.setBounds(0, 0, 887, 991);
+		JLabel lblBackgraoundFrame = new JLabel("");
+		lblBackgraoundFrame.setBounds(0, 0, 887, 991);
 		BufferedImage imagebackground = ImageIO.read(new File("label_backgrounds/background.jpg"));
 		ImageIcon imageb = new ImageIcon(imagebackground);
 		Image imagerisizeb = imageb.getImage().getScaledInstance(887, 991, 140) ;
-		lblNewLabel_2.setIcon(new ImageIcon(imagerisizeb));
-		panel.add(lblNewLabel_2);
+		lblBackgraoundFrame.setIcon(new ImageIcon(imagerisizeb));
+		panel.add(lblBackgraoundFrame);
 		
 		ButtonListener listener = new ButtonListener();
 		requestsButton.addActionListener(listener);

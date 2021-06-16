@@ -44,7 +44,7 @@ import java.awt.Color;
 public class BackendProfileBossGUI {
 
 	private JFrame frmStartingPage;
-	private JTextField textField;
+	private JTextField textFieldSearch;
 	private JRadioButton connectionsRadio,PublicRadio;
 	private JList<String> connectionsList;
 	private JList<String> suggestedList;
@@ -53,16 +53,15 @@ public class BackendProfileBossGUI {
 	private JPanel panel,picturePanel;
 	private JButton searchButton,helpButton,requestsButton,messagesButton,notifsButton,editAccountButton,
 	postButton,checkprofileButton,sendMessageButton,sendRequestButton,disconnectButton,editCompanyInfoButton;
-	
 	private ArrayList<User> listOfConnections;
 	
-	
+	//This method is the constructor of class  BackendProfileBossfGUI.
 	public BackendProfileBossGUI(User theBoss) throws IOException{
 		boss = (Boss)theBoss;
 		initialize();
 	}
 
-
+	//This method initialize the properties of this gui.
 	private void initialize() throws IOException{
 		frmStartingPage = new JFrame();
 		frmStartingPage.setTitle("Starting Page");
@@ -71,10 +70,8 @@ public class BackendProfileBossGUI {
 		frmStartingPage.getContentPane().setLayout(null);
 		frmStartingPage.setResizable(false);
 		frmStartingPage.setVisible(true);
-		
 		ImageIcon logoimage = new ImageIcon("label_backgrounds/bsn_32px.jpg");
 		frmStartingPage.setIconImage(logoimage.getImage());
-		
 		frmStartingPage.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		
 	    panel = new JPanel();
@@ -88,19 +85,19 @@ public class BackendProfileBossGUI {
 		panel.add(picturePanel);
 		picturePanel.setLayout(null);
 		
-		JLabel lblNewLabel_5 = new JLabel();
+		JLabel lblPhotoProfile = new JLabel();
 		BufferedImage imageicon2;
 		try {
 			imageicon2 = ImageIO.read(new File(boss.getImage()));
 			ImageIcon image2 = new ImageIcon(imageicon2);
 			Image imagerisize2 = image2.getImage().getScaledInstance(181, 152, 170);
-			lblNewLabel_5.setIcon(new ImageIcon(imagerisize2));
+			lblPhotoProfile.setIcon(new ImageIcon(imagerisize2));
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		lblNewLabel_5.setBounds(0, 0, 181, 152);
-		picturePanel.add(lblNewLabel_5);
+		lblPhotoProfile.setBounds(0, 0, 181, 152);
+		picturePanel.add(lblPhotoProfile);
 		
 		Icon search = new ImageIcon("Buttons_backgrounds/search_30px.png");
 		searchButton = new JButton(search);
@@ -109,11 +106,10 @@ public class BackendProfileBossGUI {
 		searchButton.setFocusPainted(false); 
 		searchButton.setOpaque(false);
 		searchButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		
 		searchButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				String text = textField.getText();
+				String text = textFieldSearch.getText();
 				if(!text.isEmpty()) {
 					boolean result;
 					try {
@@ -137,7 +133,6 @@ public class BackendProfileBossGUI {
 			}
 		});
 		panel.add(searchButton);
-		
 		
 		JTextArea textPost = new JTextArea();
 		textPost.setBounds(427, 213, 424, 409);
@@ -177,7 +172,6 @@ public class BackendProfileBossGUI {
 		helpButton.setOpaque(false);
 		helpButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		helpButton.addActionListener(new ActionListener() {
-			
 			public void actionPerformed(ActionEvent e) {
 				try {
 					frmStartingPage.setVisible(false);
@@ -199,7 +193,6 @@ public class BackendProfileBossGUI {
 		requestsButton.setOpaque(false);
 		requestsButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		requestsButton.addActionListener(new ActionListener() {
-			
 			public void actionPerformed(ActionEvent e) {
 				
 				try {
@@ -221,7 +214,6 @@ public class BackendProfileBossGUI {
 	    messagesButton.setOpaque(false);
 	    messagesButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 	    messagesButton.addActionListener(new ActionListener() {
-			
 			public void actionPerformed(ActionEvent e) {
 				
 				try {
@@ -243,7 +235,6 @@ public class BackendProfileBossGUI {
 		notifsButton.setOpaque(false);
 		notifsButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		notifsButton.addActionListener(new ActionListener() {
-			
 			public void actionPerformed(ActionEvent e) {
 				
 				try {
@@ -315,18 +306,18 @@ public class BackendProfileBossGUI {
 		suggestedList.setBackground(new Color(255, 250, 240));
 		panel.add(suggestedList);
 	
-		JLabel lblNewLabel_9 = new JLabel("Connections: ("+boss.getListOfConnections().size()+")");
-		lblNewLabel_9.setBounds(49, 438, 99, 16);
-		panel.add(lblNewLabel_9);
+		JLabel lblConnections = new JLabel("Connections: ("+boss.getListOfConnections().size()+")");
+		lblConnections.setBounds(49, 438, 99, 16);
+		panel.add(lblConnections);
 		
-		JLabel lblNewLabel_9_1 = new JLabel("Suggested Connections");
-		lblNewLabel_9_1.setBounds(221, 438, 150, 16);
-		panel.add(lblNewLabel_9_1);
+		JLabel lblSuggestedConnections = new JLabel("Suggested Connections");
+		lblSuggestedConnections.setBounds(221, 438, 150, 16);
+		panel.add(lblSuggestedConnections);
 		
 		JTextArea writePostArea = new JTextArea();
 		writePostArea.setBounds(427, 651, 424, 49);
 		writePostArea.setLineWrap(true);
-		writePostArea.setWrapStyleWord(true);
+        writePostArea.setWrapStyleWord(true);
 		writePostArea.setBackground(new Color(255, 250, 240));
 		panel.add(writePostArea);
 		
@@ -355,32 +346,27 @@ public class BackendProfileBossGUI {
 				
 				   if(connectionsRadio.isSelected() || PublicRadio.isSelected() ){
 			        
-					//Putting post on boss' and others Users' wall
-					//Prepei na ginei elegxos , an den exei epilexthei kapoio radio button na bgazei minima lathous sto pathma tou post
-						String myText = writePostArea.getText();
-						Post myPost = new Post(boss,myText,radioGroup.getSelection().getActionCommand());
-						boss.addPost(myPost);
-						textPost.setText(""); 
-					    for( Post post : boss.returnAllPosts())
-						{
-							DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-					        String formatDateTime = post.getTimestamp().format(formatter);
-					        textPost.append("-----------------------------------------------------------------------------------------------------"+ "\n\r");
-					        textPost.append(post.getContent()+" | "+post.getCreator().getFirstName()+" | "+post.getPostScope()+" | "+formatDateTime+ "\n\r");
-						}
-					    textPost.setBackground(new Color(255, 250, 240));
-					    textPost.setBounds(427, 213, 424, 409);	
+				    //Putting post on boss' and others Users' wall
+					String myText = writePostArea.getText();
+					Post myPost = new Post(boss,myText,radioGroup.getSelection().getActionCommand());
+					boss.addPost(myPost);
+					textPost.setText(""); 
+				    for( Post post : boss.returnAllPosts())
+					{
+						DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+				        String formatDateTime = post.getTimestamp().format(formatter);
+				        textPost.append("-----------------------------------------------------------------------------------------------------"+ "\n\r");
+				        textPost.append(post.getContent()+" | "+post.getCreator().getFirstName()+" | "+post.getPostScope()+" | "+formatDateTime+ "\n\r");
+					}
 				   }
 				   else
 				   {
 					   String message = "Select Post scope before posting!";
 						JOptionPane.showMessageDialog(new JFrame(), message, "Message",
-						        JOptionPane.ERROR_MESSAGE);
+						         JOptionPane.ERROR_MESSAGE);
 				   }
-
-	
-			}
-		});
+         }
+	    });
 		postButton.setContentAreaFilled(false); 
 		postButton.setFocusPainted(false); 
 		postButton.setOpaque(false);
@@ -415,7 +401,7 @@ public class BackendProfileBossGUI {
 		
 		Icon logout = new ImageIcon("Buttons_backgrounds/exit_50px.png");
 		disconnectButton = new JButton(logout);
-		disconnectButton.setBounds(793, 110, 56, 56);
+		disconnectButton.setBounds(796, 155, 55, 54);
 		disconnectButton.setContentAreaFilled(false); 
 		disconnectButton.setFocusPainted(false); 
 		disconnectButton.setToolTipText("logout");
@@ -450,21 +436,19 @@ public class BackendProfileBossGUI {
 		editCompanyInfoButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		panel.add(editCompanyInfoButton);
 
+		textFieldSearch = new JTextField();
+		textFieldSearch.setBounds(332, 36, 279, 30);
+		textFieldSearch.setBackground(new Color(255, 250, 240));
+		textFieldSearch.setColumns(10);
+		panel.add(textFieldSearch);
 		
-		textField = new JTextField();
-		textField.setBounds(332, 36, 279, 30);
-		textField.setBackground(new Color(255, 250, 240));
-		textField.setColumns(10);
-		panel.add(textField);
-		
-		
-		JLabel lblNewLabel_2 = new JLabel("");
-		lblNewLabel_2.setBounds(0, 0, 887, 991);
+		JLabel lblBackgraoundFrame = new JLabel("");
+		lblBackgraoundFrame.setBounds(0, 0, 887, 991);
 		BufferedImage imagebackground = ImageIO.read(new File("label_backgrounds/background.jpg"));
 		ImageIcon imageb = new ImageIcon(imagebackground);
 		Image imagerisizeb = imageb.getImage().getScaledInstance(887, 991, 140) ;
-		lblNewLabel_2.setIcon(new ImageIcon(imagerisizeb));
-		panel.add(lblNewLabel_2);
+		lblBackgraoundFrame.setIcon(new ImageIcon(imagerisizeb));
+		panel.add(lblBackgraoundFrame);
 		
 		ButtonListener listener = new ButtonListener();
 		checkprofileButton.addActionListener(listener);

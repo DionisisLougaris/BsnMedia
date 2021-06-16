@@ -44,13 +44,14 @@ public class EditCompanyGUI {
 	private JLabel lblCompanyInfo;
 	private JButton btnSaveAll;
 	private JButton btnViewChanges;
-	
 	private Boss boss;
 	
+	//This method is the constructor of class EditCompanyGUI.
 	public EditCompanyGUI(Boss theBoss) {
 		initialize(theBoss);
 	}
-
+    
+	//This method initialize the properties of this gui.
 	private void initialize(Boss theBoss) {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 792, 602);
@@ -61,7 +62,6 @@ public class EditCompanyGUI {
 		frame.setVisible(true);
 		frame.setResizable(false);
 		frame.setTitle("Edit Company");
-		
 		ImageIcon logoimage = new ImageIcon("label_backgrounds/bsn_32px.jpg");
 		frame.setIconImage(logoimage.getImage());
 		
@@ -91,6 +91,8 @@ public class EditCompanyGUI {
 			    	if (extension.equalsIgnoreCase("png") || extension.equalsIgnoreCase("jpg")) {
 			    		boss.getMyAccount().getMyCompany().setImage(path);
 				    
+			    		frame.dispose();
+						 new EditCompanyGUI(boss);
 					String message = "Successful change! Go check the Changes!";
 					JOptionPane.showMessageDialog(new JFrame(), message, "Message",
 					        JOptionPane.INFORMATION_MESSAGE);
@@ -137,15 +139,15 @@ public class EditCompanyGUI {
 		frame.getContentPane().add(tfCompanyEmail);
 		tfCompanyEmail.setColumns(10);
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(190, 389, 312, 88);
-		frame.getContentPane().add(panel_1);
-		panel_1.setLayout(null);
+		JPanel panelCompanyInfo = new JPanel();
+		panelCompanyInfo.setBounds(190, 389, 312, 88);
+		frame.getContentPane().add(panelCompanyInfo);
+		panelCompanyInfo.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBorder(new LineBorder(Color.WHITE, 2));
 		scrollPane.setBounds(0, 0, 312, 88);
-		panel_1.add(scrollPane);
+		panelCompanyInfo.add(scrollPane);
 		
 		tfCompanyInfo = new JTextArea(boss.getMyAccount().getMyCompany().getInfo());
 		tfCompanyInfo.setBorder(new LineBorder(Color.WHITE, 2));
@@ -222,50 +224,50 @@ public class EditCompanyGUI {
 		btnViewChanges.setBounds(393, 503, 124, 25);
 		frame.getContentPane().add(btnViewChanges);
 		
-		JSeparator separator = new JSeparator();
-		separator.setForeground(Color.WHITE);
-		separator.setBackground(Color.WHITE);
-		separator.setBounds(190, 257, 166, 2);
-		frame.getContentPane().add(separator);
+		JSeparator separatorCompanyName = new JSeparator();
+		separatorCompanyName.setForeground(Color.WHITE);
+		separatorCompanyName.setBackground(Color.WHITE);
+		separatorCompanyName.setBounds(190, 257, 166, 2);
+		frame.getContentPane().add(separatorCompanyName);
 		
-		JSeparator separator_1 = new JSeparator();
-		separator_1.setForeground(Color.WHITE);
-		separator_1.setBounds(190, 294, 166, 16);
-		frame.getContentPane().add(separator_1);
+		JSeparator separatorCompanyTelephone = new JSeparator();
+		separatorCompanyTelephone.setForeground(Color.WHITE);
+		separatorCompanyTelephone.setBounds(190, 294, 166, 16);
+		frame.getContentPane().add(separatorCompanyTelephone);
 		
-		JSeparator separator_2 = new JSeparator();
-		separator_2.setForeground(Color.WHITE);
-		separator_2.setBounds(190, 329, 166, 2);
-		frame.getContentPane().add(separator_2);
+		JSeparator separatorCompanyAddress = new JSeparator();
+		separatorCompanyAddress.setForeground(Color.WHITE);
+		separatorCompanyAddress.setBounds(190, 329, 166, 2);
+		frame.getContentPane().add(separatorCompanyAddress);
 		
-		JSeparator separator_3 = new JSeparator();
-		separator_3.setForeground(Color.WHITE);
-		separator_3.setBounds(190, 361, 166, 2);
-		frame.getContentPane().add(separator_3);
+		JSeparator separatorCompanyEmail = new JSeparator();
+		separatorCompanyEmail.setForeground(Color.WHITE);
+		separatorCompanyEmail.setBounds(190, 361, 166, 2);
+		frame.getContentPane().add(separatorCompanyEmail);
 		
-		JSeparator separator_4 = new JSeparator();
-		separator_4.setForeground(Color.WHITE);
-		separator_4.setBounds(0, 488, 776, 17);
-		frame.getContentPane().add(separator_4);
+		JSeparator separatorChangesButton = new JSeparator();
+		separatorChangesButton.setForeground(Color.WHITE);
+		separatorChangesButton.setBounds(0, 488, 776, 17);
+		frame.getContentPane().add(separatorChangesButton);
 		
-		JPanel panel = new JPanel();
-		panel.setBounds(31, 11, 610, 211);
-		frame.getContentPane().add(panel);
-		panel.setLayout(null);
+		JPanel panelCompanyPhoto = new JPanel();
+		panelCompanyPhoto.setBounds(31, 11, 610, 211);
+		frame.getContentPane().add(panelCompanyPhoto);
+		panelCompanyPhoto.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel();
+		JLabel lblPhotoCompany = new JLabel();
 		BufferedImage imageicon;
 		try {
 			imageicon = ImageIO.read(new File(theBoss.getMyAccount().getMyCompany().getImage()));
 			ImageIcon imageBackground = new ImageIcon(imageicon);
 			Image imagerisize = imageBackground.getImage().getScaledInstance(610, 211, 140) ;
-			lblNewLabel.setIcon(new ImageIcon(imagerisize));
+			lblPhotoCompany.setIcon(new ImageIcon(imagerisize));
 		} catch (IOException e2) {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
-		lblNewLabel.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-		lblNewLabel.setBounds(0, 0, 610, 211);
-		panel.add(lblNewLabel);
+		lblPhotoCompany.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+		lblPhotoCompany.setBounds(0, 0, 610, 211);
+		panelCompanyPhoto.add(lblPhotoCompany);
 	}
 }

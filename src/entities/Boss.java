@@ -13,12 +13,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-
-
 public class Boss extends User implements Serializable{
 
-	
-	//Constructor for Boss class
+    //Constructor for Boss class
 	public Boss(String firstName, String lastName, String telephone, String address, String gender, String birthday,
 			String companyPost, Account myAccount) {
 		super(firstName, lastName, telephone, address, gender, birthday, companyPost, myAccount);
@@ -32,12 +29,12 @@ public class Boss extends User implements Serializable{
 			myAccount.getMyCompany().setVerificationCode(potentialVerificationCode);
 			
 			String message = "Password updated successfully!";
-			JOptionPane.showMessageDialog(new JFrame(), message, "Message",
-			        JOptionPane.INFORMATION_MESSAGE);
-		}else {
+			JOptionPane.showMessageDialog(new JFrame(), message, "Message",JOptionPane.INFORMATION_MESSAGE);
+		}
+		else 
+		{
 			String message = "The password is weak or the same as the previous one";
-			JOptionPane.showMessageDialog(new JFrame(), message, "Message",
-			        JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(new JFrame(), message, "Message", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	
@@ -104,12 +101,10 @@ public class Boss extends User implements Serializable{
 		
 		if (!emptyFields) {
 			String message = "All your business public information has been updated!"; 
-			JOptionPane.showMessageDialog(new JFrame(), message, "Message",
-			        JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(new JFrame(), message, "Message", JOptionPane.INFORMATION_MESSAGE);
 		}else {
 			String message = "All information that was not empty was updated"; 
-			JOptionPane.showMessageDialog(new JFrame(), message, "Message",
-			        JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(new JFrame(), message, "Message",  JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
 	
@@ -117,25 +112,27 @@ public class Boss extends User implements Serializable{
 	public TreeSet<Post> returnAllPosts() {
 		// TODO Auto-generated method stub
 		
-		TreeSet<Post> postForBackEndProfile = new TreeSet<Post>(myPostComp); //List of Posts that will appear in the User's Back-End Profile
+		TreeSet<Post> postForBackEndProfile = new TreeSet<Post>(myPostComp); //List of Posts that will appear in the User's Back-End Profile.
 		
 		for(Post hisPost: listOfPosts)
 		{
 			if(hisPost.getPostScope().equals("Connections"))
-				postForBackEndProfile.add(hisPost); //Initially, his own are added
+				postForBackEndProfile.add(hisPost); //Initially, his own are added.
 		}
-		for(User connectedUser: listOfConnections) {
+		for(User connectedUser: listOfConnections)
+		{
 			TreeSet<Post> friendsPosts = connectedUser.getListOfPosts();
 			for(Post friendsPost: friendsPosts) 
 				if (friendsPost.getPostScope().equalsIgnoreCase("Connections")) 
-					postForBackEndProfile.add(friendsPost); //The Posts of connected users with whom he has the opportunity to see
+					postForBackEndProfile.add(friendsPost); //The Posts of connected users with whom he has the opportunity to see.
 		}
 		
-		for(User otherCompanyMember: this.myAccount.getMyCompany().getCompanyMembers()) {
+		for(User otherCompanyMember: this.myAccount.getMyCompany().getCompanyMembers())
+		{
 			TreeSet<Post> otherUsersPosts = otherCompanyMember.getListOfPosts();
 			for(Post otherUserPost: otherUsersPosts)
 				if (otherUserPost.getPostScope().equalsIgnoreCase("public"))
-					postForBackEndProfile.add(otherUserPost); //Posts from members of the company that have a universal scope
+					postForBackEndProfile.add(otherUserPost); //Posts from members of the company that have a universal scope.
 		}
 		
 		return postForBackEndProfile;
@@ -165,6 +162,5 @@ public class Boss extends User implements Serializable{
 		
 		return null;
 	}
-	
 	
 }
