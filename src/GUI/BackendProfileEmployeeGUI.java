@@ -141,7 +141,7 @@ public class BackendProfileEmployeeGUI {
 		panel.add(companyPostLabel);
 		
 		JLabel specializationLabel = new JLabel(employee.getCompanyPost());
-		specializationLabel.setBounds(116, 285, 112, 16);
+		specializationLabel.setBounds(116, 285, 283, 16);
 		panel.add(specializationLabel);
 		
 		emailLabel = new JLabel(employee.getMyAccount().getEmail());
@@ -552,7 +552,6 @@ public class BackendProfileEmployeeGUI {
 		messagesButton.addActionListener(listener);
 		notifsButton.addActionListener(listener);
 		editAccountButton.addActionListener(listener);
-		disconnectButton.addActionListener(listener);
 		checkprofileButton.addActionListener(listener);
 		sendMessageButton.addActionListener(listener);
 		sendRequestButton.addActionListener(listener);
