@@ -79,7 +79,7 @@ public class CreateProjectGUI {
 		
 		JLabel lblProjectDescription= new JLabel("Project description :");
 		lblProjectDescription.setForeground(new Color(255, 255, 255));
-		lblProjectDescription.setBounds(48, 124, 108, 16);
+		lblProjectDescription.setBounds(35, 124, 121, 16);
 		frame.getContentPane().add(lblProjectDescription);
 		
 		JTextArea textProjectDescription = new JTextArea();
@@ -114,36 +114,36 @@ public class CreateProjectGUI {
 		frame.getContentPane().add(lblGroupName);
 		
 		feasibleForSelection = pchief.getMyAccount().getMyCompany().returnEmployees(); //All Employees
-		JList<String> addUsersGroupList = new JList<String>();
-		addUsersGroupList.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-		addUsersGroupList.setBounds(48, 399, 174, 157);
+		JList<String> selectEmployeesList = new JList<String>();
+		selectEmployeesList.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+		selectEmployeesList.setBounds(48, 399, 174, 157);
 		DefaultListModel<String> addUserGroupmodel = new DefaultListModel<String>();
 		for (Employee employee: feasibleForSelection) {
 			if (employee.getGroups().size()<=2) {
 				addUserGroupmodel.addElement(employee.getFirstName()+" "+employee.getLastName()+" | "+employee.getMyAccount().getUsername());
 			}
 		}
-		addUsersGroupList.setModel(addUserGroupmodel);
-		frame.getContentPane().add(addUsersGroupList);
-		JScrollPane scrollPaneaddUser = new JScrollPane(addUsersGroupList);
+		selectEmployeesList.setModel(addUserGroupmodel);
+		frame.getContentPane().add(selectEmployeesList);
+		JScrollPane scrollPaneaddUser = new JScrollPane(selectEmployeesList);
 		scrollPaneaddUser.setBounds(48, 403, 174, 153);
 		scrollPaneaddUser.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		frame.getContentPane().add(scrollPaneaddUser);
 		
-		JLabel lblNewLabel_4 = new JLabel("Select employees:");
-		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblNewLabel_4.setForeground(new Color(255, 255, 255));
-		lblNewLabel_4.setBounds(71, 370, 136, 16);
-		frame.getContentPane().add(lblNewLabel_4);
+		JLabel selectLabel = new JLabel("Select employees:");
+		selectLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		selectLabel.setForeground(new Color(255, 255, 255));
+		selectLabel.setBounds(71, 370, 136, 16);
+		frame.getContentPane().add(selectLabel);
 		
 		
-		JList<String> selectedEmployeesList = new JList<String>();
+		JList<String> membersList = new JList<String>();
 		DefaultListModel<String> removeUserGroupmodel = new DefaultListModel<String>();
-		selectedEmployeesList.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-		selectedEmployeesList.setBounds(298, 399, 174, 157);
-		selectedEmployeesList.setModel(removeUserGroupmodel);
-		frame.getContentPane().add(selectedEmployeesList);
-		JScrollPane scrollPaneremoveUser = new JScrollPane(selectedEmployeesList);
+		membersList.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+		membersList.setBounds(298, 399, 174, 157);
+		membersList.setModel(removeUserGroupmodel);
+		frame.getContentPane().add(membersList);
+		JScrollPane scrollPaneremoveUser = new JScrollPane(membersList);
 		scrollPaneremoveUser.setBounds(298, 403, 174, 153);
 		scrollPaneremoveUser.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		frame.getContentPane().add(scrollPaneremoveUser);
@@ -165,8 +165,8 @@ public class CreateProjectGUI {
 		btnaddUserGroup.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				String selectedEmployeeString = addUsersGroupList.getSelectedValue();
-				int index = addUsersGroupList.getSelectedIndex(); //We hold the position of the one chosen
+				String selectedEmployeeString = selectEmployeesList.getSelectedValue();
+				int index = selectEmployeesList.getSelectedIndex(); //We hold the position of the one chosen
 
 				Employee selectedEmployee = null;
 				
@@ -202,9 +202,9 @@ public class CreateProjectGUI {
 		btnremoveUserGroup.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				String selectedEmployeeString = selectedEmployeesList.getSelectedValue();
+				String selectedEmployeeString = membersList.getSelectedValue();
 				Employee selectedEmployeeToRemove = null;
-				int index = selectedEmployeesList.getSelectedIndex();
+				int index = membersList.getSelectedIndex();
 				
 				for (Employee theEmployee: selectedMembers ) {
 					String fullName = theEmployee.getFirstName()+" "+theEmployee.getLastName()+" | "+theEmployee.getMyAccount().getUsername();
@@ -310,17 +310,17 @@ public class CreateProjectGUI {
 		lblNewLabel.setBounds(10, 11, 60, 50);
 		panel.add(lblNewLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("Create a Group");
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.ITALIC, 16));
-		lblNewLabel_1.setBounds(115, 11, 255, 22);
-		panel.add(lblNewLabel_1);
+		JLabel label1 = new JLabel("Create a Group");
+		label1.setHorizontalAlignment(SwingConstants.CENTER);
+		label1.setFont(new Font("Tahoma", Font.ITALIC, 16));
+		label1.setBounds(115, 11, 255, 22);
+		panel.add(label1);
 		
-		JLabel lblNewLabel_1_1 = new JLabel("for better organization!");
-		lblNewLabel_1_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.ITALIC, 16));
-		lblNewLabel_1_1.setBounds(115, 29, 255, 22);
-		panel.add(lblNewLabel_1_1);
+		JLabel label2 = new JLabel("for better organization!");
+		label2.setHorizontalAlignment(SwingConstants.CENTER);
+		label2.setFont(new Font("Tahoma", Font.ITALIC, 16));
+		label2.setBounds(115, 29, 255, 22);
+		panel.add(label2);
 		
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setForeground(new Color(255, 255, 255));

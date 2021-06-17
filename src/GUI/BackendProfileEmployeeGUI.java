@@ -320,12 +320,12 @@ public class BackendProfileEmployeeGUI {
 		PublicRadio.setBackground(Color.WHITE);
 		panel.add(PublicRadio);
 		
-		JRadioButton rdbtnGroup = new JRadioButton("Group");
-		rdbtnGroup.setBounds(639, 746, 78, 25);
-		rdbtnGroup.setActionCommand("Group");
-		rdbtnGroup.setOpaque(false);
-		rdbtnGroup.setBackground(Color.WHITE);
-		panel.add(rdbtnGroup);
+		JRadioButton GroupRadio = new JRadioButton("Group");
+		GroupRadio.setBounds(639, 746, 78, 25);
+		GroupRadio.setActionCommand("Group");
+		GroupRadio.setOpaque(false);
+		GroupRadio.setBackground(Color.WHITE);
+		panel.add(GroupRadio);
 		
 		postButton = new JButton("Post");
 		postButton.setBounds(754, 750, 97, 25);
@@ -351,7 +351,7 @@ public class BackendProfileEmployeeGUI {
 						textAreaPost.append(post.getContent()+" | "+post.getCreator().getFirstName()+" | "+post.getPostScope()+" | "+formatDateTime+ "\n\r");
 					}
 				 }
-				 else if(rdbtnGroup.isSelected())
+				 else if(GroupRadio.isSelected())
 				 {
 				 	String myText = writePostArea.getText();
 					String groupToPost=textPostGroup.getText();
@@ -403,7 +403,7 @@ public class BackendProfileEmployeeGUI {
 		radioGroup = new ButtonGroup();
 	    radioGroup.add(connectionsRadio);
 		radioGroup.add(PublicRadio);
-		radioGroup.add(rdbtnGroup);
+		radioGroup.add(GroupRadio);
 		
 		textPostGroup = new JTextField();
 		textPostGroup.setBounds(639, 780, 64, 25);

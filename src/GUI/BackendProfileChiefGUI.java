@@ -45,7 +45,7 @@ public class BackendProfileChiefGUI {
 	private static Chief chief;
 	private JPanel panel, picturePanel;
 	private JLabel lblPhotoProfile;
-	private JButton searchButton, helpButton, requestsButton, messagesButton, notifsButton, editAccountButton,createProjectButton, 
+	private JButton searchButton, helpButton, requestsButton, messagesButton, notifsButton, editAccountButton, createProjectButton, 
 	postButton, checkprofileButton, sendMessageButton, sendRequestButton, disconnectButton;
 	private JLabel emailLabel;
 	private JRadioButton connectionsRadio, PublicRadio;
@@ -269,13 +269,13 @@ public class BackendProfileChiefGUI {
 		panel.add(scrollPaneSuggestedConnections);
 		
 		
-		JLabel lblNewLabel_9 = new JLabel("Connections (" + chief.getListOfConnections().size() + ")");
-		lblNewLabel_9.setBounds(48, 565, 99, 16);
-		panel.add(lblNewLabel_9);
+		JLabel connectionsLabel = new JLabel("Connections (" + chief.getListOfConnections().size() + ")");
+		connectionsLabel.setBounds(48, 565, 99, 16);
+		panel.add(connectionsLabel);
 		
-		JLabel lblNewLabel_9_1 = new JLabel("Suggested Connections");
-		lblNewLabel_9_1.setBounds(215, 565, 139, 16);
-		panel.add(lblNewLabel_9_1);
+		JLabel suggestedConnectionsLabel = new JLabel("Suggested Connections");
+		suggestedConnectionsLabel.setBounds(215, 565, 139, 16);
+		panel.add(suggestedConnectionsLabel);
 		
 		writePostArea = new JTextArea();
 		writePostArea.setBounds(427, 688, 424, 49);
@@ -298,12 +298,12 @@ public class BackendProfileChiefGUI {
 		PublicRadio.setBackground(Color.WHITE);
 		panel.add(PublicRadio);
 		
-		JRadioButton rdbtnGroup = new JRadioButton("Group");
-		rdbtnGroup.setBounds(639, 746, 78, 25);
-		rdbtnGroup.setActionCommand("Group");
-		rdbtnGroup.setOpaque(false);
-		rdbtnGroup.setBackground(Color.WHITE);
-		panel.add(rdbtnGroup);
+		JRadioButton GroupRadio = new JRadioButton("Group");
+		GroupRadio.setBounds(639, 746, 78, 25);
+		GroupRadio.setActionCommand("Group");
+		GroupRadio.setOpaque(false);
+		GroupRadio.setBackground(Color.WHITE);
+		panel.add(GroupRadio);
 		
 		textAreaPost = new JTextArea();
 		textAreaPost.setBounds(427, 237, 424, 409);
@@ -357,7 +357,7 @@ public class BackendProfileChiefGUI {
 							}
 							
 					   }
-				 else if(rdbtnGroup.isSelected())
+				 else if(GroupRadio.isSelected())
 				 {
 					 	String myText = writePostArea.getText();
 						String groupToPost=textField.getText();
@@ -417,7 +417,7 @@ public class BackendProfileChiefGUI {
 		radioGroup = new ButtonGroup();
 	    radioGroup.add(connectionsRadio);
 		radioGroup.add(PublicRadio);
-		radioGroup.add(rdbtnGroup);
+		radioGroup.add(GroupRadio);
 		
 		sendMessageButton = new JButton("Send Message");
 		sendMessageButton.setBounds(43, 797, 116, 25);
