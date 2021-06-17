@@ -22,11 +22,7 @@ public class Post implements Serializable{
 	}
 	
 	
-	
-	
-	/*Μεθοδοι που αφορούσαν την κλάση Post δεν εγιναν */
-	
-	
+   /*The methods addLike , removelike and sharetoconversation removed due to panel issues  */ 
 	
 	//*************** Getters and Setters *************
 	public User getCreator() {

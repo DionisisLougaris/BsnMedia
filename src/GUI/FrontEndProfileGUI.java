@@ -65,7 +65,7 @@ public class FrontEndProfileGUI {
 		frame.getContentPane().setLayout(null);
 		frame.setVisible(true);
 		frame.setResizable(false);
-		frame.setTitle(aUser.getMyAccount().getUsername());
+		frame.setTitle(aUser.getFirstName() + " " + aUser.getLastName());
 		//This is needed so the main frames cannot close from the x and only for the login screen so everything is saved!
 		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		

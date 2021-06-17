@@ -66,7 +66,7 @@ public class BackendProfileBossGUI {
 	//This method initialize the properties of this gui.
 	private void initialize() throws IOException{
 		frmStartingPage = new JFrame();
-		frmStartingPage.setTitle("Starting Page");
+		frmStartingPage.setTitle(boss.getMyAccount().getUsername());
 		frmStartingPage.setBounds(100, 100, 893, 1020);
 		frmStartingPage.setLocation(500, 0);
 		frmStartingPage.getContentPane().setLayout(null);
@@ -172,7 +172,7 @@ public class BackendProfileBossGUI {
 		helpButton = new JButton(help);
 		helpButton.setBounds(814, 922, 63, 58);
 		helpButton.setContentAreaFilled(false);
-		helpButton.setToolTipText("Do you want help? Click me.");
+		helpButton.setToolTipText("BSN support");
 		helpButton.setFocusPainted(false); 
 		helpButton.setOpaque(false);
 		helpButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -192,7 +192,7 @@ public class BackendProfileBossGUI {
 		Icon friends = new ImageIcon("Buttons_backgrounds/friends_30px.png");
 		requestsButton = new JButton(friends);
 		requestsButton.setBounds(714, 27, 37, 30);
-		requestsButton.setToolTipText("Watch your connection requests");
+		requestsButton.setToolTipText("Connection requests");
 		requestsButton.setContentAreaFilled(false); 
 		requestsButton.setFocusPainted(false); 
 		requestsButton.setOpaque(false);
@@ -213,7 +213,7 @@ public class BackendProfileBossGUI {
 		Icon messages = new ImageIcon("Buttons_backgrounds/Messages_30px.png");
 	    messagesButton = new JButton(messages);
 	    messagesButton.setBounds(763, 27, 37, 30);
-	    messagesButton.setToolTipText("See your new messages");
+	    messagesButton.setToolTipText("Conversations");
 	    messagesButton.setContentAreaFilled(false); 
 	    messagesButton.setFocusPainted(false); 
 	    messagesButton.setOpaque(false);
@@ -234,7 +234,7 @@ public class BackendProfileBossGUI {
 		Icon bell = new ImageIcon("Buttons_backgrounds/bell_30px.png");
 		notifsButton = new JButton(bell);
 		notifsButton.setBounds(814, 27, 37, 30);
-		notifsButton.setToolTipText("Watch your notofications");
+		notifsButton.setToolTipText("Notifications");
 		notifsButton.setContentAreaFilled(false); 
 		notifsButton.setFocusPainted(false); 
 		notifsButton.setOpaque(false);
