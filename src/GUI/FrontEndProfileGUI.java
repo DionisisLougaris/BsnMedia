@@ -282,7 +282,7 @@ public class FrontEndProfileGUI {
 					
 					public void actionPerformed(ActionEvent e) {
 						try {
-							new GroupProfileGUI(profileUser, profileUser.getGroups().get(0));
+							new GroupProfileGUI(loggedUser, profileUser.getGroups().get(0));
 							frame.dispose();
 						} catch (IOException e1) {
 							// TODO Auto-generated catch block
@@ -307,7 +307,7 @@ public class FrontEndProfileGUI {
 					
 					public void actionPerformed(ActionEvent e) {
 						try {
-							new GroupProfileGUI(profileUser, profileUser.getGroups().get(1));
+							new GroupProfileGUI(loggedUser, profileUser.getGroups().get(1));
 							frame.dispose();
 						} catch (IOException e1) {
 							// TODO Auto-generated catch block
@@ -332,7 +332,7 @@ public class FrontEndProfileGUI {
 					
 					public void actionPerformed(ActionEvent e) {
 						try {
-							new GroupProfileGUI(profileUser, profileUser.getGroups().get(2));
+							new GroupProfileGUI(loggedUser, profileUser.getGroups().get(2));
 							frame.dispose();
 						} catch (IOException e1) {
 							// TODO Auto-generated catch block
