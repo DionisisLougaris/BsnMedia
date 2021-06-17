@@ -225,10 +225,10 @@ public class CompanyProfileGUI {
 	    scrollPaneEmployee.setBounds(461, 609, 133, 186);
 	    frame.getContentPane().add(scrollPaneEmployee);
 	    
-	    JLabel chiefsLabel = new JLabel("Employees("+company.returnEmployees().size()+")");
-	    chiefsLabel.setHorizontalAlignment(SwingConstants.CENTER);
-	    chiefsLabel.setBounds(461, 580, 130, 16);
-	    frame.getContentPane().add(chiefsLabel);
+	    JLabel employeesLabel = new JLabel("Employees("+company.returnEmployees().size()+")");
+	    employeesLabel.setHorizontalAlignment(SwingConstants.CENTER);
+	    employeesLabel.setBounds(461, 580, 130, 16);
+	    frame.getContentPane().add(employeesLabel);
 	    
 	    //Adding chiefs to list on company's profile
 	    JList<String> allChiefsList = new JList<String>();
@@ -245,10 +245,10 @@ public class CompanyProfileGUI {
 	    scrollPaneChief.setBounds(660, 612, 133, 183);
 	    frame.getContentPane().add(scrollPaneChief);
 	    
-	    JLabel EmployeesLabel = new JLabel("Chiefs ("+company.returnChiefs().size()+")");
-	    EmployeesLabel.setHorizontalAlignment(SwingConstants.CENTER);
-	    EmployeesLabel.setBounds(660, 580, 133, 16);
-	    frame.getContentPane().add(EmployeesLabel);
+	    JLabel chiefsLabel = new JLabel("Chiefs ("+company.returnChiefs().size()+")");
+	    chiefsLabel.setHorizontalAlignment(SwingConstants.CENTER);
+	    chiefsLabel.setBounds(660, 580, 133, 16);
+	    frame.getContentPane().add(chiefsLabel);
 
 	    JLabel companyEmailLabel = new JLabel();
 	    companyEmailLabel.setForeground(Color.RED);
@@ -359,11 +359,11 @@ public class CompanyProfileGUI {
 	    goToBossProfButton.setBounds(187, 611, 117, 22);
 	    frame.getContentPane().add(goToBossProfButton);    
 	    
-	    JLabel lblNewLabel = new JLabel("Contact Us!");
-	    lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-	    lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 17));
-	    lblNewLabel.setBounds(70, 668, 187, 25);
-	    frame.getContentPane().add(lblNewLabel);
+	    JLabel contactUsLabel = new JLabel("Contact Us!");
+	    contactUsLabel.setHorizontalAlignment(SwingConstants.CENTER);
+	    contactUsLabel.setFont(new Font("Tahoma", Font.PLAIN, 17));
+	    contactUsLabel.setBounds(70, 668, 187, 25);
+	    frame.getContentPane().add(contactUsLabel);
 	    
 	    JSeparator separator = new JSeparator();
 	    separator.setBackground(Color.RED);

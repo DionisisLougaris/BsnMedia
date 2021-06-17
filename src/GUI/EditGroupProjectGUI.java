@@ -140,17 +140,17 @@ public class EditGroupProjectGUI {
 		lblCurrentsituation.setBounds(18, 212, 147, 16);
 		frame.getContentPane().add(lblCurrentsituation);
 		
-		JList<String> EmployeesToAdd = new JList<String>();
-		EmployeesToAdd.setBounds(58, 280, 153, 164);
-		EmployeesToAdd.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+		JList<String> addUsersList = new JList<String>();
+		addUsersList.setBounds(58, 280, 153, 164);
+		addUsersList.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		DefaultListModel<String> addUserGroupmodel = new DefaultListModel<String>();
 		for (Employee employee: myGroup.getSupervisor().getMyAccount().getMyCompany().returnEmployees()) {
 			if (employee.getGroups().size()<=2 && !myGroup.isMember(employee)) {
 				addUserGroupmodel.addElement(employee.getFirstName()+" "+employee.getLastName()+" | "+employee.getMyAccount().getUsername());
 			}
 		}
-		EmployeesToAdd.setModel(addUserGroupmodel);
-		frame.getContentPane().add(EmployeesToAdd);
+		addUsersList.setModel(addUserGroupmodel);
+		frame.getContentPane().add(addUsersList);
 		
 		JList<String> groupMembersList = new JList<String>();
 		groupMembersList.setBounds(390, 280, 153, 164);
@@ -185,8 +185,8 @@ public class EditGroupProjectGUI {
 		btnaddGroup.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				String selectedEmployeeString = EmployeesToAdd.getSelectedValue();
-				int index = EmployeesToAdd.getSelectedIndex();
+				String selectedEmployeeString = addUsersList.getSelectedValue();
+				int index = addUsersList.getSelectedIndex();
 
 				Employee selectedEmployee = null;
 				
@@ -216,15 +216,15 @@ public class EditGroupProjectGUI {
 		btnaddGroup.setBounds(86, 450, 95, 25);
 		frame.getContentPane().add(btnaddGroup);
 		
-		JButton btnremoveUser = new JButton("Remove");
-		btnremoveUser.setForeground(Color.WHITE);
-		btnremoveUser.setBorder(new LineBorder(Color.WHITE, 3));
-		btnremoveUser.setContentAreaFilled(false); 
-		btnremoveUser.setFocusPainted(false); 
-		btnremoveUser.setOpaque(false);
-		btnremoveUser.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		btnremoveUser.setBounds(422, 450, 95, 25);
-		btnremoveUser.addActionListener(new ActionListener() {
+		JButton btnRemoveUser = new JButton("Remove");
+		btnRemoveUser.setForeground(Color.WHITE);
+		btnRemoveUser.setBorder(new LineBorder(Color.WHITE, 3));
+		btnRemoveUser.setContentAreaFilled(false); 
+		btnRemoveUser.setFocusPainted(false); 
+		btnRemoveUser.setOpaque(false);
+		btnRemoveUser.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		btnRemoveUser.setBounds(422, 450, 95, 25);
+		btnRemoveUser.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				String selectedEmployeeString = groupMembersList.getSelectedValue();
@@ -254,7 +254,7 @@ public class EditGroupProjectGUI {
 				}	
 			}
 		});
-		frame.getContentPane().add(btnremoveUser);
+		frame.getContentPane().add(btnRemoveUser);
 		
 		JButton btnSaveAll = new JButton("Save all");
 		btnSaveAll.setBorder(new LineBorder(Color.WHITE, 3));
@@ -307,15 +307,15 @@ public class EditGroupProjectGUI {
 		});
 		frame.getContentPane().add(btnSaveAll);
 		
-		JButton btnViwChanges = new JButton("View changes");
-		btnViwChanges.setBorder(new LineBorder(Color.WHITE, 3));
-		btnViwChanges.setForeground(Color.WHITE);
-		btnViwChanges.setContentAreaFilled(false); 
-		btnViwChanges.setFocusPainted(false); 
-		btnViwChanges.setOpaque(false);
-		btnViwChanges.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		btnViwChanges.setBounds(251, 549, 116, 25);
-		btnViwChanges.addActionListener(new ActionListener() {
+		JButton btnViewChanges = new JButton("View changes");
+		btnViewChanges.setBorder(new LineBorder(Color.WHITE, 3));
+		btnViewChanges.setForeground(Color.WHITE);
+		btnViewChanges.setContentAreaFilled(false); 
+		btnViewChanges.setFocusPainted(false); 
+		btnViewChanges.setOpaque(false);
+		btnViewChanges.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		btnViewChanges.setBounds(251, 549, 116, 25);
+		btnViewChanges.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				try {
@@ -328,7 +328,7 @@ public class EditGroupProjectGUI {
 				}
 			}	
 		});
-		frame.getContentPane().add(btnViwChanges);
+		frame.getContentPane().add(btnViewChanges);
 		
 		JSeparator separatorProjectName = new JSeparator();
 		separatorProjectName.setForeground(Color.WHITE);
