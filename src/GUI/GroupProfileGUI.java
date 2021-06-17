@@ -85,17 +85,17 @@ public class GroupProfileGUI {
 		groupNameLabel.setBounds(38, 122, 825, 54);
 		frame.getContentPane().add(groupNameLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("Project in Progress:");
-		lblNewLabel_1.setBounds(38, 220, 125, 16);
-		frame.getContentPane().add(lblNewLabel_1);
+		JLabel projectinProgressLabel = new JLabel("Project in Progress:");
+		projectinProgressLabel.setBounds(38, 220, 125, 16);
+		frame.getContentPane().add(projectinProgressLabel);
 		
-		JLabel lblNewLabel_2 = new JLabel("Project Status:");
-		lblNewLabel_2.setBounds(38, 249, 97, 16);
-		frame.getContentPane().add(lblNewLabel_2);
+		JLabel projectStatusLabel = new JLabel("Project Status:");
+		projectStatusLabel.setBounds(38, 249, 97, 16);
+		frame.getContentPane().add(projectStatusLabel);
 		
-		JLabel lblNewLabel_3 = new JLabel("Project Description:");
-		lblNewLabel_3.setBounds(38, 278, 117, 16);
-		frame.getContentPane().add(lblNewLabel_3);
+		JLabel projectDescriptionLabel = new JLabel("Project Description:");
+		projectDescriptionLabel.setBounds(38, 278, 117, 16);
+		frame.getContentPane().add(projectDescriptionLabel);
 		
 		JTextArea projectDesc = new JTextArea(myGroup.getMyProject().getDescription());
 		projectDesc.setBackground(new Color(255, 250, 240));
@@ -105,9 +105,9 @@ public class GroupProfileGUI {
 		projectDesc.setBounds(189, 279, 390, 46);
 		frame.getContentPane().add(projectDesc);
 		
-		JLabel lblNewLabel_4 = new JLabel("Group Evaluation: (/100)");
-		lblNewLabel_4.setBounds(38, 350, 141, 16);
-		frame.getContentPane().add(lblNewLabel_4);
+		JLabel groupEvaluationLabel = new JLabel("Group Evaluation: (/100)");
+		groupEvaluationLabel.setBounds(38, 350, 141, 16);
+		frame.getContentPane().add(groupEvaluationLabel);
 		
 		JSlider slider = new JSlider();
 		slider.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -116,18 +116,18 @@ public class GroupProfileGUI {
 		slider.setBounds(199, 340, 200, 26);
 		frame.getContentPane().add(slider);
 		
-		JLabel lblNewLabel_7 = new JLabel("Group rating: ");
-		lblNewLabel_7.setBounds(550, 350, 86, 16);
-		frame.getContentPane().add(lblNewLabel_7);
+		JLabel groupRatingLabel = new JLabel("Group rating: ");
+		groupRatingLabel.setBounds(550, 350, 86, 16);
+		frame.getContentPane().add(groupRatingLabel);
 		
-		JLabel lblNewLabel_8 = new JLabel();
+		JLabel notratedLabel = new JLabel();
 		if (myGroup.getRating() == -1) {
-			lblNewLabel_8.setText("Not rated yet!");
+			notratedLabel.setText("Not rated yet!");
 		}else {
-			lblNewLabel_8.setText(String.valueOf(myGroup.getRating()));
+			notratedLabel.setText(String.valueOf(myGroup.getRating()));
 		}
-		lblNewLabel_8.setBounds(648, 350, 125, 16);
-		frame.getContentPane().add(lblNewLabel_8);
+		notratedLabel.setBounds(648, 350, 125, 16);
+		frame.getContentPane().add(notratedLabel);
 		
 		JButton submitRatingButton = new JButton("Submit");
 		submitRatingButton.setContentAreaFilled(false); 
@@ -154,7 +154,7 @@ public class GroupProfileGUI {
 					JOptionPane.showMessageDialog(new JFrame(), message, "Message",
 					        JOptionPane.INFORMATION_MESSAGE);
 						
-					lblNewLabel_8.setText(String.valueOf(myGroup.getRating()));					
+					notratedLabel.setText(String.valueOf(myGroup.getRating()));					
 					}else {
 						String message = "Please come back to rate when project is finished!";
 						JOptionPane.showMessageDialog(new JFrame(), message, "Message",
@@ -172,15 +172,15 @@ public class GroupProfileGUI {
 		submitRatingButton.setBounds(401, 346, 86, 25);
 		frame.getContentPane().add(submitRatingButton);
 		
-		JLabel lblNewLabel_5 = new JLabel("Members of Group("+myGroup.getGroupMembers().size()+")");
-		lblNewLabel_5.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_5.setBounds(38, 447, 190, 16);
-		frame.getContentPane().add(lblNewLabel_5);
+		JLabel membersofGroupLabel = new JLabel("Members of Group("+myGroup.getGroupMembers().size()+")");
+		membersofGroupLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		membersofGroupLabel.setBounds(38, 447, 190, 16);
+		frame.getContentPane().add(membersofGroupLabel);
 		
-		JLabel lblNewLabel_6 = new JLabel("Posts of the Group");
-		lblNewLabel_6.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_6.setBounds(323, 447, 506, 16);
-		frame.getContentPane().add(lblNewLabel_6);
+		JLabel groupPostsLabel = new JLabel("Posts of the Group");
+		groupPostsLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		groupPostsLabel.setBounds(323, 447, 506, 16);
+		frame.getContentPane().add(groupPostsLabel);
 		
 		JTextArea postTextArea = new JTextArea();
 		postTextArea.setBounds(395, 476, 434, 406);
@@ -343,18 +343,18 @@ public class GroupProfileGUI {
 		scrollPaneMembers.setBounds(38, 476, 190, 406);
 		frame.getContentPane().add(scrollPaneMembers);
 		
-		JLabel lblNewLabel = new JLabel("Who is the group's supervisor");
-		lblNewLabel.setBounds(38, 401, 190, 14);
-		frame.getContentPane().add(lblNewLabel);
+		JLabel supervisorLabel = new JLabel("Who is the group's supervisor");
+		supervisorLabel.setBounds(38, 401, 190, 14);
+		frame.getContentPane().add(supervisorLabel);
 		
-		JButton btnNewButton = new JButton("Check here");
-		btnNewButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnNewButton.setForeground(Color.RED);
-		btnNewButton.setBounds(226, 399, 114, 18);
-		btnNewButton.setOpaque(false);
-		btnNewButton.setContentAreaFilled(false);
-		btnNewButton.setBorderPainted(false);
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton checkSupervisorProfileButton = new JButton("Check here");
+		checkSupervisorProfileButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		checkSupervisorProfileButton.setForeground(Color.RED);
+		checkSupervisorProfileButton.setBounds(226, 399, 114, 18);
+		checkSupervisorProfileButton.setOpaque(false);
+		checkSupervisorProfileButton.setContentAreaFilled(false);
+		checkSupervisorProfileButton.setBorderPainted(false);
+		checkSupervisorProfileButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				try {
@@ -367,7 +367,7 @@ public class GroupProfileGUI {
 				}
 			}
 		});
-		frame.getContentPane().add(btnNewButton);
+		frame.getContentPane().add(checkSupervisorProfileButton);
 		
 		//adding label which acts like background for the frame
 		JLabel lblNewLabel_11 = new JLabel("");

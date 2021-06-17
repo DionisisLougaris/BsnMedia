@@ -156,12 +156,12 @@ public class NewMessagesGUI {
 		goToConvo.setBounds(144, 201, 40, 35);
 		frmNewMessages.getContentPane().add(goToConvo);
 		
-		JLabel lblNewLabel = new JLabel("All Conversations:");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblNewLabel.setForeground(Color.WHITE);
-		lblNewLabel.setBounds(22, 48, 162, 16);
-		frmNewMessages.getContentPane().add(lblNewLabel);
+		JLabel allconvLabel = new JLabel("All Conversations:");
+		allconvLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		allconvLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		allconvLabel.setForeground(Color.WHITE);
+		allconvLabel.setBounds(22, 48, 162, 16);
+		frmNewMessages.getContentPane().add(allconvLabel);
 		
 		
 		searchConvoField = new JTextField();

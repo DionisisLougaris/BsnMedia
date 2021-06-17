@@ -142,9 +142,9 @@ public class PrivateChatGUI {
 		lblNewLabel_2.setBounds(18, 13, 46, 38);
 		frame.getContentPane().add(lblNewLabel_2);
 		
-		JLabel lblNewLabel = new JLabel("(Write in English characters)");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel.setBounds(480, 11, 175, 32);
-		frame.getContentPane().add(lblNewLabel);
+		JLabel noteLabel = new JLabel("(Write in English characters)");
+		noteLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+		noteLabel.setBounds(480, 11, 175, 32);
+		frame.getContentPane().add(noteLabel);
 	}
 }

@@ -258,27 +258,27 @@ public class FrontEndProfileGUI {
 		
 		
 		//adding section if user is of type employee
-		JLabel lblNewLabel_5 = new JLabel("Currently apart of:");
-		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_5.setBounds(108, 287, 133, 16);
+		JLabel apartOfLabel = new JLabel("Currently apart of:");
+		apartOfLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		apartOfLabel.setBounds(108, 287, 133, 16);
 		if (profileUser instanceof Employee) {
-			panel.add(lblNewLabel_5);
+			panel.add(apartOfLabel);
 		}
 		
 		if (profileUser instanceof Employee) {
 			
-			JButton btnNewButton = new JButton("Group A");
-			btnNewButton.setOpaque(false);
-			btnNewButton.setBorder(null);
-			btnNewButton.setForeground(Color.RED);
-			btnNewButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-			btnNewButton.setBackground(new Color(255, 153, 102));
-			btnNewButton.setBounds(74, 318, 68, 23);
+			JButton btnGroupA = new JButton("Group A");
+			btnGroupA.setOpaque(false);
+			btnGroupA.setBorder(null);
+			btnGroupA.setForeground(Color.RED);
+			btnGroupA.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			btnGroupA.setBackground(new Color(255, 153, 102));
+			btnGroupA.setBounds(74, 318, 68, 23);
 			if (profileUser.getGroups().size()>=1) {
 				
-				panel.add(btnNewButton);
+				panel.add(btnGroupA);
 				
-				btnNewButton.addActionListener(new ActionListener() {
+				btnGroupA.addActionListener(new ActionListener() {
 					
 					public void actionPerformed(ActionEvent e) {
 						try {
@@ -418,10 +418,10 @@ public class FrontEndProfileGUI {
 			}
 		}
 		
-		JLabel lblNewLabel_9 = new JLabel("Information:");
-		lblNewLabel_9.setBounds(74, 376, 84, 16);
-		lblNewLabel_9.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		panel.add(lblNewLabel_9);
+		JLabel infolabel = new JLabel("Information:");
+		infolabel.setBounds(74, 376, 84, 16);
+		infolabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		panel.add(infolabel);
 		
 		String telephone = profileUser.getTelephone();
 		JLabel labeltelephone = new JLabel(telephone);
@@ -458,9 +458,9 @@ public class FrontEndProfileGUI {
 		
 		if (!loggedUser.equals(profileUser)) {
 			
-			JLabel lblNewLabel_13 = new JLabel("Mutual connections("+usersconnection.mutualConnections().size()+")");
-			lblNewLabel_13.setBounds(709, 382, 130, 16);
-			panel.add(lblNewLabel_13);
+			JLabel mutualconnectionsLabel = new JLabel("Mutual connections("+usersconnection.mutualConnections().size()+")");
+			mutualconnectionsLabel.setBounds(709, 382, 130, 16);
+			panel.add(mutualconnectionsLabel);
 			
 			//Adding mutual their connections to list
 			DefaultListModel<String> mutualmodel = new DefaultListModel<String>();

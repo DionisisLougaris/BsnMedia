@@ -42,7 +42,7 @@ public class HelpGUI {
 	private JTextField txtYourFullName;
 	private JTextField txtYourEmail;
 	private JTextArea txtYourMessage;
-	private JButton btnNewButton_2;
+	private JButton submitButton;
 	private User myUser;
 
 
@@ -125,90 +125,90 @@ public class HelpGUI {
 		
 		
 		//FAQs and answers
-		JLabel lblNewLabel_13 = new JLabel("Frequently asked questions:");
-		lblNewLabel_13.setFont(new Font("Tahoma", Font.BOLD, 22));
-		lblNewLabel_13.setBounds(34, 144, 314, 27);
-		panel.add(lblNewLabel_13);
+		JLabel askedQuestionsLabel = new JLabel("Frequently asked questions:");
+		askedQuestionsLabel.setFont(new Font("Tahoma", Font.BOLD, 22));
+		askedQuestionsLabel.setBounds(34, 144, 314, 27);
+		panel.add(askedQuestionsLabel);
 		
-		JLabel lblNewLabel_14 = new JLabel("1. Is Bsn Media accesible online?");
-		lblNewLabel_14.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_14.setBounds(34, 201, 314, 16);
-		panel.add(lblNewLabel_14);
+		JLabel question1Label = new JLabel("1. Is Bsn Media accesible online?");
+		question1Label.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		question1Label.setBounds(34, 201, 314, 16);
+		panel.add(question1Label);
 		
-		JLabel lblNewLabel_15 = new JLabel("Bsn Media is currently not accesible online");
-		lblNewLabel_15.setFont(new Font("Tahoma", Font.ITALIC, 14));
-		lblNewLabel_15.setBounds(44, 230, 356, 16);
-		panel.add(lblNewLabel_15);
+		JLabel answerTo1QuestionLabel1 = new JLabel("Bsn Media is currently not accesible online");
+		answerTo1QuestionLabel1.setFont(new Font("Tahoma", Font.ITALIC, 14));
+		answerTo1QuestionLabel1.setBounds(44, 230, 356, 16);
+		panel.add(answerTo1QuestionLabel1);
 		
-		JLabel lblNewLabel_14_1 = new JLabel("2. Who is the audience of Bsn Media?");
-		lblNewLabel_14_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_14_1.setBounds(34, 293, 275, 16);
-		panel.add(lblNewLabel_14_1);
+		JLabel question2Label = new JLabel("2. Who is the audience of Bsn Media?");
+		question2Label.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		question2Label.setBounds(34, 293, 275, 16);
+		panel.add(question2Label);
 		
-		JLabel lblNewLabel_15_1 = new JLabel("Bsn Media is addressed to companies with");
-		lblNewLabel_15_1.setFont(new Font("Tahoma", Font.ITALIC, 14));
-		lblNewLabel_15_1.setBounds(44, 322, 265, 16);
-		panel.add(lblNewLabel_15_1);
+		JLabel answerTo2QuestionLabel1 = new JLabel("Bsn Media is addressed to companies with");
+		answerTo2QuestionLabel1.setFont(new Font("Tahoma", Font.ITALIC, 14));
+		answerTo2QuestionLabel1.setBounds(44, 322, 265, 16);
+		panel.add(answerTo2QuestionLabel1);
 		
-		JLabel lblNewLabel_15_1_1 = new JLabel("a big social network!");
-		lblNewLabel_15_1_1.setFont(new Font("Tahoma", Font.ITALIC, 14));
-		lblNewLabel_15_1_1.setBounds(44, 340, 265, 16);
-		panel.add(lblNewLabel_15_1_1);
+		JLabel answerTo2QuestionLabel2 = new JLabel("a big social network!");
+		answerTo2QuestionLabel2.setFont(new Font("Tahoma", Font.ITALIC, 14));
+		answerTo2QuestionLabel2.setBounds(44, 340, 265, 16);
+		panel.add(answerTo2QuestionLabel2);
 		
-		JLabel lblNewLabel_14_1_1 = new JLabel("3. Can there be more than one Boss");
-		lblNewLabel_14_1_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_14_1_1.setBounds(34, 383, 251, 16);
-		panel.add(lblNewLabel_14_1_1);
+		JLabel question3_1Label = new JLabel("3. Can there be more than one Boss");
+		question3_1Label.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		question3_1Label.setBounds(34, 383, 251, 16);
+		panel.add(question3_1Label);
 		
-		JLabel lblNewLabel_14_1_1_1 = new JLabel("on the Bsn Media network?");
-		lblNewLabel_14_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_14_1_1_1.setBounds(56, 402, 364, 16);
-		panel.add(lblNewLabel_14_1_1_1);
+		JLabel question3_2Label = new JLabel("on the Bsn Media network?");
+		question3_2Label.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		question3_2Label.setBounds(56, 402, 364, 16);
+		panel.add(question3_2Label);
 		
-		JLabel lblNewLabel_15_1_1_1 = new JLabel("Currently no.");
-		lblNewLabel_15_1_1_1.setFont(new Font("Tahoma", Font.ITALIC, 14));
-		lblNewLabel_15_1_1_1.setBounds(44, 436, 265, 16);
-		panel.add(lblNewLabel_15_1_1_1);
+		JLabel answerTo3QuestionLabel = new JLabel("Currently no.");
+		answerTo3QuestionLabel.setFont(new Font("Tahoma", Font.ITALIC, 14));
+		answerTo3QuestionLabel.setBounds(44, 436, 265, 16);
+		panel.add(answerTo3QuestionLabel);
 		
-		JLabel lblNewLabel_14_1_1_2 = new JLabel("4. Can there be more than one Company");
-		lblNewLabel_14_1_1_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_14_1_1_2.setBounds(39, 478, 291, 16);
-		panel.add(lblNewLabel_14_1_1_2);
+		JLabel question4_1Label = new JLabel("4. Can there be more than one Company");
+		question4_1Label.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		question4_1Label.setBounds(39, 478, 291, 16);
+		panel.add(question4_1Label);
 		
-		JLabel lblNewLabel_14_1_1_1_1 = new JLabel("on the Bsn Media network?");
-		lblNewLabel_14_1_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_14_1_1_1_1.setBounds(56, 496, 364, 16);
-		panel.add(lblNewLabel_14_1_1_1_1);
+		JLabel question4_2Label = new JLabel("on the Bsn Media network?");
+		question4_2Label.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		question4_2Label.setBounds(56, 496, 364, 16);
+		panel.add(question4_2Label);
 		
-		JLabel lblNewLabel_15_1_1_1_1 = new JLabel("Currently no.");
-		lblNewLabel_15_1_1_1_1.setFont(new Font("Tahoma", Font.ITALIC, 14));
-		lblNewLabel_15_1_1_1_1.setBounds(44, 525, 265, 16);
-		panel.add(lblNewLabel_15_1_1_1_1);
+		JLabel answerTo4QuestionLabel = new JLabel("Currently no.");
+		answerTo4QuestionLabel.setFont(new Font("Tahoma", Font.ITALIC, 14));
+		answerTo4QuestionLabel.setBounds(44, 525, 265, 16);
+		panel.add(answerTo4QuestionLabel);
 		
-		JLabel lblNewLabel_15_2 = new JLabel(" and can be used localy from one computer.");
-		lblNewLabel_15_2.setFont(new Font("Tahoma", Font.ITALIC, 14));
-		lblNewLabel_15_2.setBounds(44, 249, 356, 16);
-		panel.add(lblNewLabel_15_2);
+		JLabel answerTo1QuestionLabel2 = new JLabel(" and can be used localy from one computer.");
+		answerTo1QuestionLabel2.setFont(new Font("Tahoma", Font.ITALIC, 14));
+		answerTo1QuestionLabel2.setBounds(44, 249, 356, 16);
+		panel.add(answerTo1QuestionLabel2);
 		
-		JLabel lblNewLabel_14_1_1_2_1 = new JLabel("5. Can I use the greek alphabet on Bsn Media?");
-		lblNewLabel_14_1_1_2_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_14_1_1_2_1.setBounds(34, 565, 314, 27);
-		panel.add(lblNewLabel_14_1_1_2_1);
+		JLabel question5Label = new JLabel("5. Can I use the greek alphabet on Bsn Media?");
+		question5Label.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		question5Label.setBounds(34, 565, 314, 27);
+		panel.add(question5Label);
 		
-		JLabel lblNewLabel_15_1_1_1_1_1 = new JLabel("No, greek letters cannot be encrypted currently.");
-		lblNewLabel_15_1_1_1_1_1.setFont(new Font("Tahoma", Font.ITALIC, 14));
-		lblNewLabel_15_1_1_1_1_1.setBounds(44, 605, 304, 20);
-		panel.add(lblNewLabel_15_1_1_1_1_1);
+		JLabel answerTo5QuestionLabel = new JLabel("No, greek letters cannot be encrypted currently.");
+		answerTo5QuestionLabel.setFont(new Font("Tahoma", Font.ITALIC, 14));
+		answerTo5QuestionLabel.setBounds(44, 605, 304, 20);
+		panel.add(answerTo5QuestionLabel);
 		
-		JLabel lblNewLabel_14_1_1_2_1_1 = new JLabel("** You 'll have to be logged in our email in order");
-		lblNewLabel_14_1_1_2_1_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_14_1_1_2_1_1.setBounds(19, 670, 329, 27);
-		panel.add(lblNewLabel_14_1_1_2_1_1);
+		JLabel notes1Label = new JLabel("** You 'll have to be logged in our email in order");
+		notes1Label.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		notes1Label.setBounds(19, 670, 329, 27);
+		panel.add(notes1Label);
 		
-		JLabel lblNewLabel_14_1_1_2_1_1_1 = new JLabel(" to recieve authentication email for resetting password **");
-		lblNewLabel_14_1_1_2_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_14_1_1_2_1_1_1.setBounds(22, 692, 376, 27);
-		panel.add(lblNewLabel_14_1_1_2_1_1_1);
+		JLabel notes2Label = new JLabel(" to recieve authentication email for resetting password **");
+		notes2Label.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		notes2Label.setBounds(22, 692, 376, 27);
+		panel.add(notes2Label);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(Color.WHITE);
@@ -217,10 +217,10 @@ public class HelpGUI {
 		panel_1.setLayout(null);
 		
 		//Contact form
-		JLabel lblNewLabel_13_1 = new JLabel("Send us a message!");
-		lblNewLabel_13_1.setFont(new Font("Tahoma", Font.BOLD, 22));
-		lblNewLabel_13_1.setBounds(41, 143, 314, 27);
-		panel_1.add(lblNewLabel_13_1);
+		JLabel sendMessageLabel = new JLabel("Send us a message!");
+		sendMessageLabel.setFont(new Font("Tahoma", Font.BOLD, 22));
+		sendMessageLabel.setBounds(41, 143, 314, 27);
+		panel_1.add(sendMessageLabel);
 		
 		txtYourFullName = new JTextField();
 		txtYourFullName.setText("Your full name...");
@@ -262,34 +262,34 @@ public class HelpGUI {
         });
 		panel_1.add(txtYourMessage);
 		
-		JLabel lblNewLabel_16 = new JLabel("Name");
-		lblNewLabel_16.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_16.setBounds(57, 207, 56, 16);
-		panel_1.add(lblNewLabel_16);
+		JLabel nameForSendingMessageLabel = new JLabel("Name");
+		nameForSendingMessageLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		nameForSendingMessageLabel.setBounds(57, 207, 56, 16);
+		panel_1.add(nameForSendingMessageLabel);
 		
-		JLabel lblNewLabel_16_1 = new JLabel("email");
-		lblNewLabel_16_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_16_1.setBounds(57, 279, 56, 16);
-		panel_1.add(lblNewLabel_16_1);
+		JLabel emailForSendingMessageLabel = new JLabel("email");
+		emailForSendingMessageLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		emailForSendingMessageLabel.setBounds(57, 279, 56, 16);
+		panel_1.add(emailForSendingMessageLabel);
 		
-		JLabel lblNewLabel_17 = new JLabel("Message");
-		lblNewLabel_17.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_17.setBounds(57, 361, 73, 27);
-		panel_1.add(lblNewLabel_17);
+		JLabel messageLabel = new JLabel("Message");
+		messageLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		messageLabel.setBounds(57, 361, 73, 27);
+		panel_1.add(messageLabel);
 		
-		btnNewButton_2 = new JButton("Submit");
-		btnNewButton_2.setBorder(new LineBorder(new Color(255, 255, 255), 2));
-		btnNewButton_2.setForeground(Color.WHITE);
-		btnNewButton_2.setContentAreaFilled(false); 
-		btnNewButton_2.setFocusPainted(false); 
-		btnNewButton_2.setOpaque(false);
-		btnNewButton_2.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		btnNewButton_2.setBounds(243, 528, 97, 25);
-		btnNewButton_2.addActionListener(new ActionListener() {
+		submitButton = new JButton("Submit");
+		submitButton.setBorder(new LineBorder(new Color(255, 255, 255), 2));
+		submitButton.setForeground(Color.WHITE);
+		submitButton.setContentAreaFilled(false); 
+		submitButton.setFocusPainted(false); 
+		submitButton.setOpaque(false);
+		submitButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		submitButton.setBounds(243, 528, 97, 25);
+		submitButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		panel_1.add(btnNewButton_2);
+		panel_1.add(submitButton);
 		
 		JLabel lblNewLabel_21 = new JLabel("");
 		BufferedImage imagebackground = ImageIO.read(new File("label_backgrounds/Background_help_page-0001.jpg"));
@@ -305,23 +305,23 @@ public class HelpGUI {
 		frame.getContentPane().add(panel_2);
 		panel_2.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Get in touch!");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 24));
-		lblNewLabel.setBounds(39, 76, 163, 27);
-		panel_2.add(lblNewLabel);
+		JLabel getInTouchLabel = new JLabel("Get in touch!");
+		getInTouchLabel.setFont(new Font("Tahoma", Font.BOLD, 24));
+		getInTouchLabel.setBounds(39, 76, 163, 27);
+		panel_2.add(getInTouchLabel);
 		
 		//Hyperlinking creators' linkedin profiles
-		JLabel lblNewLabel_1 = new JLabel("Creators:");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.ITALIC, 17));
-		lblNewLabel_1.setBounds(445, 79, 105, 27);
-		panel_2.add(lblNewLabel_1);
+		JLabel creatorsLabel = new JLabel("Creators:");
+		creatorsLabel.setFont(new Font("Tahoma", Font.ITALIC, 17));
+		creatorsLabel.setBounds(445, 79, 105, 27);
+		panel_2.add(creatorsLabel);
 		
-		JLabel lblNewLabel_2 = new JLabel("Kosmidou Eleni");
-		lblNewLabel_2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblNewLabel_2.setForeground(Color.BLUE);
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_2.setBounds(445, 148, 117, 20);
-		lblNewLabel_2.addMouseListener(new MouseAdapter() {
+		JLabel member2Label = new JLabel("Kosmidou Eleni");
+		member2Label.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		member2Label.setForeground(Color.BLUE);
+		member2Label.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		member2Label.setBounds(445, 148, 117, 20);
+		member2Label.addMouseListener(new MouseAdapter() {
 	       	 
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -332,14 +332,14 @@ public class HelpGUI {
                 }
             }
 		});
-		panel_2.add(lblNewLabel_2);
+		panel_2.add(member2Label);
 		
-		JLabel lblNewLabel_3 = new JLabel("Kwnstantinidi Styliana");
-		lblNewLabel_3.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblNewLabel_3.setForeground(Color.BLUE);
-		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_3.setBounds(445, 177, 163, 20);
-		lblNewLabel_3.addMouseListener(new MouseAdapter() {
+		JLabel member3Label = new JLabel("Kwnstantinidi Styliana");
+		member3Label.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		member3Label.setForeground(Color.BLUE);
+		member3Label.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		member3Label.setBounds(445, 177, 163, 20);
+		member3Label.addMouseListener(new MouseAdapter() {
 	       	 
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -350,14 +350,14 @@ public class HelpGUI {
                 }
             }
 		});
-		panel_2.add(lblNewLabel_3);
+		panel_2.add(member3Label);
 		
-		JLabel lblNewLabel_4 = new JLabel("Lougaris Dionisis");
-		lblNewLabel_4.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblNewLabel_4.setForeground(Color.BLUE);
-		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_4.setBounds(445, 206, 117, 23);
-		lblNewLabel_4.addMouseListener(new MouseAdapter() {
+		JLabel member4Label = new JLabel("Lougaris Dionisis");
+		member4Label.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		member4Label.setForeground(Color.BLUE);
+		member4Label.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		member4Label.setBounds(445, 206, 117, 23);
+		member4Label.addMouseListener(new MouseAdapter() {
 	       	 
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -368,14 +368,14 @@ public class HelpGUI {
                 }
             }
 		});
-		panel_2.add(lblNewLabel_4);
+		panel_2.add(member4Label);
 		
-		JLabel lblNewLabel_5 = new JLabel("Mazaraki Eleni");
-		lblNewLabel_5.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblNewLabel_5.setForeground(Color.BLUE);
-		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_5.setBounds(445, 235, 105, 20);
-		lblNewLabel_5.addMouseListener(new MouseAdapter() {
+		JLabel member5Label = new JLabel("Mazaraki Eleni");
+		member5Label.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		member5Label.setForeground(Color.BLUE);
+		member5Label.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		member5Label.setBounds(445, 235, 105, 20);
+		member5Label.addMouseListener(new MouseAdapter() {
 	       	 
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -386,14 +386,14 @@ public class HelpGUI {
                 }
             }
 		});
-		panel_2.add(lblNewLabel_5);
+		panel_2.add(member5Label);
 		
-		JLabel lblNewLabel_6 = new JLabel("Machairas Panagiotis");
-		lblNewLabel_6.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblNewLabel_6.setForeground(Color.BLUE);
-		lblNewLabel_6.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_6.setBounds(687, 119, 176, 20);
-		lblNewLabel_6.addMouseListener(new MouseAdapter() {
+		JLabel member6Label = new JLabel("Machairas Panagiotis");
+		member6Label.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		member6Label.setForeground(Color.BLUE);
+		member6Label.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		member6Label.setBounds(687, 119, 176, 20);
+		member6Label.addMouseListener(new MouseAdapter() {
 	       	 
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -404,14 +404,14 @@ public class HelpGUI {
                 }
             }
 		});
-		panel_2.add(lblNewLabel_6);
+		panel_2.add(member6Label);
 		
-		JLabel lblNewLabel_7 = new JLabel("Melissanidou Kwnstantina");
-		lblNewLabel_7.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblNewLabel_7.setForeground(Color.BLUE);
-		lblNewLabel_7.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_7.setBounds(687, 148, 176, 20);
-		lblNewLabel_7.addMouseListener(new MouseAdapter() {
+		JLabel member7Label = new JLabel("Melissanidou Kwnstantina");
+		member7Label.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		member7Label.setForeground(Color.BLUE);
+		member7Label.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		member7Label.setBounds(687, 148, 176, 20);
+		member7Label.addMouseListener(new MouseAdapter() {
 	       	 
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -422,14 +422,14 @@ public class HelpGUI {
                 }
             }
 		});
-		panel_2.add(lblNewLabel_7);
+		panel_2.add(member7Label);
 		
-		JLabel lblNewLabel_8 = new JLabel("Mertzanhs Antwnhs");
-		lblNewLabel_8.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblNewLabel_8.setForeground(Color.BLUE);
-		lblNewLabel_8.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_8.setBounds(687, 177, 147, 20);
-		lblNewLabel_8.addMouseListener(new MouseAdapter() {
+		JLabel member8Label = new JLabel("Mertzanhs Antwnhs");
+		member8Label.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		member8Label.setForeground(Color.BLUE);
+		member8Label.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		member8Label.setBounds(687, 177, 147, 20);
+		member8Label.addMouseListener(new MouseAdapter() {
 	       	 
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -440,14 +440,14 @@ public class HelpGUI {
                 }
             }
 		});
-		panel_2.add(lblNewLabel_8);
+		panel_2.add(member8Label);
 		
-		JLabel lblNewLabel_9 = new JLabel("Nanou Eleftheria");
-		lblNewLabel_9.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblNewLabel_9.setForeground(Color.BLUE);
-		lblNewLabel_9.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_9.setBounds(687, 209, 117, 20);
-		lblNewLabel_9.addMouseListener(new MouseAdapter() {
+		JLabel member9Label = new JLabel("Nanou Eleftheria");
+		member9Label.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		member9Label.setForeground(Color.BLUE);
+		member9Label.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		member9Label.setBounds(687, 209, 117, 20);
+		member9Label.addMouseListener(new MouseAdapter() {
 	       	 
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -458,14 +458,14 @@ public class HelpGUI {
                 }
             }
 		});
-		panel_2.add(lblNewLabel_9);
+		panel_2.add(member9Label);
 		
-		JLabel lblNewLabel_10 = new JLabel("Stefou Giwrgos-Giannis");
-		lblNewLabel_10.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblNewLabel_10.setForeground(Color.BLUE);
-		lblNewLabel_10.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_10.setBounds(687, 235, 151, 20);
-		lblNewLabel_10.addMouseListener(new MouseAdapter() {
+		JLabel member10Label = new JLabel("Stefou Giwrgos-Giannis");
+		member10Label.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		member10Label.setForeground(Color.BLUE);
+		member10Label.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		member10Label.setBounds(687, 235, 151, 20);
+		member10Label.addMouseListener(new MouseAdapter() {
 	       	 
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -476,14 +476,14 @@ public class HelpGUI {
                 }
             }
 		});
-		panel_2.add(lblNewLabel_10);
+		panel_2.add(member10Label);
 		
-		JLabel lblNewLabel_11 = new JLabel("Charakopoulos Minas-Theodoros");
-		lblNewLabel_11.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		lblNewLabel_11.setForeground(Color.BLUE);
-		lblNewLabel_11.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel_11.setBounds(445, 119, 222, 20);
-		lblNewLabel_11.addMouseListener(new MouseAdapter() {
+		JLabel member1Label = new JLabel("Charakopoulos Minas-Theodoros");
+		member1Label.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		member1Label.setForeground(Color.BLUE);
+		member1Label.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		member1Label.setBounds(445, 119, 222, 20);
+		member1Label.addMouseListener(new MouseAdapter() {
 	       	 
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -494,12 +494,12 @@ public class HelpGUI {
                 }
             }
 		});
-		panel_2.add(lblNewLabel_11);
+		panel_2.add(member1Label);
 		
 		//Hyperlinking communication methods with It intelligence and presenting github repository
-		JLabel lblNewLabel_12 = new JLabel("\u00A9 Bsn Media 2021");
-		lblNewLabel_12.setBounds(12, 240, 117, 16);
-		panel_2.add(lblNewLabel_12);
+		JLabel footerLabel = new JLabel("\u00A9 Bsn Media 2021");
+		footerLabel.setBounds(12, 240, 117, 16);
+		panel_2.add(footerLabel);
 		
 		JLabel lblNewLabel_18 = new JLabel("");
 		lblNewLabel_18.setIcon(new ImageIcon("label_backgrounds/gmail_32px.png"));
@@ -556,7 +556,7 @@ public class HelpGUI {
 		panel_2.add(lblNewLabel_20);
 		
 		ButtonListener listener = new ButtonListener();
-		btnNewButton_2.addActionListener(listener);
+		submitButton.addActionListener(listener);
 		
 	}
 	
@@ -567,7 +567,7 @@ public class HelpGUI {
 		public void actionPerformed(ActionEvent e) {
 			// Checking if form fields were filled correctly
 			
-			if (e.getSource().equals(btnNewButton_2)) {
+			if (e.getSource().equals(submitButton)) {
 				
 				String userFullName = txtYourFullName.getText();
 				String usersEmail = txtYourEmail.getText();

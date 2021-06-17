@@ -75,10 +75,10 @@ public class SearchSuggestionsGUI {
 		searchButton.setBounds(55, 204, 131, 25);
 		frame.getContentPane().add(searchButton);
 		
-		JLabel lblNewLabel = new JLabel("Do you mean...");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 17));
-		lblNewLabel.setBounds(26, 11, 285, 25);
-		frame.getContentPane().add(lblNewLabel);
+		JLabel suggestedLabel = new JLabel("Do you mean...");
+		suggestedLabel.setFont(new Font("Tahoma", Font.BOLD, 17));
+		suggestedLabel.setBounds(26, 11, 285, 25);
+		frame.getContentPane().add(suggestedLabel);
 		
 		ButtonListener listener = new ButtonListener();
 		searchButton.addActionListener(listener);

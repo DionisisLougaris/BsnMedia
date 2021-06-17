@@ -139,9 +139,9 @@ public class GroupChatGUI {
 		lblNewLabel_2.setBounds(22, 11, 46, 38);
 		frame.getContentPane().add(lblNewLabel_2);
 		
-		JLabel lblNewLabel_3 = new JLabel("(Write in English characters)");
-		lblNewLabel_3.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel_3.setBounds(489, 11, 166, 24);
-		frame.getContentPane().add(lblNewLabel_3);
+		JLabel noteLabel = new JLabel("(Write in English characters)");
+		noteLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+		noteLabel.setBounds(489, 11, 166, 24);
+		frame.getContentPane().add(noteLabel);
 	}
 }
