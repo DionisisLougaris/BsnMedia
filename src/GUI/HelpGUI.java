@@ -291,13 +291,13 @@ public class HelpGUI {
 		});
 		panel_1.add(submitButton);
 		
-		JLabel lblNewLabel_21 = new JLabel("");
+		JLabel backgroundLabel = new JLabel("");
 		BufferedImage imagebackground = ImageIO.read(new File("label_backgrounds/Background_help_page-0001.jpg"));
 		ImageIcon imageb = new ImageIcon(imagebackground);
 		Image imagerisizeb = imageb.getImage().getScaledInstance(465, 749,0) ;
-		lblNewLabel_21.setIcon(new ImageIcon(imagerisizeb));
-		lblNewLabel_21.setBounds(0, 0, 465, 749);
-		panel_1.add(lblNewLabel_21);
+		backgroundLabel.setIcon(new ImageIcon(imagerisizeb));
+		backgroundLabel.setBounds(0, 0, 465, 749);
+		panel_1.add(backgroundLabel);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBackground(new Color(255, 250, 240));
@@ -501,12 +501,12 @@ public class HelpGUI {
 		footerLabel.setBounds(12, 240, 117, 16);
 		panel_2.add(footerLabel);
 		
-		JLabel lblNewLabel_18 = new JLabel("");
-		lblNewLabel_18.setIcon(new ImageIcon("label_backgrounds/gmail_32px.png"));
-		lblNewLabel_18.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		lblNewLabel_18.setToolTipText("Send an email to our Company");
-		lblNewLabel_18.setBounds(150, 128, 56, 46);
-		lblNewLabel_18.addMouseListener(new MouseAdapter() {
+		JLabel gmailLabel = new JLabel("");
+		gmailLabel.setIcon(new ImageIcon("label_backgrounds/gmail_32px.png"));
+		gmailLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		gmailLabel.setToolTipText("Send an email to our Company");
+		gmailLabel.setBounds(150, 128, 56, 46);
+		gmailLabel.addMouseListener(new MouseAdapter() {
 	       	 
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -517,14 +517,14 @@ public class HelpGUI {
                 }
             }
 		});
-		panel_2.add(lblNewLabel_18);
+		panel_2.add(gmailLabel);
 		
-		JLabel lblNewLabel_19 = new JLabel("");
-		lblNewLabel_19.setIcon(new ImageIcon("label_backgrounds/linkedin_32px.png"));
-		lblNewLabel_19.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		lblNewLabel_19.setToolTipText("Find us on LinkedIn");
-		lblNewLabel_19.setBounds(93, 128, 56, 46);
-		lblNewLabel_19.addMouseListener(new MouseAdapter() {
+		JLabel linkedinLabel = new JLabel("");
+		linkedinLabel.setIcon(new ImageIcon("label_backgrounds/linkedin_32px.png"));
+		linkedinLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		linkedinLabel.setToolTipText("Find us on LinkedIn");
+		linkedinLabel.setBounds(93, 128, 56, 46);
+		linkedinLabel.addMouseListener(new MouseAdapter() {
 	       	 
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -535,14 +535,14 @@ public class HelpGUI {
                 }
             }
 		});
-		panel_2.add(lblNewLabel_19);
+		panel_2.add(linkedinLabel);
 		
-		JLabel lblNewLabel_20 = new JLabel("");
-		lblNewLabel_20.setIcon(new ImageIcon("label_backgrounds/github_32px.png"));
-		lblNewLabel_20.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		lblNewLabel_20.setToolTipText("Find us on GitHub");
-		lblNewLabel_20.setBounds(39, 128, 56, 46);
-		lblNewLabel_20.addMouseListener(new MouseAdapter() {
+		JLabel githubLabel = new JLabel("");
+		githubLabel.setIcon(new ImageIcon("label_backgrounds/github_32px.png"));
+		githubLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		githubLabel.setToolTipText("Find us on GitHub");
+		githubLabel.setBounds(39, 128, 56, 46);
+		githubLabel.addMouseListener(new MouseAdapter() {
        	 
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -553,7 +553,7 @@ public class HelpGUI {
                 }
             }
 		});
-		panel_2.add(lblNewLabel_20);
+		panel_2.add(githubLabel);
 		
 		ButtonListener listener = new ButtonListener();
 		submitButton.addActionListener(listener);

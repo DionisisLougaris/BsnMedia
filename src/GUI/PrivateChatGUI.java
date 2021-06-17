@@ -138,9 +138,9 @@ public class PrivateChatGUI {
 		panel.add(sendMessageButton);
 		
 		Icon lock = new ImageIcon("label_backgrounds/lock_32px.png");
-		JLabel lblNewLabel_2 = new JLabel(lock);
-		lblNewLabel_2.setBounds(18, 13, 46, 38);
-		frame.getContentPane().add(lblNewLabel_2);
+		JLabel lockLabel = new JLabel(lock);
+		lockLabel.setBounds(18, 13, 46, 38);
+		frame.getContentPane().add(lockLabel);
 		
 		JLabel noteLabel = new JLabel("(Write in English characters)");
 		noteLabel.setHorizontalAlignment(SwingConstants.RIGHT);

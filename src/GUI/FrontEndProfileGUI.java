@@ -499,28 +499,28 @@ public class FrontEndProfileGUI {
 		});
 		panel.add(helpButton);
 		
-		JLabel lblNewLabel_14 = new JLabel(new ImageIcon("label_backgrounds/email_20px.png"));
-		lblNewLabel_14.setBounds(85, 409, 28, 25);
-		panel.add(lblNewLabel_14);
+		JLabel emailLabel = new JLabel(new ImageIcon("label_backgrounds/email_20px.png"));
+		emailLabel.setBounds(85, 409, 28, 25);
+		panel.add(emailLabel);
 		
-		JLabel lblNewLabel_14_1 = new JLabel(new ImageIcon("label_backgrounds/telephone_20px.png"));
-		lblNewLabel_14_1.setBounds(85, 438, 28, 25);
-		panel.add(lblNewLabel_14_1);
+		JLabel telephoneLabel = new JLabel(new ImageIcon("label_backgrounds/telephone_20px.png"));
+		telephoneLabel.setBounds(85, 438, 28, 25);
+		panel.add(telephoneLabel);
 		
-		JLabel lblNewLabel_14_2 = new JLabel(new ImageIcon("label_backgrounds/address_20px.png"));
-		lblNewLabel_14_2.setBounds(85, 467, 28, 25);
-		panel.add(lblNewLabel_14_2);
+		JLabel addressLabel = new JLabel(new ImageIcon("label_backgrounds/address_20px.png"));
+		addressLabel.setBounds(85, 467, 28, 25);
+		panel.add(addressLabel);
 		
-		JLabel lblNewLabel_14_3 = new JLabel(new ImageIcon("label_backgrounds/birthday_cake_20px.png"));
-		lblNewLabel_14_3.setBounds(85, 501, 28, 25);
-		panel.add(lblNewLabel_14_3);
+		JLabel birthdayLabel = new JLabel(new ImageIcon("label_backgrounds/birthday_cake_20px.png"));
+		birthdayLabel.setBounds(85, 501, 28, 25);
+		panel.add(birthdayLabel);
 		
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setBounds(0, 0, 887, 985);
+		JLabel backgroundLabel = new JLabel("");
+		backgroundLabel.setBounds(0, 0, 887, 985);
 		BufferedImage imagebackground = ImageIO.read(new File("label_backgrounds/background.jpg"));
 		ImageIcon imageb = new ImageIcon(imagebackground);
 		Image imagerisizeb = imageb.getImage().getScaledInstance(887, 991, 140) ;
-		lblNewLabel.setIcon(new ImageIcon(imagerisizeb));
-		panel.add(lblNewLabel);
+		backgroundLabel.setIcon(new ImageIcon(imagerisizeb));
+		panel.add(backgroundLabel);
 	}
 }

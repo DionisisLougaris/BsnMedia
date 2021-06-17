@@ -370,13 +370,13 @@ public class GroupProfileGUI {
 		frame.getContentPane().add(checkSupervisorProfileButton);
 		
 		//adding label which acts like background for the frame
-		JLabel lblNewLabel_11 = new JLabel("");
+		JLabel backgroundLabel = new JLabel("");
 		BufferedImage imagebackground = ImageIO.read(new File("label_backgrounds/background.jpg"));
 		ImageIcon imageb = new ImageIcon(imagebackground);
 		Image imagerisizeb = imageb.getImage().getScaledInstance(887, 991, 140) ;
-		lblNewLabel_11.setIcon(new ImageIcon(imagerisizeb));
-		lblNewLabel_11.setBounds(0, 0, 887, 981);
-		frame.getContentPane().add(lblNewLabel_11);
+		backgroundLabel.setIcon(new ImageIcon(imagerisizeb));
+		backgroundLabel.setBounds(0, 0, 887, 981);
+		frame.getContentPane().add(backgroundLabel);
 			
 	}
 }
