@@ -146,7 +146,7 @@ public class BackendProfileBossGUI {
 		{
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 	        String formatDateTime = post.getTimestamp().format(formatter);
-	        textPost.append("-----------------------------------------------------------------------------------------------------"+ "\n\r");
+	        textPost.append("-------------------------------------------------------------------------------------------------"+ "\n\r");
 	        textPost.append(post.getContent()+" | "+post.getCreator().getFirstName()+" | "+post.getPostScope()+" | "+formatDateTime+ "\n\r");
 		}
 		textPost.setBackground(new Color(255, 250, 240));
@@ -366,7 +366,7 @@ public class BackendProfileBossGUI {
 					{
 						DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 				        String formatDateTime = post.getTimestamp().format(formatter);
-				        textPost.append("-----------------------------------------------------------------------------------------------------"+ "\n\r");
+				        textPost.append("-------------------------------------------------------------------------------------------------"+ "\n\r");
 				        textPost.append(post.getContent()+" | "+post.getCreator().getFirstName()+" | "+post.getPostScope()+" | "+formatDateTime+ "\n\r");
 					}
 				   }
@@ -412,7 +412,7 @@ public class BackendProfileBossGUI {
 		
 		Icon logout = new ImageIcon("Buttons_backgrounds/exit_50px.png");
 		disconnectButton = new JButton(logout);
-		disconnectButton.setBounds(796, 155, 55, 54);
+		disconnectButton.setBounds(796, 130, 55, 54);
 		disconnectButton.setContentAreaFilled(false); 
 		disconnectButton.setFocusPainted(false); 
 		disconnectButton.setToolTipText("logout");

@@ -45,7 +45,7 @@ abstract public class Notification implements Serializable{
 	}
 	
 	
-	//*************************************Getters and Setters*************************************
+	//*************** Getters and Setters *************
 	
 	public String getNotificationContent() {
 		return notificationContent;

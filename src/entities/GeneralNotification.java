@@ -17,7 +17,7 @@ public class GeneralNotification extends Notification implements Serializable{
 	}
 
 
-	//*************************************Getters and Setters*************************************
+	//*************** Getters and Setters *************
 
 	public String getTypeOfNotification() {
 		return typeOfNotification;

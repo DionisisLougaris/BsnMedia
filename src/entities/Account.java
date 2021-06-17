@@ -109,7 +109,7 @@ public class Account implements Serializable{
 	}
 
 
-    //These methods are getters and setters.
+	//*************** Getters and Setters *************
 	public String getUsername() {
 		return username;
 	}

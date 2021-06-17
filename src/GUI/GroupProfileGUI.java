@@ -189,7 +189,7 @@ public class GroupProfileGUI {
 		{
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 	        String formatDateTime = post.getTimestamp().format(formatter);
-	        postTextArea.append("------------------------------------------------------------------------------------------------------------"+ ""+ "\n\r");
+	        postTextArea.append("--------------------------------------------------------------------------------------------------------"+ ""+ "\n\r");
 	        postTextArea.append(post.getContent()+" | "+post.getCreator().getFirstName()+" | "+formatDateTime+ "\n\r");
 		}
 		postTextArea.setBackground(new Color(255, 250, 240));

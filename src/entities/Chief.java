@@ -95,6 +95,7 @@ public class Chief extends User implements Serializable{
 		return listWithSuggestedConnections;
 	}
 	
+	//*************** Getters and Setters *************
 	public ArrayList<Group> getGroups() {
 		return groupsSupervising;
 	}

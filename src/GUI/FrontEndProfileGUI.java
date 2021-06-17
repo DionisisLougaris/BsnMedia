@@ -196,7 +196,7 @@ public class FrontEndProfileGUI {
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 	        String formatDateTime = post.getTimestamp().format(formatter);
 	        ausersposts.append("----------------------------------------------------------------------------------------------------------"
-	        		+ "-------------------------------------------------------------------------------------------"
+	        		+ "---------------------------------------------------------------------------------------"
 	        		+ ""+ "\n\r");
 	        ausersposts.append(post.getContent()+" | "+post.getCreator().getFirstName()+" | "+post.getPostScope()+" | "+formatDateTime+ "\n\r");
 		}

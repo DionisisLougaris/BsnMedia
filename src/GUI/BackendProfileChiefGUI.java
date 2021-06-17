@@ -352,7 +352,7 @@ public class BackendProfileChiefGUI {
 							{
 								DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 						        String formatDateTime = post.getTimestamp().format(formatter);
-						        textAreaPost.append("-----------------------------------------------------------------------------------------------------"+ "\n\r");
+						        textAreaPost.append("-------------------------------------------------------------------------------------------------"+ "\n\r");
 								textAreaPost.append(post.getContent()+" | "+post.getCreator().getFirstName()+" | "+post.getPostScope()+" | "+formatDateTime+ "\n\r");
 							}
 							
@@ -367,7 +367,7 @@ public class BackendProfileChiefGUI {
 						{
 							DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 					        String formatDateTime = post.getTimestamp().format(formatter);
-					        textAreaPost.append("-----------------------------------------------------------------------------------------------------"+ "\n\r");
+					        textAreaPost.append("-------------------------------------------------------------------------------------------------"+ "\n\r");
 							textAreaPost.append(post.getContent()+" | "+post.getCreator().getFirstName()+" | "+post.getPostScope()+" | "+formatDateTime+ "\n\r");
 						}
 					 String groupToPost=textField.getText();

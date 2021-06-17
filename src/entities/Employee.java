@@ -126,6 +126,7 @@ public class Employee extends User implements Serializable{
 		}
 	}
 	
+	//*************** Getters and Setters *************
 	public ArrayList<Group> getGroups() {
 		return listOfGroups;
 	}

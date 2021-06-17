@@ -158,7 +158,7 @@ public class Connection extends Notification implements Serializable{
 	}
 	
 	
-	//*************************************Getters and Setters*************************************
+	//*************** Getters and Setters *************
 	
 	public User getFirstUser() {
 		return firstUser;

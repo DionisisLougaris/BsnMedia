@@ -46,14 +46,19 @@ public class Main {
 		
 		Project p1= new Project("project name","this is the Description","deadline");
 		Group g1= new Group("group name",p1,first4);
+		Group g2= new Group("omada9",p1,first4);
+		first.addGroupToEmployeesList(g2);
 		first.addGroupToEmployeesList(g1);
 		first4.addGroupToSupervise(g1);
 		groupConversation groupConversation = new groupConversation(g1);
+		groupConversation groupConversation1 = new groupConversation(g2);
 		first.addConversation(groupConversation);
 		first4.addConversation(groupConversation);
 		g1.setMyConversation(groupConversation);
+		g2.setMyConversation(groupConversation1);
 		
 		theCompany.addCompanyGroups(g1);
+		theCompany.addCompanyGroups(g2);
 		
 		theCompany.addUser(first);
 		theCompany.addUser(first2);

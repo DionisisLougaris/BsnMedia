@@ -232,9 +232,7 @@ abstract public class User implements Serializable{
 		listOfConversations.add(theConvo);
 	}
 
-	//*********************************************************************************************************************
-	
-	//Getters and Setters
+	//*************** Getters and Setters *************
 	public String getFirstName() {
 		return firstName;
 	}

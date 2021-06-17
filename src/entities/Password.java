@@ -71,7 +71,7 @@ public class Password implements Serializable
 	}
 
 	
-	//These methods are setters and getters.
+	//*************** Getters and Setters *************
 	public String getPassword() {
 		return password;
 	}
