@@ -33,6 +33,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.TreeSet;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextArea;
 import java.awt.Font;
@@ -188,22 +189,28 @@ public class FrontEndProfileGUI {
 		});
 		panel.add(buttongotomyprofile);
 		
-		JTextArea ausersposts = new JTextArea();
-		ausersposts.setBounds(32, 561, 810, 336);
+		JTextArea frontEndProfileUser = new JTextArea();
+		frontEndProfileUser.setBounds(32, 561, 810, 336);
+		TreeSet<Post> visiblePosts = new TreeSet<Post>();
+		if (loggedUser.equals(profileUser)) {
+			visiblePosts = loggedUser.getListOfPosts(); //If the logged in user goes to his public profile, he will be able to see all his posts
+		}else {
+			visiblePosts = loggedUser.returnVisiblePosts(profileUser);
+		}
 		//adding user's posts to his wall
-		for( Post post : aUser.getListOfPosts())
+		for( Post post : visiblePosts)
 		{
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 	        String formatDateTime = post.getTimestamp().format(formatter);
-	        ausersposts.append("----------------------------------------------------------------------------------------------------------"
+	        frontEndProfileUser.append("----------------------------------------------------------------------------------------------------------"
 	        		+ "---------------------------------------------------------------------------------------"
 	        		+ ""+ "\n\r");
-	        ausersposts.append(post.getContent()+" | "+post.getCreator().getFirstName()+" | "+post.getPostScope()+" | "+formatDateTime+ "\n\r");
+	        frontEndProfileUser.append(post.getContent()+" | "+post.getCreator().getFirstName()+" | "+post.getPostScope()+" | "+formatDateTime+ "\n\r");
 		}
-		ausersposts.setEditable(false);
-		ausersposts.setLineWrap(true);
-		ausersposts.setBackground(new Color(255, 250, 240));
-		JScrollPane scrollPanePost = new JScrollPane(ausersposts);
+		frontEndProfileUser.setEditable(false);
+		frontEndProfileUser.setLineWrap(true);
+		frontEndProfileUser.setBackground(new Color(255, 250, 240));
+		JScrollPane scrollPanePost = new JScrollPane(frontEndProfileUser);
 		scrollPanePost.setBorder(new LineBorder(Color.BLACK, 2));
 		scrollPanePost.setBounds(32, 561, 810, 336);
 		panel.add(scrollPanePost);

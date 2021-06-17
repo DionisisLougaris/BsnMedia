@@ -50,10 +50,13 @@ public class Main {
 		first.addGroupToEmployeesList(g2);
 		first.addGroupToEmployeesList(g1);
 		first4.addGroupToSupervise(g1);
+		first4.addGroupToSupervise(g2);
 		groupConversation groupConversation = new groupConversation(g1);
 		groupConversation groupConversation1 = new groupConversation(g2);
 		first.addConversation(groupConversation);
 		first4.addConversation(groupConversation);
+		first.addConversation(groupConversation1);
+		first4.addConversation(groupConversation1);
 		g1.setMyConversation(groupConversation);
 		g2.setMyConversation(groupConversation1);
 		
@@ -61,7 +64,7 @@ public class Main {
 		theCompany.addCompanyGroups(g2);
 		
 		theCompany.addUser(first);
-		theCompany.addUser(first2);
+		theCompany.addUser(first2); //prepei kai o Boss na prostethei
 		theCompany.addUser(first3);
 		theCompany.addUser(first4);
 		theCompany.addUser(first5); 

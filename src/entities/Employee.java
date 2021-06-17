@@ -32,7 +32,7 @@ public class Employee extends User implements Serializable{
 		{
 			TreeSet<Post> friendsPosts = connectedUser.getListOfPosts();
 			for(Post friendsPost: friendsPosts) 
-				if (friendsPost.getPostScope().equalsIgnoreCase("friends")) 
+				if (friendsPost.getPostScope().equalsIgnoreCase("Connections")) 
 					postForBackEndProfile.add(friendsPost); //The Posts of connected users with whom he has the opportunity to see
 		}
 		
@@ -40,7 +40,7 @@ public class Employee extends User implements Serializable{
 		{
 			TreeSet<Post> otherUsersPosts = otherCompanyMember.getListOfPosts();
 			for(Post otherUserPost: otherUsersPosts)
-				if (otherUserPost.getPostScope().equalsIgnoreCase("public"))
+				if (otherUserPost.getPostScope().equalsIgnoreCase("Public"))
 					postForBackEndProfile.add(otherUserPost); //Posts from members of the company that have a universal scope
 		}
 		

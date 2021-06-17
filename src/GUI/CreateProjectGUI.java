@@ -43,12 +43,13 @@ public class CreateProjectGUI {
 	private static Chief pchief;
 	private ArrayList<Employee> selectedMembers = new ArrayList<Employee>(); //The group Members
 	private ArrayList<Employee> feasibleForSelection; //all propably members
+	private JFrame chiefBackEnd;
 
-	public CreateProjectGUI(Chief chief) {
-		initialize(chief);
+	public CreateProjectGUI(Chief chief, JFrame chiefFrame) {
+		initialize(chief, chiefFrame);
 	}
 
-	private void initialize(Chief chief) {
+	private void initialize(Chief chief, JFrame chiefFrame) {
 		frame = new JFrame();
 		frame.getContentPane().setBackground(new Color(255, 153, 102));
 		frame.setBounds(100, 100, 535, 704);
@@ -69,6 +70,7 @@ public class CreateProjectGUI {
 		frame.setIconImage(logoimage.getImage());
 		
 		pchief = chief;
+		chiefBackEnd = chiefFrame;
 		
 		JLabel lblProjectName = new JLabel("Project name :");
 		lblProjectName.setForeground(new Color(255, 255, 255));
@@ -257,11 +259,19 @@ public class CreateProjectGUI {
 							theEmp.addConversation(conversation);
 						}
 						
-						pchief.getMyAccount().getMyCompany().addCompanyGroups(createdGroup);
-						
 						String message = "The group was created successfully!";
 						JOptionPane.showMessageDialog(new JFrame(), message, "Message",
 						        JOptionPane.INFORMATION_MESSAGE);
+						
+						frame.dispose();
+						pchief.getMyAccount().getMyCompany().addCompanyGroups(createdGroup);
+						chiefBackEnd.dispose();
+						try {
+							new BackendProfileChiefGUI(pchief);
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 					}else {
 						String message = "The Group name selected is not available";
 						JOptionPane.showMessageDialog(new JFrame(), message, "Message",

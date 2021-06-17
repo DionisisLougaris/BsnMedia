@@ -24,6 +24,10 @@ public class Post implements Serializable{
 	
 	
 	
+	/*Μεθοδοι που αφορούσαν την κλάση Post δεν εγιναν */
+	
+	
+	
 	//*************** Getters and Setters *************
 	public User getCreator() {
 		return creator;

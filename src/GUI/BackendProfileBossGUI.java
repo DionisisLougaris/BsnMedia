@@ -422,7 +422,13 @@ public class BackendProfileBossGUI {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				Storage.saveInBinaryFile(boss.getMyAccount().getMyCompany());
-				frmStartingPage.setVisible(false);
+				
+				//Close any pop-ups frames when logging out and open the WelcomeScreen_GUI()
+				System.gc();
+				java.awt.Window win[] = java.awt.Window.getWindows(); 
+				for(int i=0;i<win.length;i++){ 
+				    win[i].dispose(); 
+				} 
 				try {
 					new WelcomeScreen_GUI(boss.getMyAccount().getMyCompany());
 				} catch (IOException e) {

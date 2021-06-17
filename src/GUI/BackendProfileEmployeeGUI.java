@@ -1,6 +1,5 @@
 package GUI;
 
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -11,7 +10,6 @@ import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.TreeSet;
-
 import javax.imageio.ImageIO;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultListModel;
@@ -24,7 +22,6 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -357,24 +354,18 @@ public class BackendProfileEmployeeGUI {
 				 else if(rdbtnGroup.isSelected())
 				 {
 				 	String myText = writePostArea.getText();
-					Post myPost = new Post(employee,myText,radioGroup.getSelection().getActionCommand());
-					employee.addPost(myPost);
-					textAreaPost.setText(""); 
-				    for( Post post : employee.returnAllPosts())
-					{
-						DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-				        String formatDateTime = post.getTimestamp().format(formatter);
-						textAreaPost.append("-------------------------------------------------------------------------------------------------"+ "\n\r");
-						textAreaPost.append(post.getContent()+" | "+post.getCreator().getFirstName()+" | "+post.getPostScope()+" | "+formatDateTime+ "\n\r");
-					}
-					 String groupToPost=textPostGroup.getText();
-					 boolean found=false;
-					 for(int i=0;i<employee.getGroups().size();i++)
-					 {
+					String groupToPost=textPostGroup.getText();
+					boolean found = false;
+					
+					for(int i=0;i<employee.getGroups().size();i++)  {
+						
 						 if(employee.getGroups().get(i).getName().equals(groupToPost))
 						 {
-							 found=true;
+							 found = true;
+							 Post myPost = new Post(employee,myText,radioGroup.getSelection().getActionCommand());
+							 employee.addPost(myPost);
 							 employee.getGroups().get(i).addPostToGroupList(myPost);
+							 
 							 String message = "You successfully posted on "+employee.getGroups().get(i).getName()+"'s wall!";
 								JOptionPane.showMessageDialog(new JFrame(), message, "Message",
 								  JOptionPane.INFORMATION_MESSAGE);
@@ -385,6 +376,16 @@ public class BackendProfileEmployeeGUI {
 						 String message = "Group not found...Please check your spelling!";
 							JOptionPane.showMessageDialog(new JFrame(), message, "Message",
 							  JOptionPane.ERROR_MESSAGE);
+					 }else {
+						 
+							textAreaPost.setText(""); 
+						    for( Post post : employee.returnAllPosts())
+							{
+								DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+						        String formatDateTime = post.getTimestamp().format(formatter);
+								textAreaPost.append("-------------------------------------------------------------------------------------------------"+ "\n\r");
+								textAreaPost.append(post.getContent()+" | "+post.getCreator().getFirstName()+" | "+post.getPostScope()+" | "+formatDateTime+ "\n\r");
+							}
 					 }
 				 }
 				else
@@ -521,7 +522,13 @@ public class BackendProfileEmployeeGUI {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				Storage.saveInBinaryFile(employee.getMyAccount().getMyCompany());
-				frmStartingPage.dispose();
+				
+				//Close any pop-ups frames when logging out and open the WelcomeScreen_GUI()
+				System.gc();
+				java.awt.Window win[] = java.awt.Window.getWindows(); 
+				for(int i=0;i<win.length;i++){ 
+				    win[i].dispose(); 
+				}
 				try {
 					new WelcomeScreen_GUI(employee.getMyAccount().getMyCompany());
 				} catch (IOException e) {

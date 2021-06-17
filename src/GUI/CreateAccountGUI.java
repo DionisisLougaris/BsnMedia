@@ -222,37 +222,37 @@ public class CreateAccountGUI {
 		JLabel companyCodeLabel = new JLabel("Company Code:");
 		companyCodeLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		companyCodeLabel.setForeground(new Color(255, 255, 255));
-		companyCodeLabel.setBounds(23, 140, 88, 16);
+		companyCodeLabel.setBounds(15, 140, 101, 16);
 		frmRegisterNow.getContentPane().add(companyCodeLabel);
 		
 		JLabel usernameLabel = new JLabel("Username:");
 		usernameLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		usernameLabel.setForeground(new Color(255, 255, 255));
-		usernameLabel.setBounds(23, 180, 56, 16);
+		usernameLabel.setBounds(15, 180, 64, 16);
 		frmRegisterNow.getContentPane().add(usernameLabel);
 		
 		JLabel PasswordLabel = new JLabel("Password:");
 		PasswordLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		PasswordLabel.setForeground(new Color(255, 255, 255));
-		PasswordLabel.setBounds(23, 220, 56, 16);
+		PasswordLabel.setBounds(15, 220, 64, 16);
 		frmRegisterNow.getContentPane().add(PasswordLabel);
 		
 		JLabel confPasswordLabel = new JLabel("Confirm Pass:");
 		confPasswordLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		confPasswordLabel.setForeground(new Color(255, 255, 255));
-		confPasswordLabel.setBounds(23, 260, 73, 16);
+		confPasswordLabel.setBounds(15, 260, 88, 16);
 		frmRegisterNow.getContentPane().add(confPasswordLabel);
 		
 		JLabel emailLabel = new JLabel("Email:");
 		emailLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		emailLabel.setForeground(new Color(255, 255, 255));
-		emailLabel.setBounds(23, 300, 33, 16);
+		emailLabel.setBounds(15, 300, 46, 16);
 		frmRegisterNow.getContentPane().add(emailLabel);
 		
 		JLabel telephoneLabel = new JLabel("Telephone:");
 		telephoneLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		telephoneLabel.setForeground(new Color(255, 255, 255));
-		telephoneLabel.setBounds(23, 340, 64, 16);
+		telephoneLabel.setBounds(15, 340, 73, 16);
 		frmRegisterNow.getContentPane().add(telephoneLabel);
 		
 		JLabel nameLabel = new JLabel("First Name:");
@@ -270,7 +270,7 @@ public class CreateAccountGUI {
 		JLabel addressLabel = new JLabel("Address:");
 		addressLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		addressLabel.setForeground(new Color(255, 255, 255));
-		addressLabel.setBounds(23, 380, 46, 16);
+		addressLabel.setBounds(15, 380, 64, 16);
 		frmRegisterNow.getContentPane().add(addressLabel);
 		
 		JLabel genderLabel = new JLabel("Gender:");
@@ -316,9 +316,9 @@ public class CreateAccountGUI {
 		title2Label.setBounds(234, 57, 211, 29);
 		panel.add(title2Label);
 		
-		JLabel title1Label = new JLabel("Want to be apart of BSN Media?");
+		JLabel title1Label = new JLabel("Want to be a part of BSN Media?");
 		title1Label.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 16));
-		title1Label.setBounds(234, 15, 217, 29);
+		title1Label.setBounds(234, 15, 272, 29);
 		panel.add(title1Label);
 		
 		JSeparator separator = new JSeparator();

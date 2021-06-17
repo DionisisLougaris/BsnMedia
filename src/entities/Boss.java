@@ -131,7 +131,7 @@ public class Boss extends User implements Serializable{
 		{
 			TreeSet<Post> otherUsersPosts = otherCompanyMember.getListOfPosts();
 			for(Post otherUserPost: otherUsersPosts)
-				if (otherUserPost.getPostScope().equalsIgnoreCase("public"))
+				if (otherUserPost.getPostScope().equalsIgnoreCase("Public"))
 					postForBackEndProfile.add(otherUserPost); //Posts from members of the company that have a universal scope.
 		}
 		

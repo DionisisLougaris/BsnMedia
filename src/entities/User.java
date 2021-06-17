@@ -48,9 +48,9 @@ abstract public class User implements Serializable{
 		TreeSet<Post> visiblePostsToBeReturned = new TreeSet<Post>(myPostComp);
 		
 		for (Post visitedUserPost: visitedUserAllPosts) {
-			if(visitedUserPost.getPostScope().equalsIgnoreCase("public"))
+			if(visitedUserPost.getPostScope().equalsIgnoreCase("Public"))
 				visiblePostsToBeReturned.add(visitedUserPost);
-			else if(visitedUserPost.getPostScope().equalsIgnoreCase("friends")) {
+			else if(visitedUserPost.getPostScope().equalsIgnoreCase("Connections")) {
 				Connection areFriends = new Connection(this, visitedUser);
 				if(areFriends.areConnected())
 					visiblePostsToBeReturned.add(visitedUserPost);

@@ -149,11 +149,11 @@ public class BackendProfileChiefGUI {
 		panel.add(companyPostLabel);
 		
 		JLabel specializationLabel = new JLabel(chief.getCompanyPost());
-		specializationLabel.setBounds(86, 295, 124, 16);
+		specializationLabel.setBounds(85, 297, 124, 16);
 		panel.add(specializationLabel);
 		
 		emailLabel = new JLabel(chief.getMyAccount().getEmail());
-		emailLabel.setBounds(49, 324, 125, 16);
+		emailLabel.setBounds(49, 324, 322, 16);
 		panel.add(emailLabel);
 		
 		JLabel lblCurrentlySupervising = new JLabel("Currently supervising:");
@@ -359,37 +359,40 @@ public class BackendProfileChiefGUI {
 					   }
 				 else if(rdbtnGroup.isSelected())
 				 {
-					    String myText = writePostArea.getText();
-						Post myPost = new Post(chief,myText,radioGroup.getSelection().getActionCommand());
-						chief.addPost(myPost);
-						textAreaPost.setText(""); 
-					    for( Post post : chief.returnAllPosts())
-						{
-							DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-					        String formatDateTime = post.getTimestamp().format(formatter);
-					        textAreaPost.append("-------------------------------------------------------------------------------------------------"+ "\n\r");
-							textAreaPost.append(post.getContent()+" | "+post.getCreator().getFirstName()+" | "+post.getPostScope()+" | "+formatDateTime+ "\n\r");
-						}
-					 String groupToPost=textField.getText();
-					 boolean found=false;
-					 for(int i=0;i<chief.getGroups().size();i++)
-					 {
-						 if(chief.getGroups().get(i).getName().equals(groupToPost))
-						 {
-							 found=true;
-							 chief.getGroups().get(i).addPostToGroupList(myPost);
-						 
-						 String message = "You successfully posted on "+chief.getGroups().get(i).getName()+"'s wall!";
-							JOptionPane.showMessageDialog(new JFrame(), message, "Message",
-							  JOptionPane.INFORMATION_MESSAGE);
+					 	String myText = writePostArea.getText();
+						String groupToPost=textField.getText();
+						boolean found = false;
+						
+						for(int i=0;i<chief.getGroups().size();i++)  {
+							
+							 if(chief.getGroups().get(i).getName().equals(groupToPost))
+							 {
+								 found = true;
+								 Post myPost = new Post(chief,myText,radioGroup.getSelection().getActionCommand());
+								 chief.addPost(myPost);
+								 chief.getGroups().get(i).addPostToGroupList(myPost);
+								 
+								 String message = "You successfully posted on "+chief.getGroups().get(i).getName()+"'s wall!";
+									JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+									  JOptionPane.INFORMATION_MESSAGE);
+							 }
 						 }
-					 }
-					 if(found==false)
-					 {
-						 String message = "Group not found...Please check your spelling!";
-							JOptionPane.showMessageDialog(new JFrame(), message, "Message",
-							  JOptionPane.ERROR_MESSAGE);
-					 }
+						 if(found==false)
+						 {
+							 String message = "Group not found...Please check your spelling!";
+								JOptionPane.showMessageDialog(new JFrame(), message, "Message",
+								  JOptionPane.ERROR_MESSAGE);
+						 }else {
+							 
+								textAreaPost.setText(""); 
+							    for( Post post : chief.returnAllPosts())
+								{
+									DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+							        String formatDateTime = post.getTimestamp().format(formatter);
+									textAreaPost.append("-------------------------------------------------------------------------------------------------"+ "\n\r");
+									textAreaPost.append(post.getContent()+" | "+post.getCreator().getFirstName()+" | "+post.getPostScope()+" | "+formatDateTime+ "\n\r");
+								}
+						 }
 				 }
 				else
 				{
@@ -445,7 +448,13 @@ public class BackendProfileChiefGUI {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				Storage.saveInBinaryFile(chief.getMyAccount().getMyCompany());
-				frmStartingPage.dispose();
+				
+				//Close any pop-ups frames when logging out and open the WelcomeScreen_GUI()
+				System.gc();
+				java.awt.Window win[] = java.awt.Window.getWindows(); 
+				for(int i=0;i<win.length;i++){ 
+				    win[i].dispose(); 
+				} 
 				try {
 					new WelcomeScreen_GUI(chief.getMyAccount().getMyCompany());
 				} catch (IOException e) {
@@ -457,7 +466,7 @@ public class BackendProfileChiefGUI {
 		panel.add(disconnectButton);
 		
 		createProjectButton = new JButton("Create Project");
-		createProjectButton.setBounds(216, 332, 155, 25);
+		createProjectButton.setBounds(216, 350, 155, 25);
 		createProjectButton.setContentAreaFilled(false); 
 		createProjectButton.setFocusPainted(false); 
 		createProjectButton.setOpaque(false);
@@ -655,7 +664,7 @@ public class BackendProfileChiefGUI {
 			
 			else if(e.getSource().equals(createProjectButton)) {
 				
-				 new CreateProjectGUI(chief);
+				 new CreateProjectGUI(chief, frmStartingPage);
 			}
 			
 			else if(e.getSource().equals(helpButton)) {
