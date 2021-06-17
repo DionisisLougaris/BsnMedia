@@ -201,7 +201,7 @@ public class BackendProfileBossGUI {
 			public void actionPerformed(ActionEvent e) {
 				
 				try {
-					new ConnectionRequestsGUI(boss);
+					new ConnectionRequestsGUI(boss, frmStartingPage);
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -444,7 +444,7 @@ public class BackendProfileBossGUI {
 		editCompanyInfoButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				new EditCompanyGUI(boss);
+				new EditCompanyGUI(boss, frmStartingPage);
 			}
 		});
 		editCompanyInfoButton.setContentAreaFilled(false); 

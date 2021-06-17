@@ -564,7 +564,7 @@ public class BackendProfileEmployeeGUI {
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource().equals(requestsButton)) {
 				try {
-					new ConnectionRequestsGUI(employee);
+					new ConnectionRequestsGUI(employee, frmStartingPage);
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

@@ -7,7 +7,9 @@ public class Main {
 
 	public static void main(String[] args) {
 		
+		//DEN PREPEI TA SXOLIA NA AFAIRETHOUN. YPARXOYN EDO MONO GIA NA EINAI ORATA TA STOIXEIA SYNDESIS TOYS
 		//************************Meloi tis omadas 9 pou prosferontai gia tin ektelesi tou programmatos********************************************
+		//Pera apo tous xristes exoun dimiourgithei mesa apo to programma idi merikes syndeseis kai ena group
 		//Sas parotrinoume na dimiourgisete kai ton diko sas logariasmo meso tis efarmogis. (Na gnorizete oti to Company verification code einai: 18062021)
 		
 		//The company that is being hosted on BSN media.

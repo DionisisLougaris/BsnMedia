@@ -30,13 +30,14 @@ public class ConnectionRequestsGUI {
 	private JList<String> list;
 	private DefaultListModel<String> listModel;
 	private TreeSet<Notification> connectionRequests;
+	private JFrame backEndFrame;
 	
 
-	public ConnectionRequestsGUI(User theUser ) throws IOException {
-		initialize(theUser);
+	public ConnectionRequestsGUI(User theUser, JFrame backendFrame) throws IOException {
+		initialize(theUser, backendFrame);
 	}
 
-	private void initialize(User theUser){
+	private void initialize(User theUser, JFrame backendFrame){
 		frmConnectionRequests = new JFrame();
 		frmConnectionRequests.setResizable(false);
 		frmConnectionRequests.setVisible(true); 
@@ -49,6 +50,7 @@ public class ConnectionRequestsGUI {
 		frmConnectionRequests.setIconImage(logoimage.getImage());
 		
 		user = theUser;
+		backEndFrame = backendFrame;
 		
 		list = new JList<String>();
 		listModel = new DefaultListModel<String>();
@@ -128,6 +130,31 @@ public class ConnectionRequestsGUI {
 					if (indexOfSelectedValue != -1) {
 						listModel.remove(indexOfSelectedValue);
 						indexOfSelectedValue = -1;
+					}
+					if (user instanceof Employee) {
+						try {
+							new BackendProfileEmployeeGUI(user);
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						backEndFrame.dispose();
+					}else if (user instanceof Chief) {
+						try {
+							new BackendProfileChiefGUI(user);
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						backEndFrame.dispose();
+					}else {
+						try {
+							new BackendProfileBossGUI(user);
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						backEndFrame.dispose();
 					}
 				}else {
 					String message = "You have not selected any requests to Accept!";

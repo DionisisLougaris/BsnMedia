@@ -45,14 +45,15 @@ public class EditCompanyGUI {
 	private JButton btnSaveAll;
 	private JButton btnViewChanges;
 	private Boss boss;
+	private JFrame backEndBoss;
 	
 	//This method is the constructor of class EditCompanyGUI.
-	public EditCompanyGUI(Boss theBoss) {
-		initialize(theBoss);
+	public EditCompanyGUI(Boss theBoss, JFrame bossBackend) {
+		initialize(theBoss, bossBackend);
 	}
     
 	//This method initialize the properties of this gui.
-	private void initialize(Boss theBoss) {
+	private void initialize(Boss theBoss, JFrame bossBackend) {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 792, 602);
 		frame.getContentPane().setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -66,6 +67,7 @@ public class EditCompanyGUI {
 		frame.setIconImage(logoimage.getImage());
 		
 		boss = theBoss;
+		backEndBoss = bossBackend;
 		
 		JButton btnChangeCompanyPhoto = new JButton("Change company photo");
 		btnChangeCompanyPhoto.setFont(new Font("Tahoma", Font.PLAIN, 10));
@@ -92,7 +94,7 @@ public class EditCompanyGUI {
 			    		boss.getMyAccount().getMyCompany().setImage(path);
 				    
 			    		frame.dispose();
-						 new EditCompanyGUI(boss);
+						 new EditCompanyGUI(boss, backEndBoss);
 					String message = "Successful change! Go check the Changes!";
 					JOptionPane.showMessageDialog(new JFrame(), message, "Message",
 					        JOptionPane.INFORMATION_MESSAGE);
@@ -217,6 +219,7 @@ public class EditCompanyGUI {
 			public void actionPerformed(ActionEvent e) {
 				
 				new CompanyProfileGUI(boss,boss.getMyAccount().getMyCompany());
+				backEndBoss.dispose();
 			    frame.dispose();
 				
 			}

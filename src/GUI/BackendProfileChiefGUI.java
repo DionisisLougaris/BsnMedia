@@ -594,7 +594,7 @@ public class BackendProfileChiefGUI {
 			
 			if(e.getSource().equals(requestsButton)) {
 				try {
-					new ConnectionRequestsGUI(chief);
+					new ConnectionRequestsGUI(chief, frmStartingPage);
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
