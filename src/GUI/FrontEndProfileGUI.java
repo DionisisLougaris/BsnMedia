@@ -380,11 +380,14 @@ public class FrontEndProfileGUI {
 								
 								for (Conversation theConversation: listOfConversation) {
 									
-									if ((((privateConversation)theConversation).getDiscussant1().equals(loggedUser) && ((privateConversation)theConversation).getDiscussant2().equals(profileUser)) ||
-										(((privateConversation)theConversation).getDiscussant2().equals(loggedUser) && ((privateConversation)theConversation).getDiscussant1().equals(profileUser))) {
-										
-										selectedUserToChat = theConversation;
-										break;
+									if (theConversation instanceof privateConversation) {
+									
+										if ((((privateConversation)theConversation).getDiscussant1().equals(loggedUser) && ((privateConversation)theConversation).getDiscussant2().equals(profileUser)) ||
+											(((privateConversation)theConversation).getDiscussant2().equals(loggedUser) && ((privateConversation)theConversation).getDiscussant1().equals(profileUser))) {
+											
+											selectedUserToChat = theConversation;
+											break;
+										}
 									}
 								}
 								

@@ -641,11 +641,14 @@ public class BackendProfileEmployeeGUI {
 					
 					for (Conversation theConversation: listOfConversation) {
 						
-						if ((((privateConversation)theConversation).getDiscussant1().equals(employee) && ((privateConversation)theConversation).getDiscussant2().equals(selectedUser)) ||
-							(((privateConversation)theConversation).getDiscussant2().equals(employee) && ((privateConversation)theConversation).getDiscussant1().equals(selectedUser))) {
+						if (theConversation instanceof privateConversation) {
 							
-							selectedUserToChat = theConversation;
-							break;
+							if ((((privateConversation)theConversation).getDiscussant1().equals(employee) && ((privateConversation)theConversation).getDiscussant2().equals(selectedUser)) ||
+								(((privateConversation)theConversation).getDiscussant2().equals(employee) && ((privateConversation)theConversation).getDiscussant1().equals(selectedUser))) {
+								
+								selectedUserToChat = theConversation;
+								break;
+							}
 						}
 					}
 					

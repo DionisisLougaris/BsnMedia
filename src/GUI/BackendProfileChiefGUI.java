@@ -705,49 +705,7 @@ public class BackendProfileChiefGUI {
 					}
 					frmStartingPage.setVisible(false);
 				}
-			}
-			else if(e.getSource().equals(sendMessageButton)) {
-				
-				String selectedUserString = connectionsList.getSelectedValue();
-				User selectedUser = null;
-				
-				for(User theUser: listOfConnections) {
-					String userFullName = theUser.getFirstName()+" "+theUser.getLastName();
-					
-					if (userFullName.equalsIgnoreCase(selectedUserString)) {
-						selectedUser = theUser;
-						break;
-					}
-				}
-				
-				if (selectedUser == null) {
-					 String message = "You have not selected any user!";
-						JOptionPane.showMessageDialog(new JFrame(), message, "Message",
-						        JOptionPane.INFORMATION_MESSAGE);
-				}else {
-					ArrayList<Conversation> listOfConversation = chief.getListOfConversations();
-					Conversation selectedUserToChat = null;
-					
-					for (Conversation theConversation: listOfConversation) {
-						
-						if ((((privateConversation)theConversation).getDiscussant1().equals(chief) && ((privateConversation)theConversation).getDiscussant2().equals(selectedUser)) ||
-							(((privateConversation)theConversation).getDiscussant2().equals(chief) && ((privateConversation)theConversation).getDiscussant1().equals(selectedUser))) {
-							
-							selectedUserToChat = theConversation;
-							break;
-						}
-					}
-					
-					if(selectedUserToChat == null) {
-						 String message = "Something went Wrong!";
-							JOptionPane.showMessageDialog(new JFrame(), message, "Message",
-							        JOptionPane.INFORMATION_MESSAGE);
-					}else {
-						new PrivateChatGUI(chief, selectedUser, selectedUserToChat);
-					}
-				}
-			}
-			else if(e.getSource().equals(sendRequestButton)) {
+			}else if(e.getSource().equals(sendRequestButton)) {
 				
 				String selectedUserString = suggestedList.getSelectedValue();
 				User selectedUser = null;
@@ -769,7 +727,6 @@ public class BackendProfileChiefGUI {
 					Connection possibleConnection = new Connection(chief, selectedUser);
 					possibleConnection.sendConnectionRequest();
 				}
-				
 			}
 		}
 	}
