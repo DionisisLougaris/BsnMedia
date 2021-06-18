@@ -529,11 +529,14 @@ public class BackendProfileBossGUI {
 					
 					for (Conversation theConversation: listOfConversation) {
 						
-						if ((((privateConversation)theConversation).getDiscussant1().equals(boss) && ((privateConversation)theConversation).getDiscussant2().equals(selectedUser)) ||
-							(((privateConversation)theConversation).getDiscussant2().equals(boss) && ((privateConversation)theConversation).getDiscussant1().equals(selectedUser))) {
-							
-							selectedUserToChat = theConversation;
-							break;
+						if(theConversation instanceof privateConversation)
+						{
+							if ((((privateConversation)theConversation).getDiscussant1().equals(boss) && ((privateConversation)theConversation).getDiscussant2().equals(selectedUser)) ||
+								(((privateConversation)theConversation).getDiscussant2().equals(boss) && ((privateConversation)theConversation).getDiscussant1().equals(selectedUser))) {
+								
+								selectedUserToChat = theConversation;
+								break;
+							}
 						}
 					}
 					

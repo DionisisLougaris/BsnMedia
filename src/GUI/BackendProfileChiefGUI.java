@@ -632,11 +632,14 @@ public class BackendProfileChiefGUI {
 								
 								for (Conversation theConversation: listOfConversation) {
 									
-									if ((((privateConversation)theConversation).getDiscussant1().equals(chief) && ((privateConversation)theConversation).getDiscussant2().equals(selectedUser)) ||
-										(((privateConversation)theConversation).getDiscussant2().equals(chief) && ((privateConversation)theConversation).getDiscussant1().equals(selectedUser))) {
-										
-										selectedUserToChat = theConversation;
-										break;
+									if(theConversation instanceof privateConversation)
+									{
+										if ((((privateConversation)theConversation).getDiscussant1().equals(chief) && ((privateConversation)theConversation).getDiscussant2().equals(selectedUser)) ||
+											(((privateConversation)theConversation).getDiscussant2().equals(chief) && ((privateConversation)theConversation).getDiscussant1().equals(selectedUser))) {
+											
+											selectedUserToChat = theConversation;
+											break;
+										}
 									}
 								}
 								
